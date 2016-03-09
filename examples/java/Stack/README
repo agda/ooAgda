@@ -1,0 +1,6 @@
+
+
+modelt after java.util Interface Deque<E>
+
+pop explicitly throws a 'java.util.NoSuchElementException' exception, while the java docs of java.util Interface Deque<E> don't use a checked exception; the java docs use a runtime exception.
+
