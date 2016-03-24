@@ -1,0 +1,40 @@
+# Ignore Emacs backup files
+
+*~
+\#*
+.\#*
+*~
+\#*#
+\.#Makefile
+.[#]*[#]
+
+# Ignore Agda/Haskell/Java compiled files
+
+MAlonzo/
+*.agdai
+*.hi
+*.o
+*.class
+*.pyg
+
+
+# Ignore LaTeX generated files
+
+*.log
+*.dvi
+*.ps
+*.blg
+*.bbl
+*.aux
+*_aux
+*.toc
+*.ptb
+*.nav
+*.out
+*.snm
+*.vrb
+
+# Misc
+
+*.rtf
+*.backup
