@@ -45,7 +45,6 @@ Create the file
 "/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" (path adapted)
 with the following content (three lines):
 ----------
-agda-lib 
 name: std-lib
 include: .
 ----------
