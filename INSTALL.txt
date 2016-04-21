@@ -1,54 +1,77 @@
+ INSTALL:
 
-INSTALL:
-
-The following are the preliminary installation instructions, we are currently working on a more detailed documentation of the library.
-
-The code works with the most resent version of Agda version 2.5
-(master branch from github, commit "useefd12c778e095ee783eeb1f845fc1938ea360204").
-
-The current agda code uses the haskell graphic library "wxhaskell" and implements a small game, where a space ship can be moved with the arrow keys.
-
-Please note: file path are set for linux/unix, for Windows adapt the file "./examples/StateSized/GUI/ShipBitMap.agda".
-
-Details:
-
- - Agda standard library version (latest master branch version, tested with commit "545b94b81e4eb1d5a8b2b9f1083b12de5422d786")
-
- - wxWidgets version 3.0.2
-   https://www.wxwidgets.org/
-   
- - wxHaskell from github
-   https://github.com/wxHaskell/wxHaskell
-   (latest master branch version, tested with commit "db2a571300b5810a7dadfe117744e5b9389e0c9b"")
-
-*) INSTALL wxHaskell:
-
-https://github.com/wxHaskell/wxHaskell/blob/master/README.md
+ The following are the preliminary installation instructions, we are currently
+ working on a more detailed documentation of the library.
 
 
-IMPORTANT:
+ The code works with the most resent version of Agda version 2.5
+ (master branch from github, commit
+ "useefd12c778e095ee783eeb1f845fc1938ea360204").
 
-It is needed to set up the agda library files, so
-in "~/.agda" set up the following files:
 
-In "~/.agda/libraries" add the following three lines:
------------
-/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
-/home/username/Downloads/ooAgda/src/ionew.agda-lib
-/home/username/Downloads/ooAgda/examples/ioexamples.agda-lib
-----------
+ The current agda code uses the haskell graphic library "wxhaskell" and
+ implements a small game, where a space ship can be moved with the arrow keys.
 
-with the paths adapted to your std-lib (Agda standard lib)
-and your ooAgda folder.
 
-Create the file
-"/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" (path adapted)
-with the following content (three lines):
-----------
-name: std-lib
-include: .
-----------
+ Please note: file path are set for linux/unix, for Windows adapt the file
+ "./examples/StateSized/GUI/ShipBitMap.agda".
 
-For more information on the library files,
-please refer to the changelog of Agda "2.5.1":
-https://github.com/agda/agda/blob/master/CHANGELOG
+
+ Details:
+
+  - Install Agda standard library version (latest master branch version,
+    tested with commit "545b94b81e4eb1d5a8b2b9f1083b12de5422d786") 
+    from https://github.com/agda/agda-stdlib
+
+  - wxWidgets version 3.0.2
+    https://www.wxwidgets.org/
+    Follow the installation instructions in for the latest stable version
+    ("Latest Stable Release: 3.0.2" not the development version)
+
+    Follow the instructions in 
+
+    https://github.com/wxWidgets/wxWidgets/blob/v3.0.2/docs/readme.txt
+
+    and use the installation instructions for gtk,
+    with instructions in   wxWidgets-3.1.0/docs/gtk/install.txt
+    (e.g. follow "The simplest case")
+
+  - wxHaskell from github
+    https://github.com/wxHaskell/wxHaskell
+    (latest master branch version, tested with commit
+    "db2a571300b5810a7dadfe117744e5b9389e0c9b"")
+
+    Best is to clone  
+    https://github.com/wxHaskell/wxHaskell
+    git clone https://github.com/wxHaskell/wxHaskell
+
+    follow instructions at 
+    https://github.com/wxHaskell/wxHaskell/blob/master/README.md
+
+
+ IMPORTANT:
+
+ It is needed to set up the agda library files, so
+ in "~/.agda" set up the following files:
+
+ In "~/.agda/libraries" add the following three lines:
+ -----------
+ /home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
+ /home/username/Downloads/ooAgda/src/ionew.agda-lib
+ /home/username/Downloads/ooAgda/examples/ioexamples.agda-lib
+ ----------
+
+ with the paths adapted to your std-lib (Agda standard lib)
+ and your ooAgda folder.
+
+ Create the file
+ "/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" (path
+ adapted)  with the following content (three lines):
+ ----------
+ name: std-lib
+ include: .
+ ----------
+
+ For more information on the library files,
+ please refer to the changelog of Agda "2.5.1":
+ https://github.com/agda/agda/blob/master/CHANGELOG
