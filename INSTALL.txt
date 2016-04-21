@@ -4,7 +4,7 @@
  working on a more detailed documentation of the library.
 
 
- The code works with the most resent version of Agda version 2.5
+ The code works with the most recent version of Agda version 2.5
  (master branch from github, commit
  "useefd12c778e095ee783eeb1f845fc1938ea360204").
 
@@ -19,11 +19,26 @@
 
  Details:
 
+  - Install agda from git:
+
+    git clone https://github.com/agda/agda.git
+
+    sudo cabal update
+  
+    in the created directory
+ 
+    sudo cabal install --global
+    agda-mode setup
+
   - Install Agda standard library version (latest master branch version,
     tested with commit "545b94b81e4eb1d5a8b2b9f1083b12de5422d786") 
     from https://github.com/agda/agda-stdlib
 
-  - wxWidgets version 3.0.2
+    git clone https://github.com/agda/agda-stdlib
+
+    (adaption of library files see below)
+
+  - Install wxWidgets version 3.0.2
     https://www.wxwidgets.org/
     Follow the installation instructions in for the latest stable version
     ("Latest Stable Release: 3.0.2" not the development version)
@@ -33,45 +48,57 @@
     https://github.com/wxWidgets/wxWidgets/blob/v3.0.2/docs/readme.txt
 
     and use the installation instructions for gtk,
-    with instructions in   wxWidgets-3.1.0/docs/gtk/install.txt
-    (e.g. follow "The simplest case")
+    with instructions in the downloaded version
+    at  wxWidgets-3.1.0/docs/gtk/install.txt
+    (easiest to follow instructions "The simplest case")
 
-  - wxHaskell from github
+  - Install wxHaskell from github
     https://github.com/wxHaskell/wxHaskell
     (latest master branch version, tested with commit
     "db2a571300b5810a7dadfe117744e5b9389e0c9b"")
 
     Best is to clone  
     https://github.com/wxHaskell/wxHaskell
+    by using
     git clone https://github.com/wxHaskell/wxHaskell
 
-    follow instructions at 
-    https://github.com/wxHaskell/wxHaskell/blob/master/README.md
+    Then follow instructions at 
+    install.txt
+
+    possibly replace  there 
+    cabal install 
+    by
+    sudo cabal install 
+    or
+    sudo cabal install  --global
+    or
+    cabal install --global
 
 
- IMPORTANT:
 
- It is needed to set up the agda library files, so
- in "~/.agda" set up the following files:
 
- In "~/.agda/libraries" add the following three lines:
- -----------
- /home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
- /home/username/Downloads/ooAgda/src/ionew.agda-lib
- /home/username/Downloads/ooAgda/examples/ioexamples.agda-lib
- ----------
+  - Set up the agda library files:
+ 
+    In "~/.agda/libraries" add the following three lines:
+     -----------
+    /home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
+    /home/username/Downloads/ooAgda/src/ionew.agda-lib
+    /home/username/Downloads/ooAgda/examples/ioexamples.agda-lib
+    ----------
 
- with the paths adapted to your std-lib (Agda standard lib)
- and your ooAgda folder.
+    with the paths adapted to where your version of std-lib (Agda standard lib)
+     and of ooAgda  is located
 
- Create the file
- "/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" (path
- adapted)  with the following content (three lines):
+    Create the file
+    "/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" 
+    (adapt the path so that it points to your version of the agda standard 
+    library) with the following content (two lines):
+
  ----------
  name: std-lib
  include: .
  ----------
 
- For more information on the library files,
- please refer to the changelog of Agda "2.5.1":
- https://github.com/agda/agda/blob/master/CHANGELOG
+    For more information on the library files,
+    please refer to the changelog of Agda "2.5.1":
+    https://github.com/agda/agda/blob/master/CHANGELOG
