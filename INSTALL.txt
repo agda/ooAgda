@@ -82,8 +82,8 @@
     In "~/.agda/libraries" add the following three lines:
      -----------
     /home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
-    /home/username/Downloads/ooAgda/src/ionew.agda-lib
-    /home/username/Downloads/ooAgda/examples/ioexamples.agda-lib
+    /home/username/Downloads/ooAgda/src/ooAgda.agda-lib
+    /home/username/Downloads/ooAgda/examples/ooAgdaExamples.agda-lib
     ----------
 
     with the paths adapted to where your version of std-lib (Agda standard lib)

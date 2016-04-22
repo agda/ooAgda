@@ -1,3 +1,0 @@
-name: ioexamples
-depend: std-lib ionew
-include: .
