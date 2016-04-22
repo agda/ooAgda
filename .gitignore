@@ -38,3 +38,8 @@ MAlonzo/
 
 *.rtf
 *.backup
+
+# executables
+IOExampleGraphicsDrawingProgram
+SpaceShipAdvanced
+SpaceShipExtendedExample
