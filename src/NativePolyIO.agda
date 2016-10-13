@@ -12,7 +12,6 @@ postulate
   nativeReturn : ∀{α}{A : Set α} → A → NativeIO A
   _native>>=_  : ∀{α β}{A : Set α}{B : Set β} → NativeIO A → (A → NativeIO B) → NativeIO B
 
-{-# IMPORT IO.FFI #-}
 {-# BUILTIN IO NativeIO #-}
 {-# COMPILED_TYPE NativeIO IO.FFI.AgdaIO #-}
 {-# COMPILED _native>>=_ (\_ _ _ _ -> (>>=) :: IO a -> (a -> IO b) -> IO b) #-}
