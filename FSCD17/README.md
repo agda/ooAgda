@@ -1,12 +1,4 @@
-<head
-  ><title
-    >examples.heap.ALL</title
-    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
-     /><meta http-equiv="Content-Style-Type" content="text/css"
-     /><link href="Agda.css" rel="stylesheet" type="text/css"
-     /></head
-  ><body
-  ><pre
+<pre
     ><a name="1"
       >
 
@@ -208,5 +200,4 @@
       >
 </a
       ></pre
-    ></body
-  >
+    >
