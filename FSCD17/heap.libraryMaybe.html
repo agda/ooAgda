@@ -1,0 +1,1157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >heap.libraryMaybe</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="heap.libraryMaybe.html#1" class="Module"
+      >heap.libraryMaybe</a
+      ><a name="25"
+      > </a
+      ><a name="26" class="Keyword"
+      >where</a
+      ><a name="31"
+      >
+
+</a
+      ><a name="33" class="Keyword"
+      >open</a
+      ><a name="37"
+      > </a
+      ><a name="38" class="Keyword"
+      >import</a
+      ><a name="44"
+      > </a
+      ><a name="45" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="55"
+      > </a
+      ><a name="56" class="Keyword"
+      >hiding</a
+      ><a name="62"
+      > </a
+      ><a name="63" class="Symbol"
+      >(</a
+      ><a name="64" href="Data.Maybe.Base.html#1191" class="Function"
+      >maybe</a
+      ><a name="69" class="Symbol"
+      >)</a
+      ><a name="70"
+      >
+</a
+      ><a name="71" class="Keyword"
+      >open</a
+      ><a name="75"
+      > </a
+      ><a name="76" class="Keyword"
+      >import</a
+      ><a name="82"
+      > </a
+      ><a name="83" href="Data.Empty.html#1" class="Module"
+      >Data.Empty</a
+      ><a name="93"
+      >
+</a
+      ><a name="94" class="Keyword"
+      >open</a
+      ><a name="98"
+      > </a
+      ><a name="99" class="Keyword"
+      >import</a
+      ><a name="105"
+      > </a
+      ><a name="106" href="Data.Unit.Base.html#1" class="Module"
+      >Data.Unit.Base</a
+      ><a name="120"
+      >
+</a
+      ><a name="121" class="Keyword"
+      >open</a
+      ><a name="125"
+      > </a
+      ><a name="126" class="Keyword"
+      >import</a
+      ><a name="132"
+      > </a
+      ><a name="133" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="145"
+      > </a
+      ><a name="146" class="Keyword"
+      >renaming</a
+      ><a name="154"
+      > </a
+      ><a name="155" class="Symbol"
+      >(</a
+      ><a name="156" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="Symbol"
+      >to</a
+      ><a name="164"
+      > </a
+      ><a name="165" href="Data.Product.html#525" class="Field"
+      >pr&#8321;</a
+      ><a name="168" class="Symbol"
+      >;</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="175"
+      > </a
+      ><a name="176" class="Symbol"
+      >to</a
+      ><a name="178"
+      > </a
+      ><a name="179" href="Data.Product.html#539" class="Field"
+      >pr&#8322;</a
+      ><a name="182" class="Symbol"
+      >;</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="Data.Product.html#1295" class="Function Operator"
+      >_&#215;_</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="Symbol"
+      >to</a
+      ><a name="190"
+      > </a
+      ><a name="191" href="Data.Product.html#1295" class="Function Operator"
+      >_&#215;'_</a
+      ><a name="195" class="Symbol"
+      >;</a
+      ><a name="196"
+      > </a
+      ><a name="197" href="Data.Product.html#2094" class="Function"
+      >map</a
+      ><a name="200"
+      > </a
+      ><a name="201" class="Symbol"
+      >to</a
+      ><a name="203"
+      > </a
+      ><a name="204" href="Data.Product.html#2094" class="Function"
+      >mapp</a
+      ><a name="208" class="Symbol"
+      >)</a
+      ><a name="209"
+      >
+
+</a
+      ><a name="211" class="Keyword"
+      >data</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="227"
+      > </a
+      ><a name="228" class="Symbol"
+      >(</a
+      ><a name="229" href="heap.libraryMaybe.html#229" class="Bound"
+      >A</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Symbol"
+      >:</a
+      ><a name="232"
+      > </a
+      ><a name="233" class="PrimitiveType"
+      >Set</a
+      ><a name="236" class="Symbol"
+      >)</a
+      ><a name="237"
+      > </a
+      ><a name="238" class="Symbol"
+      >:</a
+      ><a name="239"
+      > </a
+      ><a name="240" class="PrimitiveType"
+      >Set</a
+      ><a name="243"
+      > </a
+      ><a name="244" class="Keyword"
+      >where</a
+      ><a name="249"
+      >
+  </a
+      ><a name="252" href="heap.libraryMaybe.html#252" class="InductiveConstructor"
+      >nothingNative</a
+      ><a name="265"
+      > </a
+      ><a name="266" class="Symbol"
+      >:</a
+      ><a name="267"
+      > </a
+      ><a name="268" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="279"
+      > </a
+      ><a name="280" href="heap.libraryMaybe.html#229" class="Bound"
+      >A</a
+      ><a name="281"
+      >
+  </a
+      ><a name="284" href="heap.libraryMaybe.html#284" class="InductiveConstructor"
+      >justNative</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >:</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="heap.libraryMaybe.html#229" class="Bound"
+      >A</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      > </a
+      ><a name="301" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="312"
+      > </a
+      ><a name="313" href="heap.libraryMaybe.html#229" class="Bound"
+      >A</a
+      ><a name="314"
+      >
+
+</a
+      ><a name="316" class="Symbol"
+      >{-#</a
+      ><a name="319"
+      > </a
+      ><a name="320" class="Keyword"
+      >COMPILE</a
+      ><a name="327"
+      > GHC </a
+      ><a name="332" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="343"
+      > = data Maybe (Nothing | Just) </a
+      ><a name="374" class="Symbol"
+      >#-}</a
+      ><a name="377"
+      >
+
+</a
+      ><a name="379" href="heap.libraryMaybe.html#379" class="Function"
+      >nativeMaybeFunc</a
+      ><a name="394"
+      > </a
+      ><a name="395" class="Symbol"
+      >:</a
+      ><a name="396"
+      > </a
+      ><a name="397" class="Symbol"
+      >{</a
+      ><a name="398" href="heap.libraryMaybe.html#398" class="Bound"
+      >A</a
+      ><a name="399"
+      > </a
+      ><a name="400" class="Symbol"
+      >:</a
+      ><a name="401"
+      > </a
+      ><a name="402" class="PrimitiveType"
+      >Set</a
+      ><a name="405" class="Symbol"
+      >}</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >{</a
+      ><a name="408" href="heap.libraryMaybe.html#408" class="Bound"
+      >B</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Symbol"
+      >:</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="PrimitiveType"
+      >Set</a
+      ><a name="415" class="Symbol"
+      >}</a
+      ><a name="416"
+      > </a
+      ><a name="417" class="Symbol"
+      >&#8594;</a
+      ><a name="418"
+      > </a
+      ><a name="419" class="Symbol"
+      >(</a
+      ><a name="420" href="heap.libraryMaybe.html#398" class="Bound"
+      >A</a
+      ><a name="421"
+      > </a
+      ><a name="422" class="Symbol"
+      >&#8594;</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="heap.libraryMaybe.html#408" class="Bound"
+      >B</a
+      ><a name="425" class="Symbol"
+      >)</a
+      ><a name="426"
+      > </a
+      ><a name="427" class="Symbol"
+      >&#8594;</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="440"
+      > </a
+      ><a name="441" href="heap.libraryMaybe.html#398" class="Bound"
+      >A</a
+      ><a name="442"
+      > </a
+      ><a name="443" class="Symbol"
+      >&#8594;</a
+      ><a name="444"
+      > </a
+      ><a name="445" href="heap.libraryMaybe.html#216" class="Datatype"
+      >NativeMaybe</a
+      ><a name="456"
+      > </a
+      ><a name="457" href="heap.libraryMaybe.html#408" class="Bound"
+      >B</a
+      ><a name="458"
+      >
+</a
+      ><a name="459" href="heap.libraryMaybe.html#379" class="Function"
+      >nativeMaybeFunc</a
+      ><a name="474"
+      > </a
+      ><a name="475" href="heap.libraryMaybe.html#475" class="Bound"
+      >f</a
+      ><a name="476"
+      > </a
+      ><a name="477" class="Symbol"
+      >(</a
+      ><a name="478" href="heap.libraryMaybe.html#284" class="InductiveConstructor"
+      >justNative</a
+      ><a name="488"
+      > </a
+      ><a name="489" href="heap.libraryMaybe.html#489" class="Bound"
+      >x</a
+      ><a name="490" class="Symbol"
+      >)</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Symbol"
+      >=</a
+      ><a name="493"
+      > </a
+      ><a name="494" href="heap.libraryMaybe.html#284" class="InductiveConstructor"
+      >justNative</a
+      ><a name="504"
+      > </a
+      ><a name="505" class="Symbol"
+      >(</a
+      ><a name="506" href="heap.libraryMaybe.html#475" class="Bound"
+      >f</a
+      ><a name="507"
+      > </a
+      ><a name="508" href="heap.libraryMaybe.html#489" class="Bound"
+      >x</a
+      ><a name="509" class="Symbol"
+      >)</a
+      ><a name="510"
+      >
+</a
+      ><a name="511" href="heap.libraryMaybe.html#379" class="Function"
+      >nativeMaybeFunc</a
+      ><a name="526"
+      > </a
+      ><a name="527" href="heap.libraryMaybe.html#527" class="Bound"
+      >f</a
+      ><a name="528"
+      > </a
+      ><a name="529" href="heap.libraryMaybe.html#252" class="InductiveConstructor"
+      >nothingNative</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Symbol"
+      >=</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="heap.libraryMaybe.html#252" class="InductiveConstructor"
+      >nothingNative</a
+      ><a name="558"
+      >
+
+</a
+      ><a name="560" class="Symbol"
+      >{-#</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Keyword"
+      >INLINE</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="heap.libraryMaybe.html#379" class="Function"
+      >nativeMaybeFunc</a
+      ><a name="586"
+      > </a
+      ><a name="587" class="Symbol"
+      >#-}</a
+      ><a name="590"
+      >
+
+</a
+      ><a name="592" href="heap.libraryMaybe.html#592" class="Function"
+      >maybeFunc</a
+      ><a name="601"
+      > </a
+      ><a name="602" class="Symbol"
+      >:</a
+      ><a name="603"
+      > </a
+      ><a name="604" class="Symbol"
+      >{</a
+      ><a name="605" href="heap.libraryMaybe.html#605" class="Bound"
+      >A</a
+      ><a name="606"
+      > </a
+      ><a name="607" class="Symbol"
+      >:</a
+      ><a name="608"
+      > </a
+      ><a name="609" class="PrimitiveType"
+      >Set</a
+      ><a name="612" class="Symbol"
+      >}</a
+      ><a name="613"
+      > </a
+      ><a name="614" class="Symbol"
+      >{</a
+      ><a name="615" href="heap.libraryMaybe.html#615" class="Bound"
+      >B</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Symbol"
+      >:</a
+      ><a name="618"
+      > </a
+      ><a name="619" class="PrimitiveType"
+      >Set</a
+      ><a name="622" class="Symbol"
+      >}</a
+      ><a name="623"
+      > </a
+      ><a name="624" class="Symbol"
+      >&#8594;</a
+      ><a name="625"
+      > </a
+      ><a name="626" class="Symbol"
+      >(</a
+      ><a name="627" href="heap.libraryMaybe.html#605" class="Bound"
+      >A</a
+      ><a name="628"
+      > </a
+      ><a name="629" class="Symbol"
+      >&#8594;</a
+      ><a name="630"
+      > </a
+      ><a name="631" href="heap.libraryMaybe.html#615" class="Bound"
+      >B</a
+      ><a name="632" class="Symbol"
+      >)</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Symbol"
+      >&#8594;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="641"
+      > </a
+      ><a name="642" href="heap.libraryMaybe.html#605" class="Bound"
+      >A</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >&#8594;</a
+      ><a name="645"
+      > </a
+      ><a name="646" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="heap.libraryMaybe.html#615" class="Bound"
+      >B</a
+      ><a name="653"
+      >
+</a
+      ><a name="654" href="heap.libraryMaybe.html#592" class="Function"
+      >maybeFunc</a
+      ><a name="663"
+      > </a
+      ><a name="664" href="heap.libraryMaybe.html#664" class="Bound"
+      >f</a
+      ><a name="665"
+      > </a
+      ><a name="666" class="Symbol"
+      >(</a
+      ><a name="667" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="671"
+      > </a
+      ><a name="672" href="heap.libraryMaybe.html#672" class="Bound"
+      >x</a
+      ><a name="673" class="Symbol"
+      >)</a
+      ><a name="674"
+      > </a
+      ><a name="675" class="Symbol"
+      >=</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >(</a
+      ><a name="683" href="heap.libraryMaybe.html#664" class="Bound"
+      >f</a
+      ><a name="684"
+      > </a
+      ><a name="685" href="heap.libraryMaybe.html#672" class="Bound"
+      >x</a
+      ><a name="686" class="Symbol"
+      >)</a
+      ><a name="687"
+      >
+</a
+      ><a name="688" href="heap.libraryMaybe.html#592" class="Function"
+      >maybeFunc</a
+      ><a name="697"
+      > </a
+      ><a name="698" href="heap.libraryMaybe.html#698" class="Bound"
+      >f</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >=</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="717"
+      >
+</a
+      ><a name="718" class="Symbol"
+      >{-#</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Keyword"
+      >INLINE</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="heap.libraryMaybe.html#592" class="Function"
+      >maybeFunc</a
+      ><a name="738"
+      > </a
+      ><a name="739" class="Symbol"
+      >#-}</a
+      ><a name="742"
+      >
+
+</a
+      ><a name="744" href="heap.libraryMaybe.html#744" class="Function"
+      >IsNothing</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >:</a
+      ><a name="755"
+      > </a
+      ><a name="756" class="Symbol"
+      >{</a
+      ><a name="757" href="heap.libraryMaybe.html#757" class="Bound"
+      >A</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Symbol"
+      >:</a
+      ><a name="760"
+      > </a
+      ><a name="761" class="PrimitiveType"
+      >Set</a
+      ><a name="764" class="Symbol"
+      >}</a
+      ><a name="765"
+      > </a
+      ><a name="766" class="Symbol"
+      >(</a
+      ><a name="767" href="heap.libraryMaybe.html#767" class="Bound"
+      >a</a
+      ><a name="768"
+      > </a
+      ><a name="769" class="Symbol"
+      >:</a
+      ><a name="770"
+      > </a
+      ><a name="771" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="heap.libraryMaybe.html#757" class="Bound"
+      >A</a
+      ><a name="778" class="Symbol"
+      >)</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Symbol"
+      >&#8594;</a
+      ><a name="781"
+      >  </a
+      ><a name="783" class="PrimitiveType"
+      >Set</a
+      ><a name="786"
+      >
+</a
+      ><a name="787" href="heap.libraryMaybe.html#744" class="Function"
+      >IsNothing</a
+      ><a name="796"
+      > </a
+      ><a name="797" class="Symbol"
+      >(</a
+      ><a name="798" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="heap.libraryMaybe.html#803" class="Bound"
+      >x</a
+      ><a name="804" class="Symbol"
+      >)</a
+      ><a name="805"
+      > </a
+      ><a name="806" class="Symbol"
+      >=</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="Data.Empty.html#243" class="Datatype"
+      >&#8869;</a
+      ><a name="809"
+      >
+</a
+      ><a name="810" href="heap.libraryMaybe.html#744" class="Function"
+      >IsNothing</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >=</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="831"
+      >
+
+</a
+      ><a name="833" href="heap.libraryMaybe.html#833" class="Function"
+      >NothingInductionLemma</a
+      ><a name="854"
+      > </a
+      ><a name="855" class="Symbol"
+      >:</a
+      ><a name="856"
+      > </a
+      ><a name="857" class="Symbol"
+      >&#8704;{</a
+      ><a name="859" href="heap.libraryMaybe.html#859" class="Bound"
+      >A</a
+      ><a name="860" class="Symbol"
+      >}(</a
+      ><a name="862" href="heap.libraryMaybe.html#862" class="Bound"
+      >P</a
+      ><a name="863"
+      > </a
+      ><a name="864" class="Symbol"
+      >:</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="heap.libraryMaybe.html#859" class="Bound"
+      >A</a
+      ><a name="873"
+      > </a
+      ><a name="874" class="Symbol"
+      >&#8594;</a
+      ><a name="875"
+      > </a
+      ><a name="876" class="PrimitiveType"
+      >Set</a
+      ><a name="879" class="Symbol"
+      >)</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >&#8594;</a
+      ><a name="882"
+      > </a
+      ><a name="883" class="Symbol"
+      >(</a
+      ><a name="884" href="heap.libraryMaybe.html#884" class="Bound"
+      >a</a
+      ><a name="885"
+      > </a
+      ><a name="886" class="Symbol"
+      >:</a
+      ><a name="887"
+      > </a
+      ><a name="888" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="heap.libraryMaybe.html#859" class="Bound"
+      >A</a
+      ><a name="895" class="Symbol"
+      >)</a
+      ><a name="896"
+      > </a
+      ><a name="897" class="Symbol"
+      >-&gt;</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="heap.libraryMaybe.html#744" class="Function"
+      >IsNothing</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="heap.libraryMaybe.html#884" class="Bound"
+      >a</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >&#8594;</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="heap.libraryMaybe.html#862" class="Bound"
+      >P</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="923"
+      > </a
+      ><a name="924" class="Symbol"
+      >&#8594;</a
+      ><a name="925"
+      > </a
+      ><a name="926" href="heap.libraryMaybe.html#862" class="Bound"
+      >P</a
+      ><a name="927"
+      > </a
+      ><a name="928" href="heap.libraryMaybe.html#884" class="Bound"
+      >a</a
+      ><a name="929"
+      >
+</a
+      ><a name="930" href="heap.libraryMaybe.html#833" class="Function"
+      >NothingInductionLemma</a
+      ><a name="951"
+      > </a
+      ><a name="952" href="heap.libraryMaybe.html#952" class="Bound"
+      >p</a
+      ><a name="953"
+      > </a
+      ><a name="954" class="Symbol"
+      >(</a
+      ><a name="955" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="heap.libraryMaybe.html#960" class="Bound"
+      >x</a
+      ><a name="961" class="Symbol"
+      >)</a
+      ><a name="962"
+      > </a
+      ><a name="963" class="Symbol"
+      >()</a
+      ><a name="965"
+      >
+</a
+      ><a name="966" href="heap.libraryMaybe.html#833" class="Function"
+      >NothingInductionLemma</a
+      ><a name="987"
+      > </a
+      ><a name="988" href="heap.libraryMaybe.html#988" class="Bound"
+      >p</a
+      ><a name="989"
+      > </a
+      ><a name="990" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="heap.libraryMaybe.html#998" class="Bound"
+      >q</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="heap.libraryMaybe.html#1000" class="Bound"
+      >q'</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >=</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="heap.libraryMaybe.html#1000" class="Bound"
+      >q'</a
+      ><a name="1007"
+      >
+
+</a
+      ><a name="1009" class="Comment"
+      >{-
+NothingMaybeLem : {A B : Set} &#8594; (P : B &#8594; Set) &#8594; (a : Maybe A)
+                  &#8594; IsNothing a
+                  &#8594; (g : A &#8594; B)
+                  &#8594; (b : B)
+                  &#8594; P b
+                  &#8594; P (maybe g b a)
+NothingMaybeLem P (just x) () b g p
+NothingMaybeLem P nothing anothing b g p = p
+-}</a
+      ><a name="1309"
+      >
+
+</a
+      ><a name="1311" href="heap.libraryMaybe.html#1311" class="Function"
+      >maybeAcrossBtoMaybeAcrossB</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >:</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" class="Symbol"
+      >{</a
+      ><a name="1341" href="heap.libraryMaybe.html#1341" class="Bound"
+      >A</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" href="heap.libraryMaybe.html#1343" class="Bound"
+      >B</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" class="Symbol"
+      >:</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="PrimitiveType"
+      >Set</a
+      ><a name="1350" class="Symbol"
+      >}</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Symbol"
+      >(</a
+      ><a name="1353" href="heap.libraryMaybe.html#1353" class="Bound"
+      >mab</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" class="Symbol"
+      >:</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="heap.libraryMaybe.html#1341" class="Bound"
+      >A</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Data.Product.html#1295" class="Function Operator"
+      >&#215;'</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="heap.libraryMaybe.html#1343" class="Bound"
+      >B</a
+      ><a name="1371" class="Symbol"
+      >)</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >&#8594;</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" class="Symbol"
+      >(</a
+      ><a name="1382" href="heap.libraryMaybe.html#1341" class="Bound"
+      >A</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="Data.Product.html#1295" class="Function Operator"
+      >&#215;'</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" href="heap.libraryMaybe.html#1343" class="Bound"
+      >B</a
+      ><a name="1388" class="Symbol"
+      >)</a
+      ><a name="1389"
+      >
+</a
+      ><a name="1390" href="heap.libraryMaybe.html#1311" class="Function"
+      >maybeAcrossBtoMaybeAcrossB</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >(</a
+      ><a name="1418" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="heap.libraryMaybe.html#1423" class="Bound"
+      >a</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" href="heap.libraryMaybe.html#1427" class="Bound"
+      >b</a
+      ><a name="1428" class="Symbol"
+      >)</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >=</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" class="Symbol"
+      >(</a
+      ><a name="1438" href="heap.libraryMaybe.html#1423" class="Bound"
+      >a</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="heap.libraryMaybe.html#1427" class="Bound"
+      >b</a
+      ><a name="1443" class="Symbol"
+      >)</a
+      ><a name="1444"
+      >
+</a
+      ><a name="1445" href="heap.libraryMaybe.html#1311" class="Function"
+      >maybeAcrossBtoMaybeAcrossB</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" class="Symbol"
+      >(</a
+      ><a name="1473" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >_)</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" class="Symbol"
+      >=</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="1495"
+      >
+
+</a
+      ><a name="1497" href="heap.libraryMaybe.html#1497" class="Function"
+      >maybeFunctor</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >:</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >{</a
+      ><a name="1513" href="heap.libraryMaybe.html#1513" class="Bound"
+      >A</a
+      ><a name="1514"
+      > </a
+      ><a name="1515" href="heap.libraryMaybe.html#1515" class="Bound"
+      >B</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >:</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="PrimitiveType"
+      >Set</a
+      ><a name="1522" class="Symbol"
+      >}</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" class="Symbol"
+      >(</a
+      ><a name="1525" href="heap.libraryMaybe.html#1525" class="Bound"
+      >f</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >:</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="heap.libraryMaybe.html#1513" class="Bound"
+      >A</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" class="Symbol"
+      >&#8594;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="heap.libraryMaybe.html#1515" class="Bound"
+      >B</a
+      ><a name="1534" class="Symbol"
+      >)</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" class="Symbol"
+      >(</a
+      ><a name="1537" href="heap.libraryMaybe.html#1537" class="Bound"
+      >ma</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" class="Symbol"
+      >:</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" href="heap.libraryMaybe.html#1513" class="Bound"
+      >A</a
+      ><a name="1549" class="Symbol"
+      >)</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" class="Symbol"
+      >&#8594;</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" href="heap.libraryMaybe.html#1515" class="Bound"
+      >B</a
+      ><a name="1560"
+      >
+</a
+      ><a name="1561" href="heap.libraryMaybe.html#1497" class="Function"
+      >maybeFunctor</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" href="heap.libraryMaybe.html#1574" class="Bound"
+      >f</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >(</a
+      ><a name="1577" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" href="heap.libraryMaybe.html#1582" class="Bound"
+      >x</a
+      ><a name="1583" class="Symbol"
+      >)</a
+      ><a name="1584"
+      > </a
+      ><a name="1585" class="Symbol"
+      >=</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" class="Symbol"
+      >(</a
+      ><a name="1593" href="heap.libraryMaybe.html#1574" class="Bound"
+      >f</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="heap.libraryMaybe.html#1582" class="Bound"
+      >x</a
+      ><a name="1596" class="Symbol"
+      >)</a
+      ><a name="1597"
+      >
+</a
+      ><a name="1598" href="heap.libraryMaybe.html#1497" class="Function"
+      >maybeFunctor</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" href="heap.libraryMaybe.html#1611" class="Bound"
+      >f</a
+      ><a name="1612"
+      > </a
+      ><a name="1613" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" class="Symbol"
+      >=</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="1630"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

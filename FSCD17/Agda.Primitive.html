@@ -1,0 +1,1290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Agda.Primitive</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- The Agda primitives (preloaded).</a
+      ><a name="36"
+      >
+
+</a
+      ><a name="38" class="Symbol"
+      >{-#</a
+      ><a name="41"
+      > </a
+      ><a name="42" class="Keyword"
+      >OPTIONS</a
+      ><a name="49"
+      > </a
+      ><a name="50" class="Option"
+      >--without-K</a
+      ><a name="61"
+      > </a
+      ><a name="62" class="Symbol"
+      >#-}</a
+      ><a name="65"
+      >
+
+</a
+      ><a name="67" class="Keyword"
+      >module</a
+      ><a name="73"
+      > </a
+      ><a name="74" href="Agda.Primitive.html#1" class="Module"
+      >Agda.Primitive</a
+      ><a name="88"
+      > </a
+      ><a name="89" class="Keyword"
+      >where</a
+      ><a name="94"
+      >
+
+</a
+      ><a name="96" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="168"
+      >
+</a
+      ><a name="169" class="Comment"
+      >-- Universe levels</a
+      ><a name="187"
+      >
+</a
+      ><a name="188" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="260"
+      >
+
+</a
+      ><a name="262" class="Keyword"
+      >infixl</a
+      ><a name="268"
+      > </a
+      ><a name="269" class="Number"
+      >6</a
+      ><a name="270"
+      > </a
+      ><a name="271" href="Agda.Primitive.html#657" class="Primitive Operator"
+      >_&#8852;_</a
+      ><a name="274"
+      >
+
+</a
+      ><a name="276" class="Comment"
+      >-- Level is the first thing we need to define.</a
+      ><a name="322"
+      >
+</a
+      ><a name="323" class="Comment"
+      >-- The other postulates can only be checked if built-in Level is known.</a
+      ><a name="394"
+      >
+
+</a
+      ><a name="396" class="Keyword"
+      >postulate</a
+      ><a name="405"
+      >
+  </a
+      ><a name="408" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="413"
+      > </a
+      ><a name="414" class="Symbol"
+      >:</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="PrimitiveType"
+      >Set</a
+      ><a name="419"
+      >
+
+</a
+      ><a name="421" class="Comment"
+      >-- MAlonzo compiles Level to (). This should be safe, because it is</a
+      ><a name="488"
+      >
+</a
+      ><a name="489" class="Comment"
+      >-- not possible to pattern match on levels.</a
+      ><a name="532"
+      >
+
+</a
+      ><a name="534" class="Symbol"
+      >{-#</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Keyword"
+      >COMPILE</a
+      ><a name="545"
+      > GHC </a
+      ><a name="550" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="555"
+      > = type () </a
+      ><a name="566" class="Symbol"
+      >#-}</a
+      ><a name="569"
+      >
+</a
+      ><a name="570" class="Symbol"
+      >{-#</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Keyword"
+      >BUILTIN</a
+      ><a name="581"
+      > LEVEL </a
+      ><a name="588" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >#-}</a
+      ><a name="597"
+      >
+
+</a
+      ><a name="599" class="Keyword"
+      >postulate</a
+      ><a name="608"
+      >
+  </a
+      ><a name="611" href="Agda.Primitive.html#611" class="Postulate"
+      >lzero</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Symbol"
+      >:</a
+      ><a name="618"
+      > </a
+      ><a name="619" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="624"
+      >
+  </a
+      ><a name="627" href="Agda.Primitive.html#627" class="Postulate"
+      >lsuc</a
+      ><a name="631"
+      >  </a
+      ><a name="633" class="Symbol"
+      >:</a
+      ><a name="634"
+      > </a
+      ><a name="635" class="Symbol"
+      >(</a
+      ><a name="636" href="Agda.Primitive.html#636" class="Bound"
+      >&#8467;</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Symbol"
+      >:</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="645" class="Symbol"
+      >)</a
+      ><a name="646"
+      > </a
+      ><a name="647" class="Symbol"
+      >&#8594;</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="654"
+      >
+  </a
+      ><a name="657" href="Agda.Primitive.html#657" class="Postulate Operator"
+      >_&#8852;_</a
+      ><a name="660"
+      >   </a
+      ><a name="663" class="Symbol"
+      >:</a
+      ><a name="664"
+      > </a
+      ><a name="665" class="Symbol"
+      >(</a
+      ><a name="666" href="Agda.Primitive.html#666" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="668"
+      > </a
+      ><a name="669" href="Agda.Primitive.html#669" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Symbol"
+      >:</a
+      ><a name="673"
+      > </a
+      ><a name="674" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="679" class="Symbol"
+      >)</a
+      ><a name="680"
+      > </a
+      ><a name="681" class="Symbol"
+      >&#8594;</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="688"
+      >
+
+</a
+      ><a name="690" class="Symbol"
+      >{-#</a
+      ><a name="693"
+      > </a
+      ><a name="694" class="Keyword"
+      >BUILTIN</a
+      ><a name="701"
+      > LEVELZERO </a
+      ><a name="712" href="Agda.Primitive.html#611" class="Primitive"
+      >lzero</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >#-}</a
+      ><a name="721"
+      >
+</a
+      ><a name="722" class="Symbol"
+      >{-#</a
+      ><a name="725"
+      > </a
+      ><a name="726" class="Keyword"
+      >BUILTIN</a
+      ><a name="733"
+      > LEVELSUC  </a
+      ><a name="744" href="Agda.Primitive.html#627" class="Primitive"
+      >lsuc</a
+      ><a name="748"
+      >  </a
+      ><a name="750" class="Symbol"
+      >#-}</a
+      ><a name="753"
+      >
+</a
+      ><a name="754" class="Symbol"
+      >{-#</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Keyword"
+      >BUILTIN</a
+      ><a name="765"
+      > LEVELMAX  </a
+      ><a name="776" href="Agda.Primitive.html#657" class="Primitive Operator"
+      >_&#8852;_</a
+      ><a name="779"
+      >   </a
+      ><a name="782" class="Symbol"
+      >#-}</a
+      ><a name="785"
+      >
+
+</a
+      ><a name="787" class="Symbol"
+      >{-#</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Keyword"
+      >BUILTIN</a
+      ><a name="798"
+      > INTERVAL </a
+      ><a name="808" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="809"
+      >    </a
+      ><a name="813" class="Symbol"
+      >#-}</a
+      ><a name="816"
+      > </a
+      ><a name="817" class="Comment"
+      >-- I : Set&#969;</a
+      ><a name="828"
+      >
+
+</a
+      ><a name="830" class="Symbol"
+      >{-#</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Keyword"
+      >BUILTIN</a
+      ><a name="841"
+      > IZERO    </a
+      ><a name="851" href="Agda.Primitive.html#851" class="InductiveConstructor"
+      >i0</a
+      ><a name="853"
+      >   </a
+      ><a name="856" class="Symbol"
+      >#-}</a
+      ><a name="859"
+      >
+</a
+      ><a name="860" class="Symbol"
+      >{-#</a
+      ><a name="863"
+      > </a
+      ><a name="864" class="Keyword"
+      >BUILTIN</a
+      ><a name="871"
+      > IONE     </a
+      ><a name="881" href="Agda.Primitive.html#881" class="InductiveConstructor"
+      >i1</a
+      ><a name="883"
+      >   </a
+      ><a name="886" class="Symbol"
+      >#-}</a
+      ><a name="889"
+      >
+
+</a
+      ><a name="891" class="Keyword"
+      >infix</a
+      ><a name="896"
+      > </a
+      ><a name="897" class="Number"
+      >30</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="Agda.Primitive.html#974" class="Primitive"
+      >primINeg</a
+      ><a name="908"
+      >
+
+</a
+      ><a name="910" class="Keyword"
+      >primitive</a
+      ><a name="919"
+      >
+    </a
+      ><a name="924" href="Agda.Primitive.html#924" class="Primitive"
+      >primIMin</a
+      ><a name="932"
+      > </a
+      ><a name="933" class="Symbol"
+      >:</a
+      ><a name="934"
+      > </a
+      ><a name="935" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >&#8594;</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="940"
+      > </a
+      ><a name="941" class="Symbol"
+      >&#8594;</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="944"
+      >
+    </a
+      ><a name="949" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >:</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="961"
+      > </a
+      ><a name="962" class="Symbol"
+      >&#8594;</a
+      ><a name="963"
+      > </a
+      ><a name="964" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="965"
+      > </a
+      ><a name="966" class="Symbol"
+      >&#8594;</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="969"
+      >
+    </a
+      ><a name="974" href="Agda.Primitive.html#974" class="Primitive"
+      >primINeg</a
+      ><a name="982"
+      > </a
+      ><a name="983" class="Symbol"
+      >:</a
+      ><a name="984"
+      > </a
+      ><a name="985" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >&#8594;</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="990"
+      >
+
+</a
+      ><a name="992" class="Symbol"
+      >{-#</a
+      ><a name="995"
+      > </a
+      ><a name="996" class="Keyword"
+      >BUILTIN</a
+      ><a name="1003"
+      > ISONE        </a
+      ><a name="1017" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" class="Symbol"
+      >#-}</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" class="Comment"
+      >-- IsOne : I &#8594; Set&#969;</a
+      ><a name="1046"
+      >
+
+
+</a
+      ><a name="1049" class="Keyword"
+      >postulate</a
+      ><a name="1058"
+      >
+  </a
+      ><a name="1061" href="Agda.Primitive.html#1061" class="Postulate"
+      >itIsOne</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" class="Symbol"
+      >:</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="Agda.Primitive.html#881" class="InductiveConstructor"
+      >i1</a
+      ><a name="1079"
+      >
+  </a
+      ><a name="1082" href="Agda.Primitive.html#1082" class="Postulate"
+      >IsOne1</a
+      ><a name="1088"
+      >  </a
+      ><a name="1090" class="Symbol"
+      >:</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >&#8704;</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="Agda.Primitive.html#1094" class="Bound"
+      >i</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="Agda.Primitive.html#1096" class="Bound"
+      >j</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" class="Symbol"
+      >&#8594;</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" href="Agda.Primitive.html#1094" class="Bound"
+      >i</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" class="Symbol"
+      >&#8594;</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" class="Symbol"
+      >(</a
+      ><a name="1117" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="Agda.Primitive.html#1094" class="Bound"
+      >i</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" href="Agda.Primitive.html#1096" class="Bound"
+      >j</a
+      ><a name="1129" class="Symbol"
+      >)</a
+      ><a name="1130"
+      >
+  </a
+      ><a name="1133" href="Agda.Primitive.html#1133" class="Postulate"
+      >IsOne2</a
+      ><a name="1139"
+      >  </a
+      ><a name="1141" class="Symbol"
+      >:</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" class="Symbol"
+      >&#8704;</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Agda.Primitive.html#1145" class="Bound"
+      >i</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" href="Agda.Primitive.html#1147" class="Bound"
+      >j</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" class="Symbol"
+      >&#8594;</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" href="Agda.Primitive.html#1147" class="Bound"
+      >j</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" class="Symbol"
+      >&#8594;</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" href="Agda.Primitive.html#1017" class="Postulate"
+      >IsOne</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" class="Symbol"
+      >(</a
+      ><a name="1168" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="Agda.Primitive.html#1145" class="Bound"
+      >i</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" href="Agda.Primitive.html#1147" class="Bound"
+      >j</a
+      ><a name="1180" class="Symbol"
+      >)</a
+      ><a name="1181"
+      >
+
+</a
+      ><a name="1183" class="Symbol"
+      >{-#</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" class="Keyword"
+      >BUILTIN</a
+      ><a name="1194"
+      > ITISONE      </a
+      ><a name="1208" href="Agda.Primitive.html#1061" class="Postulate"
+      >itIsOne</a
+      ><a name="1215"
+      >  </a
+      ><a name="1217" class="Symbol"
+      >#-}</a
+      ><a name="1220"
+      >
+</a
+      ><a name="1221" class="Symbol"
+      >{-#</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" class="Keyword"
+      >BUILTIN</a
+      ><a name="1232"
+      > ISONE1       </a
+      ><a name="1246" href="Agda.Primitive.html#1082" class="Postulate"
+      >IsOne1</a
+      ><a name="1252"
+      >   </a
+      ><a name="1255" class="Symbol"
+      >#-}</a
+      ><a name="1258"
+      >
+</a
+      ><a name="1259" class="Symbol"
+      >{-#</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Keyword"
+      >BUILTIN</a
+      ><a name="1270"
+      > ISONE2       </a
+      ><a name="1284" href="Agda.Primitive.html#1133" class="Postulate"
+      >IsOne2</a
+      ><a name="1290"
+      >   </a
+      ><a name="1293" class="Symbol"
+      >#-}</a
+      ><a name="1296"
+      >
+</a
+      ><a name="1297" class="Symbol"
+      >{-#</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" class="Keyword"
+      >BUILTIN</a
+      ><a name="1308"
+      > PARTIAL      </a
+      ><a name="1322" href="Agda.Primitive.html#1322" class="Primitive"
+      >Partial</a
+      ><a name="1329"
+      >  </a
+      ><a name="1331" class="Symbol"
+      >#-}</a
+      ><a name="1334"
+      >
+</a
+      ><a name="1335" class="Symbol"
+      >{-#</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" class="Keyword"
+      >BUILTIN</a
+      ><a name="1346"
+      > PARTIALP     </a
+      ><a name="1360" href="Agda.Primitive.html#1360" class="Primitive"
+      >PartialP</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" class="Symbol"
+      >#-}</a
+      ><a name="1372"
+      >
+
+</a
+      ><a name="1374" class="Keyword"
+      >postulate</a
+      ><a name="1383"
+      >
+  </a
+      ><a name="1386" href="Agda.Primitive.html#1386" class="Postulate"
+      >isOneEmpty</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" class="Symbol"
+      >:</a
+      ><a name="1398"
+      > </a
+      ><a name="1399" class="Symbol"
+      >&#8704;</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" class="Symbol"
+      >{</a
+      ><a name="1402" href="Agda.Primitive.html#1402" class="Bound"
+      >a</a
+      ><a name="1403" class="Symbol"
+      >}</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >{</a
+      ><a name="1406" href="Agda.Primitive.html#1406" class="Bound"
+      >A</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >:</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="Agda.Primitive.html#1322" class="Primitive"
+      >Partial</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" class="Symbol"
+      >(</a
+      ><a name="1419" class="PrimitiveType"
+      >Set</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="Agda.Primitive.html#1402" class="Bound"
+      >a</a
+      ><a name="1424" class="Symbol"
+      >)</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="Agda.Primitive.html#851" class="InductiveConstructor"
+      >i0</a
+      ><a name="1428" class="Symbol"
+      >}</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >&#8594;</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="Agda.Primitive.html#1360" class="Primitive"
+      >PartialP</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="Agda.Primitive.html#851" class="InductiveConstructor"
+      >i0</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="Agda.Primitive.html#1406" class="Bound"
+      >A</a
+      ><a name="1445"
+      >
+</a
+      ><a name="1446" class="Symbol"
+      >{-#</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" class="Keyword"
+      >BUILTIN</a
+      ><a name="1457"
+      > ISONEEMPTY </a
+      ><a name="1469" href="Agda.Primitive.html#1386" class="Postulate"
+      >isOneEmpty</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Symbol"
+      >#-}</a
+      ><a name="1483"
+      >
+
+</a
+      ><a name="1485" class="Keyword"
+      >primitive</a
+      ><a name="1494"
+      >
+  </a
+      ><a name="1497" href="Agda.Primitive.html#1497" class="Primitive"
+      >primPFrom1</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" class="Symbol"
+      >:</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >&#8704;</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >{</a
+      ><a name="1513" href="Agda.Primitive.html#1513" class="Bound"
+      >a</a
+      ><a name="1514" class="Symbol"
+      >}</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >{</a
+      ><a name="1517" href="Agda.Primitive.html#1517" class="Bound"
+      >A</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >:</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" class="Symbol"
+      >&#8594;</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" class="PrimitiveType"
+      >Set</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="Agda.Primitive.html#1513" class="Bound"
+      >a</a
+      ><a name="1530" class="Symbol"
+      >}</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" class="Symbol"
+      >&#8594;</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" href="Agda.Primitive.html#1517" class="Bound"
+      >A</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="Agda.Primitive.html#881" class="InductiveConstructor"
+      >i1</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" class="Symbol"
+      >&#8594;</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" class="Symbol"
+      >&#8704;</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" href="Agda.Primitive.html#1543" class="Bound"
+      >i</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" href="Agda.Primitive.html#1545" class="Bound"
+      >j</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" class="Symbol"
+      >&#8594;</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Agda.Primitive.html#1322" class="Primitive"
+      >Partial</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" class="Symbol"
+      >(</a
+      ><a name="1558" href="Agda.Primitive.html#1517" class="Bound"
+      >A</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" class="Symbol"
+      >(</a
+      ><a name="1561" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="Agda.Primitive.html#1543" class="Bound"
+      >i</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="Agda.Primitive.html#1545" class="Bound"
+      >j</a
+      ><a name="1573" class="Symbol"
+      >))</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="Agda.Primitive.html#1543" class="Bound"
+      >i</a
+      ><a name="1577"
+      >
+  </a
+      ><a name="1580" href="Agda.Primitive.html#1580" class="Primitive"
+      >primPOr</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" class="Symbol"
+      >:</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" class="Symbol"
+      >&#8704;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" class="Symbol"
+      >{</a
+      ><a name="1593" href="Agda.Primitive.html#1593" class="Bound"
+      >a</a
+      ><a name="1594" class="Symbol"
+      >}</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >(</a
+      ><a name="1597" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" class="Symbol"
+      >:</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="1604" class="Symbol"
+      >)</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >{</a
+      ><a name="1607" href="Agda.Primitive.html#1607" class="Bound"
+      >A</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" class="Symbol"
+      >:</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" href="Agda.Primitive.html#1322" class="Primitive"
+      >Partial</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" class="Symbol"
+      >(</a
+      ><a name="1620" class="PrimitiveType"
+      >Set</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" href="Agda.Primitive.html#1593" class="Bound"
+      >a</a
+      ><a name="1625" class="Symbol"
+      >)</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" class="Symbol"
+      >(</a
+      ><a name="1628" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1640" class="Symbol"
+      >)}</a
+      ><a name="1642"
+      >
+            </a
+      ><a name="1655" class="Symbol"
+      >&#8594;</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="Agda.Primitive.html#1360" class="Primitive"
+      >PartialP</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" class="Symbol"
+      >(&#955;</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" href="Agda.Primitive.html#1671" class="Bound"
+      >z</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >&#8594;</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="Agda.Primitive.html#1607" class="Bound"
+      >A</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" class="Symbol"
+      >(</a
+      ><a name="1678" href="Agda.Primitive.html#1082" class="Postulate"
+      >IsOne1</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="Agda.Primitive.html#1671" class="Bound"
+      >z</a
+      ><a name="1690" class="Symbol"
+      >))</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" class="Symbol"
+      >&#8594;</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="Agda.Primitive.html#1360" class="Primitive"
+      >PartialP</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" class="Symbol"
+      >(&#955;</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="Agda.Primitive.html#1709" class="Bound"
+      >z</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" class="Symbol"
+      >&#8594;</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" href="Agda.Primitive.html#1607" class="Bound"
+      >A</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" class="Symbol"
+      >(</a
+      ><a name="1716" href="Agda.Primitive.html#1133" class="Postulate"
+      >IsOne2</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="Agda.Primitive.html#1709" class="Bound"
+      >z</a
+      ><a name="1728" class="Symbol"
+      >))</a
+      ><a name="1730"
+      >
+            </a
+      ><a name="1743" class="Symbol"
+      >&#8594;</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Agda.Primitive.html#1360" class="Primitive"
+      >PartialP</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" class="Symbol"
+      >(</a
+      ><a name="1755" href="Agda.Primitive.html#949" class="Primitive"
+      >primIMax</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="Agda.Primitive.html#1597" class="Bound"
+      >i</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="Agda.Primitive.html#1599" class="Bound"
+      >j</a
+      ><a name="1767" class="Symbol"
+      >)</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" href="Agda.Primitive.html#1607" class="Bound"
+      >A</a
+      ><a name="1770"
+      >
+  </a
+      ><a name="1773" href="Agda.Primitive.html#1773" class="Primitive"
+      >primComp</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" class="Symbol"
+      >:</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" class="Symbol"
+      >&#8704;</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >{</a
+      ><a name="1787" href="Agda.Primitive.html#1787" class="Bound"
+      >a</a
+      ><a name="1788" class="Symbol"
+      >}</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" class="Symbol"
+      >(</a
+      ><a name="1791" href="Agda.Primitive.html#1791" class="Bound"
+      >A</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="Symbol"
+      >:</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" class="Symbol"
+      >(</a
+      ><a name="1796" href="Agda.Primitive.html#1796" class="Bound"
+      >i</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" class="Symbol"
+      >:</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="1801" class="Symbol"
+      >)</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >&#8594;</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="PrimitiveType"
+      >Set</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" class="Symbol"
+      >(</a
+      ><a name="1810" href="Agda.Primitive.html#1787" class="Bound"
+      >a</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="Agda.Primitive.html#1796" class="Bound"
+      >i</a
+      ><a name="1813" class="Symbol"
+      >))</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" class="Symbol"
+      >(</a
+      ><a name="1817" href="Agda.Primitive.html#1817" class="Bound"
+      >&#966;</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" class="Symbol"
+      >:</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="Agda.Primitive.html#808" class="Datatype"
+      >I</a
+      ><a name="1822" class="Symbol"
+      >)</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" class="Symbol"
+      >&#8594;</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" class="Symbol"
+      >(&#8704;</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="Agda.Primitive.html#1829" class="Bound"
+      >i</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" class="Symbol"
+      >&#8594;</a
+      ><a name="1832"
+      > </a
+      ><a name="1833" href="Agda.Primitive.html#1322" class="Primitive"
+      >Partial</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" class="Symbol"
+      >(</a
+      ><a name="1842" href="Agda.Primitive.html#1791" class="Bound"
+      >A</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" href="Agda.Primitive.html#1829" class="Bound"
+      >i</a
+      ><a name="1845" class="Symbol"
+      >)</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="Agda.Primitive.html#1817" class="Bound"
+      >&#966;</a
+      ><a name="1848" class="Symbol"
+      >)</a
+      ><a name="1849"
+      > </a
+      ><a name="1850" class="Symbol"
+      >&#8594;</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" class="Symbol"
+      >(</a
+      ><a name="1853" href="Agda.Primitive.html#1853" class="Bound"
+      >a</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" class="Symbol"
+      >:</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="Agda.Primitive.html#1791" class="Bound"
+      >A</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" href="Agda.Primitive.html#851" class="InductiveConstructor"
+      >i0</a
+      ><a name="1861" class="Symbol"
+      >)</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" class="Symbol"
+      >&#8594;</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" href="Agda.Primitive.html#1791" class="Bound"
+      >A</a
+      ><a name="1866"
+      > </a
+      ><a name="1867" href="Agda.Primitive.html#881" class="InductiveConstructor"
+      >i1</a
+      ><a name="1869"
+      >
+
+</a
+      ><a name="1871" class="Keyword"
+      >syntax</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="Agda.Primitive.html#1580" class="Primitive"
+      >primPOr</a
+      ><a name="1885"
+      > p q u t </a
+      ><a name="1894" class="Symbol"
+      >=</a
+      ><a name="1895"
+      > [ p &#8614; u , q &#8614; t ]
+</a
+      ></pre
+    ></body
+  ></html
+>

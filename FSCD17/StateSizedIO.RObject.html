@@ -1,0 +1,851 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >StateSizedIO.RObject</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >--@PREFIX@StateSizedRObject</a
+      ><a name="28"
+      >
+
+</a
+      ><a name="30" class="Keyword"
+      >module</a
+      ><a name="36"
+      > </a
+      ><a name="37" href="StateSizedIO.RObject.html#1" class="Module"
+      >StateSizedIO.RObject</a
+      ><a name="57"
+      > </a
+      ><a name="58" class="Keyword"
+      >where</a
+      ><a name="63"
+      >
+
+</a
+      ><a name="65" class="Keyword"
+      >open</a
+      ><a name="69"
+      > </a
+      ><a name="70" class="Keyword"
+      >import</a
+      ><a name="76"
+      > </a
+      ><a name="77" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="89"
+      >
+</a
+      ><a name="90" class="Keyword"
+      >open</a
+      ><a name="94"
+      > </a
+      ><a name="95" class="Keyword"
+      >import</a
+      ><a name="101"
+      > </a
+      ><a name="102" href="StateSizedIO.Base.html#1" class="Module"
+      >StateSizedIO.Base</a
+      ><a name="119"
+      > </a
+      ><a name="120" class="Keyword"
+      >public</a
+      ><a name="126"
+      >
+</a
+      ><a name="127" class="Comment"
+      >{-
+--  This definition was probably moved to StateSizedIO.Base
+--  and by accident left here. Delete this.
+record Interface&#738; : Set&#8321; where
+  field
+    State&#738;    : Set
+    Method&#738;   : State&#738; &#8594; Set
+    Result&#738;   : (s : State&#738;) &#8594; (m : Method&#738; s) &#8594; Set
+    next&#738;     : (s : State&#738;) &#8594; (m : Method&#738; s) &#8594; Result&#738; s m &#8594; State&#738;
+open Interface&#738; public
+-}</a
+      ><a name="470"
+      >
+
+</a
+      ><a name="472" class="Comment"
+      >--\StateSizedRObjectRInterface</a
+      ><a name="502"
+      >
+</a
+      ><a name="503" class="Comment"
+      >--@BEGIN@RInterface</a
+      ><a name="522"
+      >
+</a
+      ><a name="523" class="Keyword"
+      >record</a
+      ><a name="529"
+      > </a
+      ><a name="530" href="StateSizedIO.RObject.html#530" class="Record"
+      >RInterface&#738;</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >:</a
+      ><a name="543"
+      > </a
+      ><a name="544" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Keyword"
+      >where</a
+      ><a name="554"
+      >
+  </a
+      ><a name="557" class="Keyword"
+      >field</a
+      ><a name="562"
+      >
+    </a
+      ><a name="567" href="StateSizedIO.RObject.html#567" class="Field"
+      >State&#738;</a
+      ><a name="573"
+      >    </a
+      ><a name="577" class="Symbol"
+      >:</a
+      ><a name="578"
+      >  </a
+      ><a name="580" class="PrimitiveType"
+      >Set</a
+      ><a name="583"
+      >
+    </a
+      ><a name="588" href="StateSizedIO.RObject.html#588" class="Field"
+      >Method&#738;</a
+      ><a name="595"
+      >   </a
+      ><a name="598" class="Symbol"
+      >:</a
+      ><a name="599"
+      >  </a
+      ><a name="601" class="Symbol"
+      >(</a
+      ><a name="602" href="StateSizedIO.RObject.html#602" class="Bound"
+      >s</a
+      ><a name="603"
+      > </a
+      ><a name="604" class="Symbol"
+      >:</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Field"
+      >State&#738;</a
+      ><a name="612" class="Symbol"
+      >)</a
+      ><a name="613"
+      > </a
+      ><a name="614" class="Symbol"
+      >&#8594;</a
+      ><a name="615"
+      > </a
+      ><a name="616" class="PrimitiveType"
+      >Set</a
+      ><a name="619"
+      >
+    </a
+      ><a name="624" href="StateSizedIO.RObject.html#624" class="Field"
+      >Result&#738;</a
+      ><a name="631"
+      >   </a
+      ><a name="634" class="Symbol"
+      >:</a
+      ><a name="635"
+      >  </a
+      ><a name="637" class="Symbol"
+      >(</a
+      ><a name="638" href="StateSizedIO.RObject.html#638" class="Bound"
+      >s</a
+      ><a name="639"
+      > </a
+      ><a name="640" class="Symbol"
+      >:</a
+      ><a name="641"
+      > </a
+      ><a name="642" class="Field"
+      >State&#738;</a
+      ><a name="648" class="Symbol"
+      >)</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >&#8594;</a
+      ><a name="651"
+      > </a
+      ><a name="652" class="Symbol"
+      >(</a
+      ><a name="653" href="StateSizedIO.RObject.html#653" class="Bound"
+      >m</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >:</a
+      ><a name="656"
+      > </a
+      ><a name="657" class="Field"
+      >Method&#738;</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="StateSizedIO.RObject.html#638" class="Bound"
+      >s</a
+      ><a name="666" class="Symbol"
+      >)</a
+      ><a name="667"
+      > </a
+      ><a name="668" class="Symbol"
+      >&#8594;</a
+      ><a name="669"
+      > </a
+      ><a name="670" class="PrimitiveType"
+      >Set</a
+      ><a name="673"
+      >
+    </a
+      ><a name="678" href="StateSizedIO.RObject.html#678" class="Field"
+      >next&#738;</a
+      ><a name="683"
+      >     </a
+      ><a name="688" class="Symbol"
+      >:</a
+      ><a name="689"
+      >  </a
+      ><a name="691" class="Symbol"
+      >(</a
+      ><a name="692" href="StateSizedIO.RObject.html#692" class="Bound"
+      >s</a
+      ><a name="693"
+      > </a
+      ><a name="694" class="Symbol"
+      >:</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Field"
+      >State&#738;</a
+      ><a name="702" class="Symbol"
+      >)</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="Symbol"
+      >&#8594;</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >(</a
+      ><a name="707" href="StateSizedIO.RObject.html#707" class="Bound"
+      >m</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Symbol"
+      >:</a
+      ><a name="710"
+      > </a
+      ><a name="711" class="Field"
+      >Method&#738;</a
+      ><a name="718"
+      > </a
+      ><a name="719" href="StateSizedIO.RObject.html#692" class="Bound"
+      >s</a
+      ><a name="720" class="Symbol"
+      >)</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >&#8594;</a
+      ><a name="723"
+      > </a
+      ><a name="724" class="Symbol"
+      >(</a
+      ><a name="725" href="StateSizedIO.RObject.html#725" class="Bound"
+      >r</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >:</a
+      ><a name="728"
+      > </a
+      ><a name="729" class="Field"
+      >Result&#738;</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="StateSizedIO.RObject.html#692" class="Bound"
+      >s</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="StateSizedIO.RObject.html#707" class="Bound"
+      >m</a
+      ><a name="740" class="Symbol"
+      >)</a
+      ><a name="741"
+      > </a
+      ><a name="742" class="Symbol"
+      >&#8594;</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="Field"
+      >State&#738;</a
+      ><a name="750"
+      >
+    </a
+      ><a name="755" href="StateSizedIO.RObject.html#755" class="Field"
+      >RMethod&#738;</a
+      ><a name="763"
+      >  </a
+      ><a name="765" class="Symbol"
+      >:</a
+      ><a name="766"
+      >  </a
+      ><a name="768" class="Symbol"
+      >(</a
+      ><a name="769" href="StateSizedIO.RObject.html#769" class="Bound"
+      >s</a
+      ><a name="770"
+      > </a
+      ><a name="771" class="Symbol"
+      >:</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Field"
+      >State&#738;</a
+      ><a name="779" class="Symbol"
+      >)</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >&#8594;</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="PrimitiveType"
+      >Set</a
+      ><a name="786"
+      >
+    </a
+      ><a name="791" href="StateSizedIO.RObject.html#791" class="Field"
+      >RResult&#738;</a
+      ><a name="799"
+      >  </a
+      ><a name="801" class="Symbol"
+      >:</a
+      ><a name="802"
+      >  </a
+      ><a name="804" class="Symbol"
+      >(</a
+      ><a name="805" href="StateSizedIO.RObject.html#805" class="Bound"
+      >s</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >:</a
+      ><a name="808"
+      > </a
+      ><a name="809" class="Field"
+      >State&#738;</a
+      ><a name="815" class="Symbol"
+      >)</a
+      ><a name="816"
+      > </a
+      ><a name="817" class="Symbol"
+      >&#8594;</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >(</a
+      ><a name="820" href="StateSizedIO.RObject.html#820" class="Bound"
+      >m</a
+      ><a name="821"
+      > </a
+      ><a name="822" class="Symbol"
+      >:</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="StateSizedIO.RObject.html#755" class="Field"
+      >RMethod&#738;</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="StateSizedIO.RObject.html#805" class="Bound"
+      >s</a
+      ><a name="834" class="Symbol"
+      >)</a
+      ><a name="835"
+      > </a
+      ><a name="836" class="Symbol"
+      >&#8594;</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="PrimitiveType"
+      >Set</a
+      ><a name="841"
+      >
+</a
+      ><a name="842" class="Comment"
+      >--@END</a
+      ><a name="848"
+      >
+
+</a
+      ><a name="850" class="Keyword"
+      >open</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="StateSizedIO.RObject.html#530" class="Module"
+      >RInterface&#738;</a
+      ><a name="866"
+      > </a
+      ><a name="867" class="Keyword"
+      >public</a
+      ><a name="873"
+      >
+
+
+
+</a
+      ><a name="877" class="Keyword"
+      >module</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="StateSizedIO.RObject.html#884" class="Module"
+      >_</a
+      ><a name="885"
+      > </a
+      ><a name="886" class="Symbol"
+      >(</a
+      ><a name="887" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="888"
+      > </a
+      ><a name="889" class="Symbol"
+      >:</a
+      ><a name="890"
+      > </a
+      ><a name="891" href="StateSizedIO.RObject.html#530" class="Record"
+      >RInterface&#738;</a
+      ><a name="902" class="Symbol"
+      >)(</a
+      ><a name="904" class="Keyword"
+      >let</a
+      ><a name="907"
+      > </a
+      ><a name="908" href="StateSizedIO.RObject.html#908" class="Bound"
+      >S</a
+      ><a name="909"
+      > </a
+      ><a name="910" class="Symbol"
+      >=</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="StateSizedIO.RObject.html#567" class="Field"
+      >State&#738;</a
+      ><a name="918"
+      > </a
+      ><a name="919" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="920" class="Symbol"
+      >)</a
+      ><a name="921"
+      > </a
+      ><a name="922" class="Symbol"
+      >(</a
+      ><a name="923" class="Keyword"
+      >let</a
+      ><a name="926"
+      > </a
+      ><a name="927" href="StateSizedIO.RObject.html#927" class="Bound"
+      >M</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >=</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="StateSizedIO.RObject.html#588" class="Field"
+      >Method&#738;</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="940" class="Symbol"
+      >)</a
+      ><a name="941"
+      >
+         </a
+      ><a name="951" class="Symbol"
+      >(</a
+      ><a name="952" class="Keyword"
+      >let</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="StateSizedIO.RObject.html#956" class="Bound"
+      >R</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >=</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="StateSizedIO.RObject.html#624" class="Field"
+      >Result&#738;</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="969" class="Symbol"
+      >)</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Symbol"
+      >(</a
+      ><a name="972" class="Keyword"
+      >let</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="StateSizedIO.RObject.html#976" class="Bound"
+      >next</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >=</a
+      ><a name="982"
+      > </a
+      ><a name="983" href="StateSizedIO.RObject.html#678" class="Field"
+      >next&#738;</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="990" class="Symbol"
+      >)</a
+      ><a name="991"
+      >
+         </a
+      ><a name="1001" class="Symbol"
+      >(</a
+      ><a name="1002" class="Keyword"
+      >let</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="StateSizedIO.RObject.html#1006" class="Bound"
+      >RM</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >=</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="StateSizedIO.RObject.html#755" class="Field"
+      >RMethod&#738;</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="1021" class="Symbol"
+      >)</a
+      ><a name="1022"
+      >
+         </a
+      ><a name="1032" class="Symbol"
+      >(</a
+      ><a name="1033" class="Keyword"
+      >let</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" href="StateSizedIO.RObject.html#1037" class="Bound"
+      >RR</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >=</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" href="StateSizedIO.RObject.html#791" class="Field"
+      >RResult&#738;</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="StateSizedIO.RObject.html#887" class="Bound"
+      >I</a
+      ><a name="1052" class="Symbol"
+      >)</a
+      ><a name="1053"
+      >
+          </a
+      ><a name="1064" class="Keyword"
+      >where</a
+      ><a name="1069"
+      >
+  </a
+      ><a name="1072" class="Comment"
+      >-- A simple object just returns for a method the response</a
+      ><a name="1129"
+      >
+  </a
+      ><a name="1132" class="Comment"
+      >-- and the object itself</a
+      ><a name="1156"
+      >
+</a
+      ><a name="1157" class="Comment"
+      >--\StateSizedRObjectRObject</a
+      ><a name="1184"
+      >
+</a
+      ><a name="1185" class="Comment"
+      >--@BEGIN@RObject</a
+      ><a name="1201"
+      >
+  </a
+      ><a name="1204" class="Keyword"
+      >record</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" href="StateSizedIO.RObject.html#1211" class="Record"
+      >RObject&#738;</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="Symbol"
+      >(</a
+      ><a name="1221" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >:</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="StateSizedIO.RObject.html#908" class="Bound"
+      >S</a
+      ><a name="1226" class="Symbol"
+      >)</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" class="Symbol"
+      >:</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" class="PrimitiveType"
+      >Set</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" class="Keyword"
+      >where</a
+      ><a name="1239"
+      >
+    </a
+      ><a name="1244" class="Keyword"
+      >coinductive</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" class="Comment"
+      >--@HIDE-BEG</a
+      ><a name="1267"
+      >
+    </a
+      ><a name="1272" class="Keyword"
+      >field</a
+      ><a name="1277"
+      >
+</a
+      ><a name="1278" class="Comment"
+      >--@HIDE-END</a
+      ><a name="1289"
+      >
+      </a
+      ><a name="1296" href="StateSizedIO.RObject.html#1296" class="Field"
+      >objectMethod</a
+      ><a name="1308"
+      >  </a
+      ><a name="1310" class="Symbol"
+      >:</a
+      ><a name="1311"
+      >  </a
+      ><a name="1313" class="Symbol"
+      >(</a
+      ><a name="1314" href="StateSizedIO.RObject.html#1314" class="Bound"
+      >m</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >:</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" href="StateSizedIO.RObject.html#927" class="Bound"
+      >M</a
+      ><a name="1319"
+      > </a
+      ><a name="1320" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1321" class="Symbol"
+      >)</a
+      ><a name="1322"
+      > </a
+      ><a name="1323" class="Symbol"
+      >&#8594;</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="StateSizedIO.RObject.html#1328" class="Bound"
+      >r</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="StateSizedIO.RObject.html#956" class="Bound"
+      >R</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="StateSizedIO.RObject.html#1314" class="Bound"
+      >m</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" href="StateSizedIO.RObject.html#1211" class="Record"
+      >RObject&#738;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" class="Symbol"
+      >(</a
+      ><a name="1350" href="StateSizedIO.RObject.html#976" class="Bound"
+      >next</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" href="StateSizedIO.RObject.html#1314" class="Bound"
+      >m</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="StateSizedIO.RObject.html#1328" class="Bound"
+      >r</a
+      ><a name="1360" class="Symbol"
+      >)</a
+      ><a name="1361"
+      >
+      </a
+      ><a name="1368" href="StateSizedIO.RObject.html#1368" class="Field"
+      >readerMethod</a
+      ><a name="1380"
+      >  </a
+      ><a name="1382" class="Symbol"
+      >:</a
+      ><a name="1383"
+      >  </a
+      ><a name="1385" class="Symbol"
+      >(</a
+      ><a name="1386" href="StateSizedIO.RObject.html#1386" class="Bound"
+      >m</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >:</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="StateSizedIO.RObject.html#1006" class="Bound"
+      >RM</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1394" class="Symbol"
+      >)</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >&#8594;</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="StateSizedIO.RObject.html#1037" class="Bound"
+      >RR</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="StateSizedIO.RObject.html#1221" class="Bound"
+      >s</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="StateSizedIO.RObject.html#1386" class="Bound"
+      >m</a
+      ><a name="1404"
+      >
+</a
+      ><a name="1405" class="Comment"
+      >--@END</a
+      ><a name="1411"
+      >
+  </a
+      ><a name="1414" class="Keyword"
+      >open</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="StateSizedIO.RObject.html#1211" class="Module"
+      >RObject&#738;</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" class="Keyword"
+      >public</a
+      ><a name="1434"
+      >
+
+
+
+
+</a
+      ><a name="1439" class="Comment"
+      >-- Bisimilation for Object&#738;</a
+      ><a name="1466"
+      >
+</a
+      ><a name="1467" class="Comment"
+      >{-
+module Bisim (I : Interface&#738;)
+  (let S    = State&#738;  I)
+  (let M    = Method&#738; I)
+  (let R    = Result&#738; I)
+  (let next = next&#738;   I)
+  (let O = Object&#738; I)
+  where
+
+    mutual
+
+      record _&#8773;_ {s : S} (o o' : O s) : Set where
+        coinductive
+        field bisimMethod : (m : M s) &#8594; objectMethod o m &#8801;&#215;&#8773; objectMethod o' m
+
+      data _&#8801;&#215;&#8773;_ {s m} : (p p' :  &#931;[ r &#8712; R s m ] O (next s m r)) &#8594; Set where
+        bisim : &#8704;{r} (let s' = next s m r) {o o' : O s'} (p : o &#8773; o')
+              &#8594; (r , o) &#8801;&#215;&#8773; (r , o')
+
+    open _&#8773;_ public
+
+    refl&#8773; : &#8704;{s} (o : O s) &#8594; o &#8773; o
+    bisimMethod (refl&#8773; o) m = bisim (refl&#8773; (proj&#8322; (objectMethod o m)))
+-}</a
+      ><a name="2107"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

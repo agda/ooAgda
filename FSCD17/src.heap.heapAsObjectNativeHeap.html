@@ -1,0 +1,1740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >src.heap.heapAsObjectNativeHeap</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >
+
+
+</a
+      ><a name="4" class="Symbol"
+      >{-#</a
+      ><a name="7"
+      > </a
+      ><a name="8" class="Keyword"
+      >OPTIONS</a
+      ><a name="15"
+      > </a
+      ><a name="16" class="Option"
+      >--postfix-projections</a
+      ><a name="37"
+      > </a
+      ><a name="38" class="Symbol"
+      >#-}</a
+      ><a name="41"
+      >
+
+
+</a
+      ><a name="44" class="Keyword"
+      >module</a
+      ><a name="50"
+      > </a
+      ><a name="51" href="src.heap.heapAsObjectNativeHeap.html#1" class="Module"
+      >src.heap.heapAsObjectNativeHeap</a
+      ><a name="82"
+      > </a
+      ><a name="83" class="Keyword"
+      >where</a
+      ><a name="88"
+      >
+
+</a
+      ><a name="90" class="Keyword"
+      >open</a
+      ><a name="94"
+      > </a
+      ><a name="95" class="Keyword"
+      >import</a
+      ><a name="101"
+      > </a
+      ><a name="102" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="112"
+      > </a
+      ><a name="113" class="Keyword"
+      >using</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Symbol"
+      >(</a
+      ><a name="120" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="125" class="Symbol"
+      >;</a
+      ><a name="126"
+      > </a
+      ><a name="127" href="Data.Maybe.html#1588" class="InductiveConstructor"
+      >nothing</a
+      ><a name="134" class="Symbol"
+      >;</a
+      ><a name="135"
+      > </a
+      ><a name="136" href="Data.Maybe.html#1527" class="InductiveConstructor"
+      >just</a
+      ><a name="140" class="Symbol"
+      >)</a
+      ><a name="141"
+      >
+</a
+      ><a name="142" class="Keyword"
+      >open</a
+      ><a name="146"
+      > </a
+      ><a name="147" class="Keyword"
+      >import</a
+      ><a name="153"
+      > </a
+      ><a name="154" href="Size.html#1" class="Module"
+      >Size</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Keyword"
+      >using</a
+      ><a name="164"
+      > </a
+      ><a name="165" class="Symbol"
+      >(</a
+      ><a name="166" href="Agda.Builtin.Size.html#114" class="Postulate"
+      >Size</a
+      ><a name="170" class="Symbol"
+      >;</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Agda.Builtin.Size.html#210" class="Postulate"
+      >&#8734;</a
+      ><a name="173" class="Symbol"
+      >)</a
+      ><a name="174"
+      >
+
+</a
+      ><a name="176" class="Keyword"
+      >open</a
+      ><a name="180"
+      > </a
+      ><a name="181" class="Keyword"
+      >import</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="SizedIO.Base.html#1" class="Module"
+      >SizedIO.Base</a
+      ><a name="200"
+      >
+
+</a
+      ><a name="202" class="Keyword"
+      >open</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="Keyword"
+      >import</a
+      ><a name="213"
+      > </a
+      ><a name="214" href="NativeIO.html#1" class="Module"
+      >NativeIO</a
+      ><a name="222"
+      >
+
+
+
+</a
+      ><a name="226" class="Comment"
+      >{- Idea:
+
+    We can write an IO language corresponding to the langauge of
+   Mvars
+    MVar would be postulated
+   but we have commands
+     newMVar {A}  depending on A returntype MVar A
+     takeMVAr {A}  depending on MVar A returntype A
+     putMVar {A} depending on MVar A and A and returntype Unit
+
+   now we can write IO programs referring to MVars and use this
+     to create Strings on the heap
+
+
+   When defining LInked list we have the problem that we would need
+
+    MVar(String x Maybe (MVar (String x Maybe ( ....)))
+
+   anfinite type.
+
+   In Java this is done by having
+    X = MVar(String x Maybe (pointer to X)
+
+   unclear how to do it with Mvars
+   SOLUTION:
+     https://www.schoolofhaskell.com/user/edwardk/unlifted-structures
+
+     data DLL = DLL (IORef (Maybe DLL)) (IORef (Maybe DLL))
+   so we would write
+
+     data LL = LL (MVar (String x Maybe LL))
+
+
+
+ These IO programs can be translated in Agda into programs operating on
+our heap.
+   newMVar {A} would use the new function for the Agda heap
+   takeMVar {A} would look up the element on the Agda heap
+   putMVar  {A} would update the AGda heap
+
+-}</a
+      ><a name="1350"
+      >
+
+
+
+
+
+</a
+      ><a name="1356" class="Symbol"
+      >{-#</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" class="Keyword"
+      >FOREIGN</a
+      ><a name="1367"
+      > GHC import qualified Data.IORef as IORef </a
+      ><a name="1409" class="Symbol"
+      >#-}</a
+      ><a name="1412"
+      >
+
+</a
+      ><a name="1414" class="Keyword"
+      >postulate</a
+      ><a name="1423"
+      >  </a
+      ><a name="1425" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >:</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="PrimitiveType"
+      >Set</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" class="Symbol"
+      >&#8594;</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" class="PrimitiveType"
+      >Set</a
+      ><a name="1442"
+      >
+</a
+      ><a name="1443" class="Symbol"
+      >{-#</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" class="Keyword"
+      >COMPILE</a
+      ><a name="1454"
+      > GHC </a
+      ><a name="1459" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="1464"
+      > = type IORef.IORef </a
+      ><a name="1484" class="Symbol"
+      >#-}</a
+      ><a name="1487"
+      >
+
+
+
+
+</a
+      ><a name="1492" class="Keyword"
+      >postulate</a
+      ><a name="1501"
+      >
+  </a
+      ><a name="1504" href="src.heap.heapAsObjectNativeHeap.html#1504" class="Postulate"
+      >nativeNewIORef</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >:</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" class="Symbol"
+      >{</a
+      ><a name="1522" href="src.heap.heapAsObjectNativeHeap.html#1522" class="Bound"
+      >A</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" class="Symbol"
+      >:</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="PrimitiveType"
+      >Set</a
+      ><a name="1529" class="Symbol"
+      >}</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" class="Symbol"
+      >&#8594;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="src.heap.heapAsObjectNativeHeap.html#1522" class="Bound"
+      >A</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" class="Symbol"
+      >&#8594;</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" class="Symbol"
+      >(</a
+      ><a name="1547" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" href="src.heap.heapAsObjectNativeHeap.html#1522" class="Bound"
+      >A</a
+      ><a name="1554" class="Symbol"
+      >)</a
+      ><a name="1555"
+      >
+  </a
+      ><a name="1558" href="src.heap.heapAsObjectNativeHeap.html#1558" class="Postulate"
+      >nativeReadIORef</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >:</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >{</a
+      ><a name="1577" href="src.heap.heapAsObjectNativeHeap.html#1577" class="Bound"
+      >A</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" class="Symbol"
+      >:</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" class="PrimitiveType"
+      >Set</a
+      ><a name="1584" class="Symbol"
+      >}</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" class="Symbol"
+      >&#8594;</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="src.heap.heapAsObjectNativeHeap.html#1577" class="Bound"
+      >A</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >&#8594;</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="src.heap.heapAsObjectNativeHeap.html#1577" class="Bound"
+      >A</a
+      ><a name="1608"
+      >
+  </a
+      ><a name="1611" href="src.heap.heapAsObjectNativeHeap.html#1611" class="Postulate"
+      >nativeWriteIORef</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >:</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >{</a
+      ><a name="1631" href="src.heap.heapAsObjectNativeHeap.html#1631" class="Bound"
+      >A</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" class="Symbol"
+      >:</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" class="PrimitiveType"
+      >Set</a
+      ><a name="1638" class="Symbol"
+      >}</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" class="Symbol"
+      >&#8594;</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" href="src.heap.heapAsObjectNativeHeap.html#1631" class="Bound"
+      >A</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" class="Symbol"
+      >&#8594;</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="src.heap.heapAsObjectNativeHeap.html#1631" class="Bound"
+      >A</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" class="Symbol"
+      >&#8594;</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="1669"
+      >
+
+</a
+      ><a name="1671" class="Symbol"
+      >{-#</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" class="Keyword"
+      >COMPILE</a
+      ><a name="1682"
+      > GHC </a
+      ><a name="1687" href="src.heap.heapAsObjectNativeHeap.html#1504" class="Postulate"
+      >nativeNewIORef</a
+      ><a name="1701"
+      > = (\ _ -&gt; IORef.newIORef ) </a
+      ><a name="1729" class="Symbol"
+      >#-}</a
+      ><a name="1732"
+      >
+</a
+      ><a name="1733" class="Symbol"
+      >{-#</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" class="Keyword"
+      >COMPILE</a
+      ><a name="1744"
+      > GHC </a
+      ><a name="1749" href="src.heap.heapAsObjectNativeHeap.html#1558" class="Postulate"
+      >nativeReadIORef</a
+      ><a name="1764"
+      > = (\ _ -&gt; IORef.readIORef ) </a
+      ><a name="1793" class="Symbol"
+      >#-}</a
+      ><a name="1796"
+      >
+</a
+      ><a name="1797" class="Symbol"
+      >{-#</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" class="Keyword"
+      >COMPILE</a
+      ><a name="1808"
+      > GHC </a
+      ><a name="1813" href="src.heap.heapAsObjectNativeHeap.html#1611" class="Postulate"
+      >nativeWriteIORef</a
+      ><a name="1829"
+      > = (\ _ -&gt; IORef.writeIORef ) </a
+      ><a name="1859" class="Symbol"
+      >#-}</a
+      ><a name="1862"
+      >
+
+</a
+      ><a name="1864" class="Comment"
+      >{-
+nativeNewIORef : {A : Set} (a : A) &#8594; NativeIO (IORef A)
+nativeNewIORef {A} = nativeNewIORef' {Maybe A}
+
+nativeReadIORef : {A : Set} (p : IORef (Maybe A)) &#8594; NativeIO (Maybe A)
+nativeReadIORef {A} = anativeReadIORef' {Maybe A}
+
+nativeWriteIORef : IORef (Maybe String) &#8594; Maybe String &#8594; NativeIO Unit
+nativeWriteIORef =  nativeWriteIORef' {Maybe String}
+-}</a
+      ><a name="2219"
+      >
+
+
+</a
+      ><a name="2222" class="Keyword"
+      >data</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" class="Symbol"
+      >(</a
+      ><a name="2240" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" class="Symbol"
+      >:</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" class="PrimitiveType"
+      >Set</a
+      ><a name="2247" class="Symbol"
+      >)</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" class="Symbol"
+      >:</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" class="PrimitiveType"
+      >Set</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" class="Keyword"
+      >where</a
+      ><a name="2260"
+      >
+    </a
+      ><a name="2265" href="src.heap.heapAsObjectNativeHeap.html#2265" class="InductiveConstructor"
+      >newIORef</a
+      ><a name="2273"
+      > </a
+      ><a name="2274" class="Symbol"
+      >:</a
+      ><a name="2275"
+      > </a
+      ><a name="2276" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" class="Symbol"
+      >&#8594;</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2293"
+      >
+    </a
+      ><a name="2298" href="src.heap.heapAsObjectNativeHeap.html#2298" class="InductiveConstructor"
+      >readIORef</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >:</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="2315"
+      > </a
+      ><a name="2316" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" class="Symbol"
+      >&#8594;</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2333"
+      >
+    </a
+      ><a name="2338" href="src.heap.heapAsObjectNativeHeap.html#2338" class="InductiveConstructor"
+      >writeIORef</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" class="Symbol"
+      >:</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="2356"
+      > </a
+      ><a name="2357" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" class="Symbol"
+      >&#8594;</a
+      ><a name="2360"
+      > </a
+      ><a name="2361" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" class="Symbol"
+      >&#8594;</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2378"
+      >
+    </a
+      ><a name="2383" href="src.heap.heapAsObjectNativeHeap.html#2383" class="InductiveConstructor"
+      >heapPutStrLn</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" class="Symbol"
+      >:</a
+      ><a name="2397"
+      > </a
+      ><a name="2398" href="Agda.Builtin.String.html#165" class="Postulate"
+      >String</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" class="Symbol"
+      >&#8594;</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" href="src.heap.heapAsObjectNativeHeap.html#2240" class="Bound"
+      >A</a
+      ><a name="2420"
+      >
+
+
+</a
+      ><a name="2423" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" class="Symbol"
+      >:</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >{</a
+      ><a name="2437" href="src.heap.heapAsObjectNativeHeap.html#2437" class="Bound"
+      >A</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" class="Symbol"
+      >:</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" class="PrimitiveType"
+      >Set</a
+      ><a name="2444" class="Symbol"
+      >}(</a
+      ><a name="2446" href="src.heap.heapAsObjectNativeHeap.html#2446" class="Bound"
+      >c</a
+      ><a name="2447"
+      > </a
+      ><a name="2448" class="Symbol"
+      >:</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2461"
+      > </a
+      ><a name="2462" href="src.heap.heapAsObjectNativeHeap.html#2437" class="Bound"
+      >A</a
+      ><a name="2463" class="Symbol"
+      >)</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" class="Symbol"
+      >&#8594;</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" class="PrimitiveType"
+      >Set</a
+      ><a name="2470"
+      >
+</a
+      ><a name="2471" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" class="Symbol"
+      >{</a
+      ><a name="2483" href="src.heap.heapAsObjectNativeHeap.html#2483" class="Bound"
+      >A</a
+      ><a name="2484" class="Symbol"
+      >}</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" class="Symbol"
+      >(</a
+      ><a name="2487" href="src.heap.heapAsObjectNativeHeap.html#2265" class="InductiveConstructor"
+      >newIORef</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" class="Symbol"
+      >_</a
+      ><a name="2497"
+      >    </a
+      ><a name="2501" class="Symbol"
+      >)</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" class="Symbol"
+      >=</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" href="src.heap.heapAsObjectNativeHeap.html#1425" class="Postulate"
+      >IORef</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" href="src.heap.heapAsObjectNativeHeap.html#2483" class="Bound"
+      >A</a
+      ><a name="2512"
+      >
+</a
+      ><a name="2513" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" class="Symbol"
+      >{</a
+      ><a name="2525" href="src.heap.heapAsObjectNativeHeap.html#2525" class="Bound"
+      >A</a
+      ><a name="2526" class="Symbol"
+      >}</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" class="Symbol"
+      >(</a
+      ><a name="2529" href="src.heap.heapAsObjectNativeHeap.html#2298" class="InductiveConstructor"
+      >readIORef</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" class="Symbol"
+      >_</a
+      ><a name="2540"
+      >   </a
+      ><a name="2543" class="Symbol"
+      >)</a
+      ><a name="2544"
+      > </a
+      ><a name="2545" class="Symbol"
+      >=</a
+      ><a name="2546"
+      > </a
+      ><a name="2547" href="src.heap.heapAsObjectNativeHeap.html#2525" class="Bound"
+      >A</a
+      ><a name="2548"
+      >
+</a
+      ><a name="2549" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >{</a
+      ><a name="2561" href="src.heap.heapAsObjectNativeHeap.html#2561" class="Bound"
+      >A</a
+      ><a name="2562" class="Symbol"
+      >}</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" class="Symbol"
+      >(</a
+      ><a name="2565" href="src.heap.heapAsObjectNativeHeap.html#2338" class="InductiveConstructor"
+      >writeIORef</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" class="Symbol"
+      >_</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" class="Symbol"
+      >_)</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" class="Symbol"
+      >=</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="2587"
+      >
+</a
+      ><a name="2588" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" class="Symbol"
+      >{</a
+      ><a name="2600" href="src.heap.heapAsObjectNativeHeap.html#2600" class="Bound"
+      >A</a
+      ><a name="2601" class="Symbol"
+      >}</a
+      ><a name="2602"
+      > </a
+      ><a name="2603" class="Symbol"
+      >(</a
+      ><a name="2604" href="src.heap.heapAsObjectNativeHeap.html#2383" class="InductiveConstructor"
+      >heapPutStrLn</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" class="Symbol"
+      >_)</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" class="Symbol"
+      >=</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="2626"
+      >
+
+</a
+      ><a name="2628" href="src.heap.heapAsObjectNativeHeap.html#2628" class="Function"
+      >HeapInterface</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" class="Symbol"
+      >:</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" class="Symbol"
+      >(</a
+      ><a name="2645" href="src.heap.heapAsObjectNativeHeap.html#2645" class="Bound"
+      >A</a
+      ><a name="2646"
+      > </a
+      ><a name="2647" class="Symbol"
+      >:</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="PrimitiveType"
+      >Set</a
+      ><a name="2652" class="Symbol"
+      >)</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" class="Symbol"
+      >&#8594;</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" href="SizedIO.Base.html#334" class="Record"
+      >IOInterface</a
+      ><a name="2667"
+      >
+</a
+      ><a name="2668" href="src.heap.heapAsObjectNativeHeap.html#2628" class="Function"
+      >HeapInterface</a
+      ><a name="2681"
+      > </a
+      ><a name="2682" href="src.heap.heapAsObjectNativeHeap.html#2682" class="Bound"
+      >A</a
+      ><a name="2683"
+      > </a
+      ><a name="2684" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2685" href="SizedIO.Base.html#372" class="DottedPattern Field"
+      >Command</a
+      ><a name="2692"
+      >  </a
+      ><a name="2694" class="Symbol"
+      >=</a
+      ><a name="2695"
+      > </a
+      ><a name="2696" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="src.heap.heapAsObjectNativeHeap.html#2682" class="Bound"
+      >A</a
+      ><a name="2709"
+      >
+</a
+      ><a name="2710" href="src.heap.heapAsObjectNativeHeap.html#2628" class="Function"
+      >HeapInterface</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="src.heap.heapAsObjectNativeHeap.html#2724" class="Bound"
+      >A</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2727" href="SizedIO.Base.html#392" class="DottedPattern Field"
+      >Response</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" class="Symbol"
+      >=</a
+      ><a name="2737"
+      > </a
+      ><a name="2738" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >{</a
+      ><a name="2750" href="src.heap.heapAsObjectNativeHeap.html#2724" class="Bound"
+      >A</a
+      ><a name="2751" class="Symbol"
+      >}</a
+      ><a name="2752"
+      >
+
+</a
+      ><a name="2754" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" class="Symbol"
+      >:</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" class="Symbol"
+      >{</a
+      ><a name="2777" href="src.heap.heapAsObjectNativeHeap.html#2777" class="Bound"
+      >A</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" class="Symbol"
+      >:</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" class="PrimitiveType"
+      >Set</a
+      ><a name="2784" class="Symbol"
+      >}</a
+      ><a name="2785"
+      > </a
+      ><a name="2786" class="Symbol"
+      >(</a
+      ><a name="2787" href="src.heap.heapAsObjectNativeHeap.html#2787" class="Bound"
+      >c</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" class="Symbol"
+      >:</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="src.heap.heapAsObjectNativeHeap.html#2227" class="Datatype"
+      >HeapCommand</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="src.heap.heapAsObjectNativeHeap.html#2777" class="Bound"
+      >A</a
+      ><a name="2804" class="Symbol"
+      >)</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" class="Symbol"
+      >&#8594;</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" class="Symbol"
+      >(</a
+      ><a name="2818" href="src.heap.heapAsObjectNativeHeap.html#2423" class="Function"
+      >HeapResult</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="src.heap.heapAsObjectNativeHeap.html#2787" class="Bound"
+      >c</a
+      ><a name="2830" class="Symbol"
+      >)</a
+      ><a name="2831"
+      >
+</a
+      ><a name="2832" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >{</a
+      ><a name="2853" href="src.heap.heapAsObjectNativeHeap.html#2853" class="Bound"
+      >A</a
+      ><a name="2854" class="Symbol"
+      >}</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" class="Symbol"
+      >(</a
+      ><a name="2857" href="src.heap.heapAsObjectNativeHeap.html#2265" class="InductiveConstructor"
+      >newIORef</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="src.heap.heapAsObjectNativeHeap.html#2866" class="Bound"
+      >a</a
+      ><a name="2867" class="Symbol"
+      >)</a
+      ><a name="2868"
+      >        </a
+      ><a name="2876" class="Symbol"
+      >=</a
+      ><a name="2877"
+      > </a
+      ><a name="2878" href="src.heap.heapAsObjectNativeHeap.html#1504" class="Postulate"
+      >nativeNewIORef</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="src.heap.heapAsObjectNativeHeap.html#2866" class="Bound"
+      >a</a
+      ><a name="2894"
+      >
+</a
+      ><a name="2895" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" class="Symbol"
+      >{</a
+      ><a name="2916" href="src.heap.heapAsObjectNativeHeap.html#2916" class="Bound"
+      >A</a
+      ><a name="2917" class="Symbol"
+      >}</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" class="Symbol"
+      >(</a
+      ><a name="2920" href="src.heap.heapAsObjectNativeHeap.html#2298" class="InductiveConstructor"
+      >readIORef</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="src.heap.heapAsObjectNativeHeap.html#2930" class="Bound"
+      >mvar</a
+      ><a name="2934" class="Symbol"
+      >)</a
+      ><a name="2935"
+      >    </a
+      ><a name="2939" class="Symbol"
+      >=</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" href="src.heap.heapAsObjectNativeHeap.html#1558" class="Postulate"
+      >nativeReadIORef</a
+      ><a name="2956"
+      > </a
+      ><a name="2957" class="Symbol"
+      >{</a
+      ><a name="2958" href="src.heap.heapAsObjectNativeHeap.html#2916" class="Bound"
+      >A</a
+      ><a name="2959" class="Symbol"
+      >}</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" href="src.heap.heapAsObjectNativeHeap.html#2930" class="Bound"
+      >mvar</a
+      ><a name="2965"
+      >
+</a
+      ><a name="2966" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" class="Symbol"
+      >{</a
+      ><a name="2987" href="src.heap.heapAsObjectNativeHeap.html#2987" class="Bound"
+      >A</a
+      ><a name="2988" class="Symbol"
+      >}</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" class="Symbol"
+      >(</a
+      ><a name="2991" href="src.heap.heapAsObjectNativeHeap.html#2338" class="InductiveConstructor"
+      >writeIORef</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" href="src.heap.heapAsObjectNativeHeap.html#3002" class="Bound"
+      >mvar</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="src.heap.heapAsObjectNativeHeap.html#3007" class="Bound"
+      >a</a
+      ><a name="3008" class="Symbol"
+      >)</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" class="Symbol"
+      >=</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="src.heap.heapAsObjectNativeHeap.html#1611" class="Postulate"
+      >nativeWriteIORef</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" class="Symbol"
+      >{</a
+      ><a name="3030" href="src.heap.heapAsObjectNativeHeap.html#2987" class="Bound"
+      >A</a
+      ><a name="3031" class="Symbol"
+      >}</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" href="src.heap.heapAsObjectNativeHeap.html#3002" class="Bound"
+      >mvar</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="src.heap.heapAsObjectNativeHeap.html#3007" class="Bound"
+      >a</a
+      ><a name="3039"
+      >
+</a
+      ><a name="3040" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" class="Symbol"
+      >{</a
+      ><a name="3061" href="src.heap.heapAsObjectNativeHeap.html#3061" class="Bound"
+      >A</a
+      ><a name="3062" class="Symbol"
+      >}</a
+      ><a name="3063"
+      > </a
+      ><a name="3064" class="Symbol"
+      >(</a
+      ><a name="3065" href="src.heap.heapAsObjectNativeHeap.html#2383" class="InductiveConstructor"
+      >heapPutStrLn</a
+      ><a name="3077"
+      > </a
+      ><a name="3078" href="src.heap.heapAsObjectNativeHeap.html#3078" class="Bound"
+      >str</a
+      ><a name="3081" class="Symbol"
+      >)</a
+      ><a name="3082"
+      >  </a
+      ><a name="3084" class="Symbol"
+      >=</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" href="NativeIO.html#666" class="Postulate"
+      >nativePutStrLn</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="src.heap.heapAsObjectNativeHeap.html#3078" class="Bound"
+      >str</a
+      ><a name="3104"
+      >
+
+</a
+      ><a name="3106" href="src.heap.heapAsObjectNativeHeap.html#3106" class="Function"
+      >IOHeap</a
+      ><a name="3112"
+      > </a
+      ><a name="3113" class="Symbol"
+      >:</a
+      ><a name="3114"
+      > </a
+      ><a name="3115" class="Symbol"
+      >&#8704;{</a
+      ><a name="3117" href="src.heap.heapAsObjectNativeHeap.html#3117" class="Bound"
+      >i</a
+      ><a name="3118" class="Symbol"
+      >}</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" class="Symbol"
+      >&#8594;</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" class="Symbol"
+      >{</a
+      ><a name="3123" href="src.heap.heapAsObjectNativeHeap.html#3123" class="Bound"
+      >A</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" class="Symbol"
+      >:</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="PrimitiveType"
+      >Set</a
+      ><a name="3130" class="Symbol"
+      >}(</a
+      ><a name="3132" href="src.heap.heapAsObjectNativeHeap.html#3132" class="Bound"
+      >B</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" class="Symbol"
+      >:</a
+      ><a name="3135"
+      > </a
+      ><a name="3136" class="PrimitiveType"
+      >Set</a
+      ><a name="3139" class="Symbol"
+      >)</a
+      ><a name="3140"
+      > </a
+      ><a name="3141" class="Symbol"
+      >&#8594;</a
+      ><a name="3142"
+      > </a
+      ><a name="3143" class="PrimitiveType"
+      >Set</a
+      ><a name="3146"
+      >
+</a
+      ><a name="3147" href="src.heap.heapAsObjectNativeHeap.html#3106" class="Function"
+      >IOHeap</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" class="Symbol"
+      >{</a
+      ><a name="3155" href="src.heap.heapAsObjectNativeHeap.html#3155" class="Bound"
+      >i</a
+      ><a name="3156" class="Symbol"
+      >}</a
+      ><a name="3157"
+      > </a
+      ><a name="3158" class="Symbol"
+      >{</a
+      ><a name="3159" href="src.heap.heapAsObjectNativeHeap.html#3159" class="Bound"
+      >A</a
+      ><a name="3160" class="Symbol"
+      >}</a
+      ><a name="3161"
+      > </a
+      ><a name="3162" href="src.heap.heapAsObjectNativeHeap.html#3162" class="Bound"
+      >B</a
+      ><a name="3163"
+      > </a
+      ><a name="3164" class="Symbol"
+      >=</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" href="SizedIO.Base.html#545" class="Record"
+      >IO</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" class="Symbol"
+      >(</a
+      ><a name="3170" href="src.heap.heapAsObjectNativeHeap.html#2628" class="Function"
+      >HeapInterface</a
+      ><a name="3183"
+      > </a
+      ><a name="3184" href="src.heap.heapAsObjectNativeHeap.html#3159" class="Bound"
+      >A</a
+      ><a name="3185" class="Symbol"
+      >)</a
+      ><a name="3186"
+      > </a
+      ><a name="3187" href="src.heap.heapAsObjectNativeHeap.html#3155" class="Bound"
+      >i</a
+      ><a name="3188"
+      > </a
+      ><a name="3189" href="src.heap.heapAsObjectNativeHeap.html#3162" class="Bound"
+      >B</a
+      ><a name="3190"
+      >
+
+</a
+      ><a name="3192" href="src.heap.heapAsObjectNativeHeap.html#3192" class="Function"
+      >IOHeap'</a
+      ><a name="3199"
+      > </a
+      ><a name="3200" class="Symbol"
+      >:</a
+      ><a name="3201"
+      > </a
+      ><a name="3202" class="Symbol"
+      >&#8704;{</a
+      ><a name="3204" href="src.heap.heapAsObjectNativeHeap.html#3204" class="Bound"
+      >i</a
+      ><a name="3205" class="Symbol"
+      >}</a
+      ><a name="3206"
+      > </a
+      ><a name="3207" class="Symbol"
+      >&#8594;</a
+      ><a name="3208"
+      > </a
+      ><a name="3209" class="Symbol"
+      >{</a
+      ><a name="3210" href="src.heap.heapAsObjectNativeHeap.html#3210" class="Bound"
+      >A</a
+      ><a name="3211"
+      > </a
+      ><a name="3212" class="Symbol"
+      >:</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" class="PrimitiveType"
+      >Set</a
+      ><a name="3217" class="Symbol"
+      >}(</a
+      ><a name="3219" href="src.heap.heapAsObjectNativeHeap.html#3219" class="Bound"
+      >B</a
+      ><a name="3220"
+      > </a
+      ><a name="3221" class="Symbol"
+      >:</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" class="PrimitiveType"
+      >Set</a
+      ><a name="3226" class="Symbol"
+      >)</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" class="Symbol"
+      >&#8594;</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" class="PrimitiveType"
+      >Set</a
+      ><a name="3233"
+      >
+</a
+      ><a name="3234" href="src.heap.heapAsObjectNativeHeap.html#3192" class="Function"
+      >IOHeap'</a
+      ><a name="3241"
+      > </a
+      ><a name="3242" class="Symbol"
+      >{</a
+      ><a name="3243" href="src.heap.heapAsObjectNativeHeap.html#3243" class="Bound"
+      >i</a
+      ><a name="3244" class="Symbol"
+      >}</a
+      ><a name="3245"
+      > </a
+      ><a name="3246" class="Symbol"
+      >{</a
+      ><a name="3247" href="src.heap.heapAsObjectNativeHeap.html#3247" class="Bound"
+      >A</a
+      ><a name="3248" class="Symbol"
+      >}</a
+      ><a name="3249"
+      > </a
+      ><a name="3250" href="src.heap.heapAsObjectNativeHeap.html#3250" class="Bound"
+      >B</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" class="Symbol"
+      >=</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="SizedIO.Base.html#686" class="Datatype"
+      >IO'</a
+      ><a name="3257"
+      > </a
+      ><a name="3258" class="Symbol"
+      >(</a
+      ><a name="3259" href="src.heap.heapAsObjectNativeHeap.html#2628" class="Function"
+      >HeapInterface</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" href="src.heap.heapAsObjectNativeHeap.html#3247" class="Bound"
+      >A</a
+      ><a name="3274" class="Symbol"
+      >)</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" href="src.heap.heapAsObjectNativeHeap.html#3243" class="Bound"
+      >i</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="src.heap.heapAsObjectNativeHeap.html#3250" class="Bound"
+      >B</a
+      ><a name="3279"
+      >
+
+</a
+      ><a name="3281" href="src.heap.heapAsObjectNativeHeap.html#3281" class="Function"
+      >translateHeap</a
+      ><a name="3294"
+      > </a
+      ><a name="3295" class="Symbol"
+      >:</a
+      ><a name="3296"
+      > </a
+      ><a name="3297" class="Symbol"
+      >{</a
+      ><a name="3298" href="src.heap.heapAsObjectNativeHeap.html#3298" class="Bound"
+      >A</a
+      ><a name="3299"
+      > </a
+      ><a name="3300" class="Symbol"
+      >:</a
+      ><a name="3301"
+      > </a
+      ><a name="3302" class="PrimitiveType"
+      >Set</a
+      ><a name="3305" class="Symbol"
+      >}{</a
+      ><a name="3307" href="src.heap.heapAsObjectNativeHeap.html#3307" class="Bound"
+      >B</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" class="Symbol"
+      >:</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" class="PrimitiveType"
+      >Set</a
+      ><a name="3314" class="Symbol"
+      >}</a
+      ><a name="3315"
+      > </a
+      ><a name="3316" class="Symbol"
+      >&#8594;</a
+      ><a name="3317"
+      > </a
+      ><a name="3318" href="src.heap.heapAsObjectNativeHeap.html#3106" class="Function"
+      >IOHeap</a
+      ><a name="3324"
+      > </a
+      ><a name="3325" class="Symbol"
+      >{</a
+      ><a name="3326" href="Agda.Builtin.Size.html#210" class="Postulate"
+      >&#8734;</a
+      ><a name="3327" class="Symbol"
+      >}</a
+      ><a name="3328"
+      > </a
+      ><a name="3329" class="Symbol"
+      >{</a
+      ><a name="3330" href="src.heap.heapAsObjectNativeHeap.html#3298" class="Bound"
+      >A</a
+      ><a name="3331" class="Symbol"
+      >}</a
+      ><a name="3332"
+      > </a
+      ><a name="3333" href="src.heap.heapAsObjectNativeHeap.html#3307" class="Bound"
+      >B</a
+      ><a name="3334"
+      > </a
+      ><a name="3335" class="Symbol"
+      >&#8594;</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="3345"
+      > </a
+      ><a name="3346" href="src.heap.heapAsObjectNativeHeap.html#3307" class="Bound"
+      >B</a
+      ><a name="3347"
+      >
+</a
+      ><a name="3348" href="src.heap.heapAsObjectNativeHeap.html#3281" class="Function"
+      >translateHeap</a
+      ><a name="3361"
+      > </a
+      ><a name="3362" class="Symbol"
+      >=</a
+      ><a name="3363"
+      > </a
+      ><a name="3364" href="SizedIO.Base.html#1944" class="Function"
+      >translateIO</a
+      ><a name="3375"
+      > </a
+      ><a name="3376" href="src.heap.heapAsObjectNativeHeap.html#2754" class="Function"
+      >translateHeapLocate</a
+      ><a name="3395"
+      >
+
+
+</a
+      ><a name="3398" href="src.heap.heapAsObjectNativeHeap.html#3398" class="Function"
+      >prog</a
+      ><a name="3402"
+      > </a
+      ><a name="3403" class="Symbol"
+      >:</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" href="src.heap.heapAsObjectNativeHeap.html#3106" class="Function"
+      >IOHeap</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" class="Symbol"
+      >{</a
+      ><a name="3413" href="Agda.Builtin.Size.html#210" class="Postulate"
+      >&#8734;</a
+      ><a name="3414" class="Symbol"
+      >}</a
+      ><a name="3415"
+      > </a
+      ><a name="3416" class="Symbol"
+      >{</a
+      ><a name="3417" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" href="Agda.Builtin.String.html#165" class="Postulate"
+      >String</a
+      ><a name="3429" class="Symbol"
+      >}</a
+      ><a name="3430"
+      > </a
+      ><a name="3431" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="3435"
+      >
+</a
+      ><a name="3436" href="src.heap.heapAsObjectNativeHeap.html#3398" class="Function"
+      >prog</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" class="DottedPattern Symbol"
+      >.</a
+      ><a name="3442" href="SizedIO.Base.html#644" class="DottedPattern Field"
+      >force</a
+      ><a name="3447"
+      > </a
+      ><a name="3448" class="Symbol"
+      >=</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="SizedIO.Base.html#730" class="InductiveConstructor"
+      >do'</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" class="Symbol"
+      >(</a
+      ><a name="3455" href="src.heap.heapAsObjectNativeHeap.html#2265" class="InductiveConstructor"
+      >newIORef</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" class="Symbol"
+      >(</a
+      ><a name="3465" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="3472" class="Symbol"
+      >))</a
+      ><a name="3474"
+      > </a
+      ><a name="3475" class="Symbol"
+      >&#955;</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" href="src.heap.heapAsObjectNativeHeap.html#3477" class="Bound"
+      >mvar</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" class="Symbol"
+      >&#8594;</a
+      ><a name="3483"
+      >
+              </a
+      ><a name="3498" href="SizedIO.Base.html#1364" class="Function"
+      >do</a
+      ><a name="3500"
+      > </a
+      ><a name="3501" class="Symbol"
+      >(</a
+      ><a name="3502" href="src.heap.heapAsObjectNativeHeap.html#2338" class="InductiveConstructor"
+      >writeIORef</a
+      ><a name="3512"
+      > </a
+      ><a name="3513" href="src.heap.heapAsObjectNativeHeap.html#3477" class="Bound"
+      >mvar</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" class="Symbol"
+      >(</a
+      ><a name="3519" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="3523"
+      > </a
+      ><a name="3524" class="String"
+      >&quot;hello&quot;</a
+      ><a name="3531" class="Symbol"
+      >))</a
+      ><a name="3533"
+      > </a
+      ><a name="3534" class="Symbol"
+      >&#955;</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" href="src.heap.heapAsObjectNativeHeap.html#3536" class="Bound"
+      >_</a
+      ><a name="3537"
+      > </a
+      ><a name="3538" class="Symbol"
+      >&#8594;</a
+      ><a name="3539"
+      >
+              </a
+      ><a name="3554" href="SizedIO.Base.html#1364" class="Function"
+      >do</a
+      ><a name="3556"
+      > </a
+      ><a name="3557" class="Symbol"
+      >(</a
+      ><a name="3558" href="src.heap.heapAsObjectNativeHeap.html#2298" class="InductiveConstructor"
+      >readIORef</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" href="src.heap.heapAsObjectNativeHeap.html#3477" class="Bound"
+      >mvar</a
+      ><a name="3572" class="Symbol"
+      >)</a
+      ><a name="3573"
+      > </a
+      ><a name="3574" class="Symbol"
+      >&#955;</a
+      ><a name="3575"
+      > </a
+      ><a name="3576" class="Symbol"
+      >{</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" class="Symbol"
+      >(</a
+      ><a name="3579" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" href="src.heap.heapAsObjectNativeHeap.html#3584" class="Bound"
+      >str</a
+      ><a name="3587" class="Symbol"
+      >)</a
+      ><a name="3588"
+      > </a
+      ><a name="3589" class="Symbol"
+      >&#8594;</a
+      ><a name="3590"
+      >
+              </a
+      ><a name="3605" href="SizedIO.Base.html#1364" class="Function"
+      >do</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" class="Symbol"
+      >(</a
+      ><a name="3609" href="src.heap.heapAsObjectNativeHeap.html#2383" class="InductiveConstructor"
+      >heapPutStrLn</a
+      ><a name="3621"
+      > </a
+      ><a name="3622" href="src.heap.heapAsObjectNativeHeap.html#3584" class="Bound"
+      >str</a
+      ><a name="3625" class="Symbol"
+      >)</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" class="Symbol"
+      >&#955;</a
+      ><a name="3628"
+      > </a
+      ><a name="3629" href="src.heap.heapAsObjectNativeHeap.html#3629" class="Bound"
+      >_</a
+      ><a name="3630"
+      > </a
+      ><a name="3631" class="Symbol"
+      >&#8594;</a
+      ><a name="3632"
+      >
+              </a
+      ><a name="3647" href="SizedIO.Base.html#1289" class="Function"
+      >return</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" class="Symbol"
+      >_;</a
+      ><a name="3656"
+      >
+
+              </a
+      ><a name="3672" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="3679"
+      > </a
+      ><a name="3680" class="Symbol"
+      >&#8594;</a
+      ><a name="3681"
+      >
+              </a
+      ><a name="3696" href="SizedIO.Base.html#1364" class="Function"
+      >do</a
+      ><a name="3698"
+      > </a
+      ><a name="3699" class="Symbol"
+      >(</a
+      ><a name="3700" href="src.heap.heapAsObjectNativeHeap.html#2383" class="InductiveConstructor"
+      >heapPutStrLn</a
+      ><a name="3712"
+      > </a
+      ><a name="3713" class="String"
+      >&quot;got nothing&quot;</a
+      ><a name="3726" class="Symbol"
+      >)</a
+      ><a name="3727"
+      > </a
+      ><a name="3728" class="Symbol"
+      >&#955;</a
+      ><a name="3729"
+      > </a
+      ><a name="3730" href="src.heap.heapAsObjectNativeHeap.html#3730" class="Bound"
+      >_</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" class="Symbol"
+      >&#8594;</a
+      ><a name="3733"
+      >
+              </a
+      ><a name="3748" href="SizedIO.Base.html#1289" class="Function"
+      >return</a
+      ><a name="3754"
+      > </a
+      ><a name="3755" class="Symbol"
+      >_</a
+      ><a name="3756"
+      > </a
+      ><a name="3757" class="Symbol"
+      >}</a
+      ><a name="3758"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

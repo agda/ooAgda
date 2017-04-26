@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Category.Functor.Identity</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- The Agda standard library</a
+      ><a name="102"
+      >
+</a
+      ><a name="103" class="Comment"
+      >--</a
+      ><a name="105"
+      >
+</a
+      ><a name="106" class="Comment"
+      >-- The identity functor</a
+      ><a name="129"
+      >
+</a
+      ><a name="130" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="202"
+      >
+
+</a
+      ><a name="204" class="Keyword"
+      >module</a
+      ><a name="210"
+      > </a
+      ><a name="211" href="Category.Functor.Identity.html#1" class="Module"
+      >Category.Functor.Identity</a
+      ><a name="236"
+      > </a
+      ><a name="237" class="Keyword"
+      >where</a
+      ><a name="242"
+      >
+
+</a
+      ><a name="244" class="Keyword"
+      >open</a
+      ><a name="248"
+      > </a
+      ><a name="249" class="Keyword"
+      >import</a
+      ><a name="255"
+      > </a
+      ><a name="256" href="Category.Functor.html#1" class="Module"
+      >Category.Functor</a
+      ><a name="272"
+      >
+
+</a
+      ><a name="274" href="Category.Functor.Identity.html#274" class="Function"
+      >Identity</a
+      ><a name="282"
+      > </a
+      ><a name="283" class="Symbol"
+      >:</a
+      ><a name="284"
+      > </a
+      ><a name="285" class="Symbol"
+      >&#8704;</a
+      ><a name="286"
+      > </a
+      ><a name="287" class="Symbol"
+      >{</a
+      ><a name="288" href="Category.Functor.Identity.html#288" class="Bound"
+      >f</a
+      ><a name="289" class="Symbol"
+      >}</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Symbol"
+      >&#8594;</a
+      ><a name="292"
+      > </a
+      ><a name="293" class="PrimitiveType"
+      >Set</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Category.Functor.Identity.html#288" class="Bound"
+      >f</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Symbol"
+      >&#8594;</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="PrimitiveType"
+      >Set</a
+      ><a name="304"
+      > </a
+      ><a name="305" href="Category.Functor.Identity.html#288" class="Bound"
+      >f</a
+      ><a name="306"
+      >
+</a
+      ><a name="307" href="Category.Functor.Identity.html#274" class="Function"
+      >Identity</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="Category.Functor.Identity.html#316" class="Bound"
+      >A</a
+      ><a name="317"
+      > </a
+      ><a name="318" class="Symbol"
+      >=</a
+      ><a name="319"
+      > </a
+      ><a name="320" href="Category.Functor.Identity.html#316" class="Bound"
+      >A</a
+      ><a name="321"
+      >
+
+</a
+      ><a name="323" href="Category.Functor.Identity.html#323" class="Function"
+      >IdentityFunctor</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >:</a
+      ><a name="340"
+      > </a
+      ><a name="341" class="Symbol"
+      >&#8704;</a
+      ><a name="342"
+      > </a
+      ><a name="343" class="Symbol"
+      >{</a
+      ><a name="344" href="Category.Functor.Identity.html#344" class="Bound"
+      >f</a
+      ><a name="345" class="Symbol"
+      >}</a
+      ><a name="346"
+      > </a
+      ><a name="347" class="Symbol"
+      >&#8594;</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="Category.Functor.html#385" class="Record"
+      >RawFunctor</a
+      ><a name="359"
+      > </a
+      ><a name="360" class="Symbol"
+      >(</a
+      ><a name="361" href="Category.Functor.Identity.html#274" class="Function"
+      >Identity</a
+      ><a name="369"
+      > </a
+      ><a name="370" class="Symbol"
+      >{</a
+      ><a name="371" href="Category.Functor.Identity.html#344" class="Bound"
+      >f</a
+      ><a name="372" class="Symbol"
+      >})</a
+      ><a name="374"
+      >
+</a
+      ><a name="375" href="Category.Functor.Identity.html#323" class="Function"
+      >IdentityFunctor</a
+      ><a name="390"
+      > </a
+      ><a name="391" class="Symbol"
+      >=</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Keyword"
+      >record</a
+      ><a name="399"
+      >
+  </a
+      ><a name="402" class="Symbol"
+      >{</a
+      ><a name="403"
+      > </a
+      ><a name="404" class="Field Operator"
+      >_&lt;$&gt;_</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Symbol"
+      >=</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="Symbol"
+      >&#955;</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="Category.Functor.Identity.html#414" class="Bound"
+      >x</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Symbol"
+      >&#8594;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="Category.Functor.Identity.html#414" class="Bound"
+      >x</a
+      ><a name="419"
+      >
+  </a
+      ><a name="422" class="Symbol"
+      >}</a
+      ><a name="423"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

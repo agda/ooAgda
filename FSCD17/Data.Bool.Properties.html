@@ -1,0 +1,5712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Data.Bool.Properties</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- The Agda standard library</a
+      ><a name="102"
+      >
+</a
+      ><a name="103" class="Comment"
+      >--</a
+      ><a name="105"
+      >
+</a
+      ><a name="106" class="Comment"
+      >-- A bunch of properties</a
+      ><a name="130"
+      >
+</a
+      ><a name="131" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="203"
+      >
+
+</a
+      ><a name="205" class="Keyword"
+      >module</a
+      ><a name="211"
+      > </a
+      ><a name="212" href="Data.Bool.Properties.html#1" class="Module"
+      >Data.Bool.Properties</a
+      ><a name="232"
+      > </a
+      ><a name="233" class="Keyword"
+      >where</a
+      ><a name="238"
+      >
+
+</a
+      ><a name="240" class="Keyword"
+      >open</a
+      ><a name="244"
+      > </a
+      ><a name="245" class="Keyword"
+      >import</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="261"
+      > </a
+      ><a name="262" class="Symbol"
+      >as</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Module"
+      >Bool</a
+      ><a name="269"
+      >
+</a
+      ><a name="270" class="Keyword"
+      >open</a
+      ><a name="274"
+      > </a
+      ><a name="275" class="Keyword"
+      >import</a
+      ><a name="281"
+      > </a
+      ><a name="282" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="290"
+      >
+</a
+      ><a name="291" class="Keyword"
+      >open</a
+      ><a name="295"
+      > </a
+      ><a name="296" class="Keyword"
+      >import</a
+      ><a name="302"
+      > </a
+      ><a name="303" href="Function.Equality.html#1" class="Module"
+      >Function.Equality</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Keyword"
+      >using</a
+      ><a name="326"
+      > </a
+      ><a name="327" class="Symbol"
+      >(</a
+      ><a name="328" href="Function.Equality.html#681" class="Field Operator"
+      >_&#10216;$&#10217;_</a
+      ><a name="333" class="Symbol"
+      >)</a
+      ><a name="334"
+      >
+</a
+      ><a name="335" class="Keyword"
+      >open</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Keyword"
+      >import</a
+      ><a name="346"
+      > </a
+      ><a name="347" href="Function.Equivalence.html#1" class="Module"
+      >Function.Equivalence</a
+      ><a name="367"
+      >
+  </a
+      ><a name="370" class="Keyword"
+      >using</a
+      ><a name="375"
+      > </a
+      ><a name="376" class="Symbol"
+      >(</a
+      ><a name="377" href="Function.Equivalence.html#711" class="Function Operator"
+      >_&#8660;_</a
+      ><a name="380" class="Symbol"
+      >;</a
+      ><a name="381"
+      > </a
+      ><a name="382" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="393" class="Symbol"
+      >;</a
+      ><a name="394"
+      > </a
+      ><a name="395" class="Keyword"
+      >module</a
+      ><a name="401"
+      > </a
+      ><a name="402" href="Function.Equivalence.html#218" class="Module"
+      >Equivalence</a
+      ><a name="413" class="Symbol"
+      >)</a
+      ><a name="414"
+      >
+</a
+      ><a name="415" class="Keyword"
+      >open</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Keyword"
+      >import</a
+      ><a name="426"
+      > </a
+      ><a name="427" href="Algebra.html#1" class="Module"
+      >Algebra</a
+      ><a name="434"
+      >
+</a
+      ><a name="435" class="Keyword"
+      >open</a
+      ><a name="439"
+      > </a
+      ><a name="440" class="Keyword"
+      >import</a
+      ><a name="446"
+      > </a
+      ><a name="447" href="Algebra.Structures.html#1" class="Module"
+      >Algebra.Structures</a
+      ><a name="465"
+      >
+</a
+      ><a name="466" class="Keyword"
+      >import</a
+      ><a name="472"
+      > </a
+      ><a name="473" href="Algebra.RingSolver.Simple.html#1" class="Module"
+      >Algebra.RingSolver.Simple</a
+      ><a name="498"
+      > </a
+      ><a name="499" class="Symbol"
+      >as</a
+      ><a name="501"
+      > </a
+      ><a name="502" class="Module"
+      >Solver</a
+      ><a name="508"
+      >
+</a
+      ><a name="509" class="Keyword"
+      >import</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="Algebra.RingSolver.AlmostCommutativeRing.html#1" class="Module"
+      >Algebra.RingSolver.AlmostCommutativeRing</a
+      ><a name="556"
+      > </a
+      ><a name="557" class="Symbol"
+      >as</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Module"
+      >ACR</a
+      ><a name="563"
+      >
+</a
+      ><a name="564" class="Keyword"
+      >open</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Keyword"
+      >import</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="613"
+      > </a
+      ><a name="614" class="Symbol"
+      >as</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Module"
+      >P</a
+      ><a name="618"
+      >
+  </a
+      ><a name="621" class="Keyword"
+      >using</a
+      ><a name="626"
+      > </a
+      ><a name="627" class="Symbol"
+      >(</a
+      ><a name="628" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="631" class="Symbol"
+      >;</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="Relation.Binary.Core.html#4493" class="Function Operator"
+      >_&#8802;_</a
+      ><a name="636" class="Symbol"
+      >;</a
+      ><a name="637"
+      > </a
+      ><a name="638" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="642" class="Symbol"
+      >)</a
+      ><a name="643"
+      >
+</a
+      ><a name="644" class="Keyword"
+      >open</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="Relation.Binary.PropositionalEquality.html#243" class="Module"
+      >P.</a
+      ><a name="651" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="662"
+      >
+</a
+      ><a name="663" class="Keyword"
+      >import</a
+      ><a name="669"
+      > </a
+      ><a name="670" href="Algebra.FunctionProperties.html#1" class="Module"
+      >Algebra.FunctionProperties</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >as</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Module"
+      >FP</a
+      ><a name="702" class="Symbol"
+      >;</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="Keyword"
+      >open</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="Algebra.FunctionProperties.html#1" class="Module"
+      >FP</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >(</a
+      ><a name="713" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="716"
+      > </a
+      ><a name="717" class="Symbol"
+      >{</a
+      ><a name="718" class="Argument"
+      >A</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >=</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="Agda.Builtin.Bool.html#67" class="Datatype"
+      >Bool</a
+      ><a name="726" class="Symbol"
+      >})</a
+      ><a name="728"
+      >
+</a
+      ><a name="729" class="Keyword"
+      >open</a
+      ><a name="733"
+      > </a
+      ><a name="734" class="Keyword"
+      >import</a
+      ><a name="740"
+      > </a
+      ><a name="741" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="753"
+      >
+</a
+      ><a name="754" class="Keyword"
+      >open</a
+      ><a name="758"
+      > </a
+      ><a name="759" class="Keyword"
+      >import</a
+      ><a name="765"
+      > </a
+      ><a name="766" href="Data.Sum.html#1" class="Module"
+      >Data.Sum</a
+      ><a name="774"
+      >
+</a
+      ><a name="775" class="Keyword"
+      >open</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Keyword"
+      >import</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Data.Empty.html#1" class="Module"
+      >Data.Empty</a
+      ><a name="797"
+      >
+
+</a
+      ><a name="799" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="871"
+      >
+</a
+      ><a name="872" class="Comment"
+      >-- Duality</a
+      ><a name="882"
+      >
+
+</a
+      ><a name="884" class="Comment"
+      >-- Can we take advantage of duality in some (nice) way?</a
+      ><a name="939"
+      >
+
+</a
+      ><a name="941" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="1013"
+      >
+</a
+      ><a name="1014" class="Comment"
+      >-- (Bool, &#8744;, &#8743;, false, true) forms a commutative semiring</a
+      ><a name="1071"
+      >
+
+</a
+      ><a name="1073" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" class="Symbol"
+      >:</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" href="Algebra.FunctionProperties.html#848" class="Function"
+      >Associative</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1098"
+      >
+</a
+      ><a name="1099" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1111"
+      >  </a
+      ><a name="1113" href="Data.Bool.Properties.html#1113" class="Bound"
+      >y</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="Data.Bool.Properties.html#1115" class="Bound"
+      >z</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" class="Symbol"
+      >=</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1123"
+      >
+</a
+      ><a name="1124" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="Data.Bool.Properties.html#1138" class="Bound"
+      >y</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="Data.Bool.Properties.html#1140" class="Bound"
+      >z</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="Symbol"
+      >=</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1148"
+      >
+
+</a
+      ><a name="1150" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" class="Symbol"
+      >:</a
+      ><a name="1159"
+      > </a
+      ><a name="1160" href="Algebra.FunctionProperties.html#848" class="Function"
+      >Associative</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1175"
+      >
+</a
+      ><a name="1176" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1188"
+      >  </a
+      ><a name="1190" href="Data.Bool.Properties.html#1190" class="Bound"
+      >y</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="Data.Bool.Properties.html#1192" class="Bound"
+      >z</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >=</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1200"
+      >
+</a
+      ><a name="1201" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="Data.Bool.Properties.html#1215" class="Bound"
+      >y</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" href="Data.Bool.Properties.html#1217" class="Bound"
+      >z</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Symbol"
+      >=</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1225"
+      >
+
+</a
+      ><a name="1227" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" class="Symbol"
+      >:</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="Algebra.FunctionProperties.html#935" class="Function"
+      >Commutative</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1251"
+      >
+</a
+      ><a name="1252" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1263"
+      >  </a
+      ><a name="1265" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1269"
+      >  </a
+      ><a name="1271" class="Symbol"
+      >=</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1277"
+      >
+</a
+      ><a name="1278" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1289"
+      >  </a
+      ><a name="1291" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="Symbol"
+      >=</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1303"
+      >
+</a
+      ><a name="1304" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1321"
+      >  </a
+      ><a name="1323" class="Symbol"
+      >=</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1329"
+      >
+</a
+      ><a name="1330" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" class="Symbol"
+      >=</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1355"
+      >
+
+</a
+      ><a name="1357" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" class="Symbol"
+      >:</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" href="Algebra.FunctionProperties.html#935" class="Function"
+      >Commutative</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1381"
+      >
+</a
+      ><a name="1382" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1393"
+      >  </a
+      ><a name="1395" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1399"
+      >  </a
+      ><a name="1401" class="Symbol"
+      >=</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1407"
+      >
+</a
+      ><a name="1408" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1419"
+      >  </a
+      ><a name="1421" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >=</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1433"
+      >
+</a
+      ><a name="1434" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1451"
+      >  </a
+      ><a name="1453" class="Symbol"
+      >=</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1459"
+      >
+</a
+      ><a name="1460" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >=</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1485"
+      >
+
+</a
+      ><a name="1487" href="Data.Bool.Properties.html#1487" class="Function"
+      >&#8743;-&#8744;-dist&#737;</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Symbol"
+      >:</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="Algebra.FunctionProperties.html#1709" class="Function Operator"
+      >DistributesOver&#737;</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1523"
+      >
+</a
+      ><a name="1524" href="Data.Bool.Properties.html#1487" class="Function"
+      >&#8743;-&#8744;-dist&#737;</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1538"
+      >  </a
+      ><a name="1540" href="Data.Bool.Properties.html#1540" class="Bound"
+      >y</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" href="Data.Bool.Properties.html#1542" class="Bound"
+      >z</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Symbol"
+      >=</a
+      ><a name="1545"
+      > </a
+      ><a name="1546" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1550"
+      >
+</a
+      ><a name="1551" href="Data.Bool.Properties.html#1487" class="Function"
+      >&#8743;-&#8744;-dist&#737;</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1566"
+      > </a
+      ><a name="1567" href="Data.Bool.Properties.html#1567" class="Bound"
+      >y</a
+      ><a name="1568"
+      > </a
+      ><a name="1569" href="Data.Bool.Properties.html#1569" class="Bound"
+      >z</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" class="Symbol"
+      >=</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1577"
+      >
+
+</a
+      ><a name="1579" href="Data.Bool.Properties.html#1579" class="Function"
+      >&#8743;-&#8744;-dist&#691;</a
+      ><a name="1588"
+      > </a
+      ><a name="1589" class="Symbol"
+      >:</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="Algebra.FunctionProperties.html#1828" class="Function Operator"
+      >DistributesOver&#691;</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1615"
+      >
+</a
+      ><a name="1616" href="Data.Bool.Properties.html#1579" class="Function"
+      >&#8743;-&#8744;-dist&#691;</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >=</a
+      ><a name="1633"
+      >
+  </a
+      ><a name="1636" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="1641"
+      >
+    </a
+      ><a name="1646" class="Symbol"
+      >(</a
+      ><a name="1647" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1652" class="Symbol"
+      >)</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1657"
+      >
+  </a
+      ><a name="1660" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" class="Symbol"
+      >(</a
+      ><a name="1671" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1676" class="Symbol"
+      >)</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1681"
+      >
+    </a
+      ><a name="1686" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" class="Symbol"
+      >(</a
+      ><a name="1691" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1696" class="Symbol"
+      >)</a
+      ><a name="1697"
+      >
+  </a
+      ><a name="1700" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" href="Data.Bool.Properties.html#1487" class="Function"
+      >&#8743;-&#8744;-dist&#737;</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1720"
+      >
+    </a
+      ><a name="1725" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1738"
+      >
+  </a
+      ><a name="1741" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" class="Symbol"
+      >(</a
+      ><a name="1757" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1767" class="Symbol"
+      >)</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" class="Symbol"
+      >(</a
+      ><a name="1770" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1780" class="Symbol"
+      >)</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1783"
+      >
+    </a
+      ><a name="1788" href="Data.Bool.Properties.html#1628" class="Bound"
+      >y</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="Data.Bool.Properties.html#1630" class="Bound"
+      >z</a
+      ><a name="1797"
+      > </a
+      ><a name="1798" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="Data.Bool.Properties.html#1626" class="Bound"
+      >x</a
+      ><a name="1801"
+      >
+  </a
+      ><a name="1804" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="1805"
+      >
+
+</a
+      ><a name="1807" href="Data.Bool.Properties.html#1807" class="Function"
+      >distrib-&#8743;-&#8744;</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" class="Symbol"
+      >:</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Algebra.FunctionProperties.html#1947" class="Function Operator"
+      >DistributesOver</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1844"
+      >
+</a
+      ><a name="1845" href="Data.Bool.Properties.html#1807" class="Function"
+      >distrib-&#8743;-&#8744;</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" class="Symbol"
+      >=</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" href="Data.Bool.Properties.html#1487" class="Function"
+      >&#8743;-&#8744;-dist&#737;</a
+      ><a name="1868"
+      > </a
+      ><a name="1869" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1870"
+      > </a
+      ><a name="1871" href="Data.Bool.Properties.html#1579" class="Function"
+      >&#8743;-&#8744;-dist&#691;</a
+      ><a name="1880"
+      >
+
+</a
+      ><a name="1882" href="Data.Bool.Properties.html#1882" class="Function"
+      >isCommutativeSemiring-&#8744;-&#8743;</a
+      ><a name="1907"
+      >
+  </a
+      ><a name="1910" class="Symbol"
+      >:</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" href="Algebra.Structures.html#7019" class="Record"
+      >IsCommutativeSemiring</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="1956"
+      >
+</a
+      ><a name="1957" href="Data.Bool.Properties.html#1882" class="Function"
+      >isCommutativeSemiring-&#8744;-&#8743;</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="Symbol"
+      >=</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Keyword"
+      >record</a
+      ><a name="1991"
+      >
+  </a
+      ><a name="1994" class="Symbol"
+      >{</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" class="Field"
+      >+-isCommutativeMonoid</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" class="Symbol"
+      >=</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" class="Keyword"
+      >record</a
+      ><a name="2026"
+      >
+    </a
+      ><a name="2031" class="Symbol"
+      >{</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" class="Field"
+      >isSemigroup</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" class="Symbol"
+      >=</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" class="Keyword"
+      >record</a
+      ><a name="2053"
+      >
+      </a
+      ><a name="2060" class="Symbol"
+      >{</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Field"
+      >isEquivalence</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" class="Symbol"
+      >=</a
+      ><a name="2077"
+      > </a
+      ><a name="2078" href="Relation.Binary.PropositionalEquality.Core.html#879" class="Function"
+      >P.isEquivalence</a
+      ><a name="2093"
+      >
+      </a
+      ><a name="2100" class="Symbol"
+      >;</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" class="Field"
+      >assoc</a
+      ><a name="2107"
+      >         </a
+      ><a name="2116" class="Symbol"
+      >=</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="2125"
+      >
+      </a
+      ><a name="2132" class="Symbol"
+      >;</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" class="Field"
+      >&#8729;-cong</a
+      ><a name="2140"
+      >        </a
+      ><a name="2148" class="Symbol"
+      >=</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="2161"
+      >
+      </a
+      ><a name="2168" class="Symbol"
+      >}</a
+      ><a name="2169"
+      >
+    </a
+      ><a name="2174" class="Symbol"
+      >;</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="Field"
+      >identity&#737;</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >=</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >&#955;</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" href="Data.Bool.Properties.html#2190" class="Bound"
+      >_</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >&#8594;</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2198"
+      >
+    </a
+      ><a name="2203" class="Symbol"
+      >;</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" class="Field"
+      >comm</a
+      ><a name="2209"
+      >      </a
+      ><a name="2215" class="Symbol"
+      >=</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="2223"
+      >
+    </a
+      ><a name="2228" class="Symbol"
+      >}</a
+      ><a name="2229"
+      >
+  </a
+      ><a name="2232" class="Symbol"
+      >;</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" class="Field"
+      >*-isCommutativeMonoid</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" class="Symbol"
+      >=</a
+      ><a name="2257"
+      > </a
+      ><a name="2258" class="Keyword"
+      >record</a
+      ><a name="2264"
+      >
+    </a
+      ><a name="2269" class="Symbol"
+      >{</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" class="Field"
+      >isSemigroup</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" class="Symbol"
+      >=</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" class="Keyword"
+      >record</a
+      ><a name="2291"
+      >
+      </a
+      ><a name="2298" class="Symbol"
+      >{</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" class="Field"
+      >isEquivalence</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" class="Symbol"
+      >=</a
+      ><a name="2315"
+      > </a
+      ><a name="2316" href="Relation.Binary.PropositionalEquality.Core.html#879" class="Function"
+      >P.isEquivalence</a
+      ><a name="2331"
+      >
+      </a
+      ><a name="2338" class="Symbol"
+      >;</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" class="Field"
+      >assoc</a
+      ><a name="2345"
+      >         </a
+      ><a name="2354" class="Symbol"
+      >=</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="2363"
+      >
+      </a
+      ><a name="2370" class="Symbol"
+      >;</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" class="Field"
+      >&#8729;-cong</a
+      ><a name="2378"
+      >        </a
+      ><a name="2386" class="Symbol"
+      >=</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="2399"
+      >
+      </a
+      ><a name="2406" class="Symbol"
+      >}</a
+      ><a name="2407"
+      >
+      </a
+      ><a name="2414" class="Symbol"
+      >;</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" class="Field"
+      >identity&#737;</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" class="Symbol"
+      >=</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" class="Symbol"
+      >&#955;</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" href="Data.Bool.Properties.html#2430" class="Bound"
+      >_</a
+      ><a name="2431"
+      > </a
+      ><a name="2432" class="Symbol"
+      >&#8594;</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2438"
+      >
+    </a
+      ><a name="2443" class="Symbol"
+      >;</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" class="Field"
+      >comm</a
+      ><a name="2449"
+      >      </a
+      ><a name="2455" class="Symbol"
+      >=</a
+      ><a name="2456"
+      > </a
+      ><a name="2457" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="2463"
+      >
+    </a
+      ><a name="2468" class="Symbol"
+      >}</a
+      ><a name="2469"
+      >
+  </a
+      ><a name="2472" class="Symbol"
+      >;</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" class="Field"
+      >distrib&#691;</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" class="Symbol"
+      >=</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" href="Data.Bool.Properties.html#1807" class="Function"
+      >distrib-&#8743;-&#8744;</a
+      ><a name="2502"
+      >
+  </a
+      ><a name="2505" class="Symbol"
+      >;</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Field"
+      >zero&#737;</a
+      ><a name="2512"
+      >    </a
+      ><a name="2516" class="Symbol"
+      >=</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" class="Symbol"
+      >&#955;</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="Data.Bool.Properties.html#2520" class="Bound"
+      >_</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" class="Symbol"
+      >&#8594;</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2528"
+      >
+  </a
+      ><a name="2531" class="Symbol"
+      >}</a
+      ><a name="2532"
+      >
+
+</a
+      ><a name="2534" href="Data.Bool.Properties.html#2534" class="Function"
+      >commutativeSemiring-&#8744;-&#8743;</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" class="Symbol"
+      >:</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="Algebra.html#8521" class="Record"
+      >CommutativeSemiring</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >_</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >_</a
+      ><a name="2583"
+      >
+</a
+      ><a name="2584" href="Data.Bool.Properties.html#2534" class="Function"
+      >commutativeSemiring-&#8744;-&#8743;</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" class="Symbol"
+      >=</a
+      ><a name="2609"
+      > </a
+      ><a name="2610" class="Keyword"
+      >record</a
+      ><a name="2616"
+      >
+  </a
+      ><a name="2619" class="Symbol"
+      >{</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Field Operator"
+      >_+_</a
+      ><a name="2624"
+      >                   </a
+      ><a name="2643" class="Symbol"
+      >=</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="2648"
+      >
+  </a
+      ><a name="2651" class="Symbol"
+      >;</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" class="Field Operator"
+      >_*_</a
+      ><a name="2656"
+      >                   </a
+      ><a name="2675" class="Symbol"
+      >=</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="2680"
+      >
+  </a
+      ><a name="2683" class="Symbol"
+      >;</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" class="Field"
+      >0#</a
+      ><a name="2687"
+      >                    </a
+      ><a name="2707" class="Symbol"
+      >=</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="2714"
+      >
+  </a
+      ><a name="2717" class="Symbol"
+      >;</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" class="Field"
+      >1#</a
+      ><a name="2721"
+      >                    </a
+      ><a name="2741" class="Symbol"
+      >=</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="2747"
+      >
+  </a
+      ><a name="2750" class="Symbol"
+      >;</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" class="Field"
+      >isCommutativeSemiring</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" class="Symbol"
+      >=</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" href="Data.Bool.Properties.html#1882" class="Function"
+      >isCommutativeSemiring-&#8744;-&#8743;</a
+      ><a name="2801"
+      >
+  </a
+      ><a name="2804" class="Symbol"
+      >}</a
+      ><a name="2805"
+      >
+
+</a
+      ><a name="2807" class="Keyword"
+      >module</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" href="Data.Bool.Properties.html#2814" class="Module"
+      >RingSolver</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" class="Symbol"
+      >=</a
+      ><a name="2826"
+      >
+  </a
+      ><a name="2829" href="Algebra.RingSolver.Simple.html#1" class="Module"
+      >Solver</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" class="Symbol"
+      >(</a
+      ><a name="2837" href="Algebra.RingSolver.AlmostCommutativeRing.html#4230" class="Function"
+      >ACR.fromCommutativeSemiring</a
+      ><a name="2864"
+      > </a
+      ><a name="2865" href="Data.Bool.Properties.html#2534" class="Function"
+      >commutativeSemiring-&#8744;-&#8743;</a
+      ><a name="2888" class="Symbol"
+      >)</a
+      ><a name="2889"
+      > </a
+      ><a name="2890" href="Data.Bool.Base.html#1216" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="2893"
+      >
+
+</a
+      ><a name="2895" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="2967"
+      >
+</a
+      ><a name="2968" class="Comment"
+      >-- (Bool, &#8743;, &#8744;, true, false) forms a commutative semiring</a
+      ><a name="3025"
+      >
+
+</a
+      ><a name="3027" href="Data.Bool.Properties.html#3027" class="Function"
+      >&#8744;-&#8743;-dist&#737;</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" class="Symbol"
+      >:</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="Algebra.FunctionProperties.html#1709" class="Function Operator"
+      >DistributesOver&#737;</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3063"
+      >
+</a
+      ><a name="3064" href="Data.Bool.Properties.html#3027" class="Function"
+      >&#8744;-&#8743;-dist&#737;</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="3078"
+      >  </a
+      ><a name="3080" href="Data.Bool.Properties.html#3080" class="Bound"
+      >y</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" href="Data.Bool.Properties.html#3082" class="Bound"
+      >z</a
+      ><a name="3083"
+      > </a
+      ><a name="3084" class="Symbol"
+      >=</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3090"
+      >
+</a
+      ><a name="3091" href="Data.Bool.Properties.html#3027" class="Function"
+      >&#8744;-&#8743;-dist&#737;</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="3106"
+      > </a
+      ><a name="3107" href="Data.Bool.Properties.html#3107" class="Bound"
+      >y</a
+      ><a name="3108"
+      > </a
+      ><a name="3109" href="Data.Bool.Properties.html#3109" class="Bound"
+      >z</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" class="Symbol"
+      >=</a
+      ><a name="3112"
+      > </a
+      ><a name="3113" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3117"
+      >
+
+</a
+      ><a name="3119" href="Data.Bool.Properties.html#3119" class="Function"
+      >&#8744;-&#8743;-dist&#691;</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" class="Symbol"
+      >:</a
+      ><a name="3130"
+      > </a
+      ><a name="3131" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="3134"
+      > </a
+      ><a name="3135" href="Algebra.FunctionProperties.html#1828" class="Function Operator"
+      >DistributesOver&#691;</a
+      ><a name="3151"
+      > </a
+      ><a name="3152" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3155"
+      >
+</a
+      ><a name="3156" href="Data.Bool.Properties.html#3119" class="Function"
+      >&#8744;-&#8743;-dist&#691;</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3169"
+      > </a
+      ><a name="3170" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3171"
+      > </a
+      ><a name="3172" class="Symbol"
+      >=</a
+      ><a name="3173"
+      >
+  </a
+      ><a name="3176" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="3181"
+      >
+    </a
+      ><a name="3186" class="Symbol"
+      >(</a
+      ><a name="3187" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3188"
+      > </a
+      ><a name="3189" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="3190"
+      > </a
+      ><a name="3191" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3192" class="Symbol"
+      >)</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3197"
+      >
+  </a
+      ><a name="3200" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3202"
+      > </a
+      ><a name="3203" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" class="Symbol"
+      >(</a
+      ><a name="3211" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3212"
+      > </a
+      ><a name="3213" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="3214"
+      > </a
+      ><a name="3215" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3216" class="Symbol"
+      >)</a
+      ><a name="3217"
+      > </a
+      ><a name="3218" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3219"
+      > </a
+      ><a name="3220" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3221"
+      >
+    </a
+      ><a name="3226" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" class="Symbol"
+      >(</a
+      ><a name="3231" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3232"
+      > </a
+      ><a name="3233" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3236" class="Symbol"
+      >)</a
+      ><a name="3237"
+      >
+  </a
+      ><a name="3240" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="Data.Bool.Properties.html#3027" class="Function"
+      >&#8744;-&#8743;-dist&#737;</a
+      ><a name="3252"
+      > </a
+      ><a name="3253" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3254"
+      > </a
+      ><a name="3255" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3256"
+      > </a
+      ><a name="3257" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3258"
+      > </a
+      ><a name="3259" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3260"
+      >
+    </a
+      ><a name="3265" class="Symbol"
+      >(</a
+      ><a name="3266" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3271" class="Symbol"
+      >)</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="3274"
+      > </a
+      ><a name="3275" class="Symbol"
+      >(</a
+      ><a name="3276" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3279"
+      > </a
+      ><a name="3280" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3281" class="Symbol"
+      >)</a
+      ><a name="3282"
+      >
+  </a
+      ><a name="3285" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="3295"
+      > </a
+      ><a name="3296" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3299"
+      > </a
+      ><a name="3300" class="Symbol"
+      >(</a
+      ><a name="3301" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="3307"
+      > </a
+      ><a name="3308" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3309"
+      > </a
+      ><a name="3310" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3311" class="Symbol"
+      >)</a
+      ><a name="3312"
+      > </a
+      ><a name="3313" class="Symbol"
+      >(</a
+      ><a name="3314" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="3320"
+      > </a
+      ><a name="3321" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3324" class="Symbol"
+      >)</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3327"
+      >
+    </a
+      ><a name="3332" class="Symbol"
+      >(</a
+      ><a name="3333" href="Data.Bool.Properties.html#3168" class="Bound"
+      >y</a
+      ><a name="3334"
+      > </a
+      ><a name="3335" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3338" class="Symbol"
+      >)</a
+      ><a name="3339"
+      > </a
+      ><a name="3340" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="3341"
+      > </a
+      ><a name="3342" class="Symbol"
+      >(</a
+      ><a name="3343" href="Data.Bool.Properties.html#3170" class="Bound"
+      >z</a
+      ><a name="3344"
+      > </a
+      ><a name="3345" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" href="Data.Bool.Properties.html#3166" class="Bound"
+      >x</a
+      ><a name="3348" class="Symbol"
+      >)</a
+      ><a name="3349"
+      >
+  </a
+      ><a name="3352" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="3353"
+      >
+
+</a
+      ><a name="3355" href="Data.Bool.Properties.html#3355" class="Function"
+      >&#8744;-&#8743;-distrib</a
+      ><a name="3366"
+      > </a
+      ><a name="3367" class="Symbol"
+      >:</a
+      ><a name="3368"
+      > </a
+      ><a name="3369" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" href="Algebra.FunctionProperties.html#1947" class="Function Operator"
+      >DistributesOver</a
+      ><a name="3388"
+      > </a
+      ><a name="3389" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3392"
+      >
+</a
+      ><a name="3393" href="Data.Bool.Properties.html#3355" class="Function"
+      >&#8744;-&#8743;-distrib</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" class="Symbol"
+      >=</a
+      ><a name="3406"
+      > </a
+      ><a name="3407" href="Data.Bool.Properties.html#3027" class="Function"
+      >&#8744;-&#8743;-dist&#737;</a
+      ><a name="3416"
+      > </a
+      ><a name="3417" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3418"
+      > </a
+      ><a name="3419" href="Data.Bool.Properties.html#3119" class="Function"
+      >&#8744;-&#8743;-dist&#691;</a
+      ><a name="3428"
+      >
+
+</a
+      ><a name="3430" href="Data.Bool.Properties.html#3430" class="Function"
+      >isCommutativeSemiring-&#8743;-&#8744;</a
+      ><a name="3455"
+      >
+  </a
+      ><a name="3458" class="Symbol"
+      >:</a
+      ><a name="3459"
+      > </a
+      ><a name="3460" href="Algebra.Structures.html#7019" class="Record"
+      >IsCommutativeSemiring</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="3485"
+      > </a
+      ><a name="3486" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="3498"
+      > </a
+      ><a name="3499" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="3504"
+      >
+</a
+      ><a name="3505" href="Data.Bool.Properties.html#3430" class="Function"
+      >isCommutativeSemiring-&#8743;-&#8744;</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" class="Symbol"
+      >=</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" class="Keyword"
+      >record</a
+      ><a name="3539"
+      >
+  </a
+      ><a name="3542" class="Symbol"
+      >{</a
+      ><a name="3543"
+      > </a
+      ><a name="3544" class="Field"
+      >+-isCommutativeMonoid</a
+      ><a name="3565"
+      > </a
+      ><a name="3566" class="Symbol"
+      >=</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" class="Keyword"
+      >record</a
+      ><a name="3574"
+      >
+    </a
+      ><a name="3579" class="Symbol"
+      >{</a
+      ><a name="3580"
+      > </a
+      ><a name="3581" class="Field"
+      >isSemigroup</a
+      ><a name="3592"
+      > </a
+      ><a name="3593" class="Symbol"
+      >=</a
+      ><a name="3594"
+      > </a
+      ><a name="3595" class="Keyword"
+      >record</a
+      ><a name="3601"
+      >
+      </a
+      ><a name="3608" class="Symbol"
+      >{</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" class="Field"
+      >isEquivalence</a
+      ><a name="3623"
+      > </a
+      ><a name="3624" class="Symbol"
+      >=</a
+      ><a name="3625"
+      > </a
+      ><a name="3626" href="Relation.Binary.PropositionalEquality.Core.html#879" class="Function"
+      >P.isEquivalence</a
+      ><a name="3641"
+      >
+      </a
+      ><a name="3648" class="Symbol"
+      >;</a
+      ><a name="3649"
+      > </a
+      ><a name="3650" class="Field"
+      >assoc</a
+      ><a name="3655"
+      >         </a
+      ><a name="3664" class="Symbol"
+      >=</a
+      ><a name="3665"
+      > </a
+      ><a name="3666" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="3673"
+      >
+      </a
+      ><a name="3680" class="Symbol"
+      >;</a
+      ><a name="3681"
+      > </a
+      ><a name="3682" class="Field"
+      >&#8729;-cong</a
+      ><a name="3688"
+      >        </a
+      ><a name="3696" class="Symbol"
+      >=</a
+      ><a name="3697"
+      > </a
+      ><a name="3698" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="3705"
+      > </a
+      ><a name="3706" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="3709"
+      >
+      </a
+      ><a name="3716" class="Symbol"
+      >}</a
+      ><a name="3717"
+      >
+    </a
+      ><a name="3722" class="Symbol"
+      >;</a
+      ><a name="3723"
+      > </a
+      ><a name="3724" class="Field"
+      >identity&#737;</a
+      ><a name="3733"
+      > </a
+      ><a name="3734" class="Symbol"
+      >=</a
+      ><a name="3735"
+      > </a
+      ><a name="3736" class="Symbol"
+      >&#955;</a
+      ><a name="3737"
+      > </a
+      ><a name="3738" href="Data.Bool.Properties.html#3738" class="Bound"
+      >_</a
+      ><a name="3739"
+      > </a
+      ><a name="3740" class="Symbol"
+      >&#8594;</a
+      ><a name="3741"
+      > </a
+      ><a name="3742" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3746"
+      >
+    </a
+      ><a name="3751" class="Symbol"
+      >;</a
+      ><a name="3752"
+      > </a
+      ><a name="3753" class="Field"
+      >comm</a
+      ><a name="3757"
+      >      </a
+      ><a name="3763" class="Symbol"
+      >=</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="3771"
+      >
+    </a
+      ><a name="3776" class="Symbol"
+      >}</a
+      ><a name="3777"
+      >
+  </a
+      ><a name="3780" class="Symbol"
+      >;</a
+      ><a name="3781"
+      > </a
+      ><a name="3782" class="Field"
+      >*-isCommutativeMonoid</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" class="Symbol"
+      >=</a
+      ><a name="3805"
+      > </a
+      ><a name="3806" class="Keyword"
+      >record</a
+      ><a name="3812"
+      >
+    </a
+      ><a name="3817" class="Symbol"
+      >{</a
+      ><a name="3818"
+      > </a
+      ><a name="3819" class="Field"
+      >isSemigroup</a
+      ><a name="3830"
+      > </a
+      ><a name="3831" class="Symbol"
+      >=</a
+      ><a name="3832"
+      > </a
+      ><a name="3833" class="Keyword"
+      >record</a
+      ><a name="3839"
+      >
+      </a
+      ><a name="3846" class="Symbol"
+      >{</a
+      ><a name="3847"
+      > </a
+      ><a name="3848" class="Field"
+      >isEquivalence</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" class="Symbol"
+      >=</a
+      ><a name="3863"
+      > </a
+      ><a name="3864" href="Relation.Binary.PropositionalEquality.Core.html#879" class="Function"
+      >P.isEquivalence</a
+      ><a name="3879"
+      >
+      </a
+      ><a name="3886" class="Symbol"
+      >;</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" class="Field"
+      >assoc</a
+      ><a name="3893"
+      >         </a
+      ><a name="3902" class="Symbol"
+      >=</a
+      ><a name="3903"
+      > </a
+      ><a name="3904" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="3911"
+      >
+      </a
+      ><a name="3918" class="Symbol"
+      >;</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" class="Field"
+      >&#8729;-cong</a
+      ><a name="3926"
+      >        </a
+      ><a name="3934" class="Symbol"
+      >=</a
+      ><a name="3935"
+      > </a
+      ><a name="3936" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="3943"
+      > </a
+      ><a name="3944" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="3947"
+      >
+      </a
+      ><a name="3954" class="Symbol"
+      >}</a
+      ><a name="3955"
+      >
+    </a
+      ><a name="3960" class="Symbol"
+      >;</a
+      ><a name="3961"
+      > </a
+      ><a name="3962" class="Field"
+      >identity&#737;</a
+      ><a name="3971"
+      > </a
+      ><a name="3972" class="Symbol"
+      >=</a
+      ><a name="3973"
+      > </a
+      ><a name="3974" class="Symbol"
+      >&#955;</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" href="Data.Bool.Properties.html#3976" class="Bound"
+      >_</a
+      ><a name="3977"
+      > </a
+      ><a name="3978" class="Symbol"
+      >&#8594;</a
+      ><a name="3979"
+      > </a
+      ><a name="3980" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3984"
+      >
+    </a
+      ><a name="3989" class="Symbol"
+      >;</a
+      ><a name="3990"
+      > </a
+      ><a name="3991" class="Field"
+      >comm</a
+      ><a name="3995"
+      >      </a
+      ><a name="4001" class="Symbol"
+      >=</a
+      ><a name="4002"
+      > </a
+      ><a name="4003" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="4009"
+      >
+    </a
+      ><a name="4014" class="Symbol"
+      >}</a
+      ><a name="4015"
+      >
+  </a
+      ><a name="4018" class="Symbol"
+      >;</a
+      ><a name="4019"
+      > </a
+      ><a name="4020" class="Field"
+      >distrib&#691;</a
+      ><a name="4028"
+      > </a
+      ><a name="4029" class="Symbol"
+      >=</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" href="Data.Bool.Properties.html#3119" class="Function"
+      >&#8744;-&#8743;-dist&#691;</a
+      ><a name="4040"
+      >
+  </a
+      ><a name="4043" class="Symbol"
+      >;</a
+      ><a name="4044"
+      > </a
+      ><a name="4045" class="Field"
+      >zero&#737;</a
+      ><a name="4050"
+      >    </a
+      ><a name="4054" class="Symbol"
+      >=</a
+      ><a name="4055"
+      > </a
+      ><a name="4056" class="Symbol"
+      >&#955;</a
+      ><a name="4057"
+      > </a
+      ><a name="4058" href="Data.Bool.Properties.html#4058" class="Bound"
+      >_</a
+      ><a name="4059"
+      > </a
+      ><a name="4060" class="Symbol"
+      >&#8594;</a
+      ><a name="4061"
+      > </a
+      ><a name="4062" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4066"
+      >
+  </a
+      ><a name="4069" class="Symbol"
+      >}</a
+      ><a name="4070"
+      >
+
+</a
+      ><a name="4072" href="Data.Bool.Properties.html#4072" class="Function"
+      >commutativeSemiring-&#8743;-&#8744;</a
+      ><a name="4095"
+      > </a
+      ><a name="4096" class="Symbol"
+      >:</a
+      ><a name="4097"
+      > </a
+      ><a name="4098" href="Algebra.html#8521" class="Record"
+      >CommutativeSemiring</a
+      ><a name="4117"
+      > </a
+      ><a name="4118" class="Symbol"
+      >_</a
+      ><a name="4119"
+      > </a
+      ><a name="4120" class="Symbol"
+      >_</a
+      ><a name="4121"
+      >
+</a
+      ><a name="4122" href="Data.Bool.Properties.html#4072" class="Function"
+      >commutativeSemiring-&#8743;-&#8744;</a
+      ><a name="4145"
+      > </a
+      ><a name="4146" class="Symbol"
+      >=</a
+      ><a name="4147"
+      > </a
+      ><a name="4148" class="Keyword"
+      >record</a
+      ><a name="4154"
+      >
+  </a
+      ><a name="4157" class="Symbol"
+      >{</a
+      ><a name="4158"
+      > </a
+      ><a name="4159" class="Field Operator"
+      >_+_</a
+      ><a name="4162"
+      >                   </a
+      ><a name="4181" class="Symbol"
+      >=</a
+      ><a name="4182"
+      > </a
+      ><a name="4183" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4186"
+      >
+  </a
+      ><a name="4189" class="Symbol"
+      >;</a
+      ><a name="4190"
+      > </a
+      ><a name="4191" class="Field Operator"
+      >_*_</a
+      ><a name="4194"
+      >                   </a
+      ><a name="4213" class="Symbol"
+      >=</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="4218"
+      >
+  </a
+      ><a name="4221" class="Symbol"
+      >;</a
+      ><a name="4222"
+      > </a
+      ><a name="4223" class="Field"
+      >0#</a
+      ><a name="4225"
+      >                    </a
+      ><a name="4245" class="Symbol"
+      >=</a
+      ><a name="4246"
+      > </a
+      ><a name="4247" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="4251"
+      >
+  </a
+      ><a name="4254" class="Symbol"
+      >;</a
+      ><a name="4255"
+      > </a
+      ><a name="4256" class="Field"
+      >1#</a
+      ><a name="4258"
+      >                    </a
+      ><a name="4278" class="Symbol"
+      >=</a
+      ><a name="4279"
+      > </a
+      ><a name="4280" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4285"
+      >
+  </a
+      ><a name="4288" class="Symbol"
+      >;</a
+      ><a name="4289"
+      > </a
+      ><a name="4290" class="Field"
+      >isCommutativeSemiring</a
+      ><a name="4311"
+      > </a
+      ><a name="4312" class="Symbol"
+      >=</a
+      ><a name="4313"
+      > </a
+      ><a name="4314" href="Data.Bool.Properties.html#3430" class="Function"
+      >isCommutativeSemiring-&#8743;-&#8744;</a
+      ><a name="4339"
+      >
+  </a
+      ><a name="4342" class="Symbol"
+      >}</a
+      ><a name="4343"
+      >
+
+</a
+      ><a name="4345" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="4417"
+      >
+</a
+      ><a name="4418" class="Comment"
+      >-- (Bool, &#8744;, &#8743;, not, true, false) is a boolean algebra</a
+      ><a name="4472"
+      >
+
+</a
+      ><a name="4474" href="Data.Bool.Properties.html#4474" class="Function"
+      >&#8744;-&#8743;-abs</a
+      ><a name="4481"
+      > </a
+      ><a name="4482" class="Symbol"
+      >:</a
+      ><a name="4483"
+      > </a
+      ><a name="4484" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="4487"
+      > </a
+      ><a name="4488" href="Algebra.FunctionProperties.html#2341" class="Function Operator"
+      >Absorbs</a
+      ><a name="4495"
+      > </a
+      ><a name="4496" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4499"
+      >
+</a
+      ><a name="4500" href="Data.Bool.Properties.html#4474" class="Function"
+      >&#8744;-&#8743;-abs</a
+      ><a name="4507"
+      > </a
+      ><a name="4508" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="4512"
+      >  </a
+      ><a name="4514" href="Data.Bool.Properties.html#4514" class="Bound"
+      >y</a
+      ><a name="4515"
+      > </a
+      ><a name="4516" class="Symbol"
+      >=</a
+      ><a name="4517"
+      > </a
+      ><a name="4518" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4522"
+      >
+</a
+      ><a name="4523" href="Data.Bool.Properties.html#4474" class="Function"
+      >&#8744;-&#8743;-abs</a
+      ><a name="4530"
+      > </a
+      ><a name="4531" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4536"
+      > </a
+      ><a name="4537" href="Data.Bool.Properties.html#4537" class="Bound"
+      >y</a
+      ><a name="4538"
+      > </a
+      ><a name="4539" class="Symbol"
+      >=</a
+      ><a name="4540"
+      > </a
+      ><a name="4541" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4545"
+      >
+
+</a
+      ><a name="4547" href="Data.Bool.Properties.html#4547" class="Function"
+      >&#8743;-&#8744;-abs</a
+      ><a name="4554"
+      > </a
+      ><a name="4555" class="Symbol"
+      >:</a
+      ><a name="4556"
+      > </a
+      ><a name="4557" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" href="Algebra.FunctionProperties.html#2341" class="Function Operator"
+      >Absorbs</a
+      ><a name="4568"
+      > </a
+      ><a name="4569" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="4572"
+      >
+</a
+      ><a name="4573" href="Data.Bool.Properties.html#4547" class="Function"
+      >&#8743;-&#8744;-abs</a
+      ><a name="4580"
+      > </a
+      ><a name="4581" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="4585"
+      >  </a
+      ><a name="4587" href="Data.Bool.Properties.html#4587" class="Bound"
+      >y</a
+      ><a name="4588"
+      > </a
+      ><a name="4589" class="Symbol"
+      >=</a
+      ><a name="4590"
+      > </a
+      ><a name="4591" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4595"
+      >
+</a
+      ><a name="4596" href="Data.Bool.Properties.html#4547" class="Function"
+      >&#8743;-&#8744;-abs</a
+      ><a name="4603"
+      > </a
+      ><a name="4604" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4609"
+      > </a
+      ><a name="4610" href="Data.Bool.Properties.html#4610" class="Bound"
+      >y</a
+      ><a name="4611"
+      > </a
+      ><a name="4612" class="Symbol"
+      >=</a
+      ><a name="4613"
+      > </a
+      ><a name="4614" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4618"
+      >
+
+</a
+      ><a name="4620" href="Data.Bool.Properties.html#4620" class="Function"
+      >&#8744;-&#8743;-absorptive</a
+      ><a name="4634"
+      > </a
+      ><a name="4635" class="Symbol"
+      >:</a
+      ><a name="4636"
+      > </a
+      ><a name="4637" href="Algebra.FunctionProperties.html#2420" class="Function"
+      >Absorptive</a
+      ><a name="4647"
+      > </a
+      ><a name="4648" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="4651"
+      > </a
+      ><a name="4652" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4655"
+      >
+</a
+      ><a name="4656" href="Data.Bool.Properties.html#4620" class="Function"
+      >&#8744;-&#8743;-absorptive</a
+      ><a name="4670"
+      > </a
+      ><a name="4671" class="Symbol"
+      >=</a
+      ><a name="4672"
+      > </a
+      ><a name="4673" href="Data.Bool.Properties.html#4474" class="Function"
+      >&#8744;-&#8743;-abs</a
+      ><a name="4680"
+      > </a
+      ><a name="4681" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4682"
+      > </a
+      ><a name="4683" href="Data.Bool.Properties.html#4547" class="Function"
+      >&#8743;-&#8744;-abs</a
+      ><a name="4690"
+      >
+
+</a
+      ><a name="4692" href="Data.Bool.Properties.html#4692" class="Function"
+      >not-&#8743;-inverse&#737;</a
+      ><a name="4706"
+      > </a
+      ><a name="4707" class="Symbol"
+      >:</a
+      ><a name="4708"
+      > </a
+      ><a name="4709" href="Algebra.FunctionProperties.html#1436" class="Function"
+      >LeftInverse</a
+      ><a name="4720"
+      > </a
+      ><a name="4721" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4726"
+      > </a
+      ><a name="4727" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="4730"
+      > </a
+      ><a name="4731" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4734"
+      >
+</a
+      ><a name="4735" href="Data.Bool.Properties.html#4692" class="Function"
+      >not-&#8743;-inverse&#737;</a
+      ><a name="4749"
+      > </a
+      ><a name="4750" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4755"
+      > </a
+      ><a name="4756" class="Symbol"
+      >=</a
+      ><a name="4757"
+      > </a
+      ><a name="4758" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4762"
+      >
+</a
+      ><a name="4763" href="Data.Bool.Properties.html#4692" class="Function"
+      >not-&#8743;-inverse&#737;</a
+      ><a name="4777"
+      > </a
+      ><a name="4778" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="4782"
+      > </a
+      ><a name="4783" class="Symbol"
+      >=</a
+      ><a name="4784"
+      > </a
+      ><a name="4785" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4789"
+      >
+
+</a
+      ><a name="4791" href="Data.Bool.Properties.html#4791" class="Function"
+      >not-&#8743;-inverse&#691;</a
+      ><a name="4805"
+      > </a
+      ><a name="4806" class="Symbol"
+      >:</a
+      ><a name="4807"
+      > </a
+      ><a name="4808" href="Algebra.FunctionProperties.html#1524" class="Function"
+      >RightInverse</a
+      ><a name="4820"
+      > </a
+      ><a name="4821" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4826"
+      > </a
+      ><a name="4827" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="4830"
+      > </a
+      ><a name="4831" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4834"
+      >
+</a
+      ><a name="4835" href="Data.Bool.Properties.html#4791" class="Function"
+      >not-&#8743;-inverse&#691;</a
+      ><a name="4849"
+      > </a
+      ><a name="4850" href="Data.Bool.Properties.html#4850" class="Bound"
+      >x</a
+      ><a name="4851"
+      > </a
+      ><a name="4852" class="Symbol"
+      >=</a
+      ><a name="4853"
+      > </a
+      ><a name="4854" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="4860"
+      > </a
+      ><a name="4861" href="Data.Bool.Properties.html#4850" class="Bound"
+      >x</a
+      ><a name="4862"
+      > </a
+      ><a name="4863" class="Symbol"
+      >(</a
+      ><a name="4864" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="4867"
+      > </a
+      ><a name="4868" href="Data.Bool.Properties.html#4850" class="Bound"
+      >x</a
+      ><a name="4869" class="Symbol"
+      >)</a
+      ><a name="4870"
+      > </a
+      ><a name="4871" href="Function.html#1932" class="Function Operator"
+      >&#10216;</a
+      ><a name="4872"
+      > </a
+      ><a name="4873" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >P.trans</a
+      ><a name="4880"
+      > </a
+      ><a name="4881" href="Function.html#1932" class="Function Operator"
+      >&#10217;</a
+      ><a name="4882"
+      > </a
+      ><a name="4883" href="Data.Bool.Properties.html#4692" class="Function"
+      >not-&#8743;-inverse&#737;</a
+      ><a name="4897"
+      > </a
+      ><a name="4898" href="Data.Bool.Properties.html#4850" class="Bound"
+      >x</a
+      ><a name="4899"
+      >
+
+</a
+      ><a name="4901" href="Data.Bool.Properties.html#4901" class="Function"
+      >not-&#8743;-inverse</a
+      ><a name="4914"
+      > </a
+      ><a name="4915" class="Symbol"
+      >:</a
+      ><a name="4916"
+      > </a
+      ><a name="4917" href="Algebra.FunctionProperties.html#1614" class="Function"
+      >Inverse</a
+      ><a name="4924"
+      > </a
+      ><a name="4925" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="4930"
+      > </a
+      ><a name="4931" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="4934"
+      > </a
+      ><a name="4935" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="4938"
+      >
+</a
+      ><a name="4939" href="Data.Bool.Properties.html#4901" class="Function"
+      >not-&#8743;-inverse</a
+      ><a name="4952"
+      > </a
+      ><a name="4953" class="Symbol"
+      >=</a
+      ><a name="4954"
+      > </a
+      ><a name="4955" href="Data.Bool.Properties.html#4692" class="Function"
+      >not-&#8743;-inverse&#737;</a
+      ><a name="4969"
+      > </a
+      ><a name="4970" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4971"
+      > </a
+      ><a name="4972" href="Data.Bool.Properties.html#4791" class="Function"
+      >not-&#8743;-inverse&#691;</a
+      ><a name="4986"
+      >
+
+</a
+      ><a name="4988" href="Data.Bool.Properties.html#4988" class="Function"
+      >not-&#8744;-inverse&#737;</a
+      ><a name="5002"
+      > </a
+      ><a name="5003" class="Symbol"
+      >:</a
+      ><a name="5004"
+      > </a
+      ><a name="5005" href="Algebra.FunctionProperties.html#1436" class="Function"
+      >LeftInverse</a
+      ><a name="5016"
+      > </a
+      ><a name="5017" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="5021"
+      > </a
+      ><a name="5022" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5025"
+      > </a
+      ><a name="5026" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5029"
+      >
+</a
+      ><a name="5030" href="Data.Bool.Properties.html#4988" class="Function"
+      >not-&#8744;-inverse&#737;</a
+      ><a name="5044"
+      > </a
+      ><a name="5045" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="5050"
+      > </a
+      ><a name="5051" class="Symbol"
+      >=</a
+      ><a name="5052"
+      > </a
+      ><a name="5053" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="5057"
+      >
+</a
+      ><a name="5058" href="Data.Bool.Properties.html#4988" class="Function"
+      >not-&#8744;-inverse&#737;</a
+      ><a name="5072"
+      > </a
+      ><a name="5073" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="5077"
+      >  </a
+      ><a name="5079" class="Symbol"
+      >=</a
+      ><a name="5080"
+      > </a
+      ><a name="5081" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="5085"
+      >
+
+</a
+      ><a name="5087" href="Data.Bool.Properties.html#5087" class="Function"
+      >not-&#8744;-inverse&#691;</a
+      ><a name="5101"
+      > </a
+      ><a name="5102" class="Symbol"
+      >:</a
+      ><a name="5103"
+      > </a
+      ><a name="5104" href="Algebra.FunctionProperties.html#1524" class="Function"
+      >RightInverse</a
+      ><a name="5116"
+      > </a
+      ><a name="5117" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="5121"
+      > </a
+      ><a name="5122" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5125"
+      > </a
+      ><a name="5126" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5129"
+      >
+</a
+      ><a name="5130" href="Data.Bool.Properties.html#5087" class="Function"
+      >not-&#8744;-inverse&#691;</a
+      ><a name="5144"
+      > </a
+      ><a name="5145" href="Data.Bool.Properties.html#5145" class="Bound"
+      >x</a
+      ><a name="5146"
+      > </a
+      ><a name="5147" class="Symbol"
+      >=</a
+      ><a name="5148"
+      > </a
+      ><a name="5149" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="5155"
+      > </a
+      ><a name="5156" href="Data.Bool.Properties.html#5145" class="Bound"
+      >x</a
+      ><a name="5157"
+      > </a
+      ><a name="5158" class="Symbol"
+      >(</a
+      ><a name="5159" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5162"
+      > </a
+      ><a name="5163" href="Data.Bool.Properties.html#5145" class="Bound"
+      >x</a
+      ><a name="5164" class="Symbol"
+      >)</a
+      ><a name="5165"
+      > </a
+      ><a name="5166" href="Function.html#1932" class="Function Operator"
+      >&#10216;</a
+      ><a name="5167"
+      > </a
+      ><a name="5168" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >P.trans</a
+      ><a name="5175"
+      > </a
+      ><a name="5176" href="Function.html#1932" class="Function Operator"
+      >&#10217;</a
+      ><a name="5177"
+      > </a
+      ><a name="5178" href="Data.Bool.Properties.html#4988" class="Function"
+      >not-&#8744;-inverse&#737;</a
+      ><a name="5192"
+      > </a
+      ><a name="5193" href="Data.Bool.Properties.html#5145" class="Bound"
+      >x</a
+      ><a name="5194"
+      >
+
+</a
+      ><a name="5196" href="Data.Bool.Properties.html#5196" class="Function"
+      >not-&#8744;-inverse</a
+      ><a name="5209"
+      > </a
+      ><a name="5210" class="Symbol"
+      >:</a
+      ><a name="5211"
+      > </a
+      ><a name="5212" href="Algebra.FunctionProperties.html#1614" class="Function"
+      >Inverse</a
+      ><a name="5219"
+      > </a
+      ><a name="5220" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="5224"
+      > </a
+      ><a name="5225" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5228"
+      > </a
+      ><a name="5229" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5232"
+      >
+</a
+      ><a name="5233" href="Data.Bool.Properties.html#5196" class="Function"
+      >not-&#8744;-inverse</a
+      ><a name="5246"
+      > </a
+      ><a name="5247" class="Symbol"
+      >=</a
+      ><a name="5248"
+      > </a
+      ><a name="5249" href="Data.Bool.Properties.html#4988" class="Function"
+      >not-&#8744;-inverse&#737;</a
+      ><a name="5263"
+      > </a
+      ><a name="5264" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5265"
+      > </a
+      ><a name="5266" href="Data.Bool.Properties.html#5087" class="Function"
+      >not-&#8744;-inverse&#691;</a
+      ><a name="5280"
+      >
+
+</a
+      ><a name="5282" href="Data.Bool.Properties.html#5282" class="Function"
+      >isBooleanAlgebra</a
+      ><a name="5298"
+      > </a
+      ><a name="5299" class="Symbol"
+      >:</a
+      ><a name="5300"
+      > </a
+      ><a name="5301" href="Algebra.Structures.html#13590" class="Record"
+      >IsBooleanAlgebra</a
+      ><a name="5317"
+      > </a
+      ><a name="5318" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="5321"
+      > </a
+      ><a name="5322" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5325"
+      > </a
+      ><a name="5326" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="5329"
+      > </a
+      ><a name="5330" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5333"
+      > </a
+      ><a name="5334" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="5338"
+      > </a
+      ><a name="5339" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="5344"
+      >
+</a
+      ><a name="5345" href="Data.Bool.Properties.html#5282" class="Function"
+      >isBooleanAlgebra</a
+      ><a name="5361"
+      > </a
+      ><a name="5362" class="Symbol"
+      >=</a
+      ><a name="5363"
+      > </a
+      ><a name="5364" class="Keyword"
+      >record</a
+      ><a name="5370"
+      >
+  </a
+      ><a name="5373" class="Symbol"
+      >{</a
+      ><a name="5374"
+      > </a
+      ><a name="5375" class="Field"
+      >isDistributiveLattice</a
+      ><a name="5396"
+      > </a
+      ><a name="5397" class="Symbol"
+      >=</a
+      ><a name="5398"
+      > </a
+      ><a name="5399" class="Keyword"
+      >record</a
+      ><a name="5405"
+      >
+      </a
+      ><a name="5412" class="Symbol"
+      >{</a
+      ><a name="5413"
+      > </a
+      ><a name="5414" class="Field"
+      >isLattice</a
+      ><a name="5423"
+      > </a
+      ><a name="5424" class="Symbol"
+      >=</a
+      ><a name="5425"
+      > </a
+      ><a name="5426" class="Keyword"
+      >record</a
+      ><a name="5432"
+      >
+          </a
+      ><a name="5443" class="Symbol"
+      >{</a
+      ><a name="5444"
+      > </a
+      ><a name="5445" class="Field"
+      >isEquivalence</a
+      ><a name="5458"
+      > </a
+      ><a name="5459" class="Symbol"
+      >=</a
+      ><a name="5460"
+      > </a
+      ><a name="5461" href="Relation.Binary.PropositionalEquality.Core.html#879" class="Function"
+      >P.isEquivalence</a
+      ><a name="5476"
+      >
+          </a
+      ><a name="5487" class="Symbol"
+      >;</a
+      ><a name="5488"
+      > </a
+      ><a name="5489" class="Field"
+      >&#8744;-comm</a
+      ><a name="5495"
+      >        </a
+      ><a name="5503" class="Symbol"
+      >=</a
+      ><a name="5504"
+      > </a
+      ><a name="5505" href="Data.Bool.Properties.html#1227" class="Function"
+      >&#8744;-comm</a
+      ><a name="5511"
+      >
+          </a
+      ><a name="5522" class="Symbol"
+      >;</a
+      ><a name="5523"
+      > </a
+      ><a name="5524" class="Field"
+      >&#8744;-assoc</a
+      ><a name="5531"
+      >       </a
+      ><a name="5538" class="Symbol"
+      >=</a
+      ><a name="5539"
+      > </a
+      ><a name="5540" href="Data.Bool.Properties.html#1073" class="Function"
+      >&#8744;-assoc</a
+      ><a name="5547"
+      >
+          </a
+      ><a name="5558" class="Symbol"
+      >;</a
+      ><a name="5559"
+      > </a
+      ><a name="5560" class="Field"
+      >&#8744;-cong</a
+      ><a name="5566"
+      >        </a
+      ><a name="5574" class="Symbol"
+      >=</a
+      ><a name="5575"
+      > </a
+      ><a name="5576" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="5583"
+      > </a
+      ><a name="5584" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5587"
+      >
+          </a
+      ><a name="5598" class="Symbol"
+      >;</a
+      ><a name="5599"
+      > </a
+      ><a name="5600" class="Field"
+      >&#8743;-comm</a
+      ><a name="5606"
+      >        </a
+      ><a name="5614" class="Symbol"
+      >=</a
+      ><a name="5615"
+      > </a
+      ><a name="5616" href="Data.Bool.Properties.html#1357" class="Function"
+      >&#8743;-comm</a
+      ><a name="5622"
+      >
+          </a
+      ><a name="5633" class="Symbol"
+      >;</a
+      ><a name="5634"
+      > </a
+      ><a name="5635" class="Field"
+      >&#8743;-assoc</a
+      ><a name="5642"
+      >       </a
+      ><a name="5649" class="Symbol"
+      >=</a
+      ><a name="5650"
+      > </a
+      ><a name="5651" href="Data.Bool.Properties.html#1150" class="Function"
+      >&#8743;-assoc</a
+      ><a name="5658"
+      >
+          </a
+      ><a name="5669" class="Symbol"
+      >;</a
+      ><a name="5670"
+      > </a
+      ><a name="5671" class="Field"
+      >&#8743;-cong</a
+      ><a name="5677"
+      >        </a
+      ><a name="5685" class="Symbol"
+      >=</a
+      ><a name="5686"
+      > </a
+      ><a name="5687" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >P.cong&#8322;</a
+      ><a name="5694"
+      > </a
+      ><a name="5695" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="5698"
+      >
+          </a
+      ><a name="5709" class="Symbol"
+      >;</a
+      ><a name="5710"
+      > </a
+      ><a name="5711" class="Field"
+      >absorptive</a
+      ><a name="5721"
+      >    </a
+      ><a name="5725" class="Symbol"
+      >=</a
+      ><a name="5726"
+      > </a
+      ><a name="5727" href="Data.Bool.Properties.html#4620" class="Function"
+      >&#8744;-&#8743;-absorptive</a
+      ><a name="5741"
+      >
+          </a
+      ><a name="5752" class="Symbol"
+      >}</a
+      ><a name="5753"
+      >
+      </a
+      ><a name="5760" class="Symbol"
+      >;</a
+      ><a name="5761"
+      > </a
+      ><a name="5762" class="Field"
+      >&#8744;-&#8743;-distrib&#691;</a
+      ><a name="5774"
+      > </a
+      ><a name="5775" class="Symbol"
+      >=</a
+      ><a name="5776"
+      > </a
+      ><a name="5777" href="Data.Bool.Properties.html#3119" class="Function"
+      >&#8744;-&#8743;-dist&#691;</a
+      ><a name="5786"
+      >
+      </a
+      ><a name="5793" class="Symbol"
+      >}</a
+      ><a name="5794"
+      >
+  </a
+      ><a name="5797" class="Symbol"
+      >;</a
+      ><a name="5798"
+      > </a
+      ><a name="5799" class="Field"
+      >&#8744;-complement&#691;</a
+      ><a name="5812"
+      > </a
+      ><a name="5813" class="Symbol"
+      >=</a
+      ><a name="5814"
+      > </a
+      ><a name="5815" href="Data.Bool.Properties.html#5087" class="Function"
+      >not-&#8744;-inverse&#691;</a
+      ><a name="5829"
+      >
+  </a
+      ><a name="5832" class="Symbol"
+      >;</a
+      ><a name="5833"
+      > </a
+      ><a name="5834" class="Field"
+      >&#8743;-complement&#691;</a
+      ><a name="5847"
+      > </a
+      ><a name="5848" class="Symbol"
+      >=</a
+      ><a name="5849"
+      > </a
+      ><a name="5850" href="Data.Bool.Properties.html#4791" class="Function"
+      >not-&#8743;-inverse&#691;</a
+      ><a name="5864"
+      >
+  </a
+      ><a name="5867" class="Symbol"
+      >;</a
+      ><a name="5868"
+      > </a
+      ><a name="5869" class="Field"
+      >&#172;-cong</a
+      ><a name="5875"
+      >        </a
+      ><a name="5883" class="Symbol"
+      >=</a
+      ><a name="5884"
+      > </a
+      ><a name="5885" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >P.cong</a
+      ><a name="5891"
+      > </a
+      ><a name="5892" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="5895"
+      >
+  </a
+      ><a name="5898" class="Symbol"
+      >}</a
+      ><a name="5899"
+      >
+
+</a
+      ><a name="5901" href="Data.Bool.Properties.html#5901" class="Function"
+      >booleanAlgebra</a
+      ><a name="5915"
+      > </a
+      ><a name="5916" class="Symbol"
+      >:</a
+      ><a name="5917"
+      > </a
+      ><a name="5918" href="Algebra.html#13229" class="Record"
+      >BooleanAlgebra</a
+      ><a name="5932"
+      > </a
+      ><a name="5933" class="Symbol"
+      >_</a
+      ><a name="5934"
+      > </a
+      ><a name="5935" class="Symbol"
+      >_</a
+      ><a name="5936"
+      >
+</a
+      ><a name="5937" href="Data.Bool.Properties.html#5901" class="Function"
+      >booleanAlgebra</a
+      ><a name="5951"
+      > </a
+      ><a name="5952" class="Symbol"
+      >=</a
+      ><a name="5953"
+      > </a
+      ><a name="5954" class="Keyword"
+      >record</a
+      ><a name="5960"
+      >
+  </a
+      ><a name="5963" class="Symbol"
+      >{</a
+      ><a name="5964"
+      > </a
+      ><a name="5965" class="Field Operator"
+      >_&#8744;_</a
+      ><a name="5968"
+      >              </a
+      ><a name="5982" class="Symbol"
+      >=</a
+      ><a name="5983"
+      > </a
+      ><a name="5984" href="Data.Bool.Base.html#997" class="Function Operator"
+      >_&#8744;_</a
+      ><a name="5987"
+      >
+  </a
+      ><a name="5990" class="Symbol"
+      >;</a
+      ><a name="5991"
+      > </a
+      ><a name="5992" class="Field Operator"
+      >_&#8743;_</a
+      ><a name="5995"
+      >              </a
+      ><a name="6009" class="Symbol"
+      >=</a
+      ><a name="6010"
+      > </a
+      ><a name="6011" href="Data.Bool.Base.html#939" class="Function Operator"
+      >_&#8743;_</a
+      ><a name="6014"
+      >
+  </a
+      ><a name="6017" class="Symbol"
+      >;</a
+      ><a name="6018"
+      > </a
+      ><a name="6019" class="Field Operator"
+      >&#172;_</a
+      ><a name="6021"
+      >               </a
+      ><a name="6036" class="Symbol"
+      >=</a
+      ><a name="6037"
+      > </a
+      ><a name="6038" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="6041"
+      >
+  </a
+      ><a name="6044" class="Symbol"
+      >;</a
+      ><a name="6045"
+      > </a
+      ><a name="6046" class="Field"
+      >&#8868;</a
+      ><a name="6047"
+      >                </a
+      ><a name="6063" class="Symbol"
+      >=</a
+      ><a name="6064"
+      > </a
+      ><a name="6065" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="6069"
+      >
+  </a
+      ><a name="6072" class="Symbol"
+      >;</a
+      ><a name="6073"
+      > </a
+      ><a name="6074" class="Field"
+      >&#8869;</a
+      ><a name="6075"
+      >                </a
+      ><a name="6091" class="Symbol"
+      >=</a
+      ><a name="6092"
+      > </a
+      ><a name="6093" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="6098"
+      >
+  </a
+      ><a name="6101" class="Symbol"
+      >;</a
+      ><a name="6102"
+      > </a
+      ><a name="6103" class="Field"
+      >isBooleanAlgebra</a
+      ><a name="6119"
+      > </a
+      ><a name="6120" class="Symbol"
+      >=</a
+      ><a name="6121"
+      > </a
+      ><a name="6122" href="Data.Bool.Properties.html#5282" class="Function"
+      >isBooleanAlgebra</a
+      ><a name="6138"
+      >
+  </a
+      ><a name="6141" class="Symbol"
+      >}</a
+      ><a name="6142"
+      >
+
+</a
+      ><a name="6144" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="6216"
+      >
+</a
+      ><a name="6217" class="Comment"
+      >-- (Bool, xor, &#8743;, id, false, true) forms a commutative ring</a
+      ><a name="6276"
+      >
+
+</a
+      ><a name="6278" href="Data.Bool.Properties.html#6278" class="Function"
+      >xor-is-ok</a
+      ><a name="6287"
+      > </a
+      ><a name="6288" class="Symbol"
+      >:</a
+      ><a name="6289"
+      > </a
+      ><a name="6290" class="Symbol"
+      >&#8704;</a
+      ><a name="6291"
+      > </a
+      ><a name="6292" href="Data.Bool.Properties.html#6292" class="Bound"
+      >x</a
+      ><a name="6293"
+      > </a
+      ><a name="6294" href="Data.Bool.Properties.html#6294" class="Bound"
+      >y</a
+      ><a name="6295"
+      > </a
+      ><a name="6296" class="Symbol"
+      >&#8594;</a
+      ><a name="6297"
+      > </a
+      ><a name="6298" href="Data.Bool.Properties.html#6292" class="Bound"
+      >x</a
+      ><a name="6299"
+      > </a
+      ><a name="6300" href="Data.Bool.Base.html#1054" class="Function Operator"
+      >xor</a
+      ><a name="6303"
+      > </a
+      ><a name="6304" href="Data.Bool.Properties.html#6294" class="Bound"
+      >y</a
+      ><a name="6305"
+      > </a
+      ><a name="6306" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6307"
+      > </a
+      ><a name="6308" class="Symbol"
+      >(</a
+      ><a name="6309" href="Data.Bool.Properties.html#6292" class="Bound"
+      >x</a
+      ><a name="6310"
+      > </a
+      ><a name="6311" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="6312"
+      > </a
+      ><a name="6313" href="Data.Bool.Properties.html#6294" class="Bound"
+      >y</a
+      ><a name="6314" class="Symbol"
+      >)</a
+      ><a name="6315"
+      > </a
+      ><a name="6316" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="6317"
+      > </a
+      ><a name="6318" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="6321"
+      > </a
+      ><a name="6322" class="Symbol"
+      >(</a
+      ><a name="6323" href="Data.Bool.Properties.html#6292" class="Bound"
+      >x</a
+      ><a name="6324"
+      > </a
+      ><a name="6325" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="6326"
+      > </a
+      ><a name="6327" href="Data.Bool.Properties.html#6294" class="Bound"
+      >y</a
+      ><a name="6328" class="Symbol"
+      >)</a
+      ><a name="6329"
+      >
+</a
+      ><a name="6330" href="Data.Bool.Properties.html#6278" class="Function"
+      >xor-is-ok</a
+      ><a name="6339"
+      > </a
+      ><a name="6340" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="6344"
+      >  </a
+      ><a name="6346" href="Data.Bool.Properties.html#6346" class="Bound"
+      >y</a
+      ><a name="6347"
+      > </a
+      ><a name="6348" class="Symbol"
+      >=</a
+      ><a name="6349"
+      > </a
+      ><a name="6350" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="6354"
+      >
+</a
+      ><a name="6355" href="Data.Bool.Properties.html#6278" class="Function"
+      >xor-is-ok</a
+      ><a name="6364"
+      > </a
+      ><a name="6365" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="6370"
+      > </a
+      ><a name="6371" href="Data.Bool.Properties.html#6371" class="Bound"
+      >y</a
+      ><a name="6372"
+      > </a
+      ><a name="6373" class="Symbol"
+      >=</a
+      ><a name="6374"
+      > </a
+      ><a name="6375" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >P.sym</a
+      ><a name="6380"
+      > </a
+      ><a name="6381" href="Function.html#1835" class="Function Operator"
+      >$</a
+      ><a name="6382"
+      > </a
+      ><a name="6383" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="6388"
+      > </a
+      ><a name="6389" href="Algebra.Structures.html#1106" class="Function"
+      >CS.*-identity</a
+      ><a name="6402"
+      > </a
+      ><a name="6403" class="Symbol"
+      >_</a
+      ><a name="6404"
+      >
+  </a
+      ><a name="6407" class="Keyword"
+      >where</a
+      ><a name="6412"
+      > </a
+      ><a name="6413" class="Keyword"
+      >module</a
+      ><a name="6419"
+      > </a
+      ><a name="6420" href="Data.Bool.Properties.html#6420" class="Module"
+      >CS</a
+      ><a name="6422"
+      > </a
+      ><a name="6423" class="Symbol"
+      >=</a
+      ><a name="6424"
+      > </a
+      ><a name="6425" href="Algebra.html#8521" class="Module"
+      >CommutativeSemiring</a
+      ><a name="6444"
+      > </a
+      ><a name="6445" href="Data.Bool.Properties.html#2534" class="Function"
+      >commutativeSemiring-&#8744;-&#8743;</a
+      ><a name="6468"
+      >
+
+</a
+      ><a name="6470" href="Data.Bool.Properties.html#6470" class="Function"
+      >commutativeRing-xor-&#8743;</a
+      ><a name="6491"
+      > </a
+      ><a name="6492" class="Symbol"
+      >:</a
+      ><a name="6493"
+      > </a
+      ><a name="6494" href="Algebra.html#11121" class="Record"
+      >CommutativeRing</a
+      ><a name="6509"
+      > </a
+      ><a name="6510" class="Symbol"
+      >_</a
+      ><a name="6511"
+      > </a
+      ><a name="6512" class="Symbol"
+      >_</a
+      ><a name="6513"
+      >
+</a
+      ><a name="6514" href="Data.Bool.Properties.html#6470" class="Function"
+      >commutativeRing-xor-&#8743;</a
+      ><a name="6535"
+      > </a
+      ><a name="6536" class="Symbol"
+      >=</a
+      ><a name="6537"
+      > </a
+      ><a name="6538" href="Algebra.Properties.BooleanAlgebra.html#20622" class="Function"
+      >commutativeRing</a
+      ><a name="6553"
+      >
+  </a
+      ><a name="6556" class="Keyword"
+      >where</a
+      ><a name="6561"
+      >
+  </a
+      ><a name="6564" class="Keyword"
+      >import</a
+      ><a name="6570"
+      > </a
+      ><a name="6571" href="Algebra.Properties.BooleanAlgebra.html#1" class="Module"
+      >Algebra.Properties.BooleanAlgebra</a
+      ><a name="6604"
+      > </a
+      ><a name="6605" class="Symbol"
+      >as</a
+      ><a name="6607"
+      > </a
+      ><a name="6608" class="Module"
+      >BA</a
+      ><a name="6610"
+      >
+  </a
+      ><a name="6613" class="Keyword"
+      >open</a
+      ><a name="6617"
+      > </a
+      ><a name="6618" href="Algebra.Properties.BooleanAlgebra.html#1" class="Module"
+      >BA</a
+      ><a name="6620"
+      > </a
+      ><a name="6621" href="Data.Bool.Properties.html#5901" class="Function"
+      >booleanAlgebra</a
+      ><a name="6635"
+      >
+  </a
+      ><a name="6638" class="Keyword"
+      >open</a
+      ><a name="6642"
+      > </a
+      ><a name="6643" href="Algebra.Properties.BooleanAlgebra.html#8934" class="Module"
+      >XorRing</a
+      ><a name="6650"
+      > </a
+      ><a name="6651" href="Data.Bool.Base.html#1054" class="Function Operator"
+      >_xor_</a
+      ><a name="6656"
+      > </a
+      ><a name="6657" href="Data.Bool.Properties.html#6278" class="Function"
+      >xor-is-ok</a
+      ><a name="6666"
+      >
+
+</a
+      ><a name="6668" class="Keyword"
+      >module</a
+      ><a name="6674"
+      > </a
+      ><a name="6675" href="Data.Bool.Properties.html#6675" class="Module"
+      >XorRingSolver</a
+      ><a name="6688"
+      > </a
+      ><a name="6689" class="Symbol"
+      >=</a
+      ><a name="6690"
+      >
+  </a
+      ><a name="6693" href="Algebra.RingSolver.Simple.html#1" class="Module"
+      >Solver</a
+      ><a name="6699"
+      > </a
+      ><a name="6700" class="Symbol"
+      >(</a
+      ><a name="6701" href="Algebra.RingSolver.AlmostCommutativeRing.html#3611" class="Function"
+      >ACR.fromCommutativeRing</a
+      ><a name="6724"
+      > </a
+      ><a name="6725" href="Data.Bool.Properties.html#6470" class="Function"
+      >commutativeRing-xor-&#8743;</a
+      ><a name="6746" class="Symbol"
+      >)</a
+      ><a name="6747"
+      > </a
+      ><a name="6748" href="Data.Bool.Base.html#1216" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="6751"
+      >
+
+</a
+      ><a name="6753" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="6825"
+      >
+</a
+      ><a name="6826" class="Comment"
+      >-- Miscellaneous other properties</a
+      ><a name="6859"
+      >
+
+</a
+      ><a name="6861" href="Data.Bool.Properties.html#6861" class="Function"
+      >not-involutive</a
+      ><a name="6875"
+      > </a
+      ><a name="6876" class="Symbol"
+      >:</a
+      ><a name="6877"
+      > </a
+      ><a name="6878" href="Algebra.FunctionProperties.html#2503" class="Function"
+      >Involutive</a
+      ><a name="6888"
+      > </a
+      ><a name="6889" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="6892"
+      >
+</a
+      ><a name="6893" href="Data.Bool.Properties.html#6861" class="Function"
+      >not-involutive</a
+      ><a name="6907"
+      > </a
+      ><a name="6908" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="6912"
+      >  </a
+      ><a name="6914" class="Symbol"
+      >=</a
+      ><a name="6915"
+      > </a
+      ><a name="6916" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="6920"
+      >
+</a
+      ><a name="6921" href="Data.Bool.Properties.html#6861" class="Function"
+      >not-involutive</a
+      ><a name="6935"
+      > </a
+      ><a name="6936" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="6941"
+      > </a
+      ><a name="6942" class="Symbol"
+      >=</a
+      ><a name="6943"
+      > </a
+      ><a name="6944" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="6948"
+      >
+
+</a
+      ><a name="6950" href="Data.Bool.Properties.html#6950" class="Function"
+      >not-&#172;</a
+      ><a name="6955"
+      > </a
+      ><a name="6956" class="Symbol"
+      >:</a
+      ><a name="6957"
+      > </a
+      ><a name="6958" class="Symbol"
+      >&#8704;</a
+      ><a name="6959"
+      > </a
+      ><a name="6960" class="Symbol"
+      >{</a
+      ><a name="6961" href="Data.Bool.Properties.html#6961" class="Bound"
+      >x</a
+      ><a name="6962"
+      > </a
+      ><a name="6963" href="Data.Bool.Properties.html#6963" class="Bound"
+      >y</a
+      ><a name="6964" class="Symbol"
+      >}</a
+      ><a name="6965"
+      > </a
+      ><a name="6966" class="Symbol"
+      >&#8594;</a
+      ><a name="6967"
+      > </a
+      ><a name="6968" href="Data.Bool.Properties.html#6961" class="Bound"
+      >x</a
+      ><a name="6969"
+      > </a
+      ><a name="6970" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="6971"
+      > </a
+      ><a name="6972" href="Data.Bool.Properties.html#6963" class="Bound"
+      >y</a
+      ><a name="6973"
+      > </a
+      ><a name="6974" class="Symbol"
+      >&#8594;</a
+      ><a name="6975"
+      > </a
+      ><a name="6976" href="Data.Bool.Properties.html#6961" class="Bound"
+      >x</a
+      ><a name="6977"
+      > </a
+      ><a name="6978" href="Relation.Binary.Core.html#4493" class="Function Operator"
+      >&#8802;</a
+      ><a name="6979"
+      > </a
+      ><a name="6980" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="6983"
+      > </a
+      ><a name="6984" href="Data.Bool.Properties.html#6963" class="Bound"
+      >y</a
+      ><a name="6985"
+      >
+</a
+      ><a name="6986" href="Data.Bool.Properties.html#6950" class="Function"
+      >not-&#172;</a
+      ><a name="6991"
+      > </a
+      ><a name="6992" class="Symbol"
+      >{</a
+      ><a name="6993" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="6997" class="Symbol"
+      >}</a
+      ><a name="6998"
+      >  </a
+      ><a name="7000" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7004"
+      > </a
+      ><a name="7005" class="Symbol"
+      >()</a
+      ><a name="7007"
+      >
+</a
+      ><a name="7008" href="Data.Bool.Properties.html#6950" class="Function"
+      >not-&#172;</a
+      ><a name="7013"
+      > </a
+      ><a name="7014" class="Symbol"
+      >{</a
+      ><a name="7015" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7020" class="Symbol"
+      >}</a
+      ><a name="7021"
+      > </a
+      ><a name="7022" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7026"
+      > </a
+      ><a name="7027" class="Symbol"
+      >()</a
+      ><a name="7029"
+      >
+
+</a
+      ><a name="7031" href="Data.Bool.Properties.html#7031" class="Function"
+      >&#172;-not</a
+      ><a name="7036"
+      > </a
+      ><a name="7037" class="Symbol"
+      >:</a
+      ><a name="7038"
+      > </a
+      ><a name="7039" class="Symbol"
+      >&#8704;</a
+      ><a name="7040"
+      > </a
+      ><a name="7041" class="Symbol"
+      >{</a
+      ><a name="7042" href="Data.Bool.Properties.html#7042" class="Bound"
+      >x</a
+      ><a name="7043"
+      > </a
+      ><a name="7044" href="Data.Bool.Properties.html#7044" class="Bound"
+      >y</a
+      ><a name="7045" class="Symbol"
+      >}</a
+      ><a name="7046"
+      > </a
+      ><a name="7047" class="Symbol"
+      >&#8594;</a
+      ><a name="7048"
+      > </a
+      ><a name="7049" href="Data.Bool.Properties.html#7042" class="Bound"
+      >x</a
+      ><a name="7050"
+      > </a
+      ><a name="7051" href="Relation.Binary.Core.html#4493" class="Function Operator"
+      >&#8802;</a
+      ><a name="7052"
+      > </a
+      ><a name="7053" href="Data.Bool.Properties.html#7044" class="Bound"
+      >y</a
+      ><a name="7054"
+      > </a
+      ><a name="7055" class="Symbol"
+      >&#8594;</a
+      ><a name="7056"
+      > </a
+      ><a name="7057" href="Data.Bool.Properties.html#7042" class="Bound"
+      >x</a
+      ><a name="7058"
+      > </a
+      ><a name="7059" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7060"
+      > </a
+      ><a name="7061" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="7064"
+      > </a
+      ><a name="7065" href="Data.Bool.Properties.html#7044" class="Bound"
+      >y</a
+      ><a name="7066"
+      >
+</a
+      ><a name="7067" href="Data.Bool.Properties.html#7031" class="Function"
+      >&#172;-not</a
+      ><a name="7072"
+      > </a
+      ><a name="7073" class="Symbol"
+      >{</a
+      ><a name="7074" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7078" class="Symbol"
+      >}</a
+      ><a name="7079"
+      >  </a
+      ><a name="7081" class="Symbol"
+      >{</a
+      ><a name="7082" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7086" class="Symbol"
+      >}</a
+      ><a name="7087"
+      >  </a
+      ><a name="7089" href="Data.Bool.Properties.html#7089" class="Bound"
+      >x&#8802;y</a
+      ><a name="7092"
+      > </a
+      ><a name="7093" class="Symbol"
+      >=</a
+      ><a name="7094"
+      > </a
+      ><a name="7095" href="Data.Empty.html#360" class="Function"
+      >&#8869;-elim</a
+      ><a name="7101"
+      > </a
+      ><a name="7102" class="Symbol"
+      >(</a
+      ><a name="7103" href="Data.Bool.Properties.html#7089" class="Bound"
+      >x&#8802;y</a
+      ><a name="7106"
+      > </a
+      ><a name="7107" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7111" class="Symbol"
+      >)</a
+      ><a name="7112"
+      >
+</a
+      ><a name="7113" href="Data.Bool.Properties.html#7031" class="Function"
+      >&#172;-not</a
+      ><a name="7118"
+      > </a
+      ><a name="7119" class="Symbol"
+      >{</a
+      ><a name="7120" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7124" class="Symbol"
+      >}</a
+      ><a name="7125"
+      >  </a
+      ><a name="7127" class="Symbol"
+      >{</a
+      ><a name="7128" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7133" class="Symbol"
+      >}</a
+      ><a name="7134"
+      > </a
+      ><a name="7135" class="Symbol"
+      >_</a
+      ><a name="7136"
+      >   </a
+      ><a name="7139" class="Symbol"
+      >=</a
+      ><a name="7140"
+      > </a
+      ><a name="7141" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7145"
+      >
+</a
+      ><a name="7146" href="Data.Bool.Properties.html#7031" class="Function"
+      >&#172;-not</a
+      ><a name="7151"
+      > </a
+      ><a name="7152" class="Symbol"
+      >{</a
+      ><a name="7153" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7158" class="Symbol"
+      >}</a
+      ><a name="7159"
+      > </a
+      ><a name="7160" class="Symbol"
+      >{</a
+      ><a name="7161" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7165" class="Symbol"
+      >}</a
+      ><a name="7166"
+      >  </a
+      ><a name="7168" class="Symbol"
+      >_</a
+      ><a name="7169"
+      >   </a
+      ><a name="7172" class="Symbol"
+      >=</a
+      ><a name="7173"
+      > </a
+      ><a name="7174" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7178"
+      >
+</a
+      ><a name="7179" href="Data.Bool.Properties.html#7031" class="Function"
+      >&#172;-not</a
+      ><a name="7184"
+      > </a
+      ><a name="7185" class="Symbol"
+      >{</a
+      ><a name="7186" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7191" class="Symbol"
+      >}</a
+      ><a name="7192"
+      > </a
+      ><a name="7193" class="Symbol"
+      >{</a
+      ><a name="7194" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7199" class="Symbol"
+      >}</a
+      ><a name="7200"
+      > </a
+      ><a name="7201" href="Data.Bool.Properties.html#7201" class="Bound"
+      >x&#8802;y</a
+      ><a name="7204"
+      > </a
+      ><a name="7205" class="Symbol"
+      >=</a
+      ><a name="7206"
+      > </a
+      ><a name="7207" href="Data.Empty.html#360" class="Function"
+      >&#8869;-elim</a
+      ><a name="7213"
+      > </a
+      ><a name="7214" class="Symbol"
+      >(</a
+      ><a name="7215" href="Data.Bool.Properties.html#7201" class="Bound"
+      >x&#8802;y</a
+      ><a name="7218"
+      > </a
+      ><a name="7219" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7223" class="Symbol"
+      >)</a
+      ><a name="7224"
+      >
+
+</a
+      ><a name="7226" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7229"
+      > </a
+      ><a name="7230" class="Symbol"
+      >:</a
+      ><a name="7231"
+      > </a
+      ><a name="7232" class="Symbol"
+      >{</a
+      ><a name="7233" href="Data.Bool.Properties.html#7233" class="Bound"
+      >b&#8321;</a
+      ><a name="7235"
+      > </a
+      ><a name="7236" href="Data.Bool.Properties.html#7236" class="Bound"
+      >b&#8322;</a
+      ><a name="7238"
+      > </a
+      ><a name="7239" href="Data.Bool.Properties.html#7239" class="Bound"
+      >b</a
+      ><a name="7240"
+      > </a
+      ><a name="7241" class="Symbol"
+      >:</a
+      ><a name="7242"
+      > </a
+      ><a name="7243" href="Agda.Builtin.Bool.html#67" class="Datatype"
+      >Bool</a
+      ><a name="7247" class="Symbol"
+      >}</a
+      ><a name="7248"
+      > </a
+      ><a name="7249" class="Symbol"
+      >&#8594;</a
+      ><a name="7250"
+      > </a
+      ><a name="7251" href="Data.Bool.Properties.html#7233" class="Bound"
+      >b&#8321;</a
+      ><a name="7253"
+      > </a
+      ><a name="7254" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7255"
+      > </a
+      ><a name="7256" href="Data.Bool.Properties.html#7239" class="Bound"
+      >b</a
+      ><a name="7257"
+      > </a
+      ><a name="7258" href="Function.Equivalence.html#711" class="Function Operator"
+      >&#8660;</a
+      ><a name="7259"
+      > </a
+      ><a name="7260" href="Data.Bool.Properties.html#7236" class="Bound"
+      >b&#8322;</a
+      ><a name="7262"
+      > </a
+      ><a name="7263" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7264"
+      > </a
+      ><a name="7265" href="Data.Bool.Properties.html#7239" class="Bound"
+      >b</a
+      ><a name="7266"
+      > </a
+      ><a name="7267" class="Symbol"
+      >&#8594;</a
+      ><a name="7268"
+      > </a
+      ><a name="7269" href="Data.Bool.Properties.html#7233" class="Bound"
+      >b&#8321;</a
+      ><a name="7271"
+      > </a
+      ><a name="7272" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7273"
+      > </a
+      ><a name="7274" href="Data.Bool.Properties.html#7236" class="Bound"
+      >b&#8322;</a
+      ><a name="7276"
+      >
+</a
+      ><a name="7277" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7280"
+      > </a
+      ><a name="7281" class="Symbol"
+      >{</a
+      ><a name="7282" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7286"
+      > </a
+      ><a name="7287" class="Symbol"
+      >}</a
+      ><a name="7288"
+      > </a
+      ><a name="7289" class="Symbol"
+      >{</a
+      ><a name="7290" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7294"
+      > </a
+      ><a name="7295" class="Symbol"
+      >}</a
+      ><a name="7296"
+      >         </a
+      ><a name="7305" href="Data.Bool.Properties.html#7305" class="Bound"
+      >hyp</a
+      ><a name="7308"
+      > </a
+      ><a name="7309" class="Symbol"
+      >=</a
+      ><a name="7310"
+      > </a
+      ><a name="7311" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7315"
+      >
+</a
+      ><a name="7316" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7319"
+      > </a
+      ><a name="7320" class="Symbol"
+      >{</a
+      ><a name="7321" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7325"
+      > </a
+      ><a name="7326" class="Symbol"
+      >}</a
+      ><a name="7327"
+      > </a
+      ><a name="7328" class="Symbol"
+      >{</a
+      ><a name="7329" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7334" class="Symbol"
+      >}</a
+      ><a name="7335"
+      > </a
+      ><a name="7336" class="Symbol"
+      >{</a
+      ><a name="7337" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7341"
+      > </a
+      ><a name="7342" class="Symbol"
+      >}</a
+      ><a name="7343"
+      > </a
+      ><a name="7344" href="Data.Bool.Properties.html#7344" class="Bound"
+      >hyp</a
+      ><a name="7347"
+      > </a
+      ><a name="7348" class="Symbol"
+      >=</a
+      ><a name="7349"
+      > </a
+      ><a name="7350" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >P.sym</a
+      ><a name="7355"
+      > </a
+      ><a name="7356" class="Symbol"
+      >(</a
+      ><a name="7357" href="Function.Equivalence.html#638" class="Field"
+      >Equivalence.to</a
+      ><a name="7371"
+      > </a
+      ><a name="7372" href="Data.Bool.Properties.html#7344" class="Bound"
+      >hyp</a
+      ><a name="7375"
+      > </a
+      ><a name="7376" href="Function.Equality.html#681" class="Field Operator"
+      >&#10216;$&#10217;</a
+      ><a name="7379"
+      > </a
+      ><a name="7380" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7384" class="Symbol"
+      >)</a
+      ><a name="7385"
+      >
+</a
+      ><a name="7386" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7389"
+      > </a
+      ><a name="7390" class="Symbol"
+      >{</a
+      ><a name="7391" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7395"
+      > </a
+      ><a name="7396" class="Symbol"
+      >}</a
+      ><a name="7397"
+      > </a
+      ><a name="7398" class="Symbol"
+      >{</a
+      ><a name="7399" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7404" class="Symbol"
+      >}</a
+      ><a name="7405"
+      > </a
+      ><a name="7406" class="Symbol"
+      >{</a
+      ><a name="7407" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7412" class="Symbol"
+      >}</a
+      ><a name="7413"
+      > </a
+      ><a name="7414" href="Data.Bool.Properties.html#7414" class="Bound"
+      >hyp</a
+      ><a name="7417"
+      > </a
+      ><a name="7418" class="Symbol"
+      >=</a
+      ><a name="7419"
+      > </a
+      ><a name="7420" href="Function.Equivalence.html#659" class="Field"
+      >Equivalence.from</a
+      ><a name="7436"
+      > </a
+      ><a name="7437" href="Data.Bool.Properties.html#7414" class="Bound"
+      >hyp</a
+      ><a name="7440"
+      > </a
+      ><a name="7441" href="Function.Equality.html#681" class="Field Operator"
+      >&#10216;$&#10217;</a
+      ><a name="7444"
+      > </a
+      ><a name="7445" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7449"
+      >
+</a
+      ><a name="7450" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7453"
+      > </a
+      ><a name="7454" class="Symbol"
+      >{</a
+      ><a name="7455" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7460" class="Symbol"
+      >}</a
+      ><a name="7461"
+      > </a
+      ><a name="7462" class="Symbol"
+      >{</a
+      ><a name="7463" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7467"
+      > </a
+      ><a name="7468" class="Symbol"
+      >}</a
+      ><a name="7469"
+      > </a
+      ><a name="7470" class="Symbol"
+      >{</a
+      ><a name="7471" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7475"
+      > </a
+      ><a name="7476" class="Symbol"
+      >}</a
+      ><a name="7477"
+      > </a
+      ><a name="7478" href="Data.Bool.Properties.html#7478" class="Bound"
+      >hyp</a
+      ><a name="7481"
+      > </a
+      ><a name="7482" class="Symbol"
+      >=</a
+      ><a name="7483"
+      > </a
+      ><a name="7484" href="Function.Equivalence.html#659" class="Field"
+      >Equivalence.from</a
+      ><a name="7500"
+      > </a
+      ><a name="7501" href="Data.Bool.Properties.html#7478" class="Bound"
+      >hyp</a
+      ><a name="7504"
+      > </a
+      ><a name="7505" href="Function.Equality.html#681" class="Field Operator"
+      >&#10216;$&#10217;</a
+      ><a name="7508"
+      > </a
+      ><a name="7509" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7513"
+      >
+</a
+      ><a name="7514" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7517"
+      > </a
+      ><a name="7518" class="Symbol"
+      >{</a
+      ><a name="7519" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7524" class="Symbol"
+      >}</a
+      ><a name="7525"
+      > </a
+      ><a name="7526" class="Symbol"
+      >{</a
+      ><a name="7527" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7531"
+      > </a
+      ><a name="7532" class="Symbol"
+      >}</a
+      ><a name="7533"
+      > </a
+      ><a name="7534" class="Symbol"
+      >{</a
+      ><a name="7535" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7540" class="Symbol"
+      >}</a
+      ><a name="7541"
+      > </a
+      ><a name="7542" href="Data.Bool.Properties.html#7542" class="Bound"
+      >hyp</a
+      ><a name="7545"
+      > </a
+      ><a name="7546" class="Symbol"
+      >=</a
+      ><a name="7547"
+      > </a
+      ><a name="7548" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >P.sym</a
+      ><a name="7553"
+      > </a
+      ><a name="7554" class="Symbol"
+      >(</a
+      ><a name="7555" href="Function.Equivalence.html#638" class="Field"
+      >Equivalence.to</a
+      ><a name="7569"
+      > </a
+      ><a name="7570" href="Data.Bool.Properties.html#7542" class="Bound"
+      >hyp</a
+      ><a name="7573"
+      > </a
+      ><a name="7574" href="Function.Equality.html#681" class="Field Operator"
+      >&#10216;$&#10217;</a
+      ><a name="7577"
+      > </a
+      ><a name="7578" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7582" class="Symbol"
+      >)</a
+      ><a name="7583"
+      >
+</a
+      ><a name="7584" href="Data.Bool.Properties.html#7226" class="Function"
+      >&#8660;&#8594;&#8801;</a
+      ><a name="7587"
+      > </a
+      ><a name="7588" class="Symbol"
+      >{</a
+      ><a name="7589" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7594" class="Symbol"
+      >}</a
+      ><a name="7595"
+      > </a
+      ><a name="7596" class="Symbol"
+      >{</a
+      ><a name="7597" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7602" class="Symbol"
+      >}</a
+      ><a name="7603"
+      >         </a
+      ><a name="7612" href="Data.Bool.Properties.html#7612" class="Bound"
+      >hyp</a
+      ><a name="7615"
+      > </a
+      ><a name="7616" class="Symbol"
+      >=</a
+      ><a name="7617"
+      > </a
+      ><a name="7618" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7622"
+      >
+
+</a
+      ><a name="7624" href="Data.Bool.Properties.html#7624" class="Function"
+      >T-&#8801;</a
+      ><a name="7627"
+      > </a
+      ><a name="7628" class="Symbol"
+      >:</a
+      ><a name="7629"
+      > </a
+      ><a name="7630" class="Symbol"
+      >&#8704;</a
+      ><a name="7631"
+      > </a
+      ><a name="7632" class="Symbol"
+      >{</a
+      ><a name="7633" href="Data.Bool.Properties.html#7633" class="Bound"
+      >b</a
+      ><a name="7634" class="Symbol"
+      >}</a
+      ><a name="7635"
+      > </a
+      ><a name="7636" class="Symbol"
+      >&#8594;</a
+      ><a name="7637"
+      > </a
+      ><a name="7638" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="7639"
+      > </a
+      ><a name="7640" href="Data.Bool.Properties.html#7633" class="Bound"
+      >b</a
+      ><a name="7641"
+      > </a
+      ><a name="7642" href="Function.Equivalence.html#711" class="Function Operator"
+      >&#8660;</a
+      ><a name="7643"
+      > </a
+      ><a name="7644" href="Data.Bool.Properties.html#7633" class="Bound"
+      >b</a
+      ><a name="7645"
+      > </a
+      ><a name="7646" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7647"
+      > </a
+      ><a name="7648" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7652"
+      >
+</a
+      ><a name="7653" href="Data.Bool.Properties.html#7624" class="Function"
+      >T-&#8801;</a
+      ><a name="7656"
+      > </a
+      ><a name="7657" class="Symbol"
+      >{</a
+      ><a name="7658" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7663" class="Symbol"
+      >}</a
+      ><a name="7664"
+      > </a
+      ><a name="7665" class="Symbol"
+      >=</a
+      ><a name="7666"
+      > </a
+      ><a name="7667" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="7678"
+      > </a
+      ><a name="7679" class="Symbol"
+      >(&#955;</a
+      ><a name="7681"
+      > </a
+      ><a name="7682" class="Symbol"
+      >())</a
+      ><a name="7685"
+      >       </a
+      ><a name="7692" class="Symbol"
+      >(&#955;</a
+      ><a name="7694"
+      > </a
+      ><a name="7695" class="Symbol"
+      >())</a
+      ><a name="7698"
+      >
+</a
+      ><a name="7699" href="Data.Bool.Properties.html#7624" class="Function"
+      >T-&#8801;</a
+      ><a name="7702"
+      > </a
+      ><a name="7703" class="Symbol"
+      >{</a
+      ><a name="7704" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7708" class="Symbol"
+      >}</a
+      ><a name="7709"
+      >  </a
+      ><a name="7711" class="Symbol"
+      >=</a
+      ><a name="7712"
+      > </a
+      ><a name="7713" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="7724"
+      > </a
+      ><a name="7725" class="Symbol"
+      >(</a
+      ><a name="7726" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7731"
+      > </a
+      ><a name="7732" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7736" class="Symbol"
+      >)</a
+      ><a name="7737"
+      > </a
+      ><a name="7738" class="Symbol"
+      >(</a
+      ><a name="7739" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7744"
+      > </a
+      ><a name="7745" class="Symbol"
+      >_)</a
+      ><a name="7747"
+      >
+
+</a
+      ><a name="7749" href="Data.Bool.Properties.html#7749" class="Function"
+      >T-not-&#8801;</a
+      ><a name="7756"
+      > </a
+      ><a name="7757" class="Symbol"
+      >:</a
+      ><a name="7758"
+      > </a
+      ><a name="7759" class="Symbol"
+      >&#8704;</a
+      ><a name="7760"
+      > </a
+      ><a name="7761" class="Symbol"
+      >{</a
+      ><a name="7762" href="Data.Bool.Properties.html#7762" class="Bound"
+      >b</a
+      ><a name="7763" class="Symbol"
+      >}</a
+      ><a name="7764"
+      > </a
+      ><a name="7765" class="Symbol"
+      >&#8594;</a
+      ><a name="7766"
+      > </a
+      ><a name="7767" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="7768"
+      > </a
+      ><a name="7769" class="Symbol"
+      >(</a
+      ><a name="7770" href="Data.Bool.Base.html#657" class="Function"
+      >not</a
+      ><a name="7773"
+      > </a
+      ><a name="7774" href="Data.Bool.Properties.html#7762" class="Bound"
+      >b</a
+      ><a name="7775" class="Symbol"
+      >)</a
+      ><a name="7776"
+      > </a
+      ><a name="7777" href="Function.Equivalence.html#711" class="Function Operator"
+      >&#8660;</a
+      ><a name="7778"
+      > </a
+      ><a name="7779" href="Data.Bool.Properties.html#7762" class="Bound"
+      >b</a
+      ><a name="7780"
+      > </a
+      ><a name="7781" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7782"
+      > </a
+      ><a name="7783" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7788"
+      >
+</a
+      ><a name="7789" href="Data.Bool.Properties.html#7749" class="Function"
+      >T-not-&#8801;</a
+      ><a name="7796"
+      > </a
+      ><a name="7797" class="Symbol"
+      >{</a
+      ><a name="7798" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="7803" class="Symbol"
+      >}</a
+      ><a name="7804"
+      > </a
+      ><a name="7805" class="Symbol"
+      >=</a
+      ><a name="7806"
+      > </a
+      ><a name="7807" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="7818"
+      > </a
+      ><a name="7819" class="Symbol"
+      >(</a
+      ><a name="7820" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7825"
+      > </a
+      ><a name="7826" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7830" class="Symbol"
+      >)</a
+      ><a name="7831"
+      > </a
+      ><a name="7832" class="Symbol"
+      >(</a
+      ><a name="7833" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7838"
+      > </a
+      ><a name="7839" class="Symbol"
+      >_)</a
+      ><a name="7841"
+      >
+</a
+      ><a name="7842" href="Data.Bool.Properties.html#7749" class="Function"
+      >T-not-&#8801;</a
+      ><a name="7849"
+      > </a
+      ><a name="7850" class="Symbol"
+      >{</a
+      ><a name="7851" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7855" class="Symbol"
+      >}</a
+      ><a name="7856"
+      >  </a
+      ><a name="7858" class="Symbol"
+      >=</a
+      ><a name="7859"
+      > </a
+      ><a name="7860" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="7871"
+      > </a
+      ><a name="7872" class="Symbol"
+      >(&#955;</a
+      ><a name="7874"
+      > </a
+      ><a name="7875" class="Symbol"
+      >())</a
+      ><a name="7878"
+      >       </a
+      ><a name="7885" class="Symbol"
+      >(&#955;</a
+      ><a name="7887"
+      > </a
+      ><a name="7888" class="Symbol"
+      >())</a
+      ><a name="7891"
+      >
+
+</a
+      ><a name="7893" href="Data.Bool.Properties.html#7893" class="Function"
+      >T-&#8743;</a
+      ><a name="7896"
+      > </a
+      ><a name="7897" class="Symbol"
+      >:</a
+      ><a name="7898"
+      > </a
+      ><a name="7899" class="Symbol"
+      >&#8704;</a
+      ><a name="7900"
+      > </a
+      ><a name="7901" class="Symbol"
+      >{</a
+      ><a name="7902" href="Data.Bool.Properties.html#7902" class="Bound"
+      >b&#8321;</a
+      ><a name="7904"
+      > </a
+      ><a name="7905" href="Data.Bool.Properties.html#7905" class="Bound"
+      >b&#8322;</a
+      ><a name="7907" class="Symbol"
+      >}</a
+      ><a name="7908"
+      > </a
+      ><a name="7909" class="Symbol"
+      >&#8594;</a
+      ><a name="7910"
+      > </a
+      ><a name="7911" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="7912"
+      > </a
+      ><a name="7913" class="Symbol"
+      >(</a
+      ><a name="7914" href="Data.Bool.Properties.html#7902" class="Bound"
+      >b&#8321;</a
+      ><a name="7916"
+      > </a
+      ><a name="7917" href="Data.Bool.Base.html#939" class="Function Operator"
+      >&#8743;</a
+      ><a name="7918"
+      > </a
+      ><a name="7919" href="Data.Bool.Properties.html#7905" class="Bound"
+      >b&#8322;</a
+      ><a name="7921" class="Symbol"
+      >)</a
+      ><a name="7922"
+      > </a
+      ><a name="7923" href="Function.Equivalence.html#711" class="Function Operator"
+      >&#8660;</a
+      ><a name="7924"
+      > </a
+      ><a name="7925" class="Symbol"
+      >(</a
+      ><a name="7926" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="7927"
+      > </a
+      ><a name="7928" href="Data.Bool.Properties.html#7902" class="Bound"
+      >b&#8321;</a
+      ><a name="7930"
+      > </a
+      ><a name="7931" href="Data.Product.html#1295" class="Function Operator"
+      >&#215;</a
+      ><a name="7932"
+      > </a
+      ><a name="7933" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="7934"
+      > </a
+      ><a name="7935" href="Data.Bool.Properties.html#7905" class="Bound"
+      >b&#8322;</a
+      ><a name="7937" class="Symbol"
+      >)</a
+      ><a name="7938"
+      >
+</a
+      ><a name="7939" href="Data.Bool.Properties.html#7893" class="Function"
+      >T-&#8743;</a
+      ><a name="7942"
+      > </a
+      ><a name="7943" class="Symbol"
+      >{</a
+      ><a name="7944" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7948" class="Symbol"
+      >}</a
+      ><a name="7949"
+      >  </a
+      ><a name="7951" class="Symbol"
+      >{</a
+      ><a name="7952" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="7956" class="Symbol"
+      >}</a
+      ><a name="7957"
+      >  </a
+      ><a name="7959" class="Symbol"
+      >=</a
+      ><a name="7960"
+      > </a
+      ><a name="7961" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="7972"
+      > </a
+      ><a name="7973" class="Symbol"
+      >(</a
+      ><a name="7974" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7979"
+      > </a
+      ><a name="7980" class="Symbol"
+      >(_</a
+      ><a name="7982"
+      > </a
+      ><a name="7983" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7984"
+      > </a
+      ><a name="7985" class="Symbol"
+      >_))</a
+      ><a name="7988"
+      > </a
+      ><a name="7989" class="Symbol"
+      >(</a
+      ><a name="7990" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="7995"
+      > </a
+      ><a name="7996" class="Symbol"
+      >_)</a
+      ><a name="7998"
+      >
+</a
+      ><a name="7999" href="Data.Bool.Properties.html#7893" class="Function"
+      >T-&#8743;</a
+      ><a name="8002"
+      > </a
+      ><a name="8003" class="Symbol"
+      >{</a
+      ><a name="8004" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="8008" class="Symbol"
+      >}</a
+      ><a name="8009"
+      >  </a
+      ><a name="8011" class="Symbol"
+      >{</a
+      ><a name="8012" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8017" class="Symbol"
+      >}</a
+      ><a name="8018"
+      > </a
+      ><a name="8019" class="Symbol"
+      >=</a
+      ><a name="8020"
+      > </a
+      ><a name="8021" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="8032"
+      > </a
+      ><a name="8033" class="Symbol"
+      >(&#955;</a
+      ><a name="8035"
+      > </a
+      ><a name="8036" class="Symbol"
+      >())</a
+      ><a name="8039"
+      >          </a
+      ><a name="8049" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8054"
+      >
+</a
+      ><a name="8055" href="Data.Bool.Properties.html#7893" class="Function"
+      >T-&#8743;</a
+      ><a name="8058"
+      > </a
+      ><a name="8059" class="Symbol"
+      >{</a
+      ><a name="8060" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8065" class="Symbol"
+      >}</a
+      ><a name="8066"
+      > </a
+      ><a name="8067" class="Symbol"
+      >{_}</a
+      ><a name="8070"
+      >     </a
+      ><a name="8075" class="Symbol"
+      >=</a
+      ><a name="8076"
+      > </a
+      ><a name="8077" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="8088"
+      > </a
+      ><a name="8089" class="Symbol"
+      >(&#955;</a
+      ><a name="8091"
+      > </a
+      ><a name="8092" class="Symbol"
+      >())</a
+      ><a name="8095"
+      >          </a
+      ><a name="8105" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8110"
+      >
+
+</a
+      ><a name="8112" href="Data.Bool.Properties.html#8112" class="Function"
+      >T-&#8744;</a
+      ><a name="8115"
+      > </a
+      ><a name="8116" class="Symbol"
+      >:</a
+      ><a name="8117"
+      > </a
+      ><a name="8118" class="Symbol"
+      >&#8704;</a
+      ><a name="8119"
+      > </a
+      ><a name="8120" class="Symbol"
+      >{</a
+      ><a name="8121" href="Data.Bool.Properties.html#8121" class="Bound"
+      >b&#8321;</a
+      ><a name="8123"
+      > </a
+      ><a name="8124" href="Data.Bool.Properties.html#8124" class="Bound"
+      >b&#8322;</a
+      ><a name="8126" class="Symbol"
+      >}</a
+      ><a name="8127"
+      > </a
+      ><a name="8128" class="Symbol"
+      >&#8594;</a
+      ><a name="8129"
+      > </a
+      ><a name="8130" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="8131"
+      > </a
+      ><a name="8132" class="Symbol"
+      >(</a
+      ><a name="8133" href="Data.Bool.Properties.html#8121" class="Bound"
+      >b&#8321;</a
+      ><a name="8135"
+      > </a
+      ><a name="8136" href="Data.Bool.Base.html#997" class="Function Operator"
+      >&#8744;</a
+      ><a name="8137"
+      > </a
+      ><a name="8138" href="Data.Bool.Properties.html#8124" class="Bound"
+      >b&#8322;</a
+      ><a name="8140" class="Symbol"
+      >)</a
+      ><a name="8141"
+      > </a
+      ><a name="8142" href="Function.Equivalence.html#711" class="Function Operator"
+      >&#8660;</a
+      ><a name="8143"
+      > </a
+      ><a name="8144" class="Symbol"
+      >(</a
+      ><a name="8145" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="8146"
+      > </a
+      ><a name="8147" href="Data.Bool.Properties.html#8121" class="Bound"
+      >b&#8321;</a
+      ><a name="8149"
+      > </a
+      ><a name="8150" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="8151"
+      > </a
+      ><a name="8152" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="8153"
+      > </a
+      ><a name="8154" href="Data.Bool.Properties.html#8124" class="Bound"
+      >b&#8322;</a
+      ><a name="8156" class="Symbol"
+      >)</a
+      ><a name="8157"
+      >
+</a
+      ><a name="8158" href="Data.Bool.Properties.html#8112" class="Function"
+      >T-&#8744;</a
+      ><a name="8161"
+      > </a
+      ><a name="8162" class="Symbol"
+      >{</a
+      ><a name="8163" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="8167" class="Symbol"
+      >}</a
+      ><a name="8168"
+      >  </a
+      ><a name="8170" class="Symbol"
+      >{</a
+      ><a name="8171" href="Data.Bool.Properties.html#8171" class="Bound"
+      >b&#8322;</a
+      ><a name="8173" class="Symbol"
+      >}</a
+      ><a name="8174"
+      >    </a
+      ><a name="8178" class="Symbol"
+      >=</a
+      ><a name="8179"
+      > </a
+      ><a name="8180" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="8191"
+      > </a
+      ><a name="8192" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="8196"
+      > </a
+      ><a name="8197" class="Symbol"
+      >(</a
+      ><a name="8198" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="8203"
+      > </a
+      ><a name="8204" class="Symbol"
+      >_)</a
+      ><a name="8206"
+      >
+</a
+      ><a name="8207" href="Data.Bool.Properties.html#8112" class="Function"
+      >T-&#8744;</a
+      ><a name="8210"
+      > </a
+      ><a name="8211" class="Symbol"
+      >{</a
+      ><a name="8212" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8217" class="Symbol"
+      >}</a
+      ><a name="8218"
+      > </a
+      ><a name="8219" class="Symbol"
+      >{</a
+      ><a name="8220" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="8224" class="Symbol"
+      >}</a
+      ><a name="8225"
+      >  </a
+      ><a name="8227" class="Symbol"
+      >=</a
+      ><a name="8228"
+      > </a
+      ><a name="8229" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="8240"
+      > </a
+      ><a name="8241" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="8245"
+      > </a
+      ><a name="8246" class="Symbol"
+      >(</a
+      ><a name="8247" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="8252"
+      > </a
+      ><a name="8253" class="Symbol"
+      >_)</a
+      ><a name="8255"
+      >
+</a
+      ><a name="8256" href="Data.Bool.Properties.html#8112" class="Function"
+      >T-&#8744;</a
+      ><a name="8259"
+      > </a
+      ><a name="8260" class="Symbol"
+      >{</a
+      ><a name="8261" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8266" class="Symbol"
+      >}</a
+      ><a name="8267"
+      > </a
+      ><a name="8268" class="Symbol"
+      >{</a
+      ><a name="8269" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8274" class="Symbol"
+      >}</a
+      ><a name="8275"
+      > </a
+      ><a name="8276" class="Symbol"
+      >=</a
+      ><a name="8277"
+      > </a
+      ><a name="8278" href="Function.Equivalence.html#804" class="Function"
+      >equivalence</a
+      ><a name="8289"
+      > </a
+      ><a name="8290" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="8294"
+      > </a
+      ><a name="8295" href="Data.Sum.html#762" class="Function Operator"
+      >[</a
+      ><a name="8296"
+      > </a
+      ><a name="8297" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="8299"
+      > </a
+      ><a name="8300" href="Data.Sum.html#762" class="Function Operator"
+      >,</a
+      ><a name="8301"
+      > </a
+      ><a name="8302" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="8304"
+      > </a
+      ><a name="8305" href="Data.Sum.html#762" class="Function Operator"
+      >]</a
+      ><a name="8306"
+      >
+
+</a
+      ><a name="8308" href="Data.Bool.Properties.html#8308" class="Function"
+      >proof-irrelevance</a
+      ><a name="8325"
+      > </a
+      ><a name="8326" class="Symbol"
+      >:</a
+      ><a name="8327"
+      > </a
+      ><a name="8328" class="Symbol"
+      >&#8704;</a
+      ><a name="8329"
+      > </a
+      ><a name="8330" class="Symbol"
+      >{</a
+      ><a name="8331" href="Data.Bool.Properties.html#8331" class="Bound"
+      >b</a
+      ><a name="8332" class="Symbol"
+      >}</a
+      ><a name="8333"
+      > </a
+      ><a name="8334" class="Symbol"
+      >(</a
+      ><a name="8335" href="Data.Bool.Properties.html#8335" class="Bound"
+      >p</a
+      ><a name="8336"
+      > </a
+      ><a name="8337" href="Data.Bool.Properties.html#8337" class="Bound"
+      >q</a
+      ><a name="8338"
+      > </a
+      ><a name="8339" class="Symbol"
+      >:</a
+      ><a name="8340"
+      > </a
+      ><a name="8341" href="Data.Bool.Base.html#791" class="Function"
+      >T</a
+      ><a name="8342"
+      > </a
+      ><a name="8343" href="Data.Bool.Properties.html#8331" class="Bound"
+      >b</a
+      ><a name="8344" class="Symbol"
+      >)</a
+      ><a name="8345"
+      > </a
+      ><a name="8346" class="Symbol"
+      >&#8594;</a
+      ><a name="8347"
+      > </a
+      ><a name="8348" href="Data.Bool.Properties.html#8335" class="Bound"
+      >p</a
+      ><a name="8349"
+      > </a
+      ><a name="8350" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="8351"
+      > </a
+      ><a name="8352" href="Data.Bool.Properties.html#8337" class="Bound"
+      >q</a
+      ><a name="8353"
+      >
+</a
+      ><a name="8354" href="Data.Bool.Properties.html#8308" class="Function"
+      >proof-irrelevance</a
+      ><a name="8371"
+      > </a
+      ><a name="8372" class="Symbol"
+      >{</a
+      ><a name="8373" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="8377" class="Symbol"
+      >}</a
+      ><a name="8378"
+      >  </a
+      ><a name="8380" class="Symbol"
+      >_</a
+      ><a name="8381"
+      >  </a
+      ><a name="8383" class="Symbol"
+      >_</a
+      ><a name="8384"
+      >  </a
+      ><a name="8386" class="Symbol"
+      >=</a
+      ><a name="8387"
+      > </a
+      ><a name="8388" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="8392"
+      >
+</a
+      ><a name="8393" href="Data.Bool.Properties.html#8308" class="Function"
+      >proof-irrelevance</a
+      ><a name="8410"
+      > </a
+      ><a name="8411" class="Symbol"
+      >{</a
+      ><a name="8412" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8417" class="Symbol"
+      >}</a
+      ><a name="8418"
+      > </a
+      ><a name="8419" class="Symbol"
+      >()</a
+      ><a name="8421"
+      > </a
+      ><a name="8422" class="Symbol"
+      >()</a
+      ><a name="8424"
+      >
+
+</a
+      ><a name="8426" href="Data.Bool.Properties.html#8426" class="Function"
+      >push-function-into-if</a
+      ><a name="8447"
+      > </a
+      ><a name="8448" class="Symbol"
+      >:</a
+      ><a name="8449"
+      >
+  </a
+      ><a name="8452" class="Symbol"
+      >&#8704;</a
+      ><a name="8453"
+      > </a
+      ><a name="8454" class="Symbol"
+      >{</a
+      ><a name="8455" href="Data.Bool.Properties.html#8455" class="Bound"
+      >a</a
+      ><a name="8456"
+      > </a
+      ><a name="8457" href="Data.Bool.Properties.html#8457" class="Bound"
+      >b</a
+      ><a name="8458" class="Symbol"
+      >}</a
+      ><a name="8459"
+      > </a
+      ><a name="8460" class="Symbol"
+      >{</a
+      ><a name="8461" href="Data.Bool.Properties.html#8461" class="Bound"
+      >A</a
+      ><a name="8462"
+      > </a
+      ><a name="8463" class="Symbol"
+      >:</a
+      ><a name="8464"
+      > </a
+      ><a name="8465" class="PrimitiveType"
+      >Set</a
+      ><a name="8468"
+      > </a
+      ><a name="8469" href="Data.Bool.Properties.html#8455" class="Bound"
+      >a</a
+      ><a name="8470" class="Symbol"
+      >}</a
+      ><a name="8471"
+      > </a
+      ><a name="8472" class="Symbol"
+      >{</a
+      ><a name="8473" href="Data.Bool.Properties.html#8473" class="Bound"
+      >B</a
+      ><a name="8474"
+      > </a
+      ><a name="8475" class="Symbol"
+      >:</a
+      ><a name="8476"
+      > </a
+      ><a name="8477" class="PrimitiveType"
+      >Set</a
+      ><a name="8480"
+      > </a
+      ><a name="8481" href="Data.Bool.Properties.html#8457" class="Bound"
+      >b</a
+      ><a name="8482" class="Symbol"
+      >}</a
+      ><a name="8483"
+      > </a
+      ><a name="8484" class="Symbol"
+      >(</a
+      ><a name="8485" href="Data.Bool.Properties.html#8485" class="Bound"
+      >f</a
+      ><a name="8486"
+      > </a
+      ><a name="8487" class="Symbol"
+      >:</a
+      ><a name="8488"
+      > </a
+      ><a name="8489" href="Data.Bool.Properties.html#8461" class="Bound"
+      >A</a
+      ><a name="8490"
+      > </a
+      ><a name="8491" class="Symbol"
+      >&#8594;</a
+      ><a name="8492"
+      > </a
+      ><a name="8493" href="Data.Bool.Properties.html#8473" class="Bound"
+      >B</a
+      ><a name="8494" class="Symbol"
+      >)</a
+      ><a name="8495"
+      > </a
+      ><a name="8496" href="Data.Bool.Properties.html#8496" class="Bound"
+      >x</a
+      ><a name="8497"
+      > </a
+      ><a name="8498" class="Symbol"
+      >{</a
+      ><a name="8499" href="Data.Bool.Properties.html#8499" class="Bound"
+      >y</a
+      ><a name="8500"
+      > </a
+      ><a name="8501" href="Data.Bool.Properties.html#8501" class="Bound"
+      >z</a
+      ><a name="8502" class="Symbol"
+      >}</a
+      ><a name="8503"
+      > </a
+      ><a name="8504" class="Symbol"
+      >&#8594;</a
+      ><a name="8505"
+      >
+  </a
+      ><a name="8508" href="Data.Bool.Properties.html#8485" class="Bound"
+      >f</a
+      ><a name="8509"
+      > </a
+      ><a name="8510" class="Symbol"
+      >(</a
+      ><a name="8511" href="Data.Bool.Base.html#831" class="Function Operator"
+      >if</a
+      ><a name="8513"
+      > </a
+      ><a name="8514" href="Data.Bool.Properties.html#8496" class="Bound"
+      >x</a
+      ><a name="8515"
+      > </a
+      ><a name="8516" href="Data.Bool.Base.html#831" class="Function Operator"
+      >then</a
+      ><a name="8520"
+      > </a
+      ><a name="8521" href="Data.Bool.Properties.html#8499" class="Bound"
+      >y</a
+      ><a name="8522"
+      > </a
+      ><a name="8523" href="Data.Bool.Base.html#831" class="Function Operator"
+      >else</a
+      ><a name="8527"
+      > </a
+      ><a name="8528" href="Data.Bool.Properties.html#8501" class="Bound"
+      >z</a
+      ><a name="8529" class="Symbol"
+      >)</a
+      ><a name="8530"
+      > </a
+      ><a name="8531" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="8532"
+      > </a
+      ><a name="8533" class="Symbol"
+      >(</a
+      ><a name="8534" href="Data.Bool.Base.html#831" class="Function Operator"
+      >if</a
+      ><a name="8536"
+      > </a
+      ><a name="8537" href="Data.Bool.Properties.html#8496" class="Bound"
+      >x</a
+      ><a name="8538"
+      > </a
+      ><a name="8539" href="Data.Bool.Base.html#831" class="Function Operator"
+      >then</a
+      ><a name="8543"
+      > </a
+      ><a name="8544" href="Data.Bool.Properties.html#8485" class="Bound"
+      >f</a
+      ><a name="8545"
+      > </a
+      ><a name="8546" href="Data.Bool.Properties.html#8499" class="Bound"
+      >y</a
+      ><a name="8547"
+      > </a
+      ><a name="8548" href="Data.Bool.Base.html#831" class="Function Operator"
+      >else</a
+      ><a name="8552"
+      > </a
+      ><a name="8553" href="Data.Bool.Properties.html#8485" class="Bound"
+      >f</a
+      ><a name="8554"
+      > </a
+      ><a name="8555" href="Data.Bool.Properties.html#8501" class="Bound"
+      >z</a
+      ><a name="8556" class="Symbol"
+      >)</a
+      ><a name="8557"
+      >
+</a
+      ><a name="8558" href="Data.Bool.Properties.html#8426" class="Function"
+      >push-function-into-if</a
+      ><a name="8579"
+      > </a
+      ><a name="8580" class="Symbol"
+      >_</a
+      ><a name="8581"
+      > </a
+      ><a name="8582" href="Agda.Builtin.Bool.html#92" class="InductiveConstructor"
+      >true</a
+      ><a name="8586"
+      >  </a
+      ><a name="8588" class="Symbol"
+      >=</a
+      ><a name="8589"
+      > </a
+      ><a name="8590" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >P.refl</a
+      ><a name="8596"
+      >
+</a
+      ><a name="8597" href="Data.Bool.Properties.html#8426" class="Function"
+      >push-function-into-if</a
+      ><a name="8618"
+      > </a
+      ><a name="8619" class="Symbol"
+      >_</a
+      ><a name="8620"
+      > </a
+      ><a name="8621" href="Agda.Builtin.Bool.html#86" class="InductiveConstructor"
+      >false</a
+      ><a name="8626"
+      > </a
+      ><a name="8627" class="Symbol"
+      >=</a
+      ><a name="8628"
+      > </a
+      ><a name="8629" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >P.refl</a
+      ><a name="8635"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

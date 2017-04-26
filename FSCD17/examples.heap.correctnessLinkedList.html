@@ -1,0 +1,5320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >examples.heap.correctnessLinkedList</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >--@PREFIX@correctnessLinkedList</a
+      ><a name="32"
+      >
+</a
+      ><a name="33" class="Symbol"
+      >{-#</a
+      ><a name="36"
+      > </a
+      ><a name="37" class="Keyword"
+      >OPTIONS</a
+      ><a name="44"
+      > </a
+      ><a name="45" class="Option"
+      >--postfix-projections</a
+      ><a name="66"
+      > </a
+      ><a name="67" class="Symbol"
+      >#-}</a
+      ><a name="70"
+      >
+
+
+
+</a
+      ><a name="74" class="Keyword"
+      >module</a
+      ><a name="80"
+      > </a
+      ><a name="81" href="examples.heap.correctnessLinkedList.html#1" class="Module"
+      >examples.heap.correctnessLinkedList</a
+      ><a name="116"
+      > </a
+      ><a name="117" class="Keyword"
+      >where</a
+      ><a name="122"
+      >
+
+
+</a
+      ><a name="125" class="Keyword"
+      >open</a
+      ><a name="129"
+      > </a
+      ><a name="130" class="Keyword"
+      >import</a
+      ><a name="136"
+      > </a
+      ><a name="137" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="174"
+      > </a
+      ><a name="175" class="Keyword"
+      >using</a
+      ><a name="180"
+      > </a
+      ><a name="181" class="Symbol"
+      >(</a
+      ><a name="182" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="185" class="Symbol"
+      >;</a
+      ><a name="186"
+      > </a
+      ><a name="187" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="191" class="Symbol"
+      >)</a
+      ><a name="192"
+      >
+
+</a
+      ><a name="194" class="Keyword"
+      >open</a
+      ><a name="198"
+      > </a
+      ><a name="199" class="Keyword"
+      >import</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="216"
+      > </a
+      ><a name="217" class="Keyword"
+      >using</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Symbol"
+      >(</a
+      ><a name="224" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="229" class="Symbol"
+      >;</a
+      ><a name="230"
+      > </a
+      ><a name="231" href="Data.Maybe.html#1527" class="InductiveConstructor"
+      >just</a
+      ><a name="235" class="Symbol"
+      >;</a
+      ><a name="236"
+      > </a
+      ><a name="237" href="Data.Maybe.html#1588" class="InductiveConstructor"
+      >nothing</a
+      ><a name="244" class="Symbol"
+      >)</a
+      ><a name="245"
+      >
+
+
+</a
+      ><a name="248" class="Keyword"
+      >open</a
+      ><a name="252"
+      > </a
+      ><a name="253" class="Keyword"
+      >import</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="src.heap.heapAsObjectBase.html#1" class="Module"
+      >src.heap.heapAsObjectBase</a
+      ><a name="285"
+      > </a
+      ><a name="286" class="Keyword"
+      >using</a
+      ><a name="291"
+      > </a
+      ><a name="292" class="Symbol"
+      >(</a
+      ><a name="293" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="298" class="Symbol"
+      >;</a
+      ><a name="299"
+      > </a
+      ><a name="300" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="304" class="Symbol"
+      >;</a
+      ><a name="305"
+      > </a
+      ><a name="306" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="315" class="Symbol"
+      >;</a
+      ><a name="316"
+      > </a
+      ><a name="317" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="319" class="Symbol"
+      >;</a
+      ><a name="320"
+      > </a
+      ><a name="321" href="src.heap.heapAsObjectBase.html#828" class="Field"
+      >lift</a
+      ><a name="325" class="Symbol"
+      >;</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="src.heap.heapAsObjectBase.html#2930" class="Function"
+      >&#8709;w</a
+      ><a name="329" class="Symbol"
+      >)</a
+      ><a name="330"
+      >
+</a
+      ><a name="331" class="Keyword"
+      >open</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Keyword"
+      >import</a
+      ><a name="342"
+      > </a
+      ><a name="343" href="src.heap.heapAsObjectGeneric.html#1" class="Module"
+      >src.heap.heapAsObjectGeneric</a
+      ><a name="371"
+      > </a
+      ><a name="372" class="Keyword"
+      >using</a
+      ><a name="377"
+      > </a
+      ><a name="378" class="Symbol"
+      >(</a
+      ><a name="379" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="392" class="Symbol"
+      >;</a
+      ><a name="393"
+      > </a
+      ><a name="394" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="401" class="Symbol"
+      >;</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="src.heap.heapAsObjectGeneric.html#548" class="Field"
+      >embedp</a
+      ><a name="409" class="Symbol"
+      >;</a
+      ><a name="410"
+      > </a
+      ><a name="411" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="427" class="Symbol"
+      >;</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="437" class="Symbol"
+      >;</a
+      ><a name="438"
+      > </a
+      ><a name="439" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="450" class="Symbol"
+      >;</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="src.heap.heapAsObjectGeneric.html#2999" class="Function"
+      >&#8709;Hfin</a
+      ><a name="457" class="Symbol"
+      >;</a
+      ><a name="458"
+      > </a
+      ><a name="459" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="469" class="Symbol"
+      >)</a
+      ><a name="470"
+      >
+</a
+      ><a name="471" class="Keyword"
+      >open</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="Keyword"
+      >import</a
+      ><a name="482"
+      > </a
+      ><a name="483" href="src.heap.worldModule.html#1" class="Module"
+      >src.heap.worldModule</a
+      ><a name="503"
+      >
+
+
+</a
+      ><a name="506" class="Keyword"
+      >open</a
+      ><a name="510"
+      > </a
+      ><a name="511" class="Keyword"
+      >import</a
+      ><a name="517"
+      > </a
+      ><a name="518" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Keyword"
+      >using</a
+      ><a name="536"
+      > </a
+      ><a name="537" class="Symbol"
+      >()</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Keyword"
+      >renaming</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >(</a
+      ><a name="550" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >to</a
+      ><a name="558"
+      > </a
+      ><a name="559" href="Data.Product.html#525" class="Field"
+      >pr&#8321;</a
+      ><a name="562" class="Symbol"
+      >;</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="569"
+      > </a
+      ><a name="570" class="Symbol"
+      >to</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="Data.Product.html#539" class="Field"
+      >pr&#8322;</a
+      ><a name="576" class="Symbol"
+      >;</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="Data.Product.html#1295" class="Function Operator"
+      >_&#215;_</a
+      ><a name="581"
+      > </a
+      ><a name="582" class="Symbol"
+      >to</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="Data.Product.html#1295" class="Function Operator"
+      >_&#215;'_</a
+      ><a name="589" class="Symbol"
+      >;</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="Data.Product.html#2094" class="Function"
+      >map</a
+      ><a name="594"
+      > </a
+      ><a name="595" class="Symbol"
+      >to</a
+      ><a name="597"
+      > </a
+      ><a name="598" href="Data.Product.html#2094" class="Function"
+      >mapp</a
+      ><a name="602" class="Symbol"
+      >)</a
+      ><a name="603"
+      >
+</a
+      ><a name="604" class="Keyword"
+      >open</a
+      ><a name="608"
+      > </a
+      ><a name="609" class="Keyword"
+      >import</a
+      ><a name="615"
+      > </a
+      ><a name="616" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="625"
+      > </a
+      ><a name="626" class="Keyword"
+      >using</a
+      ><a name="631"
+      > </a
+      ><a name="632" class="Symbol"
+      >(</a
+      ><a name="633" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="634" class="Symbol"
+      >;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="638" class="Symbol"
+      >)</a
+      ><a name="639"
+      >
+
+
+
+</a
+      ><a name="643" class="Keyword"
+      >open</a
+      ><a name="647"
+      > </a
+      ><a name="648" class="Keyword"
+      >import</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="StateSizedIO.RObject.html#1" class="Module"
+      >StateSizedIO.RObject</a
+      ><a name="675"
+      > </a
+      ><a name="676" class="Keyword"
+      >using</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >(</a
+      ><a name="683" href="StateSizedIO.RObject.html#1211" class="Record"
+      >RObject&#738;</a
+      ><a name="691" class="Symbol"
+      >;</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="StateSizedIO.RObject.html#1368" class="Field"
+      >readerMethod</a
+      ><a name="705" class="Symbol"
+      >)</a
+      ><a name="706"
+      > </a
+      ><a name="707" class="Keyword"
+      >renaming</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >(</a
+      ><a name="717" href="StateSizedIO.RObject.html#1296" class="Field"
+      >objectMethod</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >to</a
+      ><a name="732"
+      > </a
+      ><a name="733" href="StateSizedIO.RObject.html#1296" class="Field"
+      >method</a
+      ><a name="739" class="Symbol"
+      >)</a
+      ><a name="740"
+      >
+
+
+
+</a
+      ><a name="744" class="Keyword"
+      >open</a
+      ><a name="748"
+      > </a
+      ><a name="749" class="Keyword"
+      >import</a
+      ><a name="755"
+      > </a
+      ><a name="756" href="src.heap.heapAsObject.html#1" class="Module"
+      >src.heap.heapAsObject</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Keyword"
+      >hiding</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >(</a
+      ><a name="786" href="src.heap.heapAsObject.html#3978" class="Function"
+      >readP</a
+      ><a name="791" class="Symbol"
+      >;</a
+      ><a name="792" href="src.heap.heapAsObject.html#3854" class="Function"
+      >writeP</a
+      ><a name="798" class="Symbol"
+      >)</a
+      ><a name="799"
+      > </a
+      ><a name="800" class="Comment"
+      >-- using (HeapRInterface&#738;; newPh; readPh; writePh) --</a
+      ><a name="853"
+      >
+
+
+
+
+
+</a
+      ><a name="859" class="Comment"
+      >{- This file shows the following:
+   * It defines Linked slist
+   * It defines CorrLinkedList meaning the heap
+         is correct
+   * It defines IsListll meaning that the linked list corresponds
+     to a list
+   * it defines l =ll l'  meaning l l' correspond to the same list
+   * it defines nil, cons tail on LinkedLists
+   * it shows that
+         nil cons tail preserve   CorrLinkedList
+   * it shows that
+         nil cons tail preserve   IsListll
+   * it shows that
+       head nil = nothing
+       tail nil = nothing
+       head (cons n s) = n
+       tail (cons n s) = s
+     provided we were using lists which fulfil CorrLinkedList and
+      IsListll
+    where in the last case the equality holds w.r.t. representing the same
+    list  =ll
+
+    Waht is missing (but probably easy to prove) is that
+     cons and tail preserve =ll
+    which should follow since we already ahve that
+     if ll represents l
+    then cons n ll represens (n :: l)
+    so if ll =ll ll' then cons n ll =ll cons n ll' via (n :: l)
+
+    and if l represents [] then pop l = nothing
+   and  if l repsents (x :: xs) then pop l represents xs
+    from which preservation of =ll under pop should follow
+-}</a
+      ><a name="2043"
+      >
+
+
+
+</a
+      ><a name="2047" class="Keyword"
+      >module</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="examples.heap.correctnessLinkedList.html#2054" class="Module"
+      >_</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" class="Symbol"
+      >(</a
+      ><a name="2057" href="examples.heap.correctnessLinkedList.html#2057" class="Bound"
+      >B</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" class="Symbol"
+      >:</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" class="PrimitiveType"
+      >Set</a
+      ><a name="2064" class="Symbol"
+      >)</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" class="Symbol"
+      >(</a
+      ><a name="2067" href="examples.heap.correctnessLinkedList.html#2067" class="Bound"
+      >pointStruct</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >:</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="2094" class="Symbol"
+      >)</a
+      ><a name="2095"
+      >
+                   </a
+      ><a name="2115" class="Symbol"
+      >(</a
+      ><a name="2116" class="Keyword"
+      >let</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" href="examples.heap.correctnessLinkedList.html#2120" class="Bound"
+      >Pointer</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" class="Symbol"
+      >=</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" href="examples.heap.correctnessLinkedList.html#2067" class="Bound"
+      >pointStruct</a
+      ><a name="2149" class="Symbol"
+      >)</a
+      ><a name="2150"
+      >
+                   </a
+      ><a name="2170" class="Symbol"
+      >(</a
+      ><a name="2171" class="Keyword"
+      >let</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" href="examples.heap.correctnessLinkedList.html#2175" class="Bound"
+      >embedp</a
+      ><a name="2181"
+      >   </a
+      ><a name="2184" class="Symbol"
+      >=</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" href="src.heap.heapAsObjectGeneric.html#548" class="Field"
+      >embedp</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="examples.heap.correctnessLinkedList.html#2067" class="Bound"
+      >pointStruct</a
+      ><a name="2204" class="Symbol"
+      >)</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" class="Keyword"
+      >where</a
+      ><a name="2211"
+      >
+
+  </a
+      ><a name="2215" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" class="Symbol"
+      >:</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" class="Symbol"
+      >{</a
+      ><a name="2226" href="examples.heap.correctnessLinkedList.html#2226" class="Bound"
+      >w</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" class="Symbol"
+      >:</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2235" class="Symbol"
+      >}</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >&#8594;</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="2244"
+      > </a
+      ><a name="2245" class="Symbol"
+      >(</a
+      ><a name="2246" href="examples.heap.correctnessLinkedList.html#2120" class="Bound"
+      >Pointer</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="examples.heap.correctnessLinkedList.html#2226" class="Bound"
+      >w</a
+      ><a name="2255" class="Symbol"
+      >)</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" class="Symbol"
+      >&#8594;</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" class="Symbol"
+      >(</a
+      ><a name="2266" href="examples.heap.correctnessLinkedList.html#2120" class="Bound"
+      >Pointer</a
+      ><a name="2273"
+      > </a
+      ><a name="2274" class="Symbol"
+      >(</a
+      ><a name="2275" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" href="examples.heap.correctnessLinkedList.html#2226" class="Bound"
+      >w</a
+      ><a name="2281" class="Symbol"
+      >))</a
+      ><a name="2283"
+      >
+  </a
+      ><a name="2286" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >(</a
+      ><a name="2295" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" href="examples.heap.correctnessLinkedList.html#2300" class="Bound"
+      >p</a
+      ><a name="2301" class="Symbol"
+      >)</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" class="Symbol"
+      >=</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" class="Symbol"
+      >(</a
+      ><a name="2311" href="examples.heap.correctnessLinkedList.html#2175" class="Bound"
+      >embedp</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" href="examples.heap.correctnessLinkedList.html#2300" class="Bound"
+      >p</a
+      ><a name="2319" class="Symbol"
+      >)</a
+      ><a name="2320"
+      >
+  </a
+      ><a name="2323" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" class="Symbol"
+      >=</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="2348"
+      >
+
+</a
+      ><a name="2350" class="Comment"
+      >--\correctnessLinkedList</a
+      ><a name="2374"
+      >
+</a
+      ><a name="2375" class="Comment"
+      >--@BEGIN@LinkedListNodeType</a
+      ><a name="2402"
+      >
+  </a
+      ><a name="2405" class="Keyword"
+      >record</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="examples.heap.correctnessLinkedList.html#2412" class="Record"
+      >LinkedListNodeType</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="Symbol"
+      >(</a
+      ><a name="2432" href="examples.heap.correctnessLinkedList.html#2432" class="Bound"
+      >w</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" class="Symbol"
+      >:</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2441" class="Symbol"
+      >)</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" class="Symbol"
+      >:</a
+      ><a name="2444"
+      >  </a
+      ><a name="2446" class="PrimitiveType"
+      >Set</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" class="Keyword"
+      >where</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" class="Comment"
+      >--@HIDE-BEG</a
+      ><a name="2467"
+      >
+    </a
+      ><a name="2472" class="Keyword"
+      >constructor</a
+      ><a name="2483"
+      > </a
+      ><a name="2484" href="examples.heap.correctnessLinkedList.html#2484" class="InductiveConstructor"
+      >linkedListNode</a
+      ><a name="2498"
+      >
+    </a
+      ><a name="2503" class="Keyword"
+      >field</a
+      ><a name="2508"
+      >
+</a
+      ><a name="2509" class="Comment"
+      >--@HIDE-END</a
+      ><a name="2520"
+      >
+      </a
+      ><a name="2527" href="examples.heap.correctnessLinkedList.html#2527" class="Field"
+      >getElemLL</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >:</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" href="examples.heap.correctnessLinkedList.html#2057" class="Bound"
+      >B</a
+      ><a name="2540"
+      >
+      </a
+      ><a name="2547" href="examples.heap.correctnessLinkedList.html#2547" class="Field"
+      >getNextLL</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" class="Symbol"
+      >:</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" class="Symbol"
+      >(</a
+      ><a name="2566" href="examples.heap.correctnessLinkedList.html#2120" class="Bound"
+      >Pointer</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" href="examples.heap.correctnessLinkedList.html#2432" class="Bound"
+      >w</a
+      ><a name="2575" class="Symbol"
+      >)</a
+      ><a name="2576"
+      >
+</a
+      ><a name="2577" class="Comment"
+      >--@END</a
+      ><a name="2583"
+      >
+
+  </a
+      ><a name="2587" class="Keyword"
+      >open</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" href="examples.heap.correctnessLinkedList.html#2412" class="Module"
+      >LinkedListNodeType</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" class="Keyword"
+      >public</a
+      ><a name="2617"
+      >
+
+  </a
+      ><a name="2621" href="examples.heap.correctnessLinkedList.html#2621" class="Function"
+      >MLinkedListNodeType</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" class="Symbol"
+      >:</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" class="Symbol"
+      >(</a
+      ><a name="2644" href="examples.heap.correctnessLinkedList.html#2644" class="Bound"
+      >w</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" class="Symbol"
+      >:</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2653" class="Symbol"
+      >)</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" class="Symbol"
+      >&#8594;</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" class="PrimitiveType"
+      >Set</a
+      ><a name="2660"
+      >
+  </a
+      ><a name="2663" href="examples.heap.correctnessLinkedList.html#2621" class="Function"
+      >MLinkedListNodeType</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="examples.heap.correctnessLinkedList.html#2683" class="Bound"
+      >w</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" class="Symbol"
+      >=</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" class="Symbol"
+      >(</a
+      ><a name="2694" href="examples.heap.correctnessLinkedList.html#2412" class="Record"
+      >LinkedListNodeType</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" href="examples.heap.correctnessLinkedList.html#2683" class="Bound"
+      >w</a
+      ><a name="2714" class="Symbol"
+      >)</a
+      ><a name="2715"
+      >
+
+  </a
+      ><a name="2719" href="examples.heap.correctnessLinkedList.html#2719" class="Function"
+      >liftLL</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" class="Symbol"
+      >:</a
+      ><a name="2727"
+      > </a
+      ><a name="2728" class="Symbol"
+      >{</a
+      ><a name="2729" href="examples.heap.correctnessLinkedList.html#2729" class="Bound"
+      >w</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" class="Symbol"
+      >:</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2738" class="Symbol"
+      >}</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" class="Symbol"
+      >(</a
+      ><a name="2741" href="examples.heap.correctnessLinkedList.html#2741" class="Bound"
+      >l</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" class="Symbol"
+      >:</a
+      ><a name="2744"
+      > </a
+      ><a name="2745" href="examples.heap.correctnessLinkedList.html#2412" class="Record"
+      >LinkedListNodeType</a
+      ><a name="2763"
+      > </a
+      ><a name="2764" href="examples.heap.correctnessLinkedList.html#2729" class="Bound"
+      >w</a
+      ><a name="2765" class="Symbol"
+      >)</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" class="Symbol"
+      >&#8594;</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" href="examples.heap.correctnessLinkedList.html#2412" class="Record"
+      >LinkedListNodeType</a
+      ><a name="2787"
+      > </a
+      ><a name="2788" class="Symbol"
+      >(</a
+      ><a name="2789" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="2793"
+      > </a
+      ><a name="2794" href="examples.heap.correctnessLinkedList.html#2729" class="Bound"
+      >w</a
+      ><a name="2795" class="Symbol"
+      >)</a
+      ><a name="2796"
+      >
+  </a
+      ><a name="2799" href="examples.heap.correctnessLinkedList.html#2719" class="Function"
+      >liftLL</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" href="examples.heap.correctnessLinkedList.html#2806" class="Bound"
+      >l</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2809" href="examples.heap.correctnessLinkedList.html#2527" class="DottedPattern Field"
+      >getElemLL</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" class="Symbol"
+      >=</a
+      ><a name="2820"
+      > </a
+      ><a name="2821" href="examples.heap.correctnessLinkedList.html#2806" class="Bound"
+      >l</a
+      ><a name="2822"
+      > </a
+      ><a name="2823" class="Symbol"
+      >.</a
+      ><a name="2824" href="examples.heap.correctnessLinkedList.html#2527" class="Field"
+      >getElemLL</a
+      ><a name="2833"
+      >
+  </a
+      ><a name="2836" href="examples.heap.correctnessLinkedList.html#2719" class="Function"
+      >liftLL</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="examples.heap.correctnessLinkedList.html#2843" class="Bound"
+      >l</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" class="DottedPattern Symbol"
+      >.</a
+      ><a name="2846" href="examples.heap.correctnessLinkedList.html#2547" class="DottedPattern Field"
+      >getNextLL</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" class="Symbol"
+      >=</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" class="Symbol"
+      >(</a
+      ><a name="2867" href="examples.heap.correctnessLinkedList.html#2843" class="Bound"
+      >l</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" class="Symbol"
+      >.</a
+      ><a name="2870" href="examples.heap.correctnessLinkedList.html#2547" class="Field"
+      >getNextLL</a
+      ><a name="2879" class="Symbol"
+      >)</a
+      ><a name="2880"
+      >
+
+  </a
+      ><a name="2884" href="examples.heap.correctnessLinkedList.html#2884" class="Function"
+      >liftMLL</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" class="Symbol"
+      >:</a
+      ><a name="2893"
+      > </a
+      ><a name="2894" class="Symbol"
+      >{</a
+      ><a name="2895" href="examples.heap.correctnessLinkedList.html#2895" class="Bound"
+      >w</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" class="Symbol"
+      >:</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2904" class="Symbol"
+      >}</a
+      ><a name="2905"
+      > </a
+      ><a name="2906" class="Symbol"
+      >(</a
+      ><a name="2907" href="examples.heap.correctnessLinkedList.html#2907" class="Bound"
+      >l</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" class="Symbol"
+      >:</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" href="examples.heap.correctnessLinkedList.html#2621" class="Function"
+      >MLinkedListNodeType</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="examples.heap.correctnessLinkedList.html#2895" class="Bound"
+      >w</a
+      ><a name="2932" class="Symbol"
+      >)</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" class="Symbol"
+      >&#8594;</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="examples.heap.correctnessLinkedList.html#2621" class="Function"
+      >MLinkedListNodeType</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" class="Symbol"
+      >(</a
+      ><a name="2957" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="examples.heap.correctnessLinkedList.html#2895" class="Bound"
+      >w</a
+      ><a name="2963" class="Symbol"
+      >)</a
+      ><a name="2964"
+      >
+  </a
+      ><a name="2967" href="examples.heap.correctnessLinkedList.html#2884" class="Function"
+      >liftMLL</a
+      ><a name="2974"
+      > </a
+      ><a name="2975" class="Symbol"
+      >{</a
+      ><a name="2976" href="examples.heap.correctnessLinkedList.html#2976" class="Bound"
+      >w</a
+      ><a name="2977" class="Symbol"
+      >}</a
+      ><a name="2978"
+      > </a
+      ><a name="2979" class="Symbol"
+      >(</a
+      ><a name="2980" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" href="examples.heap.correctnessLinkedList.html#2985" class="Bound"
+      >p</a
+      ><a name="2986" class="Symbol"
+      >)</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" class="Symbol"
+      >=</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" class="Symbol"
+      >(</a
+      ><a name="2996" href="examples.heap.correctnessLinkedList.html#2719" class="Function"
+      >liftLL</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" class="Symbol"
+      >{</a
+      ><a name="3004" href="examples.heap.correctnessLinkedList.html#2976" class="Bound"
+      >w</a
+      ><a name="3005" class="Symbol"
+      >}</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" href="examples.heap.correctnessLinkedList.html#2985" class="Bound"
+      >p</a
+      ><a name="3008" class="Symbol"
+      >)</a
+      ><a name="3009"
+      >
+  </a
+      ><a name="3012" href="examples.heap.correctnessLinkedList.html#2884" class="Function"
+      >liftMLL</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" class="Symbol"
+      >{</a
+      ><a name="3021" href="examples.heap.correctnessLinkedList.html#3021" class="Bound"
+      >w</a
+      ><a name="3022" class="Symbol"
+      >}</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" class="Symbol"
+      >=</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="3041"
+      >
+
+</a
+      ><a name="3043" class="Comment"
+      >--\correctnessLinkedList</a
+      ><a name="3067"
+      >
+</a
+      ><a name="3068" class="Comment"
+      >--@BEGIN@glinkedWP</a
+      ><a name="3086"
+      >
+  </a
+      ><a name="3089" href="examples.heap.correctnessLinkedList.html#3089" class="Function"
+      >gLinkedWP</a
+      ><a name="3098"
+      > </a
+      ><a name="3099" class="Symbol"
+      >:</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="3110"
+      >
+  </a
+      ><a name="3113" href="examples.heap.correctnessLinkedList.html#3089" class="Function"
+      >gLinkedWP</a
+      ><a name="3122"
+      > </a
+      ><a name="3123" class="DottedPattern Symbol"
+      >.</a
+      ><a name="3124" href="src.heap.heapAsObjectBase.html#758" class="DottedPattern Field"
+      >El</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" class="Symbol"
+      >=</a
+      ><a name="3128"
+      > </a
+      ><a name="3129" href="examples.heap.correctnessLinkedList.html#2412" class="Record"
+      >LinkedListNodeType</a
+      ><a name="3147"
+      >
+  </a
+      ><a name="3150" href="examples.heap.correctnessLinkedList.html#3089" class="Function"
+      >gLinkedWP</a
+      ><a name="3159"
+      > </a
+      ><a name="3160" class="DottedPattern Symbol"
+      >.</a
+      ><a name="3161" href="src.heap.heapAsObjectBase.html#828" class="DottedPattern Field"
+      >lift</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" href="examples.heap.correctnessLinkedList.html#3166" class="Bound"
+      >w</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" class="Symbol"
+      >=</a
+      ><a name="3169"
+      > </a
+      ><a name="3170" href="examples.heap.correctnessLinkedList.html#2719" class="Function"
+      >liftLL</a
+      ><a name="3176"
+      > </a
+      ><a name="3177" class="Symbol"
+      >{</a
+      ><a name="3178" href="examples.heap.correctnessLinkedList.html#3166" class="Bound"
+      >w</a
+      ><a name="3179" class="Symbol"
+      >}</a
+      ><a name="3180"
+      >
+</a
+      ><a name="3181" class="Comment"
+      >--@END</a
+      ><a name="3187"
+      >
+
+
+
+</a
+      ><a name="3191" class="Keyword"
+      >module</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="examples.heap.correctnessLinkedList.html#3198" class="Module"
+      >heapObjectLLMod</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" class="Symbol"
+      >(</a
+      ><a name="3215" href="examples.heap.correctnessLinkedList.html#3215" class="Bound"
+      >B</a
+      ><a name="3216"
+      > </a
+      ><a name="3217" class="Symbol"
+      >:</a
+      ><a name="3218"
+      > </a
+      ><a name="3219" class="PrimitiveType"
+      >Set</a
+      ><a name="3222" class="Symbol"
+      >)</a
+      ><a name="3223"
+      > </a
+      ><a name="3224" class="Symbol"
+      >(</a
+      ><a name="3225" href="examples.heap.correctnessLinkedList.html#3225" class="Bound"
+      >pointStruct</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" class="Symbol"
+      >:</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="3252" class="Symbol"
+      >)</a
+      ><a name="3253"
+      >
+
+  </a
+      ><a name="3257" class="Comment"
+      >-- Type of pointers</a
+      ><a name="3276"
+      >
+  </a
+      ><a name="3279" class="Symbol"
+      >(</a
+      ><a name="3280" class="Keyword"
+      >let</a
+      ><a name="3283"
+      > </a
+      ><a name="3284" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="3291"
+      > </a
+      ><a name="3292" class="Symbol"
+      >=</a
+      ><a name="3293"
+      > </a
+      ><a name="3294" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="3301"
+      > </a
+      ><a name="3302" href="examples.heap.correctnessLinkedList.html#3225" class="Bound"
+      >pointStruct</a
+      ><a name="3313" class="Symbol"
+      >)</a
+      ><a name="3314"
+      >
+
+  </a
+      ><a name="3318" class="Symbol"
+      >(</a
+      ><a name="3319" class="Keyword"
+      >let</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" href="examples.heap.correctnessLinkedList.html#3323" class="Bound"
+      >embedp</a
+      ><a name="3329"
+      > </a
+      ><a name="3330" class="Symbol"
+      >=</a
+      ><a name="3331"
+      > </a
+      ><a name="3332" href="src.heap.heapAsObjectGeneric.html#548" class="Field"
+      >embedp</a
+      ><a name="3338"
+      > </a
+      ><a name="3339" href="examples.heap.correctnessLinkedList.html#3225" class="Bound"
+      >pointStruct</a
+      ><a name="3350" class="Symbol"
+      >)</a
+      ><a name="3351"
+      >
+  </a
+      ><a name="3354" class="Symbol"
+      >(</a
+      ><a name="3355" class="Keyword"
+      >let</a
+      ><a name="3358"
+      > </a
+      ><a name="3359" href="examples.heap.correctnessLinkedList.html#3359" class="Bound"
+      >HeapElWP</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" class="Symbol"
+      >=</a
+      ><a name="3369"
+      > </a
+      ><a name="3370" href="examples.heap.correctnessLinkedList.html#3089" class="Function"
+      >gLinkedWP</a
+      ><a name="3379"
+      > </a
+      ><a name="3380" href="examples.heap.correctnessLinkedList.html#3215" class="Bound"
+      >B</a
+      ><a name="3381"
+      > </a
+      ><a name="3382" href="examples.heap.correctnessLinkedList.html#3225" class="Bound"
+      >pointStruct</a
+      ><a name="3393" class="Symbol"
+      >)</a
+      ><a name="3394"
+      >
+
+  </a
+      ><a name="3398" class="Comment"
+      >-- Type of heap elements (cons cells in this case).</a
+      ><a name="3449"
+      >
+  </a
+      ><a name="3452" class="Symbol"
+      >(</a
+      ><a name="3453" class="Keyword"
+      >let</a
+      ><a name="3456"
+      > </a
+      ><a name="3457" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" class="Symbol"
+      >=</a
+      ><a name="3465"
+      > </a
+      ><a name="3466" href="examples.heap.correctnessLinkedList.html#3359" class="Bound"
+      >HeapElWP</a
+      ><a name="3474"
+      > </a
+      ><a name="3475" class="Symbol"
+      >.</a
+      ><a name="3476" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="3478" class="Symbol"
+      >)</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" class="Keyword"
+      >where</a
+      ><a name="3485"
+      >
+
+
+
+   </a
+      ><a name="3492" class="Comment"
+      >-- open HeapObjectImplementation objWorldPred</a
+      ><a name="3537"
+      >
+
+   </a
+      ><a name="3542" class="Comment"
+      >-- HeapEl : World &#8594; Set</a
+      ><a name="3565"
+      >
+   </a
+      ><a name="3569" class="Comment"
+      >-- HeapEl w = Maybe (LinkedLObject &#8469; w)</a
+      ><a name="3608"
+      >
+
+
+   </a
+      ><a name="3614" class="Comment"
+      >-- The heap (stores linked lists).</a
+      ><a name="3648"
+      >
+
+   </a
+      ><a name="3653" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="3665"
+      > </a
+      ><a name="3666" class="Symbol"
+      >:</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="3673"
+      > </a
+      ><a name="3674" class="Symbol"
+      >&#8594;</a
+      ><a name="3675"
+      > </a
+      ><a name="3676" class="PrimitiveType"
+      >Set</a
+      ><a name="3679"
+      >
+   </a
+      ><a name="3683" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="3695"
+      > </a
+      ><a name="3696" class="Symbol"
+      >=</a
+      ><a name="3697"
+      >  </a
+      ><a name="3699" href="StateSizedIO.RObject.html#1211" class="Record"
+      >RObject&#738;</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" class="Symbol"
+      >(</a
+      ><a name="3709" href="src.heap.heapAsObject.html#2758" class="Function"
+      >HeapRInterface&#738;</a
+      ><a name="3724"
+      > </a
+      ><a name="3725" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="3732"
+      > </a
+      ><a name="3733" href="examples.heap.correctnessLinkedList.html#3359" class="Bound"
+      >HeapElWP</a
+      ><a name="3741" class="Symbol"
+      >)</a
+      ><a name="3742"
+      >
+
+   </a
+      ><a name="3747" class="Comment"
+      >-- Heap after allocation of a new cell.</a
+      ><a name="3786"
+      >
+
+   </a
+      ><a name="3791" href="examples.heap.correctnessLinkedList.html#3791" class="Function"
+      >nextH</a
+      ><a name="3796"
+      > </a
+      ><a name="3797" class="Symbol"
+      >:</a
+      ><a name="3798"
+      > </a
+      ><a name="3799" class="Symbol"
+      >{</a
+      ><a name="3800" href="examples.heap.correctnessLinkedList.html#3800" class="Bound"
+      >w</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" class="Symbol"
+      >:</a
+      ><a name="3803"
+      > </a
+      ><a name="3804" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="3809" class="Symbol"
+      >}</a
+      ><a name="3810"
+      > </a
+      ><a name="3811" class="Symbol"
+      >&#8594;</a
+      ><a name="3812"
+      > </a
+      ><a name="3813" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="3819"
+      > </a
+      ><a name="3820" class="Symbol"
+      >(</a
+      ><a name="3821" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="3825"
+      > </a
+      ><a name="3826" href="examples.heap.correctnessLinkedList.html#3800" class="Bound"
+      >w</a
+      ><a name="3827" class="Symbol"
+      >)</a
+      ><a name="3828"
+      >
+                       </a
+      ><a name="3852" class="Symbol"
+      >&#8594;</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="examples.heap.correctnessLinkedList.html#3800" class="Bound"
+      >w</a
+      ><a name="3868"
+      >
+                       </a
+      ><a name="3892" class="Symbol"
+      >&#8594;</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="3906"
+      > </a
+      ><a name="3907" class="Symbol"
+      >(</a
+      ><a name="3908" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" href="examples.heap.correctnessLinkedList.html#3800" class="Bound"
+      >w</a
+      ><a name="3914" class="Symbol"
+      >)</a
+      ><a name="3915"
+      >
+   </a
+      ><a name="3919" href="examples.heap.correctnessLinkedList.html#3791" class="Function"
+      >nextH</a
+      ><a name="3924"
+      > </a
+      ><a name="3925" href="examples.heap.correctnessLinkedList.html#3925" class="Bound"
+      >newPoint</a
+      ><a name="3933"
+      > </a
+      ><a name="3934" href="examples.heap.correctnessLinkedList.html#3934" class="Bound"
+      >h</a
+      ><a name="3935"
+      > </a
+      ><a name="3936" class="Symbol"
+      >=</a
+      ><a name="3937"
+      > </a
+      ><a name="3938" href="Data.Product.html#539" class="Field"
+      >pr&#8322;</a
+      ><a name="3941"
+      > </a
+      ><a name="3942" class="Symbol"
+      >(</a
+      ><a name="3943" href="examples.heap.correctnessLinkedList.html#3934" class="Bound"
+      >h</a
+      ><a name="3944"
+      > </a
+      ><a name="3945" class="Symbol"
+      >.</a
+      ><a name="3946" href="StateSizedIO.RObject.html#1296" class="Field"
+      >method</a
+      ><a name="3952"
+      > </a
+      ><a name="3953" class="Symbol"
+      >(</a
+      ><a name="3954" href="src.heap.heapAsObject.html#1983" class="InductiveConstructor"
+      >newPh</a
+      ><a name="3959"
+      > </a
+      ><a name="3960" href="examples.heap.correctnessLinkedList.html#3925" class="Bound"
+      >newPoint</a
+      ><a name="3968" class="Symbol"
+      >))</a
+      ><a name="3970"
+      >
+
+   </a
+      ><a name="3975" class="Comment"
+      >-- Pointer to the new cell.</a
+      ><a name="4002"
+      >
+
+   </a
+      ><a name="4007" href="examples.heap.correctnessLinkedList.html#4007" class="Function"
+      >newH</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" class="Symbol"
+      >:</a
+      ><a name="4013"
+      > </a
+      ><a name="4014" class="Symbol"
+      >{</a
+      ><a name="4015" href="examples.heap.correctnessLinkedList.html#4015" class="Bound"
+      >w</a
+      ><a name="4016"
+      > </a
+      ><a name="4017" class="Symbol"
+      >:</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="4024" class="Symbol"
+      >}</a
+      ><a name="4025"
+      > </a
+      ><a name="4026" class="Symbol"
+      >&#8594;</a
+      ><a name="4027"
+      > </a
+      ><a name="4028" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="4034"
+      > </a
+      ><a name="4035" class="Symbol"
+      >(</a
+      ><a name="4036" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="4040"
+      > </a
+      ><a name="4041" href="examples.heap.correctnessLinkedList.html#4015" class="Bound"
+      >w</a
+      ><a name="4042" class="Symbol"
+      >)</a
+      ><a name="4043"
+      >
+                       </a
+      ><a name="4067" class="Symbol"
+      >&#8594;</a
+      ><a name="4068"
+      > </a
+      ><a name="4069" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" href="examples.heap.correctnessLinkedList.html#4015" class="Bound"
+      >w</a
+      ><a name="4083"
+      >
+                       </a
+      ><a name="4107" class="Symbol"
+      >&#8594;</a
+      ><a name="4108"
+      > </a
+      ><a name="4109" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="4116"
+      > </a
+      ><a name="4117" class="Symbol"
+      >(</a
+      ><a name="4118" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="4122"
+      > </a
+      ><a name="4123" href="examples.heap.correctnessLinkedList.html#4015" class="Bound"
+      >w</a
+      ><a name="4124" class="Symbol"
+      >)</a
+      ><a name="4125"
+      >
+   </a
+      ><a name="4129" href="examples.heap.correctnessLinkedList.html#4007" class="Function"
+      >newH</a
+      ><a name="4133"
+      > </a
+      ><a name="4134" href="examples.heap.correctnessLinkedList.html#4134" class="Bound"
+      >newPoint</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" href="examples.heap.correctnessLinkedList.html#4143" class="Bound"
+      >h</a
+      ><a name="4144"
+      > </a
+      ><a name="4145" class="Symbol"
+      >=</a
+      ><a name="4146"
+      > </a
+      ><a name="4147" href="Data.Product.html#525" class="Field"
+      >pr&#8321;</a
+      ><a name="4150"
+      > </a
+      ><a name="4151" class="Symbol"
+      >(</a
+      ><a name="4152" href="examples.heap.correctnessLinkedList.html#4143" class="Bound"
+      >h</a
+      ><a name="4153"
+      > </a
+      ><a name="4154" class="Symbol"
+      >.</a
+      ><a name="4155" href="StateSizedIO.RObject.html#1296" class="Field"
+      >method</a
+      ><a name="4161"
+      > </a
+      ><a name="4162" class="Symbol"
+      >(</a
+      ><a name="4163" href="src.heap.heapAsObject.html#1983" class="InductiveConstructor"
+      >newPh</a
+      ><a name="4168"
+      > </a
+      ><a name="4169" href="examples.heap.correctnessLinkedList.html#4134" class="Bound"
+      >newPoint</a
+      ><a name="4177" class="Symbol"
+      >))</a
+      ><a name="4179"
+      >
+
+   </a
+      ><a name="4184" class="Comment"
+      >-- Reading a cell from the heap.</a
+      ><a name="4216"
+      >
+
+   </a
+      ><a name="4221" href="examples.heap.correctnessLinkedList.html#4221" class="Function"
+      >readP</a
+      ><a name="4226"
+      > </a
+      ><a name="4227" class="Symbol"
+      >:</a
+      ><a name="4228"
+      > </a
+      ><a name="4229" class="Symbol"
+      >{</a
+      ><a name="4230" href="examples.heap.correctnessLinkedList.html#4230" class="Bound"
+      >w</a
+      ><a name="4231"
+      > </a
+      ><a name="4232" class="Symbol"
+      >:</a
+      ><a name="4233"
+      > </a
+      ><a name="4234" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="4239" class="Symbol"
+      >}</a
+      ><a name="4240"
+      > </a
+      ><a name="4241" class="Symbol"
+      >&#8594;</a
+      ><a name="4242"
+      > </a
+      ><a name="4243" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="4255"
+      > </a
+      ><a name="4256" href="examples.heap.correctnessLinkedList.html#4230" class="Bound"
+      >w</a
+      ><a name="4257"
+      > </a
+      ><a name="4258" class="Symbol"
+      >&#8594;</a
+      ><a name="4259"
+      > </a
+      ><a name="4260" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="4267"
+      > </a
+      ><a name="4268" href="examples.heap.correctnessLinkedList.html#4230" class="Bound"
+      >w</a
+      ><a name="4269"
+      > </a
+      ><a name="4270" class="Symbol"
+      >&#8594;</a
+      ><a name="4271"
+      > </a
+      ><a name="4272" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="4278"
+      > </a
+      ><a name="4279" href="examples.heap.correctnessLinkedList.html#4230" class="Bound"
+      >w</a
+      ><a name="4280"
+      >
+   </a
+      ><a name="4284" href="examples.heap.correctnessLinkedList.html#4221" class="Function"
+      >readP</a
+      ><a name="4289"
+      > </a
+      ><a name="4290" href="examples.heap.correctnessLinkedList.html#4290" class="Bound"
+      >h</a
+      ><a name="4291"
+      > </a
+      ><a name="4292" href="examples.heap.correctnessLinkedList.html#4292" class="Bound"
+      >p</a
+      ><a name="4293"
+      > </a
+      ><a name="4294" class="Symbol"
+      >=</a
+      ><a name="4295"
+      > </a
+      ><a name="4296" href="examples.heap.correctnessLinkedList.html#4290" class="Bound"
+      >h</a
+      ><a name="4297"
+      > </a
+      ><a name="4298" class="Symbol"
+      >.</a
+      ><a name="4299" href="StateSizedIO.RObject.html#1368" class="Field"
+      >readerMethod</a
+      ><a name="4311"
+      > </a
+      ><a name="4312" class="Symbol"
+      >(</a
+      ><a name="4313" href="src.heap.heapAsObject.html#2219" class="InductiveConstructor"
+      >readPh</a
+      ><a name="4319"
+      > </a
+      ><a name="4320" href="examples.heap.correctnessLinkedList.html#4292" class="Bound"
+      >p</a
+      ><a name="4321" class="Symbol"
+      >)</a
+      ><a name="4322"
+      >
+
+   </a
+      ><a name="4327" class="Comment"
+      >-- Reading a pointer (which can be null).</a
+      ><a name="4368"
+      >
+
+   </a
+      ><a name="4373" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="4379"
+      > </a
+      ><a name="4380" class="Symbol"
+      >:</a
+      ><a name="4381"
+      > </a
+      ><a name="4382" class="Symbol"
+      >{</a
+      ><a name="4383" href="examples.heap.correctnessLinkedList.html#4383" class="Bound"
+      >w</a
+      ><a name="4384"
+      > </a
+      ><a name="4385" class="Symbol"
+      >:</a
+      ><a name="4386"
+      > </a
+      ><a name="4387" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="4392" class="Symbol"
+      >}</a
+      ><a name="4393"
+      > </a
+      ><a name="4394" class="Symbol"
+      >&#8594;</a
+      ><a name="4395"
+      > </a
+      ><a name="4396" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="4408"
+      > </a
+      ><a name="4409" href="examples.heap.correctnessLinkedList.html#4383" class="Bound"
+      >w</a
+      ><a name="4410"
+      > </a
+      ><a name="4411" class="Symbol"
+      >&#8594;</a
+      ><a name="4412"
+      > </a
+      ><a name="4413" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="4418"
+      > </a
+      ><a name="4419" class="Symbol"
+      >(</a
+      ><a name="4420" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="4427"
+      > </a
+      ><a name="4428" href="examples.heap.correctnessLinkedList.html#4383" class="Bound"
+      >w</a
+      ><a name="4429" class="Symbol"
+      >)</a
+      ><a name="4430"
+      > </a
+      ><a name="4431" class="Symbol"
+      >&#8594;</a
+      ><a name="4432"
+      > </a
+      ><a name="4433" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="4438"
+      > </a
+      ><a name="4439" class="Symbol"
+      >(</a
+      ><a name="4440" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="4446"
+      > </a
+      ><a name="4447" href="examples.heap.correctnessLinkedList.html#4383" class="Bound"
+      >w</a
+      ><a name="4448" class="Symbol"
+      >)</a
+      ><a name="4449"
+      >
+   </a
+      ><a name="4453" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="4459"
+      > </a
+      ><a name="4460" href="examples.heap.correctnessLinkedList.html#4460" class="Bound"
+      >h</a
+      ><a name="4461"
+      > </a
+      ><a name="4462" class="Symbol"
+      >(</a
+      ><a name="4463" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="4467"
+      > </a
+      ><a name="4468" href="examples.heap.correctnessLinkedList.html#4468" class="Bound"
+      >p</a
+      ><a name="4469" class="Symbol"
+      >)</a
+      ><a name="4470"
+      > </a
+      ><a name="4471" class="Symbol"
+      >=</a
+      ><a name="4472"
+      > </a
+      ><a name="4473" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="4477"
+      > </a
+      ><a name="4478" class="Symbol"
+      >(</a
+      ><a name="4479" href="examples.heap.correctnessLinkedList.html#4460" class="Bound"
+      >h</a
+      ><a name="4480"
+      > </a
+      ><a name="4481" class="Symbol"
+      >.</a
+      ><a name="4482" href="StateSizedIO.RObject.html#1368" class="Field"
+      >readerMethod</a
+      ><a name="4494"
+      > </a
+      ><a name="4495" class="Symbol"
+      >(</a
+      ><a name="4496" href="src.heap.heapAsObject.html#2219" class="InductiveConstructor"
+      >readPh</a
+      ><a name="4502"
+      > </a
+      ><a name="4503" href="examples.heap.correctnessLinkedList.html#4468" class="Bound"
+      >p</a
+      ><a name="4504" class="Symbol"
+      >))</a
+      ><a name="4506"
+      >
+   </a
+      ><a name="4510" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="4516"
+      > </a
+      ><a name="4517" href="examples.heap.correctnessLinkedList.html#4517" class="Bound"
+      >h</a
+      ><a name="4518"
+      > </a
+      ><a name="4519" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="4526"
+      > </a
+      ><a name="4527" class="Symbol"
+      >=</a
+      ><a name="4528"
+      > </a
+      ><a name="4529" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="4536"
+      >
+
+   </a
+      ><a name="4541" class="Comment"
+      >-- Writing to a pointer.</a
+      ><a name="4565"
+      >
+
+   </a
+      ><a name="4570" href="examples.heap.correctnessLinkedList.html#4570" class="Function"
+      >writeP</a
+      ><a name="4576"
+      > </a
+      ><a name="4577" class="Symbol"
+      >:</a
+      ><a name="4578"
+      > </a
+      ><a name="4579" class="Symbol"
+      >{</a
+      ><a name="4580" href="examples.heap.correctnessLinkedList.html#4580" class="Bound"
+      >w</a
+      ><a name="4581"
+      > </a
+      ><a name="4582" class="Symbol"
+      >:</a
+      ><a name="4583"
+      > </a
+      ><a name="4584" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="4589" class="Symbol"
+      >}</a
+      ><a name="4590"
+      > </a
+      ><a name="4591" class="Symbol"
+      >&#8594;</a
+      ><a name="4592"
+      > </a
+      ><a name="4593" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="4605"
+      > </a
+      ><a name="4606" href="examples.heap.correctnessLinkedList.html#4580" class="Bound"
+      >w</a
+      ><a name="4607"
+      > </a
+      ><a name="4608" class="Symbol"
+      >&#8594;</a
+      ><a name="4609"
+      > </a
+      ><a name="4610" href="examples.heap.correctnessLinkedList.html#3284" class="Bound"
+      >Pointer</a
+      ><a name="4617"
+      > </a
+      ><a name="4618" href="examples.heap.correctnessLinkedList.html#4580" class="Bound"
+      >w</a
+      ><a name="4619"
+      > </a
+      ><a name="4620" class="Symbol"
+      >&#8594;</a
+      ><a name="4621"
+      > </a
+      ><a name="4622" href="examples.heap.correctnessLinkedList.html#3457" class="Bound"
+      >HeapEl</a
+      ><a name="4628"
+      > </a
+      ><a name="4629" href="examples.heap.correctnessLinkedList.html#4580" class="Bound"
+      >w</a
+      ><a name="4630"
+      >
+            </a
+      ><a name="4643" class="Symbol"
+      >&#8594;</a
+      ><a name="4644"
+      > </a
+      ><a name="4645" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="4657"
+      > </a
+      ><a name="4658" href="examples.heap.correctnessLinkedList.html#4580" class="Bound"
+      >w</a
+      ><a name="4659"
+      >
+   </a
+      ><a name="4663" href="examples.heap.correctnessLinkedList.html#4570" class="Function"
+      >writeP</a
+      ><a name="4669"
+      > </a
+      ><a name="4670" href="examples.heap.correctnessLinkedList.html#4670" class="Bound"
+      >h</a
+      ><a name="4671"
+      > </a
+      ><a name="4672" href="examples.heap.correctnessLinkedList.html#4672" class="Bound"
+      >p</a
+      ><a name="4673"
+      > </a
+      ><a name="4674" href="examples.heap.correctnessLinkedList.html#4674" class="Bound"
+      >mo</a
+      ><a name="4676"
+      > </a
+      ><a name="4677" class="Symbol"
+      >=</a
+      ><a name="4678"
+      > </a
+      ><a name="4679" href="Data.Product.html#539" class="Field"
+      >pr&#8322;</a
+      ><a name="4682"
+      > </a
+      ><a name="4683" class="Symbol"
+      >(</a
+      ><a name="4684" href="examples.heap.correctnessLinkedList.html#4670" class="Bound"
+      >h</a
+      ><a name="4685"
+      > </a
+      ><a name="4686" class="Symbol"
+      >.</a
+      ><a name="4687" href="StateSizedIO.RObject.html#1296" class="Field"
+      >method</a
+      ><a name="4693"
+      > </a
+      ><a name="4694" class="Symbol"
+      >(</a
+      ><a name="4695" href="src.heap.heapAsObject.html#2067" class="InductiveConstructor"
+      >writePh</a
+      ><a name="4702"
+      > </a
+      ><a name="4703" href="examples.heap.correctnessLinkedList.html#4672" class="Bound"
+      >p</a
+      ><a name="4704"
+      > </a
+      ><a name="4705" href="examples.heap.correctnessLinkedList.html#4674" class="Bound"
+      >mo</a
+      ><a name="4707" class="Symbol"
+      >))</a
+      ><a name="4709"
+      >
+
+
+</a
+      ><a name="4712" class="Keyword"
+      >open</a
+      ><a name="4716"
+      > </a
+      ><a name="4717" href="src.heap.heapAsObject.html#4332" class="Module"
+      >heapRObjectFinM</a
+      ><a name="4732"
+      >  </a
+      ><a name="4734" class="Comment"
+      >-- Model implementation of heaps where pointers are Fin.</a
+      ><a name="4790"
+      >
+
+</a
+      ><a name="4792" class="Keyword"
+      >module</a
+      ><a name="4798"
+      > </a
+      ><a name="4799" href="examples.heap.correctnessLinkedList.html#4799" class="Module"
+      >moduleHeapDef</a
+      ><a name="4812"
+      > </a
+      ><a name="4813" class="Symbol"
+      >(</a
+      ><a name="4814" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="4815"
+      > </a
+      ><a name="4816" class="Symbol"
+      >:</a
+      ><a name="4817"
+      > </a
+      ><a name="4818" class="PrimitiveType"
+      >Set</a
+      ><a name="4821" class="Symbol"
+      >)</a
+      ><a name="4822"
+      >
+         </a
+      ><a name="4832" class="Symbol"
+      >(</a
+      ><a name="4833" class="Keyword"
+      >let</a
+      ><a name="4836"
+      > </a
+      ><a name="4837" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="4845"
+      > </a
+      ><a name="4846" class="Symbol"
+      >=</a
+      ><a name="4847"
+      > </a
+      ><a name="4848" href="examples.heap.correctnessLinkedList.html#3089" class="Function"
+      >gLinkedWP</a
+      ><a name="4857"
+      > </a
+      ><a name="4858" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="4859"
+      > </a
+      ><a name="4860" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="4876" class="Symbol"
+      >)</a
+      ><a name="4877"
+      >
+         </a
+      ><a name="4887" class="Symbol"
+      >(</a
+      ><a name="4888" class="Keyword"
+      >let</a
+      ><a name="4891"
+      > </a
+      ><a name="4892" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="4898"
+      > </a
+      ><a name="4899" class="Symbol"
+      >=</a
+      ><a name="4900"
+      > </a
+      ><a name="4901" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="4909"
+      > </a
+      ><a name="4910" class="Symbol"
+      >.</a
+      ><a name="4911" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="4913" class="Symbol"
+      >)</a
+      ><a name="4914"
+      >
+         </a
+      ><a name="4924" class="Keyword"
+      >where</a
+      ><a name="4929"
+      >
+  </a
+      ><a name="4932" class="Keyword"
+      >open</a
+      ><a name="4936"
+      > </a
+      ><a name="4937" href="examples.heap.correctnessLinkedList.html#3198" class="Module"
+      >heapObjectLLMod</a
+      ><a name="4952"
+      > </a
+      ><a name="4953" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="4954"
+      > </a
+      ><a name="4955" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="4971"
+      >
+
+  </a
+      ><a name="4975" class="Comment"
+      >-- A heap managing object is canonical if it is created by the heapRObject constructor.</a
+      ><a name="5062"
+      >
+  </a
+      ><a name="5065" class="Comment"
+      >-- The following predicate expresses that a heap managing object is canonical.</a
+      ><a name="5143"
+      >
+
+  </a
+      ><a name="5147" class="Keyword"
+      >record</a
+      ><a name="5153"
+      > </a
+      ><a name="5154" href="examples.heap.correctnessLinkedList.html#5154" class="Record"
+      >HeapCorrect</a
+      ><a name="5165"
+      > </a
+      ><a name="5166" class="Symbol"
+      >{</a
+      ><a name="5167" href="examples.heap.correctnessLinkedList.html#5167" class="Bound"
+      >w</a
+      ><a name="5168"
+      > </a
+      ><a name="5169" class="Symbol"
+      >:</a
+      ><a name="5170"
+      > </a
+      ><a name="5171" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="5176" class="Symbol"
+      >}(</a
+      ><a name="5178" href="examples.heap.correctnessLinkedList.html#5178" class="Bound"
+      >h</a
+      ><a name="5179"
+      > </a
+      ><a name="5180" class="Symbol"
+      >:</a
+      ><a name="5181"
+      > </a
+      ><a name="5182" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="5194"
+      > </a
+      ><a name="5195" href="examples.heap.correctnessLinkedList.html#5167" class="Bound"
+      >w</a
+      ><a name="5196" class="Symbol"
+      >)</a
+      ><a name="5197"
+      > </a
+      ><a name="5198" class="Symbol"
+      >:</a
+      ><a name="5199"
+      > </a
+      ><a name="5200" class="PrimitiveType"
+      >Set</a
+      ><a name="5203"
+      > </a
+      ><a name="5204" class="Keyword"
+      >where</a
+      ><a name="5209"
+      >
+    </a
+      ><a name="5214" class="Keyword"
+      >field</a
+      ><a name="5219"
+      >
+      </a
+      ><a name="5226" class="Comment"
+      >-- The store for the heap.</a
+      ><a name="5252"
+      >
+      </a
+      ><a name="5259" href="examples.heap.correctnessLinkedList.html#5259" class="Field"
+      >theStoreFin</a
+      ><a name="5270"
+      >  </a
+      ><a name="5272" class="Symbol"
+      >:</a
+      ><a name="5273"
+      > </a
+      ><a name="5274" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="5282"
+      > </a
+      ><a name="5283" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="5291"
+      > </a
+      ><a name="5292" href="examples.heap.correctnessLinkedList.html#5167" class="Bound"
+      >w</a
+      ><a name="5293"
+      >
+      </a
+      ><a name="5300" class="Comment"
+      >-- Canonicity property.</a
+      ><a name="5323"
+      >
+      </a
+      ><a name="5330" href="examples.heap.correctnessLinkedList.html#5330" class="Field"
+      >eqToStoreFin</a
+      ><a name="5342"
+      > </a
+      ><a name="5343" class="Symbol"
+      >:</a
+      ><a name="5344"
+      > </a
+      ><a name="5345" href="examples.heap.correctnessLinkedList.html#5178" class="Bound"
+      >h</a
+      ><a name="5346"
+      > </a
+      ><a name="5347" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="5348"
+      > </a
+      ><a name="5349" href="src.heap.heapAsObject.html#4401" class="Function"
+      >heapRObject</a
+      ><a name="5360"
+      > </a
+      ><a name="5361" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="5369"
+      > </a
+      ><a name="5370" href="examples.heap.correctnessLinkedList.html#5259" class="Field"
+      >theStoreFin</a
+      ><a name="5381"
+      >
+  </a
+      ><a name="5384" class="Keyword"
+      >open</a
+      ><a name="5388"
+      > </a
+      ><a name="5389" href="examples.heap.correctnessLinkedList.html#5154" class="Module"
+      >HeapCorrect</a
+      ><a name="5400"
+      > </a
+      ><a name="5401" class="Keyword"
+      >public</a
+      ><a name="5407"
+      >
+
+  </a
+      ><a name="5411" class="Comment"
+      >-- The canonical heap manager is trivially correct.</a
+      ><a name="5462"
+      >
+
+  </a
+      ><a name="5466" href="examples.heap.correctnessLinkedList.html#5466" class="Function"
+      >corHeapObjectLL</a
+      ><a name="5481"
+      > </a
+      ><a name="5482" class="Symbol"
+      >:</a
+      ><a name="5483"
+      > </a
+      ><a name="5484" class="Symbol"
+      >{</a
+      ><a name="5485" href="examples.heap.correctnessLinkedList.html#5485" class="Bound"
+      >w</a
+      ><a name="5486"
+      > </a
+      ><a name="5487" class="Symbol"
+      >:</a
+      ><a name="5488"
+      > </a
+      ><a name="5489" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="5494" class="Symbol"
+      >}</a
+      ><a name="5495"
+      > </a
+      ><a name="5496" class="Symbol"
+      >&#8594;</a
+      ><a name="5497"
+      > </a
+      ><a name="5498" class="Symbol"
+      >(</a
+      ><a name="5499" href="examples.heap.correctnessLinkedList.html#5499" class="Bound"
+      >st</a
+      ><a name="5501"
+      > </a
+      ><a name="5502" class="Symbol"
+      >:</a
+      ><a name="5503"
+      > </a
+      ><a name="5504" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="5512"
+      > </a
+      ><a name="5513" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="5521"
+      > </a
+      ><a name="5522" href="examples.heap.correctnessLinkedList.html#5485" class="Bound"
+      >w</a
+      ><a name="5523" class="Symbol"
+      >)</a
+      ><a name="5524"
+      > </a
+      ><a name="5525" class="Symbol"
+      >&#8594;</a
+      ><a name="5526"
+      > </a
+      ><a name="5527" href="examples.heap.correctnessLinkedList.html#5154" class="Record"
+      >HeapCorrect</a
+      ><a name="5538"
+      > </a
+      ><a name="5539" class="Symbol"
+      >(</a
+      ><a name="5540" href="src.heap.heapAsObject.html#4401" class="Function"
+      >heapRObject</a
+      ><a name="5551"
+      > </a
+      ><a name="5552" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="5560"
+      > </a
+      ><a name="5561" href="examples.heap.correctnessLinkedList.html#5499" class="Bound"
+      >st</a
+      ><a name="5563" class="Symbol"
+      >)</a
+      ><a name="5564"
+      >
+  </a
+      ><a name="5567" href="examples.heap.correctnessLinkedList.html#5466" class="Function"
+      >corHeapObjectLL</a
+      ><a name="5582"
+      > </a
+      ><a name="5583" class="Symbol"
+      >{</a
+      ><a name="5584" href="examples.heap.correctnessLinkedList.html#5584" class="Bound"
+      >w</a
+      ><a name="5585" class="Symbol"
+      >}</a
+      ><a name="5586"
+      > </a
+      ><a name="5587" href="examples.heap.correctnessLinkedList.html#5587" class="Bound"
+      >st</a
+      ><a name="5589"
+      > </a
+      ><a name="5590" class="DottedPattern Symbol"
+      >.</a
+      ><a name="5591" href="examples.heap.correctnessLinkedList.html#5259" class="DottedPattern Field"
+      >HeapCorrect.theStoreFin</a
+      ><a name="5614"
+      >  </a
+      ><a name="5616" class="Symbol"
+      >=</a
+      ><a name="5617"
+      > </a
+      ><a name="5618" href="examples.heap.correctnessLinkedList.html#5587" class="Bound"
+      >st</a
+      ><a name="5620"
+      >
+  </a
+      ><a name="5623" href="examples.heap.correctnessLinkedList.html#5466" class="Function"
+      >corHeapObjectLL</a
+      ><a name="5638"
+      > </a
+      ><a name="5639" class="Symbol"
+      >{</a
+      ><a name="5640" href="examples.heap.correctnessLinkedList.html#5640" class="Bound"
+      >w</a
+      ><a name="5641" class="Symbol"
+      >}</a
+      ><a name="5642"
+      > </a
+      ><a name="5643" href="examples.heap.correctnessLinkedList.html#5643" class="Bound"
+      >st</a
+      ><a name="5645"
+      > </a
+      ><a name="5646" class="DottedPattern Symbol"
+      >.</a
+      ><a name="5647" href="examples.heap.correctnessLinkedList.html#5330" class="DottedPattern Field"
+      >HeapCorrect.eqToStoreFin</a
+      ><a name="5671"
+      > </a
+      ><a name="5672" class="Symbol"
+      >=</a
+      ><a name="5673"
+      > </a
+      ><a name="5674" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="5678"
+      >
+
+
+
+
+
+
+
+  </a
+      ><a name="5688" class="Comment"
+      >-- Closure of a pointer (bundling a pointer with the heap it refers to).</a
+      ><a name="5760"
+      >
+  </a
+      ><a name="5763" class="Comment"
+      >-- Pointer may be null.</a
+      ><a name="5786"
+      >
+
+  </a
+      ><a name="5790" class="Keyword"
+      >record</a
+      ><a name="5796"
+      > </a
+      ><a name="5797" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="5812"
+      > </a
+      ><a name="5813" class="Symbol"
+      >{</a
+      ><a name="5814" href="examples.heap.correctnessLinkedList.html#5814" class="Bound"
+      >w</a
+      ><a name="5815"
+      > </a
+      ><a name="5816" class="Symbol"
+      >:</a
+      ><a name="5817"
+      > </a
+      ><a name="5818" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="5823" class="Symbol"
+      >}</a
+      ><a name="5824"
+      > </a
+      ><a name="5825" class="Symbol"
+      >:</a
+      ><a name="5826"
+      > </a
+      ><a name="5827" class="PrimitiveType"
+      >Set</a
+      ><a name="5830"
+      > </a
+      ><a name="5831" class="Keyword"
+      >where</a
+      ><a name="5836"
+      >
+     </a
+      ><a name="5842" class="Keyword"
+      >constructor</a
+      ><a name="5853"
+      > </a
+      ><a name="5854" href="examples.heap.correctnessLinkedList.html#5854" class="InductiveConstructor"
+      >llist</a
+      ><a name="5859"
+      >
+     </a
+      ><a name="5865" class="Keyword"
+      >field</a
+      ><a name="5870"
+      >
+        </a
+      ><a name="5879" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="5885"
+      >    </a
+      ><a name="5889" class="Symbol"
+      >:</a
+      ><a name="5890"
+      > </a
+      ><a name="5891" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="5903"
+      > </a
+      ><a name="5904" href="examples.heap.correctnessLinkedList.html#5814" class="Bound"
+      >w</a
+      ><a name="5905"
+      >
+        </a
+      ><a name="5914" href="examples.heap.correctnessLinkedList.html#5914" class="Field"
+      >llpoint</a
+      ><a name="5921"
+      >   </a
+      ><a name="5924" class="Symbol"
+      >:</a
+      ><a name="5925"
+      > </a
+      ><a name="5926" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="5937"
+      > </a
+      ><a name="5938" href="examples.heap.correctnessLinkedList.html#5814" class="Bound"
+      >w</a
+      ><a name="5939"
+      >
+
+  </a
+      ><a name="5943" class="Keyword"
+      >open</a
+      ><a name="5947"
+      > </a
+      ><a name="5948" href="examples.heap.correctnessLinkedList.html#5797" class="Module"
+      >HeapWithPointer</a
+      ><a name="5963"
+      > </a
+      ><a name="5964" class="Keyword"
+      >public</a
+      ><a name="5970"
+      >
+
+  </a
+      ><a name="5974" class="Comment"
+      >-- A closure is correct if its heap is.</a
+      ><a name="6013"
+      >
+
+  </a
+      ><a name="6017" href="examples.heap.correctnessLinkedList.html#6017" class="Function"
+      >CorrHeapWithPointer</a
+      ><a name="6036"
+      > </a
+      ><a name="6037" class="Symbol"
+      >:</a
+      ><a name="6038"
+      > </a
+      ><a name="6039" class="Symbol"
+      >{</a
+      ><a name="6040" href="examples.heap.correctnessLinkedList.html#6040" class="Bound"
+      >w</a
+      ><a name="6041"
+      > </a
+      ><a name="6042" class="Symbol"
+      >:</a
+      ><a name="6043"
+      > </a
+      ><a name="6044" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="6049" class="Symbol"
+      >}</a
+      ><a name="6050"
+      > </a
+      ><a name="6051" class="Symbol"
+      >&#8594;</a
+      ><a name="6052"
+      > </a
+      ><a name="6053" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6068"
+      > </a
+      ><a name="6069" class="Symbol"
+      >{</a
+      ><a name="6070" href="examples.heap.correctnessLinkedList.html#6040" class="Bound"
+      >w</a
+      ><a name="6071" class="Symbol"
+      >}</a
+      ><a name="6072"
+      > </a
+      ><a name="6073" class="Symbol"
+      >&#8594;</a
+      ><a name="6074"
+      > </a
+      ><a name="6075" class="PrimitiveType"
+      >Set</a
+      ><a name="6078"
+      >
+  </a
+      ><a name="6081" href="examples.heap.correctnessLinkedList.html#6017" class="Function"
+      >CorrHeapWithPointer</a
+      ><a name="6100"
+      > </a
+      ><a name="6101" class="Symbol"
+      >{</a
+      ><a name="6102" href="examples.heap.correctnessLinkedList.html#6102" class="Bound"
+      >w</a
+      ><a name="6103" class="Symbol"
+      >}</a
+      ><a name="6104"
+      > </a
+      ><a name="6105" href="examples.heap.correctnessLinkedList.html#6105" class="Bound"
+      >l</a
+      ><a name="6106"
+      >  </a
+      ><a name="6108" class="Symbol"
+      >=</a
+      ><a name="6109"
+      > </a
+      ><a name="6110" href="examples.heap.correctnessLinkedList.html#5154" class="Record"
+      >HeapCorrect</a
+      ><a name="6121"
+      > </a
+      ><a name="6122" class="Symbol"
+      >(</a
+      ><a name="6123" href="examples.heap.correctnessLinkedList.html#6105" class="Bound"
+      >l</a
+      ><a name="6124"
+      > </a
+      ><a name="6125" class="Symbol"
+      >.</a
+      ><a name="6126" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="6132" class="Symbol"
+      >)</a
+      ><a name="6133"
+      >
+
+
+
+  </a
+      ><a name="6139" href="examples.heap.correctnessLinkedList.html#6139" class="Function"
+      >CorrMaybeHeapWithPointer</a
+      ><a name="6163"
+      > </a
+      ><a name="6164" class="Symbol"
+      >:</a
+      ><a name="6165"
+      > </a
+      ><a name="6166" class="Symbol"
+      >{</a
+      ><a name="6167" href="examples.heap.correctnessLinkedList.html#6167" class="Bound"
+      >w</a
+      ><a name="6168"
+      > </a
+      ><a name="6169" class="Symbol"
+      >:</a
+      ><a name="6170"
+      > </a
+      ><a name="6171" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="6176" class="Symbol"
+      >}</a
+      ><a name="6177"
+      > </a
+      ><a name="6178" class="Symbol"
+      >&#8594;</a
+      ><a name="6179"
+      > </a
+      ><a name="6180" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="6185"
+      > </a
+      ><a name="6186" class="Symbol"
+      >(</a
+      ><a name="6187" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6202"
+      > </a
+      ><a name="6203" class="Symbol"
+      >{</a
+      ><a name="6204" href="examples.heap.correctnessLinkedList.html#6167" class="Bound"
+      >w</a
+      ><a name="6205" class="Symbol"
+      >})</a
+      ><a name="6207"
+      > </a
+      ><a name="6208" class="Symbol"
+      >&#8594;</a
+      ><a name="6209"
+      > </a
+      ><a name="6210" class="PrimitiveType"
+      >Set</a
+      ><a name="6213"
+      >
+  </a
+      ><a name="6216" href="examples.heap.correctnessLinkedList.html#6139" class="Function"
+      >CorrMaybeHeapWithPointer</a
+      ><a name="6240"
+      > </a
+      ><a name="6241" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="6248"
+      > </a
+      ><a name="6249" class="Symbol"
+      >=</a
+      ><a name="6250"
+      > </a
+      ><a name="6251" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="6252"
+      >
+  </a
+      ><a name="6255" href="examples.heap.correctnessLinkedList.html#6139" class="Function"
+      >CorrMaybeHeapWithPointer</a
+      ><a name="6279"
+      > </a
+      ><a name="6280" class="Symbol"
+      >(</a
+      ><a name="6281" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="6285"
+      > </a
+      ><a name="6286" href="examples.heap.correctnessLinkedList.html#6286" class="Bound"
+      >l</a
+      ><a name="6287" class="Symbol"
+      >)</a
+      ><a name="6288"
+      > </a
+      ><a name="6289" class="Symbol"
+      >=</a
+      ><a name="6290"
+      > </a
+      ><a name="6291" href="examples.heap.correctnessLinkedList.html#6017" class="Function"
+      >CorrHeapWithPointer</a
+      ><a name="6310"
+      > </a
+      ><a name="6311" href="examples.heap.correctnessLinkedList.html#6286" class="Bound"
+      >l</a
+      ><a name="6312"
+      >
+
+  </a
+      ><a name="6316" class="Comment"
+      >-- Nil: empty linked list.</a
+      ><a name="6342"
+      >
+  </a
+      ><a name="6345" class="Comment"
+      >-- Represented as the null pointer in the empty heap.</a
+      ><a name="6398"
+      >
+
+  </a
+      ><a name="6402" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="6406"
+      > </a
+      ><a name="6407" class="Symbol"
+      >:</a
+      ><a name="6408"
+      > </a
+      ><a name="6409" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6424"
+      > </a
+      ><a name="6425" class="Symbol"
+      >{</a
+      ><a name="6426" href="src.heap.heapAsObjectBase.html#2930" class="Function"
+      >&#8709;w</a
+      ><a name="6428" class="Symbol"
+      >}</a
+      ><a name="6429"
+      >
+  </a
+      ><a name="6432" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="6436"
+      > </a
+      ><a name="6437" class="DottedPattern Symbol"
+      >.</a
+      ><a name="6438" href="examples.heap.correctnessLinkedList.html#5879" class="DottedPattern Field"
+      >llheap</a
+      ><a name="6444"
+      > </a
+      ><a name="6445" class="Symbol"
+      >=</a
+      ><a name="6446"
+      > </a
+      ><a name="6447" href="src.heap.heapAsObject.html#4401" class="Function"
+      >heapRObject</a
+      ><a name="6458"
+      > </a
+      ><a name="6459" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="6467"
+      > </a
+      ><a name="6468" href="src.heap.heapAsObjectGeneric.html#2999" class="Function"
+      >&#8709;Hfin</a
+      ><a name="6473"
+      >
+  </a
+      ><a name="6476" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="6480"
+      > </a
+      ><a name="6481" class="DottedPattern Symbol"
+      >.</a
+      ><a name="6482" href="examples.heap.correctnessLinkedList.html#5914" class="DottedPattern Field"
+      >llpoint</a
+      ><a name="6489"
+      > </a
+      ><a name="6490" class="Symbol"
+      >=</a
+      ><a name="6491"
+      > </a
+      ><a name="6492" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="6499"
+      >
+
+  </a
+      ><a name="6503" class="Comment"
+      >-- Nil is correct.</a
+      ><a name="6521"
+      >
+
+  </a
+      ><a name="6525" href="examples.heap.correctnessLinkedList.html#6525" class="Function"
+      >corNill</a
+      ><a name="6532"
+      > </a
+      ><a name="6533" class="Symbol"
+      >:</a
+      ><a name="6534"
+      > </a
+      ><a name="6535" href="examples.heap.correctnessLinkedList.html#6017" class="Function"
+      >CorrHeapWithPointer</a
+      ><a name="6554"
+      > </a
+      ><a name="6555" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="6559"
+      >
+  </a
+      ><a name="6562" href="examples.heap.correctnessLinkedList.html#6525" class="Function"
+      >corNill</a
+      ><a name="6569"
+      > </a
+      ><a name="6570" class="Symbol"
+      >=</a
+      ><a name="6571"
+      > </a
+      ><a name="6572" href="examples.heap.correctnessLinkedList.html#5466" class="Function"
+      >corHeapObjectLL</a
+      ><a name="6587"
+      > </a
+      ><a name="6588" href="src.heap.heapAsObjectGeneric.html#2999" class="Function"
+      >&#8709;Hfin</a
+      ><a name="6593"
+      > </a
+      ><a name="6594" class="Comment"
+      >-- (newNullObject &#8709;H)</a
+      ><a name="6615"
+      >
+
+
+  </a
+      ><a name="6620" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="6627"
+      > </a
+      ><a name="6628" class="Symbol"
+      >:</a
+      ><a name="6629"
+      > </a
+      ><a name="6630" class="Symbol"
+      >{</a
+      ><a name="6631" href="examples.heap.correctnessLinkedList.html#6631" class="Bound"
+      >w</a
+      ><a name="6632"
+      > </a
+      ><a name="6633" class="Symbol"
+      >:</a
+      ><a name="6634"
+      > </a
+      ><a name="6635" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="6640" class="Symbol"
+      >}</a
+      ><a name="6641"
+      > </a
+      ><a name="6642" class="Symbol"
+      >&#8594;</a
+      ><a name="6643"
+      > </a
+      ><a name="6644" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="6656"
+      > </a
+      ><a name="6657" href="examples.heap.correctnessLinkedList.html#6631" class="Bound"
+      >w</a
+      ><a name="6658"
+      > </a
+      ><a name="6659" class="Symbol"
+      >&#8594;</a
+      ><a name="6660"
+      > </a
+      ><a name="6661" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="6666"
+      > </a
+      ><a name="6667" class="Symbol"
+      >(</a
+      ><a name="6668" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="6674"
+      > </a
+      ><a name="6675" href="examples.heap.correctnessLinkedList.html#6631" class="Bound"
+      >w</a
+      ><a name="6676" class="Symbol"
+      >)</a
+      ><a name="6677"
+      > </a
+      ><a name="6678" class="Symbol"
+      >&#8594;</a
+      ><a name="6679"
+      > </a
+      ><a name="6680" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="6685"
+      > </a
+      ><a name="6686" class="Symbol"
+      >(</a
+      ><a name="6687" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6702"
+      > </a
+      ><a name="6703" class="Symbol"
+      >{</a
+      ><a name="6704" href="examples.heap.correctnessLinkedList.html#6631" class="Bound"
+      >w</a
+      ><a name="6705" class="Symbol"
+      >})</a
+      ><a name="6707"
+      >
+  </a
+      ><a name="6710" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="6717"
+      > </a
+      ><a name="6718" href="examples.heap.correctnessLinkedList.html#6718" class="Bound"
+      >h</a
+      ><a name="6719"
+      > </a
+      ><a name="6720" class="Symbol"
+      >(</a
+      ><a name="6721" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="6725"
+      > </a
+      ><a name="6726" href="examples.heap.correctnessLinkedList.html#6726" class="Bound"
+      >x</a
+      ><a name="6727" class="Symbol"
+      >)</a
+      ><a name="6728"
+      > </a
+      ><a name="6729" class="Symbol"
+      >=</a
+      ><a name="6730"
+      > </a
+      ><a name="6731" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="6735"
+      > </a
+      ><a name="6736" class="Symbol"
+      >(</a
+      ><a name="6737" href="examples.heap.correctnessLinkedList.html#5854" class="InductiveConstructor"
+      >llist</a
+      ><a name="6742"
+      > </a
+      ><a name="6743" href="examples.heap.correctnessLinkedList.html#6718" class="Bound"
+      >h</a
+      ><a name="6744"
+      > </a
+      ><a name="6745" class="Symbol"
+      >(</a
+      ><a name="6746" href="examples.heap.correctnessLinkedList.html#6726" class="Bound"
+      >x</a
+      ><a name="6747"
+      > </a
+      ><a name="6748" class="Symbol"
+      >.</a
+      ><a name="6749" href="examples.heap.correctnessLinkedList.html#2547" class="Field"
+      >getNextLL</a
+      ><a name="6758" class="Symbol"
+      >))</a
+      ><a name="6760"
+      >
+  </a
+      ><a name="6763" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="6770"
+      > </a
+      ><a name="6771" href="examples.heap.correctnessLinkedList.html#6771" class="Bound"
+      >h</a
+      ><a name="6772"
+      > </a
+      ><a name="6773" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="6780"
+      > </a
+      ><a name="6781" class="Symbol"
+      >=</a
+      ><a name="6782"
+      > </a
+      ><a name="6783" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="6790"
+      >
+
+  </a
+      ><a name="6794" class="Comment"
+      >-- Reading the tail of a linked list.  Might be undefined.</a
+      ><a name="6852"
+      >
+
+  </a
+      ><a name="6856" href="examples.heap.correctnessLinkedList.html#6856" class="Function"
+      >tail</a
+      ><a name="6860"
+      > </a
+      ><a name="6861" class="Symbol"
+      >:</a
+      ><a name="6862"
+      > </a
+      ><a name="6863" class="Symbol"
+      >{</a
+      ><a name="6864" href="examples.heap.correctnessLinkedList.html#6864" class="Bound"
+      >w</a
+      ><a name="6865"
+      > </a
+      ><a name="6866" class="Symbol"
+      >:</a
+      ><a name="6867"
+      > </a
+      ><a name="6868" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="6873" class="Symbol"
+      >}</a
+      ><a name="6874"
+      > </a
+      ><a name="6875" class="Symbol"
+      >&#8594;</a
+      ><a name="6876"
+      > </a
+      ><a name="6877" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6892"
+      > </a
+      ><a name="6893" class="Symbol"
+      >{</a
+      ><a name="6894" href="examples.heap.correctnessLinkedList.html#6864" class="Bound"
+      >w</a
+      ><a name="6895" class="Symbol"
+      >}</a
+      ><a name="6896"
+      > </a
+      ><a name="6897" class="Symbol"
+      >&#8594;</a
+      ><a name="6898"
+      > </a
+      ><a name="6899" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="6904"
+      > </a
+      ><a name="6905" class="Symbol"
+      >(</a
+      ><a name="6906" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="6921"
+      > </a
+      ><a name="6922" class="Symbol"
+      >{</a
+      ><a name="6923" href="examples.heap.correctnessLinkedList.html#6864" class="Bound"
+      >w</a
+      ><a name="6924" class="Symbol"
+      >})</a
+      ><a name="6926"
+      >
+  </a
+      ><a name="6929" href="examples.heap.correctnessLinkedList.html#6856" class="Function"
+      >tail</a
+      ><a name="6933"
+      > </a
+      ><a name="6934" href="examples.heap.correctnessLinkedList.html#6934" class="Bound"
+      >l</a
+      ><a name="6935"
+      > </a
+      ><a name="6936" class="Symbol"
+      >=</a
+      ><a name="6937"
+      > </a
+      ><a name="6938" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="6945"
+      > </a
+      ><a name="6946" class="Symbol"
+      >(</a
+      ><a name="6947" href="examples.heap.correctnessLinkedList.html#6934" class="Bound"
+      >l</a
+      ><a name="6948"
+      > </a
+      ><a name="6949" class="Symbol"
+      >.</a
+      ><a name="6950" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="6956" class="Symbol"
+      >)</a
+      ><a name="6957"
+      > </a
+      ><a name="6958" class="Symbol"
+      >(</a
+      ><a name="6959" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="6965"
+      > </a
+      ><a name="6966" class="Symbol"
+      >(</a
+      ><a name="6967" href="examples.heap.correctnessLinkedList.html#6934" class="Bound"
+      >l</a
+      ><a name="6968"
+      > </a
+      ><a name="6969" class="Symbol"
+      >.</a
+      ><a name="6970" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="6976" class="Symbol"
+      >)</a
+      ><a name="6977"
+      > </a
+      ><a name="6978" class="Symbol"
+      >(</a
+      ><a name="6979" href="examples.heap.correctnessLinkedList.html#6934" class="Bound"
+      >l</a
+      ><a name="6980"
+      > </a
+      ><a name="6981" class="Symbol"
+      >.</a
+      ><a name="6982" href="examples.heap.correctnessLinkedList.html#5914" class="Field"
+      >llpoint</a
+      ><a name="6989" class="Symbol"
+      >))</a
+      ><a name="6991"
+      >
+
+
+
+  </a
+      ><a name="6997" href="examples.heap.correctnessLinkedList.html#6997" class="Function"
+      >corTail'</a
+      ><a name="7005"
+      > </a
+      ><a name="7006" class="Symbol"
+      >:</a
+      ><a name="7007"
+      > </a
+      ><a name="7008" class="Symbol"
+      >{</a
+      ><a name="7009" href="examples.heap.correctnessLinkedList.html#7009" class="Bound"
+      >w</a
+      ><a name="7010"
+      > </a
+      ><a name="7011" class="Symbol"
+      >:</a
+      ><a name="7012"
+      > </a
+      ><a name="7013" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="7018" class="Symbol"
+      >}</a
+      ><a name="7019"
+      > </a
+      ><a name="7020" class="Symbol"
+      >{</a
+      ><a name="7021" href="examples.heap.correctnessLinkedList.html#7021" class="Bound"
+      >h</a
+      ><a name="7022"
+      > </a
+      ><a name="7023" class="Symbol"
+      >:</a
+      ><a name="7024"
+      > </a
+      ><a name="7025" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="7037"
+      > </a
+      ><a name="7038" href="examples.heap.correctnessLinkedList.html#7009" class="Bound"
+      >w</a
+      ><a name="7039" class="Symbol"
+      >}</a
+      ><a name="7040"
+      >
+             </a
+      ><a name="7054" class="Symbol"
+      >&#8594;</a
+      ><a name="7055"
+      > </a
+      ><a name="7056" href="examples.heap.correctnessLinkedList.html#5154" class="Record"
+      >HeapCorrect</a
+      ><a name="7067"
+      > </a
+      ><a name="7068" href="examples.heap.correctnessLinkedList.html#7021" class="Bound"
+      >h</a
+      ><a name="7069"
+      >
+             </a
+      ><a name="7083" class="Symbol"
+      >&#8594;</a
+      ><a name="7084"
+      > </a
+      ><a name="7085" class="Symbol"
+      >(</a
+      ><a name="7086" href="examples.heap.correctnessLinkedList.html#7086" class="Bound"
+      >p</a
+      ><a name="7087"
+      > </a
+      ><a name="7088" class="Symbol"
+      >:</a
+      ><a name="7089"
+      > </a
+      ><a name="7090" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="7095"
+      > </a
+      ><a name="7096" class="Symbol"
+      >(</a
+      ><a name="7097" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="7103"
+      > </a
+      ><a name="7104" href="examples.heap.correctnessLinkedList.html#7009" class="Bound"
+      >w</a
+      ><a name="7105" class="Symbol"
+      >))</a
+      ><a name="7107"
+      >
+             </a
+      ><a name="7121" class="Symbol"
+      >&#8594;</a
+      ><a name="7122"
+      > </a
+      ><a name="7123" href="examples.heap.correctnessLinkedList.html#6139" class="Function"
+      >CorrMaybeHeapWithPointer</a
+      ><a name="7147"
+      > </a
+      ><a name="7148" class="Symbol"
+      >{</a
+      ><a name="7149" href="examples.heap.correctnessLinkedList.html#7009" class="Bound"
+      >w</a
+      ><a name="7150" class="Symbol"
+      >}</a
+      ><a name="7151"
+      > </a
+      ><a name="7152" class="Symbol"
+      >(</a
+      ><a name="7153" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="7160"
+      > </a
+      ><a name="7161" href="examples.heap.correctnessLinkedList.html#7021" class="Bound"
+      >h</a
+      ><a name="7162"
+      > </a
+      ><a name="7163" href="examples.heap.correctnessLinkedList.html#7086" class="Bound"
+      >p</a
+      ><a name="7164" class="Symbol"
+      >)</a
+      ><a name="7165"
+      >
+  </a
+      ><a name="7168" href="examples.heap.correctnessLinkedList.html#6997" class="Function"
+      >corTail'</a
+      ><a name="7176"
+      > </a
+      ><a name="7177" href="examples.heap.correctnessLinkedList.html#7177" class="Bound"
+      >cor</a
+      ><a name="7180"
+      > </a
+      ><a name="7181" class="Symbol"
+      >(</a
+      ><a name="7182" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="7186"
+      > </a
+      ><a name="7187" href="examples.heap.correctnessLinkedList.html#7187" class="Bound"
+      >x</a
+      ><a name="7188" class="Symbol"
+      >)</a
+      ><a name="7189"
+      > </a
+      ><a name="7190" class="Symbol"
+      >=</a
+      ><a name="7191"
+      > </a
+      ><a name="7192" href="examples.heap.correctnessLinkedList.html#7177" class="Bound"
+      >cor</a
+      ><a name="7195"
+      >
+  </a
+      ><a name="7198" href="examples.heap.correctnessLinkedList.html#6997" class="Function"
+      >corTail'</a
+      ><a name="7206"
+      > </a
+      ><a name="7207" href="examples.heap.correctnessLinkedList.html#7207" class="Bound"
+      >cor</a
+      ><a name="7210"
+      > </a
+      ><a name="7211" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="7218"
+      > </a
+      ><a name="7219" class="Symbol"
+      >=</a
+      ><a name="7220"
+      > </a
+      ><a name="7221" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="7223"
+      >
+
+  </a
+      ><a name="7227" class="Comment"
+      >-- Correctness proof of the tail function.</a
+      ><a name="7269"
+      >
+  </a
+      ><a name="7272" class="Comment"
+      >-- (Trivial as heap does not change)</a
+      ><a name="7308"
+      >
+
+  </a
+      ><a name="7312" href="examples.heap.correctnessLinkedList.html#7312" class="Function"
+      >corTail</a
+      ><a name="7319"
+      > </a
+      ><a name="7320" class="Symbol"
+      >:</a
+      ><a name="7321"
+      > </a
+      ><a name="7322" class="Symbol"
+      >{</a
+      ><a name="7323" href="examples.heap.correctnessLinkedList.html#7323" class="Bound"
+      >w</a
+      ><a name="7324"
+      > </a
+      ><a name="7325" class="Symbol"
+      >:</a
+      ><a name="7326"
+      > </a
+      ><a name="7327" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="7332" class="Symbol"
+      >}</a
+      ><a name="7333"
+      > </a
+      ><a name="7334" class="Symbol"
+      >&#8594;</a
+      ><a name="7335"
+      > </a
+      ><a name="7336" class="Symbol"
+      >(</a
+      ><a name="7337" href="examples.heap.correctnessLinkedList.html#7337" class="Bound"
+      >l</a
+      ><a name="7338"
+      > </a
+      ><a name="7339" class="Symbol"
+      >:</a
+      ><a name="7340"
+      > </a
+      ><a name="7341" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="7356"
+      > </a
+      ><a name="7357" class="Symbol"
+      >{</a
+      ><a name="7358" href="examples.heap.correctnessLinkedList.html#7323" class="Bound"
+      >w</a
+      ><a name="7359" class="Symbol"
+      >})</a
+      ><a name="7361"
+      >
+            </a
+      ><a name="7374" class="Symbol"
+      >&#8594;</a
+      ><a name="7375"
+      > </a
+      ><a name="7376" href="examples.heap.correctnessLinkedList.html#6017" class="Function"
+      >CorrHeapWithPointer</a
+      ><a name="7395"
+      > </a
+      ><a name="7396" class="Symbol"
+      >{</a
+      ><a name="7397" href="examples.heap.correctnessLinkedList.html#7323" class="Bound"
+      >w</a
+      ><a name="7398" class="Symbol"
+      >}</a
+      ><a name="7399"
+      > </a
+      ><a name="7400" href="examples.heap.correctnessLinkedList.html#7337" class="Bound"
+      >l</a
+      ><a name="7401"
+      >
+            </a
+      ><a name="7414" class="Symbol"
+      >&#8594;</a
+      ><a name="7415"
+      > </a
+      ><a name="7416" href="examples.heap.correctnessLinkedList.html#6139" class="Function"
+      >CorrMaybeHeapWithPointer</a
+      ><a name="7440"
+      > </a
+      ><a name="7441" class="Symbol"
+      >{</a
+      ><a name="7442" href="examples.heap.correctnessLinkedList.html#7323" class="Bound"
+      >w</a
+      ><a name="7443" class="Symbol"
+      >}</a
+      ><a name="7444"
+      > </a
+      ><a name="7445" class="Symbol"
+      >(</a
+      ><a name="7446" href="examples.heap.correctnessLinkedList.html#6856" class="Function"
+      >tail</a
+      ><a name="7450"
+      > </a
+      ><a name="7451" href="examples.heap.correctnessLinkedList.html#7337" class="Bound"
+      >l</a
+      ><a name="7452" class="Symbol"
+      >)</a
+      ><a name="7453"
+      >
+  </a
+      ><a name="7456" href="examples.heap.correctnessLinkedList.html#7312" class="Function"
+      >corTail</a
+      ><a name="7463"
+      > </a
+      ><a name="7464" href="examples.heap.correctnessLinkedList.html#7464" class="Bound"
+      >l</a
+      ><a name="7465"
+      > </a
+      ><a name="7466" href="examples.heap.correctnessLinkedList.html#7466" class="Bound"
+      >cor</a
+      ><a name="7469"
+      > </a
+      ><a name="7470" class="Symbol"
+      >=</a
+      ><a name="7471"
+      > </a
+      ><a name="7472" href="examples.heap.correctnessLinkedList.html#6997" class="Function"
+      >corTail'</a
+      ><a name="7480"
+      > </a
+      ><a name="7481" href="examples.heap.correctnessLinkedList.html#7466" class="Bound"
+      >cor</a
+      ><a name="7484"
+      > </a
+      ><a name="7485" class="Symbol"
+      >(</a
+      ><a name="7486" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="7492"
+      > </a
+      ><a name="7493" class="Symbol"
+      >(</a
+      ><a name="7494" href="examples.heap.correctnessLinkedList.html#7464" class="Bound"
+      >l</a
+      ><a name="7495"
+      > </a
+      ><a name="7496" class="Symbol"
+      >.</a
+      ><a name="7497" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="7503" class="Symbol"
+      >)</a
+      ><a name="7504"
+      > </a
+      ><a name="7505" class="Symbol"
+      >(</a
+      ><a name="7506" href="examples.heap.correctnessLinkedList.html#7464" class="Bound"
+      >l</a
+      ><a name="7507"
+      > </a
+      ><a name="7508" class="Symbol"
+      >.</a
+      ><a name="7509" href="examples.heap.correctnessLinkedList.html#5914" class="Field"
+      >llpoint</a
+      ><a name="7516" class="Symbol"
+      >))</a
+      ><a name="7518"
+      >
+
+  </a
+      ><a name="7522" href="examples.heap.correctnessLinkedList.html#7522" class="Function"
+      >tail'</a
+      ><a name="7527"
+      > </a
+      ><a name="7528" class="Symbol"
+      >:</a
+      ><a name="7529"
+      > </a
+      ><a name="7530" class="Symbol"
+      >{</a
+      ><a name="7531" href="examples.heap.correctnessLinkedList.html#7531" class="Bound"
+      >w</a
+      ><a name="7532"
+      > </a
+      ><a name="7533" class="Symbol"
+      >:</a
+      ><a name="7534"
+      > </a
+      ><a name="7535" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="7540" class="Symbol"
+      >}</a
+      ><a name="7541"
+      > </a
+      ><a name="7542" class="Symbol"
+      >&#8594;</a
+      ><a name="7543"
+      > </a
+      ><a name="7544" class="Symbol"
+      >(</a
+      ><a name="7545" href="examples.heap.correctnessLinkedList.html#7545" class="Bound"
+      >h</a
+      ><a name="7546"
+      > </a
+      ><a name="7547" class="Symbol"
+      >:</a
+      ><a name="7548"
+      > </a
+      ><a name="7549" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="7561"
+      > </a
+      ><a name="7562" href="examples.heap.correctnessLinkedList.html#7531" class="Bound"
+      >w</a
+      ><a name="7563" class="Symbol"
+      >)</a
+      ><a name="7564"
+      > </a
+      ><a name="7565" class="Symbol"
+      >&#8594;</a
+      ><a name="7566"
+      > </a
+      ><a name="7567" class="Symbol"
+      >(</a
+      ><a name="7568" href="examples.heap.correctnessLinkedList.html#7568" class="Bound"
+      >p</a
+      ><a name="7569"
+      > </a
+      ><a name="7570" class="Symbol"
+      >:</a
+      ><a name="7571"
+      > </a
+      ><a name="7572" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="7583"
+      > </a
+      ><a name="7584" href="examples.heap.correctnessLinkedList.html#7531" class="Bound"
+      >w</a
+      ><a name="7585" class="Symbol"
+      >)</a
+      ><a name="7586"
+      >
+          </a
+      ><a name="7597" class="Symbol"
+      >&#8594;</a
+      ><a name="7598"
+      > </a
+      ><a name="7599" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="7604"
+      > </a
+      ><a name="7605" class="Symbol"
+      >(</a
+      ><a name="7606" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="7621"
+      > </a
+      ><a name="7622" class="Symbol"
+      >{</a
+      ><a name="7623" href="examples.heap.correctnessLinkedList.html#7531" class="Bound"
+      >w</a
+      ><a name="7624" class="Symbol"
+      >})</a
+      ><a name="7626"
+      >
+  </a
+      ><a name="7629" href="examples.heap.correctnessLinkedList.html#7522" class="Function"
+      >tail'</a
+      ><a name="7634"
+      > </a
+      ><a name="7635" href="examples.heap.correctnessLinkedList.html#7635" class="Bound"
+      >h</a
+      ><a name="7636"
+      > </a
+      ><a name="7637" href="examples.heap.correctnessLinkedList.html#7637" class="Bound"
+      >p</a
+      ><a name="7638"
+      > </a
+      ><a name="7639" class="Symbol"
+      >=</a
+      ><a name="7640"
+      > </a
+      ><a name="7641" href="examples.heap.correctnessLinkedList.html#6620" class="Function"
+      >tailaux</a
+      ><a name="7648"
+      > </a
+      ><a name="7649" href="examples.heap.correctnessLinkedList.html#7635" class="Bound"
+      >h</a
+      ><a name="7650"
+      > </a
+      ><a name="7651" class="Symbol"
+      >(</a
+      ><a name="7652" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="7658"
+      > </a
+      ><a name="7659" href="examples.heap.correctnessLinkedList.html#7635" class="Bound"
+      >h</a
+      ><a name="7660"
+      > </a
+      ><a name="7661" href="examples.heap.correctnessLinkedList.html#7637" class="Bound"
+      >p</a
+      ><a name="7662" class="Symbol"
+      >)</a
+      ><a name="7663"
+      >
+
+
+
+  </a
+      ><a name="7669" href="examples.heap.correctnessLinkedList.html#7669" class="Function"
+      >headaux</a
+      ><a name="7676"
+      > </a
+      ><a name="7677" class="Symbol"
+      >:</a
+      ><a name="7678"
+      > </a
+      ><a name="7679" class="Symbol"
+      >{</a
+      ><a name="7680" href="examples.heap.correctnessLinkedList.html#7680" class="Bound"
+      >w</a
+      ><a name="7681"
+      > </a
+      ><a name="7682" class="Symbol"
+      >:</a
+      ><a name="7683"
+      > </a
+      ><a name="7684" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="7689" class="Symbol"
+      >}</a
+      ><a name="7690"
+      > </a
+      ><a name="7691" class="Symbol"
+      >&#8594;</a
+      ><a name="7692"
+      > </a
+      ><a name="7693" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="7698"
+      > </a
+      ><a name="7699" class="Symbol"
+      >(</a
+      ><a name="7700" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="7706"
+      > </a
+      ><a name="7707" href="examples.heap.correctnessLinkedList.html#7680" class="Bound"
+      >w</a
+      ><a name="7708" class="Symbol"
+      >)</a
+      ><a name="7709"
+      > </a
+      ><a name="7710" class="Symbol"
+      >&#8594;</a
+      ><a name="7711"
+      > </a
+      ><a name="7712" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="7717"
+      > </a
+      ><a name="7718" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="7719"
+      >
+  </a
+      ><a name="7722" href="examples.heap.correctnessLinkedList.html#7669" class="Function"
+      >headaux</a
+      ><a name="7729"
+      > </a
+      ><a name="7730" class="Symbol"
+      >(</a
+      ><a name="7731" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="7735"
+      > </a
+      ><a name="7736" href="examples.heap.correctnessLinkedList.html#7736" class="Bound"
+      >x</a
+      ><a name="7737" class="Symbol"
+      >)</a
+      ><a name="7738"
+      > </a
+      ><a name="7739" class="Symbol"
+      >=</a
+      ><a name="7740"
+      > </a
+      ><a name="7741" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="7745"
+      > </a
+      ><a name="7746" class="Symbol"
+      >(</a
+      ><a name="7747" href="examples.heap.correctnessLinkedList.html#7736" class="Bound"
+      >x</a
+      ><a name="7748"
+      > </a
+      ><a name="7749" class="Symbol"
+      >.</a
+      ><a name="7750" href="examples.heap.correctnessLinkedList.html#2527" class="Field"
+      >getElemLL</a
+      ><a name="7759" class="Symbol"
+      >)</a
+      ><a name="7760"
+      >
+  </a
+      ><a name="7763" href="examples.heap.correctnessLinkedList.html#7669" class="Function"
+      >headaux</a
+      ><a name="7770"
+      > </a
+      ><a name="7771" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="7778"
+      > </a
+      ><a name="7779" class="Symbol"
+      >=</a
+      ><a name="7780"
+      > </a
+      ><a name="7781" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="7788"
+      >
+
+  </a
+      ><a name="7792" href="examples.heap.correctnessLinkedList.html#7792" class="Function"
+      >head</a
+      ><a name="7796"
+      > </a
+      ><a name="7797" class="Symbol"
+      >:</a
+      ><a name="7798"
+      > </a
+      ><a name="7799" class="Symbol"
+      >{</a
+      ><a name="7800" href="examples.heap.correctnessLinkedList.html#7800" class="Bound"
+      >w</a
+      ><a name="7801"
+      > </a
+      ><a name="7802" class="Symbol"
+      >:</a
+      ><a name="7803"
+      > </a
+      ><a name="7804" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="7809" class="Symbol"
+      >}</a
+      ><a name="7810"
+      > </a
+      ><a name="7811" class="Symbol"
+      >&#8594;</a
+      ><a name="7812"
+      > </a
+      ><a name="7813" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="7828"
+      > </a
+      ><a name="7829" class="Symbol"
+      >{</a
+      ><a name="7830" href="examples.heap.correctnessLinkedList.html#7800" class="Bound"
+      >w</a
+      ><a name="7831" class="Symbol"
+      >}</a
+      ><a name="7832"
+      > </a
+      ><a name="7833" class="Symbol"
+      >&#8594;</a
+      ><a name="7834"
+      > </a
+      ><a name="7835" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="7840"
+      > </a
+      ><a name="7841" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="7842"
+      >
+  </a
+      ><a name="7845" href="examples.heap.correctnessLinkedList.html#7792" class="Function"
+      >head</a
+      ><a name="7849"
+      > </a
+      ><a name="7850" href="examples.heap.correctnessLinkedList.html#7850" class="Bound"
+      >l</a
+      ><a name="7851"
+      > </a
+      ><a name="7852" class="Symbol"
+      >=</a
+      ><a name="7853"
+      > </a
+      ><a name="7854" href="examples.heap.correctnessLinkedList.html#7669" class="Function"
+      >headaux</a
+      ><a name="7861"
+      > </a
+      ><a name="7862" class="Symbol"
+      >(</a
+      ><a name="7863" href="examples.heap.correctnessLinkedList.html#4373" class="Function"
+      >mreadP</a
+      ><a name="7869"
+      > </a
+      ><a name="7870" class="Symbol"
+      >(</a
+      ><a name="7871" href="examples.heap.correctnessLinkedList.html#7850" class="Bound"
+      >l</a
+      ><a name="7872"
+      > </a
+      ><a name="7873" class="Symbol"
+      >.</a
+      ><a name="7874" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="7880" class="Symbol"
+      >)</a
+      ><a name="7881"
+      > </a
+      ><a name="7882" class="Symbol"
+      >(</a
+      ><a name="7883" href="examples.heap.correctnessLinkedList.html#7850" class="Bound"
+      >l</a
+      ><a name="7884"
+      > </a
+      ><a name="7885" class="Symbol"
+      >.</a
+      ><a name="7886" href="examples.heap.correctnessLinkedList.html#5914" class="Field"
+      >llpoint</a
+      ><a name="7893" class="Symbol"
+      >))</a
+      ><a name="7895"
+      >
+
+
+  </a
+      ><a name="7900" href="examples.heap.correctnessLinkedList.html#7900" class="Function"
+      >lemmaNilTail</a
+      ><a name="7912"
+      > </a
+      ><a name="7913" class="Symbol"
+      >:</a
+      ><a name="7914"
+      > </a
+      ><a name="7915" href="examples.heap.correctnessLinkedList.html#6856" class="Function"
+      >tail</a
+      ><a name="7919"
+      > </a
+      ><a name="7920" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="7924"
+      > </a
+      ><a name="7925" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7926"
+      > </a
+      ><a name="7927" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="7934"
+      >
+  </a
+      ><a name="7937" href="examples.heap.correctnessLinkedList.html#7900" class="Function"
+      >lemmaNilTail</a
+      ><a name="7949"
+      > </a
+      ><a name="7950" class="Symbol"
+      >=</a
+      ><a name="7951"
+      > </a
+      ><a name="7952" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="7956"
+      >
+  </a
+      ><a name="7959" href="examples.heap.correctnessLinkedList.html#7959" class="Function"
+      >lemmaNilHead</a
+      ><a name="7971"
+      > </a
+      ><a name="7972" class="Symbol"
+      >:</a
+      ><a name="7973"
+      > </a
+      ><a name="7974" href="examples.heap.correctnessLinkedList.html#7792" class="Function"
+      >head</a
+      ><a name="7978"
+      > </a
+      ><a name="7979" href="examples.heap.correctnessLinkedList.html#6402" class="Function"
+      >nill</a
+      ><a name="7983"
+      > </a
+      ><a name="7984" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="7985"
+      > </a
+      ><a name="7986" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="7993"
+      >
+  </a
+      ><a name="7996" href="examples.heap.correctnessLinkedList.html#7959" class="Function"
+      >lemmaNilHead</a
+      ><a name="8008"
+      > </a
+      ><a name="8009" class="Symbol"
+      >=</a
+      ><a name="8010"
+      > </a
+      ><a name="8011" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="8015"
+      >
+
+
+  </a
+      ><a name="8020" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="8039"
+      > </a
+      ><a name="8040" class="Symbol"
+      >:</a
+      ><a name="8041"
+      > </a
+      ><a name="8042" class="Symbol"
+      >{</a
+      ><a name="8043" href="examples.heap.correctnessLinkedList.html#8043" class="Bound"
+      >w</a
+      ><a name="8044"
+      > </a
+      ><a name="8045" class="Symbol"
+      >:</a
+      ><a name="8046"
+      > </a
+      ><a name="8047" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="8052" class="Symbol"
+      >}</a
+      ><a name="8053"
+      > </a
+      ><a name="8054" class="Symbol"
+      >&#8594;</a
+      ><a name="8055"
+      > </a
+      ><a name="8056" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8057"
+      >
+                      </a
+      ><a name="8080" class="Symbol"
+      >&#8594;</a
+      ><a name="8081"
+      > </a
+      ><a name="8082" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="8093"
+      > </a
+      ><a name="8094" href="examples.heap.correctnessLinkedList.html#8043" class="Bound"
+      >w</a
+      ><a name="8095"
+      >
+                      </a
+      ><a name="8118" class="Symbol"
+      >&#8594;</a
+      ><a name="8119"
+      > </a
+      ><a name="8120" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="8126"
+      > </a
+      ><a name="8127" class="Symbol"
+      >(</a
+      ><a name="8128" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="8132"
+      > </a
+      ><a name="8133" href="examples.heap.correctnessLinkedList.html#8043" class="Bound"
+      >w</a
+      ><a name="8134" class="Symbol"
+      >)</a
+      ><a name="8135"
+      >
+  </a
+      ><a name="8138" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="8157"
+      > </a
+      ><a name="8158" class="Symbol"
+      >{</a
+      ><a name="8159" href="examples.heap.correctnessLinkedList.html#8159" class="Bound"
+      >w</a
+      ><a name="8160" class="Symbol"
+      >}</a
+      ><a name="8161"
+      > </a
+      ><a name="8162" href="examples.heap.correctnessLinkedList.html#8162" class="Bound"
+      >n</a
+      ><a name="8163"
+      > </a
+      ><a name="8164" href="examples.heap.correctnessLinkedList.html#8164" class="Bound"
+      >p</a
+      ><a name="8165"
+      > </a
+      ><a name="8166" class="Symbol"
+      >=</a
+      ><a name="8167"
+      > </a
+      ><a name="8168" href="examples.heap.correctnessLinkedList.html#2484" class="InductiveConstructor"
+      >linkedListNode</a
+      ><a name="8182"
+      > </a
+      ><a name="8183" href="examples.heap.correctnessLinkedList.html#8162" class="Bound"
+      >n</a
+      ><a name="8184"
+      > </a
+      ><a name="8185" class="Symbol"
+      >(</a
+      ><a name="8186" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="8193"
+      > </a
+      ><a name="8194" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8195"
+      > </a
+      ><a name="8196" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="8212"
+      > </a
+      ><a name="8213" href="examples.heap.correctnessLinkedList.html#8164" class="Bound"
+      >p</a
+      ><a name="8214" class="Symbol"
+      >)</a
+      ><a name="8215"
+      >
+
+  </a
+      ><a name="8219" href="examples.heap.correctnessLinkedList.html#8219" class="Function"
+      >consStoreFinUnpack</a
+      ><a name="8237"
+      > </a
+      ><a name="8238" class="Symbol"
+      >:</a
+      ><a name="8239"
+      > </a
+      ><a name="8240" class="Symbol"
+      >{</a
+      ><a name="8241" href="examples.heap.correctnessLinkedList.html#8241" class="Bound"
+      >w</a
+      ><a name="8242"
+      > </a
+      ><a name="8243" class="Symbol"
+      >:</a
+      ><a name="8244"
+      > </a
+      ><a name="8245" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="8250" class="Symbol"
+      >}</a
+      ><a name="8251"
+      > </a
+      ><a name="8252" class="Symbol"
+      >&#8594;</a
+      ><a name="8253"
+      > </a
+      ><a name="8254" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8255"
+      >
+                      </a
+      ><a name="8278" class="Symbol"
+      >&#8594;</a
+      ><a name="8279"
+      > </a
+      ><a name="8280" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="8288"
+      > </a
+      ><a name="8289" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="8297"
+      >  </a
+      ><a name="8299" href="examples.heap.correctnessLinkedList.html#8241" class="Bound"
+      >w</a
+      ><a name="8300"
+      >
+                      </a
+      ><a name="8323" class="Symbol"
+      >&#8594;</a
+      ><a name="8324"
+      > </a
+      ><a name="8325" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="8336"
+      > </a
+      ><a name="8337" href="examples.heap.correctnessLinkedList.html#8241" class="Bound"
+      >w</a
+      ><a name="8338"
+      >
+                      </a
+      ><a name="8361" class="Symbol"
+      >&#8594;</a
+      ><a name="8362"
+      > </a
+      ><a name="8363" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="8375"
+      > </a
+      ><a name="8376" class="Symbol"
+      >(</a
+      ><a name="8377" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="8381"
+      > </a
+      ><a name="8382" href="examples.heap.correctnessLinkedList.html#8241" class="Bound"
+      >w</a
+      ><a name="8383" class="Symbol"
+      >)</a
+      ><a name="8384"
+      >
+  </a
+      ><a name="8387" href="examples.heap.correctnessLinkedList.html#8219" class="Function"
+      >consStoreFinUnpack</a
+      ><a name="8405"
+      > </a
+      ><a name="8406" class="Symbol"
+      >{</a
+      ><a name="8407" href="examples.heap.correctnessLinkedList.html#8407" class="Bound"
+      >w</a
+      ><a name="8408" class="Symbol"
+      >}</a
+      ><a name="8409"
+      > </a
+      ><a name="8410" href="examples.heap.correctnessLinkedList.html#8410" class="Bound"
+      >b</a
+      ><a name="8411"
+      > </a
+      ><a name="8412" href="examples.heap.correctnessLinkedList.html#8412" class="Bound"
+      >h</a
+      ><a name="8413"
+      > </a
+      ><a name="8414" href="examples.heap.correctnessLinkedList.html#8414" class="Bound"
+      >p</a
+      ><a name="8415"
+      > </a
+      ><a name="8416" class="Symbol"
+      >=</a
+      ><a name="8417"
+      > </a
+      ><a name="8418" href="examples.heap.correctnessLinkedList.html#3791" class="Function"
+      >nextH</a
+      ><a name="8423"
+      > </a
+      ><a name="8424" class="Symbol"
+      >(</a
+      ><a name="8425" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="8444"
+      > </a
+      ><a name="8445" href="examples.heap.correctnessLinkedList.html#8410" class="Bound"
+      >b</a
+      ><a name="8446"
+      > </a
+      ><a name="8447" href="examples.heap.correctnessLinkedList.html#8414" class="Bound"
+      >p</a
+      ><a name="8448" class="Symbol"
+      >)</a
+      ><a name="8449"
+      > </a
+      ><a name="8450" class="Symbol"
+      >(</a
+      ><a name="8451" href="src.heap.heapAsObject.html#4401" class="Function"
+      >heapRObject</a
+      ><a name="8462"
+      > </a
+      ><a name="8463" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="8471"
+      > </a
+      ><a name="8472" href="examples.heap.correctnessLinkedList.html#8412" class="Bound"
+      >h</a
+      ><a name="8473" class="Symbol"
+      >)</a
+      ><a name="8474"
+      >
+
+
+  </a
+      ><a name="8479" href="examples.heap.correctnessLinkedList.html#8479" class="Function"
+      >consHeapUnpack</a
+      ><a name="8493"
+      > </a
+      ><a name="8494" class="Symbol"
+      >:</a
+      ><a name="8495"
+      > </a
+      ><a name="8496" class="Symbol"
+      >{</a
+      ><a name="8497" href="examples.heap.correctnessLinkedList.html#8497" class="Bound"
+      >w</a
+      ><a name="8498"
+      > </a
+      ><a name="8499" class="Symbol"
+      >:</a
+      ><a name="8500"
+      > </a
+      ><a name="8501" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="8506" class="Symbol"
+      >}</a
+      ><a name="8507"
+      > </a
+      ><a name="8508" class="Symbol"
+      >&#8594;</a
+      ><a name="8509"
+      > </a
+      ><a name="8510" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8511"
+      >
+                      </a
+      ><a name="8534" class="Symbol"
+      >&#8594;</a
+      ><a name="8535"
+      > </a
+      ><a name="8536" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="8548"
+      > </a
+      ><a name="8549" href="examples.heap.correctnessLinkedList.html#8497" class="Bound"
+      >w</a
+      ><a name="8550"
+      >
+                      </a
+      ><a name="8573" class="Symbol"
+      >&#8594;</a
+      ><a name="8574"
+      > </a
+      ><a name="8575" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="8586"
+      > </a
+      ><a name="8587" href="examples.heap.correctnessLinkedList.html#8497" class="Bound"
+      >w</a
+      ><a name="8588"
+      >
+                      </a
+      ><a name="8611" class="Symbol"
+      >&#8594;</a
+      ><a name="8612"
+      > </a
+      ><a name="8613" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="8625"
+      > </a
+      ><a name="8626" class="Symbol"
+      >(</a
+      ><a name="8627" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="8631"
+      > </a
+      ><a name="8632" href="examples.heap.correctnessLinkedList.html#8497" class="Bound"
+      >w</a
+      ><a name="8633" class="Symbol"
+      >)</a
+      ><a name="8634"
+      >
+  </a
+      ><a name="8637" href="examples.heap.correctnessLinkedList.html#8479" class="Function"
+      >consHeapUnpack</a
+      ><a name="8651"
+      > </a
+      ><a name="8652" href="examples.heap.correctnessLinkedList.html#8652" class="Bound"
+      >n</a
+      ><a name="8653"
+      > </a
+      ><a name="8654" href="examples.heap.correctnessLinkedList.html#8654" class="Bound"
+      >h</a
+      ><a name="8655"
+      > </a
+      ><a name="8656" href="examples.heap.correctnessLinkedList.html#8656" class="Bound"
+      >p</a
+      ><a name="8657"
+      > </a
+      ><a name="8658" class="Symbol"
+      >=</a
+      ><a name="8659"
+      > </a
+      ><a name="8660" href="examples.heap.correctnessLinkedList.html#3791" class="Function"
+      >nextH</a
+      ><a name="8665"
+      > </a
+      ><a name="8666" class="Symbol"
+      >(</a
+      ><a name="8667" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="8686"
+      > </a
+      ><a name="8687" href="examples.heap.correctnessLinkedList.html#8652" class="Bound"
+      >n</a
+      ><a name="8688"
+      > </a
+      ><a name="8689" href="examples.heap.correctnessLinkedList.html#8656" class="Bound"
+      >p</a
+      ><a name="8690" class="Symbol"
+      >)</a
+      ><a name="8691"
+      > </a
+      ><a name="8692" href="examples.heap.correctnessLinkedList.html#8654" class="Bound"
+      >h</a
+      ><a name="8693"
+      >
+
+  </a
+      ><a name="8697" href="examples.heap.correctnessLinkedList.html#8697" class="Function"
+      >consNewStoreFinUnpack</a
+      ><a name="8718"
+      > </a
+      ><a name="8719" class="Symbol"
+      >:</a
+      ><a name="8720"
+      > </a
+      ><a name="8721" class="Symbol"
+      >{</a
+      ><a name="8722" href="examples.heap.correctnessLinkedList.html#8722" class="Bound"
+      >w</a
+      ><a name="8723"
+      > </a
+      ><a name="8724" class="Symbol"
+      >:</a
+      ><a name="8725"
+      > </a
+      ><a name="8726" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="8731" class="Symbol"
+      >}</a
+      ><a name="8732"
+      > </a
+      ><a name="8733" class="Symbol"
+      >&#8594;</a
+      ><a name="8734"
+      > </a
+      ><a name="8735" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8736"
+      >
+                      </a
+      ><a name="8759" class="Symbol"
+      >&#8594;</a
+      ><a name="8760"
+      > </a
+      ><a name="8761" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="8769"
+      > </a
+      ><a name="8770" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="8778"
+      >  </a
+      ><a name="8780" href="examples.heap.correctnessLinkedList.html#8722" class="Bound"
+      >w</a
+      ><a name="8781"
+      >
+                      </a
+      ><a name="8804" class="Symbol"
+      >&#8594;</a
+      ><a name="8805"
+      > </a
+      ><a name="8806" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="8817"
+      > </a
+      ><a name="8818" href="examples.heap.correctnessLinkedList.html#8722" class="Bound"
+      >w</a
+      ><a name="8819"
+      >
+                      </a
+      ><a name="8842" class="Symbol"
+      >&#8594;</a
+      ><a name="8843"
+      > </a
+      ><a name="8844" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="8854"
+      > </a
+      ><a name="8855" class="Symbol"
+      >(</a
+      ><a name="8856" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="8860"
+      > </a
+      ><a name="8861" href="examples.heap.correctnessLinkedList.html#8722" class="Bound"
+      >w</a
+      ><a name="8862" class="Symbol"
+      >)</a
+      ><a name="8863"
+      >
+  </a
+      ><a name="8866" href="examples.heap.correctnessLinkedList.html#8697" class="Function"
+      >consNewStoreFinUnpack</a
+      ><a name="8887"
+      > </a
+      ><a name="8888" class="Symbol"
+      >{</a
+      ><a name="8889" href="examples.heap.correctnessLinkedList.html#8889" class="Bound"
+      >w</a
+      ><a name="8890" class="Symbol"
+      >}</a
+      ><a name="8891"
+      > </a
+      ><a name="8892" href="examples.heap.correctnessLinkedList.html#8892" class="Bound"
+      >b</a
+      ><a name="8893"
+      > </a
+      ><a name="8894" href="examples.heap.correctnessLinkedList.html#8894" class="Bound"
+      >h</a
+      ><a name="8895"
+      > </a
+      ><a name="8896" href="examples.heap.correctnessLinkedList.html#8896" class="Bound"
+      >p</a
+      ><a name="8897"
+      > </a
+      ><a name="8898" class="Symbol"
+      >=</a
+      ><a name="8899"
+      > </a
+      ><a name="8900" href="examples.heap.correctnessLinkedList.html#4007" class="Function"
+      >newH</a
+      ><a name="8904"
+      > </a
+      ><a name="8905" class="Symbol"
+      >(</a
+      ><a name="8906" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="8925"
+      > </a
+      ><a name="8926" href="examples.heap.correctnessLinkedList.html#8892" class="Bound"
+      >b</a
+      ><a name="8927"
+      > </a
+      ><a name="8928" href="examples.heap.correctnessLinkedList.html#8896" class="Bound"
+      >p</a
+      ><a name="8929" class="Symbol"
+      >)</a
+      ><a name="8930"
+      > </a
+      ><a name="8931" class="Symbol"
+      >(</a
+      ><a name="8932" href="src.heap.heapAsObject.html#4401" class="Function"
+      >heapRObject</a
+      ><a name="8943"
+      > </a
+      ><a name="8944" href="examples.heap.correctnessLinkedList.html#4837" class="Bound"
+      >HeapElWP</a
+      ><a name="8952"
+      > </a
+      ><a name="8953" href="examples.heap.correctnessLinkedList.html#8894" class="Bound"
+      >h</a
+      ><a name="8954" class="Symbol"
+      >)</a
+      ><a name="8955"
+      >
+
+
+  </a
+      ><a name="8960" href="examples.heap.correctnessLinkedList.html#8960" class="Function"
+      >consNewUnpack</a
+      ><a name="8973"
+      > </a
+      ><a name="8974" class="Symbol"
+      >:</a
+      ><a name="8975"
+      > </a
+      ><a name="8976" class="Symbol"
+      >{</a
+      ><a name="8977" href="examples.heap.correctnessLinkedList.html#8977" class="Bound"
+      >w</a
+      ><a name="8978"
+      > </a
+      ><a name="8979" class="Symbol"
+      >:</a
+      ><a name="8980"
+      > </a
+      ><a name="8981" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="8986" class="Symbol"
+      >}</a
+      ><a name="8987"
+      > </a
+      ><a name="8988" class="Symbol"
+      >&#8594;</a
+      ><a name="8989"
+      > </a
+      ><a name="8990" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="8991"
+      >
+                        </a
+      ><a name="9016" class="Symbol"
+      >&#8594;</a
+      ><a name="9017"
+      > </a
+      ><a name="9018" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="9030"
+      > </a
+      ><a name="9031" href="examples.heap.correctnessLinkedList.html#8977" class="Bound"
+      >w</a
+      ><a name="9032"
+      >
+                        </a
+      ><a name="9057" class="Symbol"
+      >&#8594;</a
+      ><a name="9058"
+      > </a
+      ><a name="9059" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="9070"
+      > </a
+      ><a name="9071" href="examples.heap.correctnessLinkedList.html#8977" class="Bound"
+      >w</a
+      ><a name="9072"
+      >
+                        </a
+      ><a name="9097" class="Symbol"
+      >&#8594;</a
+      ><a name="9098"
+      > </a
+      ><a name="9099" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="9109"
+      > </a
+      ><a name="9110" class="Symbol"
+      >(</a
+      ><a name="9111" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="9115"
+      > </a
+      ><a name="9116" href="examples.heap.correctnessLinkedList.html#8977" class="Bound"
+      >w</a
+      ><a name="9117" class="Symbol"
+      >)</a
+      ><a name="9118"
+      >
+  </a
+      ><a name="9121" href="examples.heap.correctnessLinkedList.html#8960" class="Function"
+      >consNewUnpack</a
+      ><a name="9134"
+      > </a
+      ><a name="9135" href="examples.heap.correctnessLinkedList.html#9135" class="Bound"
+      >n</a
+      ><a name="9136"
+      > </a
+      ><a name="9137" href="examples.heap.correctnessLinkedList.html#9137" class="Bound"
+      >h</a
+      ><a name="9138"
+      > </a
+      ><a name="9139" href="examples.heap.correctnessLinkedList.html#9139" class="Bound"
+      >p</a
+      ><a name="9140"
+      > </a
+      ><a name="9141" class="Symbol"
+      >=</a
+      ><a name="9142"
+      > </a
+      ><a name="9143" href="examples.heap.correctnessLinkedList.html#4007" class="Function"
+      >newH</a
+      ><a name="9147"
+      > </a
+      ><a name="9148" class="Symbol"
+      >(</a
+      ><a name="9149" href="examples.heap.correctnessLinkedList.html#8020" class="Function"
+      >consLLForHeadUnpack</a
+      ><a name="9168"
+      > </a
+      ><a name="9169" href="examples.heap.correctnessLinkedList.html#9135" class="Bound"
+      >n</a
+      ><a name="9170"
+      > </a
+      ><a name="9171" href="examples.heap.correctnessLinkedList.html#9139" class="Bound"
+      >p</a
+      ><a name="9172" class="Symbol"
+      >)</a
+      ><a name="9173"
+      > </a
+      ><a name="9174" href="examples.heap.correctnessLinkedList.html#9137" class="Bound"
+      >h</a
+      ><a name="9175"
+      >
+
+
+  </a
+      ><a name="9180" href="examples.heap.correctnessLinkedList.html#9180" class="Function"
+      >consLLForHead</a
+      ><a name="9193"
+      > </a
+      ><a name="9194" class="Symbol"
+      >:</a
+      ><a name="9195"
+      > </a
+      ><a name="9196" class="Symbol"
+      >{</a
+      ><a name="9197" href="examples.heap.correctnessLinkedList.html#9197" class="Bound"
+      >w</a
+      ><a name="9198"
+      > </a
+      ><a name="9199" class="Symbol"
+      >:</a
+      ><a name="9200"
+      > </a
+      ><a name="9201" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="9206" class="Symbol"
+      >}</a
+      ><a name="9207"
+      > </a
+      ><a name="9208" class="Symbol"
+      >&#8594;</a
+      ><a name="9209"
+      > </a
+      ><a name="9210" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="9211"
+      > </a
+      ><a name="9212" class="Symbol"
+      >&#8594;</a
+      ><a name="9213"
+      > </a
+      ><a name="9214" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="9229"
+      > </a
+      ><a name="9230" class="Symbol"
+      >{</a
+      ><a name="9231" href="examples.heap.correctnessLinkedList.html#9197" class="Bound"
+      >w</a
+      ><a name="9232" class="Symbol"
+      >}</a
+      ><a name="9233"
+      > </a
+      ><a name="9234" class="Symbol"
+      >&#8594;</a
+      ><a name="9235"
+      > </a
+      ><a name="9236" href="examples.heap.correctnessLinkedList.html#4892" class="Bound"
+      >HeapEl</a
+      ><a name="9242"
+      > </a
+      ><a name="9243" class="Symbol"
+      >(</a
+      ><a name="9244" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="9248"
+      > </a
+      ><a name="9249" href="examples.heap.correctnessLinkedList.html#9197" class="Bound"
+      >w</a
+      ><a name="9250" class="Symbol"
+      >)</a
+      ><a name="9251"
+      >
+  </a
+      ><a name="9254" href="examples.heap.correctnessLinkedList.html#9180" class="Function"
+      >consLLForHead</a
+      ><a name="9267"
+      > </a
+      ><a name="9268" class="Symbol"
+      >{</a
+      ><a name="9269" href="examples.heap.correctnessLinkedList.html#9269" class="Bound"
+      >w</a
+      ><a name="9270" class="Symbol"
+      >}</a
+      ><a name="9271"
+      > </a
+      ><a name="9272" href="examples.heap.correctnessLinkedList.html#9272" class="Bound"
+      >n</a
+      ><a name="9273"
+      > </a
+      ><a name="9274" href="examples.heap.correctnessLinkedList.html#9274" class="Bound"
+      >l</a
+      ><a name="9275"
+      > </a
+      ><a name="9276" class="Symbol"
+      >=</a
+      ><a name="9277"
+      > </a
+      ><a name="9278" href="examples.heap.correctnessLinkedList.html#2484" class="InductiveConstructor"
+      >linkedListNode</a
+      ><a name="9292"
+      > </a
+      ><a name="9293" href="examples.heap.correctnessLinkedList.html#9272" class="Bound"
+      >n</a
+      ><a name="9294"
+      > </a
+      ><a name="9295" class="Symbol"
+      >(</a
+      ><a name="9296" href="examples.heap.correctnessLinkedList.html#2215" class="Function"
+      >membedp</a
+      ><a name="9303"
+      > </a
+      ><a name="9304" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="9305"
+      > </a
+      ><a name="9306" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="9322"
+      > </a
+      ><a name="9323" class="Symbol"
+      >(</a
+      ><a name="9324" href="examples.heap.correctnessLinkedList.html#9274" class="Bound"
+      >l</a
+      ><a name="9325"
+      > </a
+      ><a name="9326" class="Symbol"
+      >.</a
+      ><a name="9327" href="examples.heap.correctnessLinkedList.html#5914" class="Field"
+      >llpoint</a
+      ><a name="9334" class="Symbol"
+      >))</a
+      ><a name="9336"
+      >
+
+  </a
+      ><a name="9340" href="examples.heap.correctnessLinkedList.html#9340" class="Function"
+      >consHeap</a
+      ><a name="9348"
+      > </a
+      ><a name="9349" class="Symbol"
+      >:</a
+      ><a name="9350"
+      > </a
+      ><a name="9351" class="Symbol"
+      >{</a
+      ><a name="9352" href="examples.heap.correctnessLinkedList.html#9352" class="Bound"
+      >w</a
+      ><a name="9353"
+      > </a
+      ><a name="9354" class="Symbol"
+      >:</a
+      ><a name="9355"
+      > </a
+      ><a name="9356" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="9361" class="Symbol"
+      >}</a
+      ><a name="9362"
+      > </a
+      ><a name="9363" class="Symbol"
+      >&#8594;</a
+      ><a name="9364"
+      > </a
+      ><a name="9365" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="9366"
+      > </a
+      ><a name="9367" class="Symbol"
+      >&#8594;</a
+      ><a name="9368"
+      > </a
+      ><a name="9369" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="9384"
+      > </a
+      ><a name="9385" class="Symbol"
+      >{</a
+      ><a name="9386" href="examples.heap.correctnessLinkedList.html#9352" class="Bound"
+      >w</a
+      ><a name="9387" class="Symbol"
+      >}</a
+      ><a name="9388"
+      > </a
+      ><a name="9389" class="Symbol"
+      >&#8594;</a
+      ><a name="9390"
+      > </a
+      ><a name="9391" href="examples.heap.correctnessLinkedList.html#3653" class="Function"
+      >HeapObjectLL</a
+      ><a name="9403"
+      > </a
+      ><a name="9404" class="Symbol"
+      >(</a
+      ><a name="9405" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="9409"
+      > </a
+      ><a name="9410" href="examples.heap.correctnessLinkedList.html#9352" class="Bound"
+      >w</a
+      ><a name="9411" class="Symbol"
+      >)</a
+      ><a name="9412"
+      >
+  </a
+      ><a name="9415" href="examples.heap.correctnessLinkedList.html#9340" class="Function"
+      >consHeap</a
+      ><a name="9423"
+      > </a
+      ><a name="9424" href="examples.heap.correctnessLinkedList.html#9424" class="Bound"
+      >n</a
+      ><a name="9425"
+      > </a
+      ><a name="9426" href="examples.heap.correctnessLinkedList.html#9426" class="Bound"
+      >l</a
+      ><a name="9427"
+      > </a
+      ><a name="9428" class="Symbol"
+      >=</a
+      ><a name="9429"
+      > </a
+      ><a name="9430" href="examples.heap.correctnessLinkedList.html#3791" class="Function"
+      >nextH</a
+      ><a name="9435"
+      > </a
+      ><a name="9436" class="Symbol"
+      >(</a
+      ><a name="9437" href="examples.heap.correctnessLinkedList.html#9180" class="Function"
+      >consLLForHead</a
+      ><a name="9450"
+      > </a
+      ><a name="9451" href="examples.heap.correctnessLinkedList.html#9424" class="Bound"
+      >n</a
+      ><a name="9452"
+      > </a
+      ><a name="9453" href="examples.heap.correctnessLinkedList.html#9426" class="Bound"
+      >l</a
+      ><a name="9454" class="Symbol"
+      >)</a
+      ><a name="9455"
+      > </a
+      ><a name="9456" class="Symbol"
+      >(</a
+      ><a name="9457" href="examples.heap.correctnessLinkedList.html#9426" class="Bound"
+      >l</a
+      ><a name="9458"
+      > </a
+      ><a name="9459" class="Symbol"
+      >.</a
+      ><a name="9460" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="9466" class="Symbol"
+      >)</a
+      ><a name="9467"
+      >
+
+  </a
+      ><a name="9471" href="examples.heap.correctnessLinkedList.html#9471" class="Function"
+      >consNew</a
+      ><a name="9478"
+      > </a
+      ><a name="9479" class="Symbol"
+      >:</a
+      ><a name="9480"
+      > </a
+      ><a name="9481" class="Symbol"
+      >{</a
+      ><a name="9482" href="examples.heap.correctnessLinkedList.html#9482" class="Bound"
+      >w</a
+      ><a name="9483"
+      > </a
+      ><a name="9484" class="Symbol"
+      >:</a
+      ><a name="9485"
+      > </a
+      ><a name="9486" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="9491" class="Symbol"
+      >}</a
+      ><a name="9492"
+      > </a
+      ><a name="9493" class="Symbol"
+      >&#8594;</a
+      ><a name="9494"
+      > </a
+      ><a name="9495" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="9496"
+      > </a
+      ><a name="9497" class="Symbol"
+      >&#8594;</a
+      ><a name="9498"
+      > </a
+      ><a name="9499" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="9514"
+      > </a
+      ><a name="9515" class="Symbol"
+      >{</a
+      ><a name="9516" href="examples.heap.correctnessLinkedList.html#9482" class="Bound"
+      >w</a
+      ><a name="9517" class="Symbol"
+      >}</a
+      ><a name="9518"
+      > </a
+      ><a name="9519" class="Symbol"
+      >&#8594;</a
+      ><a name="9520"
+      > </a
+      ><a name="9521" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="9531"
+      > </a
+      ><a name="9532" class="Symbol"
+      >(</a
+      ><a name="9533" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="9537"
+      > </a
+      ><a name="9538" href="examples.heap.correctnessLinkedList.html#9482" class="Bound"
+      >w</a
+      ><a name="9539" class="Symbol"
+      >)</a
+      ><a name="9540"
+      >
+  </a
+      ><a name="9543" href="examples.heap.correctnessLinkedList.html#9471" class="Function"
+      >consNew</a
+      ><a name="9550"
+      > </a
+      ><a name="9551" href="examples.heap.correctnessLinkedList.html#9551" class="Bound"
+      >n</a
+      ><a name="9552"
+      > </a
+      ><a name="9553" href="examples.heap.correctnessLinkedList.html#9553" class="Bound"
+      >l</a
+      ><a name="9554"
+      > </a
+      ><a name="9555" class="Symbol"
+      >=</a
+      ><a name="9556"
+      > </a
+      ><a name="9557" href="examples.heap.correctnessLinkedList.html#4007" class="Function"
+      >newH</a
+      ><a name="9561"
+      > </a
+      ><a name="9562" class="Symbol"
+      >(</a
+      ><a name="9563" href="examples.heap.correctnessLinkedList.html#9180" class="Function"
+      >consLLForHead</a
+      ><a name="9576"
+      > </a
+      ><a name="9577" href="examples.heap.correctnessLinkedList.html#9551" class="Bound"
+      >n</a
+      ><a name="9578"
+      > </a
+      ><a name="9579" href="examples.heap.correctnessLinkedList.html#9553" class="Bound"
+      >l</a
+      ><a name="9580" class="Symbol"
+      >)</a
+      ><a name="9581"
+      > </a
+      ><a name="9582" class="Symbol"
+      >(</a
+      ><a name="9583" href="examples.heap.correctnessLinkedList.html#9553" class="Bound"
+      >l</a
+      ><a name="9584"
+      > </a
+      ><a name="9585" class="Symbol"
+      >.</a
+      ><a name="9586" href="examples.heap.correctnessLinkedList.html#5879" class="Field"
+      >llheap</a
+      ><a name="9592" class="Symbol"
+      >)</a
+      ><a name="9593"
+      >
+
+  </a
+      ><a name="9597" href="examples.heap.correctnessLinkedList.html#9597" class="Function"
+      >cons</a
+      ><a name="9601"
+      > </a
+      ><a name="9602" class="Symbol"
+      >:</a
+      ><a name="9603"
+      > </a
+      ><a name="9604" class="Symbol"
+      >{</a
+      ><a name="9605" href="examples.heap.correctnessLinkedList.html#9605" class="Bound"
+      >w</a
+      ><a name="9606"
+      > </a
+      ><a name="9607" class="Symbol"
+      >:</a
+      ><a name="9608"
+      > </a
+      ><a name="9609" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="9614" class="Symbol"
+      >}</a
+      ><a name="9615"
+      > </a
+      ><a name="9616" class="Symbol"
+      >&#8594;</a
+      ><a name="9617"
+      > </a
+      ><a name="9618" href="examples.heap.correctnessLinkedList.html#4814" class="Bound"
+      >B</a
+      ><a name="9619"
+      > </a
+      ><a name="9620" class="Symbol"
+      >&#8594;</a
+      ><a name="9621"
+      > </a
+      ><a name="9622" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="9637"
+      > </a
+      ><a name="9638" class="Symbol"
+      >{</a
+      ><a name="9639" href="examples.heap.correctnessLinkedList.html#9605" class="Bound"
+      >w</a
+      ><a name="9640" class="Symbol"
+      >}</a
+      ><a name="9641"
+      > </a
+      ><a name="9642" class="Symbol"
+      >&#8594;</a
+      ><a name="9643"
+      > </a
+      ><a name="9644" href="examples.heap.correctnessLinkedList.html#5797" class="Record"
+      >HeapWithPointer</a
+      ><a name="9659"
+      > </a
+      ><a name="9660" class="Symbol"
+      >{</a
+      ><a name="9661" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="9665"
+      > </a
+      ><a name="9666" href="examples.heap.correctnessLinkedList.html#9605" class="Bound"
+      >w</a
+      ><a name="9667" class="Symbol"
+      >}</a
+      ><a name="9668"
+      >
+  </a
+      ><a name="9671" href="examples.heap.correctnessLinkedList.html#9597" class="Function"
+      >cons</a
+      ><a name="9675"
+      > </a
+      ><a name="9676" class="Symbol"
+      >{</a
+      ><a name="9677" href="examples.heap.correctnessLinkedList.html#9677" class="Bound"
+      >w</a
+      ><a name="9678" class="Symbol"
+      >}</a
+      ><a name="9679"
+      > </a
+      ><a name="9680" href="examples.heap.correctnessLinkedList.html#9680" class="Bound"
+      >n</a
+      ><a name="9681"
+      > </a
+      ><a name="9682" href="examples.heap.correctnessLinkedList.html#9682" class="Bound"
+      >l</a
+      ><a name="9683"
+      > </a
+      ><a name="9684" class="DottedPattern Symbol"
+      >.</a
+      ><a name="9685" href="examples.heap.correctnessLinkedList.html#5879" class="DottedPattern Field"
+      >llheap</a
+      ><a name="9691"
+      > </a
+      ><a name="9692" class="Symbol"
+      >=</a
+      ><a name="9693"
+      > </a
+      ><a name="9694" href="examples.heap.correctnessLinkedList.html#9340" class="Function"
+      >consHeap</a
+      ><a name="9702"
+      > </a
+      ><a name="9703" href="examples.heap.correctnessLinkedList.html#9680" class="Bound"
+      >n</a
+      ><a name="9704"
+      > </a
+      ><a name="9705" href="examples.heap.correctnessLinkedList.html#9682" class="Bound"
+      >l</a
+      ><a name="9706"
+      >
+  </a
+      ><a name="9709" href="examples.heap.correctnessLinkedList.html#9597" class="Function"
+      >cons</a
+      ><a name="9713"
+      > </a
+      ><a name="9714" class="Symbol"
+      >{</a
+      ><a name="9715" href="examples.heap.correctnessLinkedList.html#9715" class="Bound"
+      >w</a
+      ><a name="9716" class="Symbol"
+      >}</a
+      ><a name="9717"
+      > </a
+      ><a name="9718" href="examples.heap.correctnessLinkedList.html#9718" class="Bound"
+      >n</a
+      ><a name="9719"
+      > </a
+      ><a name="9720" href="examples.heap.correctnessLinkedList.html#9720" class="Bound"
+      >l</a
+      ><a name="9721"
+      > </a
+      ><a name="9722" class="DottedPattern Symbol"
+      >.</a
+      ><a name="9723" href="examples.heap.correctnessLinkedList.html#5914" class="DottedPattern Field"
+      >llpoint</a
+      ><a name="9730"
+      > </a
+      ><a name="9731" class="Symbol"
+      >=</a
+      ><a name="9732"
+      > </a
+      ><a name="9733" href="Data.Maybe.Base.html#373" class="InductiveConstructor"
+      >just</a
+      ><a name="9737"
+      > </a
+      ><a name="9738" class="Symbol"
+      >(</a
+      ><a name="9739" href="examples.heap.correctnessLinkedList.html#9471" class="Function"
+      >consNew</a
+      ><a name="9746"
+      > </a
+      ><a name="9747" href="examples.heap.correctnessLinkedList.html#9718" class="Bound"
+      >n</a
+      ><a name="9748"
+      > </a
+      ><a name="9749" href="examples.heap.correctnessLinkedList.html#9720" class="Bound"
+      >l</a
+      ><a name="9750" class="Symbol"
+      >)</a
+      ><a name="9751"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

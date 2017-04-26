@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Data.Nat</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- The Agda standard library</a
+      ><a name="102"
+      >
+</a
+      ><a name="103" class="Comment"
+      >--</a
+      ><a name="105"
+      >
+</a
+      ><a name="106" class="Comment"
+      >-- Natural numbers</a
+      ><a name="124"
+      >
+</a
+      ><a name="125" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="197"
+      >
+
+</a
+      ><a name="199" class="Keyword"
+      >module</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Keyword"
+      >where</a
+      ><a name="220"
+      >
+
+</a
+      ><a name="222" class="Keyword"
+      >open</a
+      ><a name="226"
+      > </a
+      ><a name="227" class="Keyword"
+      >import</a
+      ><a name="233"
+      > </a
+      ><a name="234" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="242"
+      >
+</a
+      ><a name="243" class="Keyword"
+      >open</a
+      ><a name="247"
+      > </a
+      ><a name="248" class="Keyword"
+      >import</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="Function.Equality.html#1" class="Module"
+      >Function.Equality</a
+      ><a name="272"
+      > </a
+      ><a name="273" class="Symbol"
+      >as</a
+      ><a name="275"
+      > </a
+      ><a name="276" class="Module"
+      >F</a
+      ><a name="277"
+      > </a
+      ><a name="278" class="Keyword"
+      >using</a
+      ><a name="283"
+      > </a
+      ><a name="284" class="Symbol"
+      >(</a
+      ><a name="285" href="Function.Equality.html#681" class="Field Operator"
+      >_&#10216;$&#10217;_</a
+      ><a name="290" class="Symbol"
+      >)</a
+      ><a name="291"
+      >
+</a
+      ><a name="292" class="Keyword"
+      >open</a
+      ><a name="296"
+      > </a
+      ><a name="297" class="Keyword"
+      >import</a
+      ><a name="303"
+      > </a
+      ><a name="304" href="Function.Injection.html#1" class="Module"
+      >Function.Injection</a
+      ><a name="322"
+      > </a
+      ><a name="323" class="Keyword"
+      >using</a
+      ><a name="328"
+      > </a
+      ><a name="329" class="Symbol"
+      >(</a
+      ><a name="330" href="Function.Injection.html#1057" class="Function Operator"
+      >_&#8611;_</a
+      ><a name="333" class="Symbol"
+      >)</a
+      ><a name="334"
+      >
+</a
+      ><a name="335" class="Keyword"
+      >open</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Keyword"
+      >import</a
+      ><a name="346"
+      > </a
+      ><a name="347" href="Data.Sum.html#1" class="Module"
+      >Data.Sum</a
+      ><a name="355"
+      >
+</a
+      ><a name="356" class="Keyword"
+      >open</a
+      ><a name="360"
+      > </a
+      ><a name="361" class="Keyword"
+      >import</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Data.Empty.html#1" class="Module"
+      >Data.Empty</a
+      ><a name="378"
+      >
+</a
+      ><a name="379" class="Keyword"
+      >import</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="391"
+      >
+</a
+      ><a name="392" class="Keyword"
+      >open</a
+      ><a name="396"
+      > </a
+      ><a name="397" class="Keyword"
+      >import</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="Relation.Nullary.html#1" class="Module"
+      >Relation.Nullary</a
+      ><a name="420"
+      >
+</a
+      ><a name="421" class="Keyword"
+      >import</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="Relation.Nullary.Decidable.html#1" class="Module"
+      >Relation.Nullary.Decidable</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Symbol"
+      >as</a
+      ><a name="457"
+      > </a
+      ><a name="458" class="Module"
+      >Dec</a
+      ><a name="461"
+      >
+</a
+      ><a name="462" class="Keyword"
+      >open</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Keyword"
+      >import</a
+      ><a name="473"
+      > </a
+      ><a name="474" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="489"
+      >
+</a
+      ><a name="490" class="Keyword"
+      >open</a
+      ><a name="494"
+      > </a
+      ><a name="495" class="Keyword"
+      >import</a
+      ><a name="501"
+      > </a
+      ><a name="502" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >as</a
+      ><a name="542"
+      > </a
+      ><a name="543" class="Module"
+      >PropEq</a
+      ><a name="549"
+      >
+  </a
+      ><a name="552" class="Keyword"
+      >using</a
+      ><a name="557"
+      > </a
+      ><a name="558" class="Symbol"
+      >(</a
+      ><a name="559" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="562" class="Symbol"
+      >;</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="568" class="Symbol"
+      >)</a
+      ><a name="569"
+      >
+
+</a
+      ><a name="571" class="Comment"
+      >-- The core type and operations are re-exported from Data.Nat.Base</a
+      ><a name="637"
+      >
+</a
+      ><a name="638" class="Keyword"
+      >open</a
+      ><a name="642"
+      > </a
+      ><a name="643" class="Keyword"
+      >import</a
+      ><a name="649"
+      > </a
+      ><a name="650" href="Data.Nat.Base.html#1" class="Module"
+      >Data.Nat.Base</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Keyword"
+      >public</a
+      ><a name="670"
+      >
+
+</a
+      ><a name="672" class="Comment"
+      >-- If there is an injection from a type to &#8469;, then the type has</a
+      ><a name="735"
+      >
+</a
+      ><a name="736" class="Comment"
+      >-- decidable equality.</a
+      ><a name="758"
+      >
+
+</a
+      ><a name="760" href="Data.Nat.html#760" class="Function"
+      >eq?</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >:</a
+      ><a name="765"
+      > </a
+      ><a name="766" class="Symbol"
+      >&#8704;</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >{</a
+      ><a name="769" href="Data.Nat.html#769" class="Bound"
+      >a</a
+      ><a name="770" class="Symbol"
+      >}</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >{</a
+      ><a name="773" href="Data.Nat.html#773" class="Bound"
+      >A</a
+      ><a name="774"
+      > </a
+      ><a name="775" class="Symbol"
+      >:</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="PrimitiveType"
+      >Set</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="Data.Nat.html#769" class="Bound"
+      >a</a
+      ><a name="782" class="Symbol"
+      >}</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >&#8594;</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="Data.Nat.html#773" class="Bound"
+      >A</a
+      ><a name="787"
+      > </a
+      ><a name="788" href="Function.Injection.html#1057" class="Function Operator"
+      >&#8611;</a
+      ><a name="789"
+      > </a
+      ><a name="790" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="791"
+      > </a
+      ><a name="792" class="Symbol"
+      >&#8594;</a
+      ><a name="793"
+      > </a
+      ><a name="794" href="Relation.Binary.Core.html#3490" class="Function"
+      >Decidable</a
+      ><a name="803"
+      > </a
+      ><a name="804" class="Symbol"
+      >{</a
+      ><a name="805" class="Argument"
+      >A</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >=</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="Data.Nat.html#773" class="Bound"
+      >A</a
+      ><a name="810" class="Symbol"
+      >}</a
+      ><a name="811"
+      > </a
+      ><a name="812" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="815"
+      >
+</a
+      ><a name="816" href="Data.Nat.html#760" class="Function"
+      >eq?</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="Data.Nat.html#820" class="Bound"
+      >inj</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >=</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="Relation.Nullary.Decidable.html#2288" class="Function"
+      >Dec.via-injection</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Data.Nat.html#820" class="Bound"
+      >inj</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Data.Nat.Base.html#3212" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="851"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,587 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >SizedIO.Console</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="SizedIO.Console.html#1" class="Module"
+      >SizedIO.Console</a
+      ><a name="23"
+      > </a
+      ><a name="24" class="Keyword"
+      >where</a
+      ><a name="29"
+      >
+
+</a
+      ><a name="31" class="Keyword"
+      >open</a
+      ><a name="35"
+      > </a
+      ><a name="36" class="Keyword"
+      >import</a
+      ><a name="42"
+      > </a
+      ><a name="43" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="48"
+      > </a
+      ><a name="49" class="Keyword"
+      >using</a
+      ><a name="54"
+      > </a
+      ><a name="55" class="Symbol"
+      >()</a
+      ><a name="57"
+      > </a
+      ><a name="58" class="Keyword"
+      >renaming</a
+      ><a name="66"
+      > </a
+      ><a name="67" class="Symbol"
+      >(</a
+      ><a name="68" href="Agda.Primitive.html#611" class="Primitive"
+      >zero</a
+      ><a name="72"
+      > </a
+      ><a name="73" class="Symbol"
+      >to</a
+      ><a name="75"
+      > </a
+      ><a name="76" href="Agda.Primitive.html#611" class="Primitive"
+      >lzero</a
+      ><a name="81" class="Symbol"
+      >)</a
+      ><a name="82"
+      >
+</a
+      ><a name="83" class="Keyword"
+      >open</a
+      ><a name="87"
+      > </a
+      ><a name="88" class="Keyword"
+      >import</a
+      ><a name="94"
+      > </a
+      ><a name="95" href="Size.html#1" class="Module"
+      >Size</a
+      ><a name="99"
+      >
+
+</a
+      ><a name="101" class="Keyword"
+      >open</a
+      ><a name="105"
+      > </a
+      ><a name="106" class="Keyword"
+      >import</a
+      ><a name="112"
+      > </a
+      ><a name="113" href="NativeIO.html#1" class="Module"
+      >NativeIO</a
+      ><a name="121"
+      >
+</a
+      ><a name="122" class="Keyword"
+      >open</a
+      ><a name="126"
+      > </a
+      ><a name="127" class="Keyword"
+      >import</a
+      ><a name="133"
+      > </a
+      ><a name="134" href="SizedIO.Base.html#1" class="Module"
+      >SizedIO.Base</a
+      ><a name="146"
+      >
+
+</a
+      ><a name="148" class="Keyword"
+      >data</a
+      ><a name="152"
+      > </a
+      ><a name="153" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="167"
+      > </a
+      ><a name="168" class="Symbol"
+      >:</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="PrimitiveType"
+      >Set</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Keyword"
+      >where</a
+      ><a name="179"
+      >
+  </a
+      ><a name="182" href="SizedIO.Console.html#182" class="InductiveConstructor"
+      >putStrLn</a
+      ><a name="190"
+      > </a
+      ><a name="191" class="Symbol"
+      >:</a
+      ><a name="192"
+      > </a
+      ><a name="193" href="Agda.Builtin.String.html#165" class="Postulate"
+      >String</a
+      ><a name="199"
+      > </a
+      ><a name="200" class="Symbol"
+      >&#8594;</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="216"
+      >
+  </a
+      ><a name="219" href="SizedIO.Console.html#219" class="InductiveConstructor"
+      >getLine</a
+      ><a name="226"
+      >  </a
+      ><a name="228" class="Symbol"
+      >:</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="244"
+      >
+
+</a
+      ><a name="246" href="SizedIO.Console.html#246" class="Function"
+      >ConsoleResponse</a
+      ><a name="261"
+      > </a
+      ><a name="262" class="Symbol"
+      >:</a
+      ><a name="263"
+      > </a
+      ><a name="264" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="278"
+      > </a
+      ><a name="279" class="Symbol"
+      >&#8594;</a
+      ><a name="280"
+      > </a
+      ><a name="281" class="PrimitiveType"
+      >Set</a
+      ><a name="284"
+      >
+</a
+      ><a name="285" href="SizedIO.Console.html#246" class="Function"
+      >ConsoleResponse</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Symbol"
+      >(</a
+      ><a name="302" href="SizedIO.Console.html#182" class="InductiveConstructor"
+      >putStrLn</a
+      ><a name="310"
+      > </a
+      ><a name="311" href="SizedIO.Console.html#311" class="Bound"
+      >s</a
+      ><a name="312" class="Symbol"
+      >)</a
+      ><a name="313"
+      > </a
+      ><a name="314" class="Symbol"
+      >=</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="320"
+      >
+</a
+      ><a name="321" href="SizedIO.Console.html#246" class="Function"
+      >ConsoleResponse</a
+      ><a name="336"
+      >  </a
+      ><a name="338" href="SizedIO.Console.html#219" class="InductiveConstructor"
+      >getLine</a
+      ><a name="345"
+      >     </a
+      ><a name="350" class="Symbol"
+      >=</a
+      ><a name="351"
+      > </a
+      ><a name="352" href="Agda.Builtin.String.html#165" class="Postulate"
+      >String</a
+      ><a name="358"
+      >
+
+</a
+      ><a name="360" href="SizedIO.Console.html#360" class="Function"
+      >consoleI</a
+      ><a name="368"
+      > </a
+      ><a name="369" class="Symbol"
+      >:</a
+      ><a name="370"
+      > </a
+      ><a name="371" href="SizedIO.Base.html#334" class="Record"
+      >IOInterface</a
+      ><a name="382"
+      >
+</a
+      ><a name="383" href="SizedIO.Base.html#372" class="Field"
+      >Command</a
+      ><a name="390"
+      >  </a
+      ><a name="392" href="SizedIO.Console.html#360" class="Function"
+      >consoleI</a
+      ><a name="400"
+      >  </a
+      ><a name="402" class="Symbol"
+      >=</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="418"
+      >
+</a
+      ><a name="419" href="SizedIO.Base.html#392" class="Field"
+      >Response</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="SizedIO.Console.html#360" class="Function"
+      >consoleI</a
+      ><a name="436"
+      >  </a
+      ><a name="438" class="Symbol"
+      >=</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="SizedIO.Console.html#246" class="Function"
+      >ConsoleResponse</a
+      ><a name="455"
+      >
+
+</a
+      ><a name="457" href="SizedIO.Console.html#457" class="Function"
+      >IOConsole</a
+      ><a name="466"
+      > </a
+      ><a name="467" class="Symbol"
+      >:</a
+      ><a name="468"
+      > </a
+      ><a name="469" href="Agda.Builtin.Size.html#114" class="Postulate"
+      >Size</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Symbol"
+      >&#8594;</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="PrimitiveType"
+      >Set</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Symbol"
+      >&#8594;</a
+      ><a name="481"
+      > </a
+      ><a name="482" class="PrimitiveType"
+      >Set</a
+      ><a name="485"
+      >
+</a
+      ><a name="486" href="SizedIO.Console.html#457" class="Function"
+      >IOConsole</a
+      ><a name="495"
+      > </a
+      ><a name="496" href="SizedIO.Console.html#496" class="Bound"
+      >i</a
+      ><a name="497"
+      > </a
+      ><a name="498" class="Symbol"
+      >=</a
+      ><a name="499"
+      > </a
+      ><a name="500" href="SizedIO.Base.html#545" class="Record"
+      >IO</a
+      ><a name="502"
+      > </a
+      ><a name="503" href="SizedIO.Console.html#360" class="Function"
+      >consoleI</a
+      ><a name="511"
+      > </a
+      ><a name="512" href="SizedIO.Console.html#496" class="Bound"
+      >i</a
+      ><a name="513"
+      >
+
+</a
+      ><a name="515" href="SizedIO.Console.html#515" class="Function"
+      >IOConsole+</a
+      ><a name="525"
+      > </a
+      ><a name="526" class="Symbol"
+      >:</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="Agda.Builtin.Size.html#114" class="Postulate"
+      >Size</a
+      ><a name="532"
+      > </a
+      ><a name="533" class="Symbol"
+      >&#8594;</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="PrimitiveType"
+      >Set</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="Symbol"
+      >&#8594;</a
+      ><a name="540"
+      > </a
+      ><a name="541" class="PrimitiveType"
+      >Set</a
+      ><a name="544"
+      >
+</a
+      ><a name="545" href="SizedIO.Console.html#515" class="Function"
+      >IOConsole+</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="SizedIO.Console.html#556" class="Bound"
+      >i</a
+      ><a name="557"
+      > </a
+      ><a name="558" class="Symbol"
+      >=</a
+      ><a name="559"
+      > </a
+      ><a name="560" href="SizedIO.Base.html#819" class="Datatype"
+      >IO+</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="SizedIO.Console.html#360" class="Function"
+      >consoleI</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="SizedIO.Console.html#556" class="Bound"
+      >i</a
+      ><a name="574"
+      >
+
+</a
+      ><a name="576" href="SizedIO.Console.html#576" class="Function"
+      >translateIOConsoleLocal</a
+      ><a name="599"
+      > </a
+      ><a name="600" class="Symbol"
+      >:</a
+      ><a name="601"
+      > </a
+      ><a name="602" class="Symbol"
+      >(</a
+      ><a name="603" href="SizedIO.Console.html#603" class="Bound"
+      >c</a
+      ><a name="604"
+      > </a
+      ><a name="605" class="Symbol"
+      >:</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="SizedIO.Console.html#153" class="Datatype"
+      >ConsoleCommand</a
+      ><a name="621" class="Symbol"
+      >)</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >&#8594;</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Symbol"
+      >(</a
+      ><a name="635" href="SizedIO.Console.html#246" class="Function"
+      >ConsoleResponse</a
+      ><a name="650"
+      > </a
+      ><a name="651" href="SizedIO.Console.html#603" class="Bound"
+      >c</a
+      ><a name="652" class="Symbol"
+      >)</a
+      ><a name="653"
+      >
+</a
+      ><a name="654" href="SizedIO.Console.html#576" class="Function"
+      >translateIOConsoleLocal</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >(</a
+      ><a name="679" href="SizedIO.Console.html#182" class="InductiveConstructor"
+      >putStrLn</a
+      ><a name="687"
+      > </a
+      ><a name="688" href="SizedIO.Console.html#688" class="Bound"
+      >s</a
+      ><a name="689" class="Symbol"
+      >)</a
+      ><a name="690"
+      > </a
+      ><a name="691" class="Symbol"
+      >=</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="NativeIO.html#666" class="Postulate"
+      >nativePutStrLn</a
+      ><a name="707"
+      > </a
+      ><a name="708" href="SizedIO.Console.html#688" class="Bound"
+      >s</a
+      ><a name="709"
+      >
+</a
+      ><a name="710" href="SizedIO.Console.html#576" class="Function"
+      >translateIOConsoleLocal</a
+      ><a name="733"
+      > </a
+      ><a name="734" href="SizedIO.Console.html#219" class="InductiveConstructor"
+      >getLine</a
+      ><a name="741"
+      >      </a
+      ><a name="747" class="Symbol"
+      >=</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="NativeIO.html#630" class="Postulate"
+      >nativeGetLine</a
+      ><a name="762"
+      >
+
+</a
+      ><a name="764" href="SizedIO.Console.html#764" class="Function"
+      >translateIOConsole</a
+      ><a name="782"
+      > </a
+      ><a name="783" class="Symbol"
+      >:</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >{</a
+      ><a name="786" href="SizedIO.Console.html#786" class="Bound"
+      >A</a
+      ><a name="787"
+      > </a
+      ><a name="788" class="Symbol"
+      >:</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="PrimitiveType"
+      >Set</a
+      ><a name="793" class="Symbol"
+      >}</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >&#8594;</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="SizedIO.Console.html#457" class="Function"
+      >IOConsole</a
+      ><a name="806"
+      > </a
+      ><a name="807" href="Agda.Builtin.Size.html#210" class="Postulate"
+      >&#8734;</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="SizedIO.Console.html#786" class="Bound"
+      >A</a
+      ><a name="810"
+      > </a
+      ><a name="811" class="Symbol"
+      >&#8594;</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="821"
+      > </a
+      ><a name="822" href="SizedIO.Console.html#786" class="Bound"
+      >A</a
+      ><a name="823"
+      >
+</a
+      ><a name="824" href="SizedIO.Console.html#764" class="Function"
+      >translateIOConsole</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >=</a
+      ><a name="844"
+      > </a
+      ><a name="845" href="SizedIO.Base.html#1944" class="Function"
+      >translateIO</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="SizedIO.Console.html#576" class="Function"
+      >translateIOConsoleLocal</a
+      ><a name="880"
+      >
+
+
+</a
+      ><a name="883" href="SizedIO.Console.html#883" class="Function"
+      >main</a
+      ><a name="887"
+      > </a
+      ><a name="888" class="Symbol"
+      >:</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="NativeIO.html#260" class="Postulate"
+      >NativeIO</a
+      ><a name="898"
+      > </a
+      ><a name="899" href="Unit.html#28" class="Record"
+      >Unit</a
+      ><a name="903"
+      >
+</a
+      ><a name="904" href="SizedIO.Console.html#883" class="Function"
+      >main</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >=</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="NativeIO.html#666" class="Postulate"
+      >nativePutStrLn</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="String"
+      >&quot;Console&quot;</a
+      ><a name="935"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

@@ -1,0 +1,2001 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >src.heap.heapAsObjectGeneric</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >--@PREFIX@heapAsObjectGeneric@</a
+      ><a name="31"
+      >
+</a
+      ><a name="32" class="Symbol"
+      >{-#</a
+      ><a name="35"
+      > </a
+      ><a name="36" class="Keyword"
+      >OPTIONS</a
+      ><a name="43"
+      > </a
+      ><a name="44" class="Option"
+      >--postfix-projections</a
+      ><a name="65"
+      > </a
+      ><a name="66" class="Symbol"
+      >#-}</a
+      ><a name="69"
+      >
+</a
+      ><a name="70" class="Keyword"
+      >open</a
+      ><a name="74"
+      > </a
+      ><a name="75" class="Keyword"
+      >import</a
+      ><a name="81"
+      > </a
+      ><a name="82" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="90"
+      > </a
+      ><a name="91" class="Keyword"
+      >hiding</a
+      ><a name="97"
+      > </a
+      ><a name="98" class="Symbol"
+      >(</a
+      ><a name="99" href="Data.Nat.Base.html#3212" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="102" class="Symbol"
+      >)</a
+      ><a name="103"
+      > </a
+      ><a name="104" class="Keyword"
+      >renaming</a
+      ><a name="112"
+      > </a
+      ><a name="113" class="Symbol"
+      >(</a
+      ><a name="114" href="Data.Nat.Base.html#2726" class="Function Operator"
+      >_&#8852;_</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >to</a
+      ><a name="120"
+      > </a
+      ><a name="121" href="Data.Nat.Base.html#2726" class="Function Operator"
+      >_&#8852;n_</a
+      ><a name="125" class="Symbol"
+      >)</a
+      ><a name="126"
+      >
+
+
+</a
+      ><a name="129" class="Keyword"
+      >module</a
+      ><a name="135"
+      > </a
+      ><a name="136" href="src.heap.heapAsObjectGeneric.html#1" class="Module"
+      >src.heap.heapAsObjectGeneric</a
+      ><a name="164"
+      >  </a
+      ><a name="166" class="Keyword"
+      >where</a
+      ><a name="171"
+      >
+
+
+</a
+      ><a name="174" class="Keyword"
+      >open</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="Keyword"
+      >import</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="Data.Fin.html#1" class="Module"
+      >Data.Fin</a
+      ><a name="194"
+      > </a
+      ><a name="195" class="Keyword"
+      >using</a
+      ><a name="200"
+      > </a
+      ><a name="201" class="Symbol"
+      >(</a
+      ><a name="202" href="Data.Fin.html#871" class="Datatype"
+      >Fin</a
+      ><a name="205" class="Symbol"
+      >;</a
+      ><a name="206"
+      > </a
+      ><a name="207" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="210" class="Symbol"
+      >;</a
+      ><a name="211"
+      > </a
+      ><a name="212" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="216" class="Symbol"
+      >)</a
+      ><a name="217"
+      >
+</a
+      ><a name="218" class="Keyword"
+      >open</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Keyword"
+      >import</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="240"
+      > </a
+      ><a name="241" class="Keyword"
+      >using</a
+      ><a name="246"
+      > </a
+      ><a name="247" class="Symbol"
+      >(</a
+      ><a name="248" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="253" class="Symbol"
+      >;</a
+      ><a name="254"
+      > </a
+      ><a name="255" href="Data.Maybe.html#1527" class="InductiveConstructor"
+      >just</a
+      ><a name="259" class="Symbol"
+      >;</a
+      ><a name="260"
+      > </a
+      ><a name="261" href="Data.Maybe.html#1588" class="InductiveConstructor"
+      >nothing</a
+      ><a name="268" class="Symbol"
+      >)</a
+      ><a name="269"
+      >
+
+
+</a
+      ><a name="272" class="Comment"
+      >--</a
+      ><a name="274"
+      >
+</a
+      ><a name="275" class="Comment"
+      >-- Heap Imports:</a
+      ><a name="291"
+      >
+</a
+      ><a name="292" class="Comment"
+      >--</a
+      ><a name="294"
+      >
+
+</a
+      ><a name="296" class="Keyword"
+      >open</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Keyword"
+      >import</a
+      ><a name="307"
+      > </a
+      ><a name="308" href="src.heap.heapAsObjectBase.html#1" class="Module"
+      >src.heap.heapAsObjectBase</a
+      ><a name="333"
+      > </a
+      ><a name="334" class="Keyword"
+      >using</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Symbol"
+      >(</a
+      ><a name="341" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="346" class="Symbol"
+      >;</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="352" class="Symbol"
+      >;</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="363" class="Symbol"
+      >;</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="367" class="Symbol"
+      >;</a
+      ><a name="368"
+      > </a
+      ><a name="369" href="src.heap.heapAsObjectBase.html#949" class="Function"
+      >liftWorldPred</a
+      ><a name="382" class="Symbol"
+      >;</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="src.heap.heapAsObjectBase.html#828" class="Field"
+      >lift</a
+      ><a name="388" class="Symbol"
+      >;</a
+      ><a name="389"
+      > </a
+      ><a name="390" href="src.heap.heapAsObjectBase.html#2930" class="Function"
+      >&#8709;w</a
+      ><a name="392" class="Symbol"
+      >)</a
+      ><a name="393"
+      >
+
+
+
+
+</a
+      ><a name="398" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="419"
+      >
+</a
+      ><a name="420" class="Comment"
+      >--@BEGIN@PointerStruct</a
+      ><a name="442"
+      >
+</a
+      ><a name="443" class="Keyword"
+      >record</a
+      ><a name="449"
+      > </a
+      ><a name="450" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="463"
+      > </a
+      ><a name="464" class="Symbol"
+      >:</a
+      ><a name="465"
+      > </a
+      ><a name="466" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Keyword"
+      >where</a
+      ><a name="476"
+      > </a
+      ><a name="477" class="Comment"
+      >--@HIDE-BEG</a
+      ><a name="488"
+      >
+  </a
+      ><a name="491" class="Keyword"
+      >field</a
+      ><a name="496"
+      >
+</a
+      ><a name="497" class="Comment"
+      >--@HIDE-END</a
+      ><a name="508"
+      >
+    </a
+      ><a name="513" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="520"
+      >  </a
+      ><a name="522" class="Symbol"
+      >:</a
+      ><a name="523"
+      >  </a
+      ><a name="525" class="Symbol"
+      >(</a
+      ><a name="526" href="src.heap.heapAsObjectGeneric.html#526" class="Bound"
+      >w</a
+      ><a name="527"
+      > </a
+      ><a name="528" class="Symbol"
+      >:</a
+      ><a name="529"
+      > </a
+      ><a name="530" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="535" class="Symbol"
+      >)</a
+      ><a name="536"
+      >  </a
+      ><a name="538" class="Symbol"
+      >&#8594;</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="PrimitiveType"
+      >Set</a
+      ><a name="543"
+      >
+    </a
+      ><a name="548" href="src.heap.heapAsObjectGeneric.html#548" class="Field"
+      >embedp</a
+      ><a name="554"
+      >   </a
+      ><a name="557" class="Symbol"
+      >:</a
+      ><a name="558"
+      >  </a
+      ><a name="560" class="Symbol"
+      >{</a
+      ><a name="561" href="src.heap.heapAsObjectGeneric.html#561" class="Bound"
+      >w</a
+      ><a name="562"
+      > </a
+      ><a name="563" class="Symbol"
+      >:</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="570" class="Symbol"
+      >}</a
+      ><a name="571"
+      >  </a
+      ><a name="573" class="Symbol"
+      >(</a
+      ><a name="574" href="src.heap.heapAsObjectGeneric.html#574" class="Bound"
+      >p</a
+      ><a name="575"
+      > </a
+      ><a name="576" class="Symbol"
+      >:</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="585"
+      > </a
+      ><a name="586" href="src.heap.heapAsObjectGeneric.html#561" class="Bound"
+      >w</a
+      ><a name="587" class="Symbol"
+      >)</a
+      ><a name="588"
+      > </a
+      ><a name="589" class="Symbol"
+      >&#8594;</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="598"
+      > </a
+      ><a name="599" class="Symbol"
+      >(</a
+      ><a name="600" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="src.heap.heapAsObjectGeneric.html#561" class="Bound"
+      >w</a
+      ><a name="606" class="Symbol"
+      >)</a
+      ><a name="607"
+      >
+</a
+      ><a name="608" class="Comment"
+      >--@END</a
+      ><a name="614"
+      >
+</a
+      ><a name="615" class="Comment"
+      >--    newp    : {w : World} &#8594; Pointer (sucw w)</a
+      ><a name="661"
+      >
+</a
+      ><a name="662" class="Comment"
+      >--    lift    : (B : Set) {w : World} (resultOfNew : B) (oldfun : Pointer w &#8594; B) (p : Pointer (sucw w)) &#8594; B</a
+      ><a name="769"
+      >
+
+
+</a
+      ><a name="772" class="Keyword"
+      >open</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="src.heap.heapAsObjectGeneric.html#450" class="Module"
+      >PointerStruct</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Keyword"
+      >public</a
+      ><a name="797"
+      >
+
+</a
+      ><a name="799" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="820"
+      >
+</a
+      ><a name="821" class="Comment"
+      >--@BEGIN@PointerFin</a
+      ><a name="840"
+      >
+</a
+      ><a name="841" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="851"
+      > </a
+      ><a name="852" class="Symbol"
+      >:</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="859"
+      > </a
+      ><a name="860" class="Symbol"
+      >&#8594;</a
+      ><a name="861"
+      > </a
+      ><a name="862" class="PrimitiveType"
+      >Set</a
+      ><a name="865"
+      >
+</a
+      ><a name="866" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >=</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="Data.Fin.html#871" class="Datatype"
+      >Fin</a
+      ><a name="882"
+      >
+
+</a
+      ><a name="884" href="src.heap.heapAsObjectGeneric.html#884" class="Function"
+      >embedfin</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Symbol"
+      >:</a
+      ><a name="894"
+      > </a
+      ><a name="895" class="Symbol"
+      >{</a
+      ><a name="896" href="src.heap.heapAsObjectGeneric.html#896" class="Bound"
+      >w</a
+      ><a name="897"
+      > </a
+      ><a name="898" class="Symbol"
+      >:</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="905" class="Symbol"
+      >}(</a
+      ><a name="907" href="src.heap.heapAsObjectGeneric.html#907" class="Bound"
+      >p</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >:</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="src.heap.heapAsObjectGeneric.html#896" class="Bound"
+      >w</a
+      ><a name="923" class="Symbol"
+      >)</a
+      ><a name="924"
+      > </a
+      ><a name="925" class="Symbol"
+      >&#8594;</a
+      ><a name="926"
+      > </a
+      ><a name="927" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >(</a
+      ><a name="939" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="943"
+      > </a
+      ><a name="944" href="src.heap.heapAsObjectGeneric.html#896" class="Bound"
+      >w</a
+      ><a name="945" class="Symbol"
+      >)</a
+      ><a name="946"
+      >
+</a
+      ><a name="947" href="src.heap.heapAsObjectGeneric.html#884" class="Function"
+      >embedfin</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="src.heap.heapAsObjectGeneric.html#956" class="Bound"
+      >p</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >=</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="963"
+      > </a
+      ><a name="964" href="src.heap.heapAsObjectGeneric.html#956" class="Bound"
+      >p</a
+      ><a name="965"
+      >
+
+</a
+      ><a name="967" href="src.heap.heapAsObjectGeneric.html#967" class="Function"
+      >newfin</a
+      ><a name="973"
+      > </a
+      ><a name="974" class="Symbol"
+      >:</a
+      ><a name="975"
+      > </a
+      ><a name="976" class="Symbol"
+      >{</a
+      ><a name="977" href="src.heap.heapAsObjectGeneric.html#977" class="Bound"
+      >w</a
+      ><a name="978"
+      > </a
+      ><a name="979" class="Symbol"
+      >:</a
+      ><a name="980"
+      > </a
+      ><a name="981" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="986" class="Symbol"
+      >}</a
+      ><a name="987"
+      > </a
+      ><a name="988" class="Symbol"
+      >&#8594;</a
+      ><a name="989"
+      > </a
+      ><a name="990" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" class="Symbol"
+      >(</a
+      ><a name="1002" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="src.heap.heapAsObjectGeneric.html#977" class="Bound"
+      >w</a
+      ><a name="1008" class="Symbol"
+      >)</a
+      ><a name="1009"
+      >
+</a
+      ><a name="1010" href="src.heap.heapAsObjectGeneric.html#967" class="Function"
+      >newfin</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" class="Symbol"
+      >=</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="1023"
+      >
+
+</a
+      ><a name="1025" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="1041"
+      > </a
+      ><a name="1042" class="Symbol"
+      >:</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="1057"
+      >
+</a
+      ><a name="1058" class="Comment"
+      >--@END</a
+      ><a name="1064"
+      >
+
+</a
+      ><a name="1066" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="Symbol"
+      >:</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" class="Symbol"
+      >&#8594;</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" class="PrimitiveType"
+      >Set</a
+      ><a name="1091"
+      >
+</a
+      ><a name="1092" href="src.heap.heapAsObjectGeneric.html#1066" class="Function"
+      >MPointerfin</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" href="src.heap.heapAsObjectGeneric.html#1104" class="Bound"
+      >w</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" class="Symbol"
+      >=</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >(</a
+      ><a name="1115" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="src.heap.heapAsObjectGeneric.html#1104" class="Bound"
+      >w</a
+      ><a name="1127" class="Symbol"
+      >)</a
+      ><a name="1128"
+      >
+
+
+</a
+      ><a name="1131" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" class="DottedPattern Symbol"
+      >.</a
+      ><a name="1149" href="src.heap.heapAsObjectGeneric.html#513" class="DottedPattern Field"
+      >Pointer</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >=</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="1169"
+      >
+</a
+      ><a name="1170" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" class="DottedPattern Symbol"
+      >.</a
+      ><a name="1188" href="src.heap.heapAsObjectGeneric.html#548" class="DottedPattern Field"
+      >embedp</a
+      ><a name="1194"
+      > </a
+      ><a name="1195" class="Symbol"
+      >=</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="src.heap.heapAsObjectGeneric.html#884" class="Function"
+      >embedfin</a
+      ><a name="1205"
+      >
+
+</a
+      ><a name="1207" class="Symbol"
+      >{-#</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Keyword"
+      >INLINE</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >#-}</a
+      ><a name="1238"
+      >
+
+
+</a
+      ><a name="1241" class="Comment"
+      >{-
+module _ (pointerStruct : PointerStruct)
+         --(Pointer : &#8469; &#8594; Set)
+         (let Pointer = Pointer pointerStruct)
+         --(embed : {n : &#8469;} &#8594; Pointer n &#8594; Pointer (suc n))
+         (let embed = embedp pointerStruct )
+         where
+-}</a
+      ><a name="1484"
+      >
+</a
+      ><a name="1485" class="Comment"
+      >--\heapAsObjectGenericStoreg</a
+      ><a name="1513"
+      >
+</a
+      ><a name="1514" class="Comment"
+      >--@BEGIN@Storeg</a
+      ><a name="1529"
+      >
+</a
+      ><a name="1530" class="Keyword"
+      >record</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="src.heap.heapAsObjectGeneric.html#1537" class="Record"
+      >Storeg</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Symbol"
+      >(</a
+      ><a name="1545" href="src.heap.heapAsObjectGeneric.html#1545" class="Bound"
+      >ptrStruct</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >:</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="1570" class="Symbol"
+      >)</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >(</a
+      ><a name="1573" href="src.heap.heapAsObjectGeneric.html#1573" class="Bound"
+      >wp</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >:</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="1587" class="Symbol"
+      >)</a
+      ><a name="1588"
+      >  </a
+      ><a name="1590" class="Symbol"
+      >(</a
+      ><a name="1591" href="src.heap.heapAsObjectGeneric.html#1591" class="Bound"
+      >w</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" class="Symbol"
+      >:</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="1600" class="Symbol"
+      >)</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" class="Symbol"
+      >:</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" class="PrimitiveType"
+      >Set</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" class="Keyword"
+      >where</a
+      ><a name="1613"
+      >  </a
+      ><a name="1615" class="Comment"
+      >--@HIDE-BEG</a
+      ><a name="1626"
+      >
+   </a
+      ><a name="1630" class="Keyword"
+      >field</a
+      ><a name="1635"
+      >
+</a
+      ><a name="1636" class="Comment"
+      >--@HIDE-END</a
+      ><a name="1647"
+      >
+       </a
+      ><a name="1655" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" class="Symbol"
+      >:</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="src.heap.heapAsObjectGeneric.html#1545" class="Bound"
+      >ptrStruct</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" class="Symbol"
+      >.</a
+      ><a name="1670" href="src.heap.heapAsObjectGeneric.html#513" class="Field"
+      >Pointer</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="src.heap.heapAsObjectGeneric.html#1591" class="Bound"
+      >w</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" class="Symbol"
+      >&#8594;</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="src.heap.heapAsObjectGeneric.html#1573" class="Bound"
+      >wp</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" class="Symbol"
+      >.</a
+      ><a name="1686" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="src.heap.heapAsObjectGeneric.html#1591" class="Bound"
+      >w</a
+      ><a name="1690"
+      >
+</a
+      ><a name="1691" class="Comment"
+      >--@END</a
+      ><a name="1697"
+      >
+</a
+      ><a name="1698" class="Keyword"
+      >open</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" href="src.heap.heapAsObjectGeneric.html#1537" class="Module"
+      >Storeg</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" class="Keyword"
+      >public</a
+      ><a name="1716"
+      >
+
+</a
+      ><a name="1718" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="1739"
+      >
+</a
+      ><a name="1740" class="Comment"
+      >--@BEGIN@liftStoreg</a
+      ><a name="1759"
+      >
+</a
+      ><a name="1760" href="src.heap.heapAsObjectGeneric.html#1760" class="Function"
+      >liftStoreg</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" class="Symbol"
+      >:</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" class="Symbol"
+      >&#8704;</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" class="Symbol"
+      >(</a
+      ><a name="1776" href="src.heap.heapAsObjectGeneric.html#1776" class="Bound"
+      >ptrStruct</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >:</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="src.heap.heapAsObjectGeneric.html#450" class="Record"
+      >PointerStruct</a
+      ><a name="1801" class="Symbol"
+      >)</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >{</a
+      ><a name="1804" href="src.heap.heapAsObjectGeneric.html#1804" class="Bound"
+      >wp</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" class="Symbol"
+      >:</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="1818" class="Symbol"
+      >}</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >{</a
+      ><a name="1821" href="src.heap.heapAsObjectGeneric.html#1821" class="Bound"
+      >w</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" class="Symbol"
+      >:</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="1830" class="Symbol"
+      >}</a
+      ><a name="1831"
+      >
+           </a
+      ><a name="1843" class="Symbol"
+      >&#8594;</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" href="src.heap.heapAsObjectGeneric.html#1537" class="Record"
+      >Storeg</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="src.heap.heapAsObjectGeneric.html#1776" class="Bound"
+      >ptrStruct</a
+      ><a name="1861"
+      > </a
+      ><a name="1862" href="src.heap.heapAsObjectGeneric.html#1804" class="Bound"
+      >wp</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >(</a
+      ><a name="1866" href="Agda.Builtin.Nat.html#128" class="InductiveConstructor"
+      >suc</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" href="src.heap.heapAsObjectGeneric.html#1821" class="Bound"
+      >w</a
+      ><a name="1871" class="Symbol"
+      >)</a
+      ><a name="1872"
+      >
+           </a
+      ><a name="1884" class="Symbol"
+      >&#8594;</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" href="src.heap.heapAsObjectGeneric.html#1537" class="Record"
+      >Storeg</a
+      ><a name="1892"
+      > </a
+      ><a name="1893" href="src.heap.heapAsObjectGeneric.html#1776" class="Bound"
+      >ptrStruct</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" class="Symbol"
+      >(</a
+      ><a name="1904" href="src.heap.heapAsObjectBase.html#949" class="Function"
+      >liftWorldPred</a
+      ><a name="1917"
+      > </a
+      ><a name="1918" href="src.heap.heapAsObjectGeneric.html#1804" class="Bound"
+      >wp</a
+      ><a name="1920" class="Symbol"
+      >)</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" href="src.heap.heapAsObjectGeneric.html#1821" class="Bound"
+      >w</a
+      ><a name="1923"
+      >
+</a
+      ><a name="1924" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" class="Symbol"
+      >(</a
+      ><a name="1927" href="src.heap.heapAsObjectGeneric.html#1760" class="Function"
+      >liftStoreg</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="src.heap.heapAsObjectGeneric.html#1938" class="Bound"
+      >ptrStruct</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" class="Symbol"
+      >{</a
+      ><a name="1949" href="src.heap.heapAsObjectGeneric.html#1949" class="Bound"
+      >wp</a
+      ><a name="1951" class="Symbol"
+      >}</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" class="Symbol"
+      >{</a
+      ><a name="1954" href="src.heap.heapAsObjectGeneric.html#1954" class="Bound"
+      >w</a
+      ><a name="1955" class="Symbol"
+      >}</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" href="src.heap.heapAsObjectGeneric.html#1957" class="Bound"
+      >h</a
+      ><a name="1958" class="Symbol"
+      >)</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="src.heap.heapAsObjectGeneric.html#1960" class="Bound"
+      >p</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >=</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="src.heap.heapAsObjectGeneric.html#1957" class="Bound"
+      >h</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" class="Symbol"
+      >(</a
+      ><a name="1969" href="src.heap.heapAsObjectGeneric.html#1938" class="Bound"
+      >ptrStruct</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" class="Symbol"
+      >.</a
+      ><a name="1980" href="src.heap.heapAsObjectGeneric.html#548" class="Field"
+      >embedp</a
+      ><a name="1986"
+      >  </a
+      ><a name="1988" href="src.heap.heapAsObjectGeneric.html#1960" class="Bound"
+      >p</a
+      ><a name="1989" class="Symbol"
+      >)</a
+      ><a name="1990"
+      >
+</a
+      ><a name="1991" class="Comment"
+      >--@END</a
+      ><a name="1997"
+      >
+
+
+</a
+      ><a name="2000" class="Comment"
+      >-- we replace HeapFin by StoreFin</a
+      ><a name="2033"
+      >
+
+</a
+      ><a name="2035" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="2056"
+      >
+</a
+      ><a name="2057" class="Comment"
+      >--@BEGIN@StoreFin</a
+      ><a name="2074"
+      >
+</a
+      ><a name="2075" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2083"
+      > </a
+      ><a name="2084" class="Symbol"
+      >:</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" class="Symbol"
+      >(</a
+      ><a name="2087" href="src.heap.heapAsObjectGeneric.html#2087" class="Bound"
+      >wp</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" class="Symbol"
+      >:</a
+      ><a name="2091"
+      > </a
+      ><a name="2092" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="2101" class="Symbol"
+      >)</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" class="Symbol"
+      >&#8594;</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="src.heap.heapAsObjectBase.html#521" class="Function"
+      >World</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >&#8594;</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" class="PrimitiveType"
+      >Set</a
+      ><a name="2116"
+      >
+</a
+      ><a name="2117" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="src.heap.heapAsObjectGeneric.html#2126" class="Bound"
+      >wp</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" href="src.heap.heapAsObjectGeneric.html#2129" class="Bound"
+      >w</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" class="Symbol"
+      >=</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" href="src.heap.heapAsObjectGeneric.html#1537" class="Record"
+      >Storeg</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" href="src.heap.heapAsObjectGeneric.html#1025" class="Function"
+      >pointerStructfin</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="src.heap.heapAsObjectGeneric.html#2126" class="Bound"
+      >wp</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="src.heap.heapAsObjectGeneric.html#2129" class="Bound"
+      >w</a
+      ><a name="2161"
+      >
+</a
+      ><a name="2162" class="Comment"
+      >--@END</a
+      ><a name="2168"
+      >
+
+</a
+      ><a name="2170" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="2191"
+      >
+</a
+      ><a name="2192" class="Comment"
+      >--@BEGIN@liftStoreFin</a
+      ><a name="2213"
+      >
+</a
+      ><a name="2214" href="src.heap.heapAsObjectGeneric.html#2214" class="Function"
+      >liftStoreFin</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" class="Symbol"
+      >:</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" class="Symbol"
+      >&#8704;</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" class="Symbol"
+      >{</a
+      ><a name="2232" href="src.heap.heapAsObjectGeneric.html#2232" class="Bound"
+      >wp</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="src.heap.heapAsObjectGeneric.html#2235" class="Bound"
+      >w</a
+      ><a name="2236" class="Symbol"
+      >}</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >&#8594;</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="src.heap.heapAsObjectGeneric.html#2232" class="Bound"
+      >wp</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" class="Symbol"
+      >(</a
+      ><a name="2253" href="Agda.Builtin.Nat.html#128" class="InductiveConstructor"
+      >suc</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" href="src.heap.heapAsObjectGeneric.html#2235" class="Bound"
+      >w</a
+      ><a name="2258" class="Symbol"
+      >)</a
+      ><a name="2259"
+      > </a
+      ><a name="2260" class="Symbol"
+      >&#8594;</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" class="Symbol"
+      >(</a
+      ><a name="2272" href="src.heap.heapAsObjectBase.html#949" class="Function"
+      >liftWorldPred</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="src.heap.heapAsObjectGeneric.html#2232" class="Bound"
+      >wp</a
+      ><a name="2288" class="Symbol"
+      >)</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="src.heap.heapAsObjectGeneric.html#2235" class="Bound"
+      >w</a
+      ><a name="2291"
+      >
+</a
+      ><a name="2292" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >(</a
+      ><a name="2295" href="src.heap.heapAsObjectGeneric.html#2214" class="Function"
+      >liftStoreFin</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" href="src.heap.heapAsObjectGeneric.html#2308" class="Bound"
+      >h</a
+      ><a name="2309" class="Symbol"
+      >)</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="src.heap.heapAsObjectGeneric.html#2311" class="Bound"
+      >p</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" class="Symbol"
+      >=</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="src.heap.heapAsObjectGeneric.html#2308" class="Bound"
+      >h</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >(</a
+      ><a name="2320" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" href="src.heap.heapAsObjectGeneric.html#2311" class="Bound"
+      >p</a
+      ><a name="2325" class="Symbol"
+      >)</a
+      ><a name="2326"
+      >
+</a
+      ><a name="2327" class="Comment"
+      >--@END</a
+      ><a name="2333"
+      >
+
+</a
+      ><a name="2335" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="2356"
+      >
+</a
+      ><a name="2357" class="Comment"
+      >--@BEGIN@newStoreFin@newHfin</a
+      ><a name="2385"
+      >
+</a
+      ><a name="2386" href="src.heap.heapAsObjectGeneric.html#2386" class="Function"
+      >newHfin</a
+      ><a name="2393"
+      > </a
+      ><a name="2394" class="Symbol"
+      >:</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" class="Symbol"
+      >&#8704;</a
+      ><a name="2397"
+      > </a
+      ><a name="2398" class="Symbol"
+      >{</a
+      ><a name="2399" href="src.heap.heapAsObjectGeneric.html#2399" class="Bound"
+      >wp</a
+      ><a name="2401"
+      > </a
+      ><a name="2402" href="src.heap.heapAsObjectGeneric.html#2402" class="Bound"
+      >w</a
+      ><a name="2403" class="Symbol"
+      >}</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" class="Symbol"
+      >&#8594;</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" href="src.heap.heapAsObjectGeneric.html#2399" class="Bound"
+      >wp</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" href="src.heap.heapAsObjectGeneric.html#2402" class="Bound"
+      >w</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" class="Symbol"
+      >&#8594;</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" href="src.heap.heapAsObjectGeneric.html#2399" class="Bound"
+      >wp</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" class="Symbol"
+      >.</a
+      ><a name="2427" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" class="Symbol"
+      >(</a
+      ><a name="2431" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" href="src.heap.heapAsObjectGeneric.html#2402" class="Bound"
+      >w</a
+      ><a name="2437" class="Symbol"
+      >)</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" class="Symbol"
+      >&#8594;</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" href="src.heap.heapAsObjectGeneric.html#2399" class="Bound"
+      >wp</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" class="Symbol"
+      >(</a
+      ><a name="2454" href="src.heap.heapAsObjectBase.html#545" class="Function"
+      >sucw</a
+      ><a name="2458"
+      > </a
+      ><a name="2459" href="src.heap.heapAsObjectGeneric.html#2402" class="Bound"
+      >w</a
+      ><a name="2460" class="Symbol"
+      >)</a
+      ><a name="2461"
+      >
+</a
+      ><a name="2462" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2463"
+      > </a
+      ><a name="2464" class="Symbol"
+      >(</a
+      ><a name="2465" href="src.heap.heapAsObjectGeneric.html#2386" class="Function"
+      >newHfin</a
+      ><a name="2472"
+      >           </a
+      ><a name="2483" href="src.heap.heapAsObjectGeneric.html#2483" class="Bound"
+      >h</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="src.heap.heapAsObjectGeneric.html#2485" class="Bound"
+      >a</a
+      ><a name="2486" class="Symbol"
+      >)</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2492"
+      >     </a
+      ><a name="2497" class="Symbol"
+      >=</a
+      ><a name="2498"
+      >  </a
+      ><a name="2500" href="src.heap.heapAsObjectGeneric.html#2485" class="Bound"
+      >a</a
+      ><a name="2501"
+      >
+</a
+      ><a name="2502" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2503"
+      > </a
+      ><a name="2504" class="Symbol"
+      >(</a
+      ><a name="2505" href="src.heap.heapAsObjectGeneric.html#2386" class="Function"
+      >newHfin</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" class="Symbol"
+      >{</a
+      ><a name="2514" href="src.heap.heapAsObjectGeneric.html#2514" class="Bound"
+      >wp</a
+      ><a name="2516" class="Symbol"
+      >}</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" class="Symbol"
+      >{</a
+      ><a name="2519" href="src.heap.heapAsObjectGeneric.html#2519" class="Bound"
+      >w</a
+      ><a name="2520" class="Symbol"
+      >}</a
+      ><a name="2521"
+      >  </a
+      ><a name="2523" href="src.heap.heapAsObjectGeneric.html#2523" class="Bound"
+      >h</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" href="src.heap.heapAsObjectGeneric.html#2525" class="Bound"
+      >a</a
+      ><a name="2526" class="Symbol"
+      >)</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" class="Symbol"
+      >(</a
+      ><a name="2529" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="src.heap.heapAsObjectGeneric.html#2533" class="Bound"
+      >x</a
+      ><a name="2534" class="Symbol"
+      >)</a
+      ><a name="2535"
+      >  </a
+      ><a name="2537" class="Symbol"
+      >=</a
+      ><a name="2538"
+      >  </a
+      ><a name="2540" href="src.heap.heapAsObjectBase.html#828" class="Field"
+      >lift</a
+      ><a name="2544"
+      > </a
+      ><a name="2545" href="src.heap.heapAsObjectGeneric.html#2514" class="Bound"
+      >wp</a
+      ><a name="2547"
+      > </a
+      ><a name="2548" href="src.heap.heapAsObjectGeneric.html#2519" class="Bound"
+      >w</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >(</a
+      ><a name="2551" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" href="src.heap.heapAsObjectGeneric.html#2523" class="Bound"
+      >h</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="src.heap.heapAsObjectGeneric.html#2533" class="Bound"
+      >x</a
+      ><a name="2556" class="Symbol"
+      >)</a
+      ><a name="2557"
+      >
+</a
+      ><a name="2558" class="Comment"
+      >--@END</a
+      ><a name="2564"
+      >
+
+</a
+      ><a name="2566" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="2587"
+      >
+</a
+      ><a name="2588" class="Comment"
+      >--@BEGIN@writeHfin</a
+      ><a name="2606"
+      >
+</a
+      ><a name="2607" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" class="Symbol"
+      >:</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" class="Symbol"
+      >&#8704;</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >{</a
+      ><a name="2622" href="src.heap.heapAsObjectGeneric.html#2622" class="Bound"
+      >wp</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="src.heap.heapAsObjectGeneric.html#2625" class="Bound"
+      >w</a
+      ><a name="2626" class="Symbol"
+      >}</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" class="Symbol"
+      >&#8594;</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2638"
+      > </a
+      ><a name="2639" href="src.heap.heapAsObjectGeneric.html#2622" class="Bound"
+      >wp</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="src.heap.heapAsObjectGeneric.html#2625" class="Bound"
+      >w</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" class="Symbol"
+      >&#8594;</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" href="src.heap.heapAsObjectGeneric.html#841" class="Function"
+      >Pointerfin</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="src.heap.heapAsObjectGeneric.html#2625" class="Bound"
+      >w</a
+      ><a name="2658"
+      > </a
+      ><a name="2659" class="Symbol"
+      >&#8594;</a
+      ><a name="2660"
+      >  </a
+      ><a name="2662" href="src.heap.heapAsObjectGeneric.html#2622" class="Bound"
+      >wp</a
+      ><a name="2664"
+      > </a
+      ><a name="2665" class="Symbol"
+      >.</a
+      ><a name="2666" href="src.heap.heapAsObjectBase.html#758" class="Field"
+      >El</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="src.heap.heapAsObjectGeneric.html#2625" class="Bound"
+      >w</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" class="Symbol"
+      >&#8594;</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="2681"
+      > </a
+      ><a name="2682" href="src.heap.heapAsObjectGeneric.html#2622" class="Bound"
+      >wp</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="src.heap.heapAsObjectGeneric.html#2625" class="Bound"
+      >w</a
+      ><a name="2686"
+      >
+</a
+      ><a name="2687" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" class="Symbol"
+      >(</a
+      ><a name="2690" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2699"
+      >       </a
+      ><a name="2706" href="src.heap.heapAsObjectGeneric.html#2706" class="Bound"
+      >h</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2712"
+      >     </a
+      ><a name="2717" href="src.heap.heapAsObjectGeneric.html#2717" class="Bound"
+      >a</a
+      ><a name="2718" class="Symbol"
+      >)</a
+      ><a name="2719"
+      >  </a
+      ><a name="2721" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2725"
+      >     </a
+      ><a name="2730" class="Symbol"
+      >=</a
+      ><a name="2731"
+      >  </a
+      ><a name="2733" href="src.heap.heapAsObjectGeneric.html#2717" class="Bound"
+      >a</a
+      ><a name="2734"
+      >
+</a
+      ><a name="2735" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="Symbol"
+      >(</a
+      ><a name="2738" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2747"
+      >       </a
+      ><a name="2754" href="src.heap.heapAsObjectGeneric.html#2754" class="Bound"
+      >h</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2760"
+      >     </a
+      ><a name="2765" href="src.heap.heapAsObjectGeneric.html#2765" class="Bound"
+      >a</a
+      ><a name="2766" class="Symbol"
+      >)</a
+      ><a name="2767"
+      >  </a
+      ><a name="2769" class="Symbol"
+      >(</a
+      ><a name="2770" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" href="src.heap.heapAsObjectGeneric.html#2774" class="Bound"
+      >q</a
+      ><a name="2775" class="Symbol"
+      >)</a
+      ><a name="2776"
+      >  </a
+      ><a name="2778" class="Symbol"
+      >=</a
+      ><a name="2779"
+      >  </a
+      ><a name="2781" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" href="src.heap.heapAsObjectGeneric.html#2754" class="Bound"
+      >h</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >(</a
+      ><a name="2786" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" href="src.heap.heapAsObjectGeneric.html#2774" class="Bound"
+      >q</a
+      ><a name="2791" class="Symbol"
+      >)</a
+      ><a name="2792"
+      >
+</a
+      ><a name="2793" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" class="Symbol"
+      >(</a
+      ><a name="2796" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2805"
+      >       </a
+      ><a name="2812" href="src.heap.heapAsObjectGeneric.html#2812" class="Bound"
+      >h</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" class="Symbol"
+      >(</a
+      ><a name="2815" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" href="src.heap.heapAsObjectGeneric.html#2819" class="Bound"
+      >p</a
+      ><a name="2820" class="Symbol"
+      >)</a
+      ><a name="2821"
+      >  </a
+      ><a name="2823" href="src.heap.heapAsObjectGeneric.html#2823" class="Bound"
+      >a</a
+      ><a name="2824" class="Symbol"
+      >)</a
+      ><a name="2825"
+      >  </a
+      ><a name="2827" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2831"
+      >     </a
+      ><a name="2836" class="Symbol"
+      >=</a
+      ><a name="2837"
+      >  </a
+      ><a name="2839" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="src.heap.heapAsObjectGeneric.html#2812" class="Bound"
+      >h</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" href="Data.Fin.html#893" class="InductiveConstructor"
+      >zero</a
+      ><a name="2847"
+      >
+</a
+      ><a name="2848" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" class="Symbol"
+      >(</a
+      ><a name="2851" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" class="Symbol"
+      >{</a
+      ><a name="2862" href="src.heap.heapAsObjectGeneric.html#2862" class="Bound"
+      >wp</a
+      ><a name="2864" class="Symbol"
+      >}</a
+      ><a name="2865"
+      >  </a
+      ><a name="2867" href="src.heap.heapAsObjectGeneric.html#2867" class="Bound"
+      >h</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" class="Symbol"
+      >(</a
+      ><a name="2870" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" href="src.heap.heapAsObjectGeneric.html#2874" class="Bound"
+      >p</a
+      ><a name="2875" class="Symbol"
+      >)</a
+      ><a name="2876"
+      >  </a
+      ><a name="2878" href="src.heap.heapAsObjectGeneric.html#2878" class="Bound"
+      >a</a
+      ><a name="2879" class="Symbol"
+      >)</a
+      ><a name="2880"
+      >  </a
+      ><a name="2882" class="Symbol"
+      >(</a
+      ><a name="2883" href="Data.Fin.html#924" class="InductiveConstructor"
+      >suc</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="src.heap.heapAsObjectGeneric.html#2887" class="Bound"
+      >q</a
+      ><a name="2888" class="Symbol"
+      >)</a
+      ><a name="2889"
+      >  </a
+      ><a name="2891" class="Symbol"
+      >=</a
+      ><a name="2892"
+      >  </a
+      ><a name="2894" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" class="Symbol"
+      >(</a
+      ><a name="2897" href="src.heap.heapAsObjectGeneric.html#2607" class="Function"
+      >writeHfin</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" class="Symbol"
+      >{</a
+      ><a name="2908" href="src.heap.heapAsObjectBase.html#949" class="Function"
+      >liftWorldPred</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="src.heap.heapAsObjectGeneric.html#2862" class="Bound"
+      >wp</a
+      ><a name="2924" class="Symbol"
+      >}</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" class="Symbol"
+      >(</a
+      ><a name="2927" href="src.heap.heapAsObjectGeneric.html#2214" class="Function"
+      >liftStoreFin</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" href="src.heap.heapAsObjectGeneric.html#2867" class="Bound"
+      >h</a
+      ><a name="2941" class="Symbol"
+      >)</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" href="src.heap.heapAsObjectGeneric.html#2874" class="Bound"
+      >p</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" href="src.heap.heapAsObjectGeneric.html#2878" class="Bound"
+      >a</a
+      ><a name="2946" class="Symbol"
+      >)</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" href="src.heap.heapAsObjectGeneric.html#2887" class="Bound"
+      >q</a
+      ><a name="2949"
+      >
+</a
+      ><a name="2950" class="Comment"
+      >--@END</a
+      ><a name="2956"
+      >
+
+</a
+      ><a name="2958" class="Comment"
+      >--heapAsObjectGeneric</a
+      ><a name="2979"
+      >
+</a
+      ><a name="2980" class="Comment"
+      >--@BEGIN@emptyHfin</a
+      ><a name="2998"
+      >
+</a
+      ><a name="2999" href="src.heap.heapAsObjectGeneric.html#2999" class="Function"
+      >&#8709;Hfin</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" class="Symbol"
+      >:</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" class="Symbol"
+      >&#8704;</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" class="Symbol"
+      >{</a
+      ><a name="3010" href="src.heap.heapAsObjectGeneric.html#3010" class="Bound"
+      >wp</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" class="Symbol"
+      >:</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" href="src.heap.heapAsObjectBase.html#638" class="Record"
+      >WorldPred</a
+      ><a name="3024" class="Symbol"
+      >}</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" class="Symbol"
+      >&#8594;</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="src.heap.heapAsObjectGeneric.html#2075" class="Function"
+      >StoreFin</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" href="src.heap.heapAsObjectGeneric.html#3010" class="Bound"
+      >wp</a
+      ><a name="3039"
+      > </a
+      ><a name="3040" href="src.heap.heapAsObjectBase.html#2930" class="Function"
+      >&#8709;w</a
+      ><a name="3042"
+      >
+</a
+      ><a name="3043" href="src.heap.heapAsObjectGeneric.html#1655" class="Field"
+      >&#8593;</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" href="src.heap.heapAsObjectGeneric.html#2999" class="Function"
+      >&#8709;Hfin</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >()</a
+      ><a name="3053"
+      >
+</a
+      ><a name="3054" class="Comment"
+      >--@END</a
+      ><a name="3060"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

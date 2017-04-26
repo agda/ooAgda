@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >StateSizedIO.writingOOsUsingIO</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Symbol"
+      >{-#</a
+      ><a name="4"
+      > </a
+      ><a name="5" class="Keyword"
+      >OPTIONS</a
+      ><a name="12"
+      > </a
+      ><a name="13" class="Option"
+      >--postfix-projections</a
+      ><a name="34"
+      > </a
+      ><a name="35" class="Symbol"
+      >#-}</a
+      ><a name="38"
+      >
+</a
+      ><a name="39" class="Symbol"
+      >{-#</a
+      ><a name="42"
+      > </a
+      ><a name="43" class="Keyword"
+      >OPTIONS</a
+      ><a name="50"
+      > </a
+      ><a name="51" class="Option"
+      >--allow-unsolved-metas</a
+      ><a name="73"
+      > </a
+      ><a name="74" class="Symbol"
+      >#-}</a
+      ><a name="77"
+      >
+
+
+</a
+      ><a name="80" class="Keyword"
+      >module</a
+      ><a name="86"
+      > </a
+      ><a name="87" href="StateSizedIO.writingOOsUsingIO.html#1" class="Module"
+      >StateSizedIO.writingOOsUsingIO</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Keyword"
+      >where</a
+      ><a name="123"
+      >
+
+
+</a
+      ><a name="126" class="Keyword"
+      >open</a
+      ><a name="130"
+      > </a
+      ><a name="131" class="Keyword"
+      >import</a
+      ><a name="137"
+      > </a
+      ><a name="138" href="StateSizedIO.Object.html#1" class="Module"
+      >StateSizedIO.Object</a
+      ><a name="157"
+      >
+</a
+      ><a name="158" class="Keyword"
+      >open</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Keyword"
+      >import</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="StateSizedIO.Base.html#1" class="Module"
+      >StateSizedIO.Base</a
+      ><a name="187"
+      >
+</a
+      ><a name="188" class="Keyword"
+      >open</a
+      ><a name="192"
+      > </a
+      ><a name="193" class="Keyword"
+      >import</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="212"
+      >
+</a
+      ><a name="213" class="Keyword"
+      >open</a
+      ><a name="217"
+      > </a
+      ><a name="218" class="Keyword"
+      >import</a
+      ><a name="224"
+      > </a
+      ><a name="225" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="233"
+      >
+</a
+      ><a name="234" class="Keyword"
+      >open</a
+      ><a name="238"
+      > </a
+      ><a name="239" class="Keyword"
+      >import</a
+      ><a name="245"
+      > </a
+      ><a name="246" href="Data.Fin.html#1" class="Module"
+      >Data.Fin</a
+      ><a name="254"
+      >
+</a
+      ><a name="255" class="Keyword"
+      >open</a
+      ><a name="259"
+      > </a
+      ><a name="260" class="Keyword"
+      >import</a
+      ><a name="266"
+      > </a
+      ><a name="267" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="276"
+      >
+</a
+      ><a name="277" class="Keyword"
+      >open</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Keyword"
+      >import</a
+      ><a name="288"
+      > </a
+      ><a name="289" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="297"
+      >
+</a
+      ><a name="298" class="Keyword"
+      >open</a
+      ><a name="302"
+      > </a
+      ><a name="303" class="Keyword"
+      >import</a
+      ><a name="309"
+      > </a
+      ><a name="310" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="319"
+      >
+</a
+      ><a name="320" class="Keyword"
+      >open</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Keyword"
+      >import</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="Data.String.html#1" class="Module"
+      >Data.String</a
+      ><a name="343"
+      >
+</a
+      ><a name="344" class="Keyword"
+      >open</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Keyword"
+      >import</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="Unit.html#1" class="Module"
+      >Unit</a
+      ><a name="360"
+      >
+</a
+      ><a name="361" class="Keyword"
+      >open</a
+      ><a name="365"
+      > </a
+      ><a name="366" class="Keyword"
+      >import</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="Data.Bool.Base.html#1" class="Module"
+      >Data.Bool.Base</a
+      ><a name="387"
+      >
+</a
+      ><a name="388" class="Keyword"
+      >open</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Keyword"
+      >import</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="437"
+      >
+</a
+      ><a name="438" class="Keyword"
+      >open</a
+      ><a name="442"
+      > </a
+      ><a name="443" class="Keyword"
+      >import</a
+      ><a name="449"
+      > </a
+      ><a name="450" href="SizedIO.Console.html#1" class="Module"
+      >SizedIO.Console</a
+      ><a name="465"
+      >
+</a
+      ><a name="466" class="Keyword"
+      >open</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Keyword"
+      >import</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="SizedIO.Console.html#1" class="Module"
+      >SizedIO.Console</a
+      ><a name="493"
+      > </a
+      ><a name="494" class="Keyword"
+      >hiding</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Symbol"
+      >(</a
+      ><a name="502" href="SizedIO.Console.html#883" class="Function"
+      >main</a
+      ><a name="506" class="Symbol"
+      >;</a
+      ><a name="507" href="SizedIO.Console.html#764" class="Function"
+      >translateIOConsole</a
+      ><a name="525" class="Symbol"
+      >)</a
+      ><a name="526"
+      >
+</a
+      ><a name="527" class="Keyword"
+      >open</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Keyword"
+      >import</a
+      ><a name="538"
+      > </a
+      ><a name="539" href="Size.html#1" class="Module"
+      >Size</a
+      ><a name="543"
+      >
+</a
+      ><a name="544" class="Keyword"
+      >open</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Keyword"
+      >import</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="SizedIO.Base.html#1" class="Module"
+      >SizedIO.Base</a
+      ><a name="568"
+      >
+</a
+      ><a name="569" class="Keyword"
+      >open</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Keyword"
+      >import</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="StateSizedIO.cellStateDependent.html#1" class="Module"
+      >StateSizedIO.cellStateDependent</a
+      ><a name="612"
+      >
+</a
+      ><a name="613" class="Keyword"
+      >open</a
+      ><a name="617"
+      > </a
+      ><a name="618" class="Keyword"
+      >import</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="NativeIO.html#1" class="Module"
+      >NativeIO</a
+      ><a name="633"
+      >
+
+
+</a
+      ><a name="636" class="Comment"
+      >--</a
+      ><a name="638"
+      >
+</a
+      ><a name="639" class="Comment"
+      >-- Delete this file (all stuff moved to writingOOsUsingIOVers2.agda</a
+      ><a name="706"
+      >
+</a
+      ><a name="707" class="Comment"
+      >--</a
+      ><a name="709"
+      >
+</a
+      ><a name="710" class="Comment"
+      >{-
+objectInterfToIOInterf&#738; : Interface&#738; &#8594; IOInterface&#738;
+objectInterfToIOInterf&#738; I .IOState&#738; = I .State&#738;
+objectInterfToIOInterf&#738; I .Command&#738; = I .Method&#738;
+objectInterfToIOInterf&#738; I .Response&#738; = I .Result&#738;
+objectInterfToIOInterf&#738; I .IOnext&#738; = I .next&#738;
+
+
+ioInterfToObjectInterf&#738; : IOInterface&#738; &#8594; Interface&#738;
+ioInterfToObjectInterf&#738; I .State&#738; = I .IOState&#738;
+ioInterfToObjectInterf&#738; I .Method&#738; = I .Command&#738;
+ioInterfToObjectInterf&#738; I .Result&#738; = I .Response&#738;
+ioInterfToObjectInterf&#738; I .next&#738; = I .IOnext&#738;
+
+
+data DecSets : Set where
+  fin : &#8469; &#8594; DecSets
+
+TDecSets : DecSets &#8594; Set
+TDecSets (fin n) = Fin n
+
+toDecSets : &#8704;{n} &#8594; (x : Fin n) &#8594; DecSets
+toDecSets x = fin (to&#8469; x)
+
+_==fin_ : {n : &#8469;} &#8594; Fin n &#8594; Fin n &#8594; Bool
+_==fin_ {zero} () t
+_==fin_ {suc _} zero zero = true
+_==fin_ {suc _} zero (suc _) = false
+_==fin_ {suc _} (suc _) zero = false
+_==fin_ {suc _} (suc s) (suc t) = s ==fin t
+
+transferFin : {n : &#8469;} &#8594; (P : Fin n &#8594; Set) &#8594;
+              (i j : Fin n) &#8594; T (i ==fin j) &#8594;
+              P i &#8594; P j
+transferFin {zero} P () j q p
+transferFin {suc n} P zero zero q p = p
+transferFin {suc n} P zero (suc j) () p
+transferFin {suc n} P (suc i) zero () p
+transferFin {suc n} P (suc i) (suc j) q p = transferFin {n} (P &#8728; suc) i j q p
+
+_==DecSets_ : {d : DecSets} &#8594; TDecSets d &#8594; TDecSets d  &#8594; Bool
+_==DecSets_ {fin n} = _==fin_
+
+
+transferFin' : {n : &#8469;} &#8594; (P : Fin n &#8594; Set) &#8594;
+              (i j : Fin n) &#8594; ((i ==fin j) &#8801; true) &#8594;
+              P i &#8594; P j
+transferFin' {zero} P () j q p
+transferFin' {suc n} P zero zero q p = p
+transferFin' {suc n} P zero (suc j) () p
+transferFin' {suc n} P (suc i) zero () p
+transferFin' {suc n} P (suc i) (suc j) q p = transferFin' {n} (P &#8728; suc) i j q p
+
+transferDecSets : {J : DecSets} &#8594; (P : TDecSets J &#8594; Set) &#8594;
+              (i j : TDecSets J) &#8594; ((i ==DecSets j) &#8801; true) &#8594;
+              P i &#8594; P j
+transferDecSets {(fin n)} P i j q p = transferFin' {n} P i j q p
+
+
+{-
+transferDec : {J : DecSets} &#8594; (P : TDecSets J  &#8594; Set) &#8594;
+              (i j : TDecSets) &#8594; ((i ==DecSets j) &#8801; true) &#8594;
+              P i &#8594; P j
+-}
+
+
+--with {!!} inspect {!!} --(_==DecSets_ j j')
+--... | x = {!!}
+
+{-
+... | true = {!!} -- {!(I j).next&#738; (f j) m ?!}
+... | false = {!!}
+-}
+
+{-
+    = if (j ==DecSets j') then  else {!!}
+-}
+
+
+
+module _ (I : IOInterface&#738; )
+         (let S = IOState&#738; I) (let C = Command&#738; I)
+         (let R = Response&#738; I) (let n = IOnext&#738; I)
+           where
+
+  mutual
+
+    data IO&#738;ind (A : S &#8594; Set) (s : S) : Set where
+
+      do&#738;''     : (c : C s) (f : (r : R s c) &#8594; IO&#738;ind A (n s c r)) &#8594; IO&#738;ind A s
+      return&#738;'' : (a : A s) &#8594; IO&#738;ind A s
+
+
+
+module _ {I : Interface&#738; } (let S = State&#738; I) (let n = next&#738; I)
+           where
+
+  translate&#738; : &#8704;{A : S &#8594; Set}{s : S}
+               &#8594; Object&#738; I s
+               &#8594; IO&#738;ind (objectInterfToIOInterf&#738; I) A s
+               &#8594; &#931;[ s' &#8712; S ]  (A s' &#215; Object&#738; I s')
+  translate&#738; {A} {s} obj (return&#738;'' x) = s , (x , obj)
+  translate&#738; {A} {s} obj (do&#738;'' c p) = obj .objectMethod c &#9657; &#955; {(x , o')
+                                      &#8594; translate&#738; {A} {n s c x} o' (p x)  }
+
+
+module _ {I : Interface&#738; }   (let S = State&#738; I)
+           where
+
+  getA&#738; : &#8704;{A : S &#8594; Set}{s : S}
+               &#8594; Object&#738; I s
+               &#8594; IO&#738;ind (objectInterfToIOInterf&#738; I) A s
+               &#8594; &#931;[ s' &#8712; S ]  A s'
+  getA&#738; {A} {s} obj (return&#738;'' x) = s , x
+  getA&#738; {A} {s} obj p = let res = translate&#738; {I} {A} {s} obj p
+                        in proj&#8321; res , proj&#8321; (proj&#8322; res)
+
+
+module _ (I : IOInterface&#738; )
+         (let S = IOState&#738; I) (let C = Command&#738; I)
+         (let R = Response&#738; I) (let n = IOnext&#738; I)
+           where
+
+  mutual
+    -- IO&#738;ind' A sbegin send
+    -- are programs which start in state sbegin and end in state send
+
+    data IO&#738;ind' (A : S &#8594; Set) (sbegin : S) : (send : S) &#8594; Set where
+
+      do&#738;'''     : {send : S} &#8594; (c : C sbegin)  &#8594;
+                   (f : (r : R sbegin c) &#8594; IO&#738;ind' A (n sbegin c r) send)
+                  &#8594; IO&#738;ind' A sbegin send
+      return&#738;''' : (a : A sbegin) &#8594; IO&#738;ind' A sbegin sbegin
+
+
+
+module _ {I : Interface&#738; } (let S = State&#738; I) (let n = next&#738; I)
+           where
+
+  translate&#738;' : &#8704;{A : S &#8594; Set}{sbegin : S}{send : S}
+               &#8594; Object&#738; I sbegin
+               &#8594; IO&#738;ind' (objectInterfToIOInterf&#738; I) A sbegin send
+               &#8594; (A send &#215; Object&#738; I send)
+  translate&#738;' {A} {sbegin} {send} obj (return&#738;''' x) = x , obj
+  translate&#738;' {A} {sbegin} {send} obj (do&#738;''' c p) = obj .objectMethod c &#9657; &#955; {(x , o')
+                                      &#8594; translate&#738;' {A} {n sbegin c x} {send} o' (p x)  }
+
+module _ {I : Interface&#738; }   (let S = State&#738; I)
+           where
+
+  getA&#738;' : &#8704;{A : S &#8594; Set}{sbegin : S}{send : S}
+               &#8594; Object&#738; I sbegin
+               &#8594; IO&#738;ind' (objectInterfToIOInterf&#738; I) A sbegin send
+               &#8594; A send
+  getA&#738;' {A} {sbegin} {send} obj (return&#738;''' x) = x
+  getA&#738;' {A} {sbegin} {send} obj p = let res = translate&#738;' {I} {A} {sbegin} {send} obj p
+                        in proj&#8321; res
+
+
+updateFinFunction : {n : &#8469;} &#8594; (P : Fin n &#8594; Set)
+                    &#8594; (f : (k : Fin n) &#8594; P k)
+                    &#8594; (l : Fin n)
+                    &#8594; (b : P l)
+                    &#8594; (k : Fin n) &#8594; P k
+updateFinFunction {zero} P f () b k
+updateFinFunction {suc n} P f zero b zero = b
+updateFinFunction {suc n} P f zero b (suc k) = f (suc k)
+updateFinFunction {suc n} P f (suc l) b zero = f zero
+updateFinFunction {suc n} P f (suc l) b (suc k) = updateFinFunction {n} (P &#8728; suc)  (f &#8728; suc) l b k
+
+updateDecSetsFunction : {J : DecSets} &#8594; (P : TDecSets J &#8594; Set)
+                    &#8594; (f : (k : TDecSets J) &#8594; P k)
+                    &#8594; (l : TDecSets J)
+                    &#8594; (b : P l)
+                    &#8594; (k : TDecSets J) &#8594; P k
+updateDecSetsFunction {fin n} P f l b k = updateFinFunction {n} P f l b k
+
+
+updateFinFunctionStateChange : {n : &#8469;}
+                    &#8594; (P : Fin n &#8594; Set)
+                    &#8594; (f : (k : Fin n) &#8594; P k)
+                    &#8594; (Q : (k : Fin n) &#8594; P k &#8594; Set)
+                    &#8594; (g : (k : Fin n) &#8594; Q k (f k) )
+                    &#8594; (l : Fin n)
+                    &#8594; (newP : P l)
+                    &#8594; (newQ : Q l newP)
+                    &#8594; (k : Fin n)
+                    &#8594; Q k (updateFinFunction {n} P f l newP k)
+updateFinFunctionStateChange {zero} P f Q g () newP newQ k
+updateFinFunctionStateChange {suc n} P f Q g zero newP newQ zero = newQ
+updateFinFunctionStateChange {suc n} P f Q g zero newP newQ (suc k) = g (suc k)
+updateFinFunctionStateChange {suc n} P f Q g (suc l) newP newQ zero = g zero
+updateFinFunctionStateChange {suc n} P f Q g (suc l) newP newQ (suc k) =
+   updateFinFunctionStateChange {n} (P &#8728; suc) (f &#8728; suc)
+                                (&#955; k p &#8594; Q (suc k) p)
+                                (g &#8728; suc) l newP newQ k
+
+
+updateDecSetsFunctionStateChange : {J : DecSets}
+                    &#8594; (P : TDecSets J &#8594; Set)
+                    &#8594; (f : (k : TDecSets J) &#8594; P k)
+                    &#8594; (Q : (k : TDecSets J) &#8594; P k &#8594; Set)
+                    &#8594; (g : (k : TDecSets J) &#8594; Q k (f k) )
+                    &#8594; (l : TDecSets J)
+                    &#8594; (newP : P l)
+                    &#8594; (newQ : Q l newP)
+                    &#8594; (k : TDecSets J)
+                    &#8594; Q k (updateDecSetsFunction {J} P f l newP k)
+updateDecSetsFunctionStateChange {fin n} P f Q g l newP newQ k = updateFinFunctionStateChange {n} P f Q g l newP newQ k
+
+
+
+
+objectInterfMultiToIOInterf&#738; : (J : DecSets) &#8594; (TDecSets J &#8594; Interface&#738;) &#8594; IOInterface&#738;
+objectInterfMultiToIOInterf&#738; J I .IOState&#738; = (j : TDecSets J) &#8594;  (I j).State&#738;
+objectInterfMultiToIOInterf&#738; J I .Command&#738; f  = &#931;[ j &#8712; TDecSets J ] (I j).Method&#738; (f j)
+objectInterfMultiToIOInterf&#738; J I .Response&#738; f (j , m) = (I j).Result&#738; (f j) m
+objectInterfMultiToIOInterf&#738; J I .IOnext&#738; f (j , m) r =
+   updateDecSetsFunction {J} (&#955; j&#8321; &#8594; I j&#8321; .State&#738;) f j (I j .next&#738; (f j) m r)
+
+{-
+objectInterfMultiToIOInterf&#738; J I .IOnext&#738; f (j , m) r j' with (_==DecSets_ j j') | inspect (_==DecSets_ j) j'
+... | true | [ eq ] = transferDecSets {J} (&#955; j'' &#8594; I j'' .State&#738;) j j' eq ((I j).next&#738; (f j) m r)
+... | false | [ eq ] = f j'
+-}
+
+
+
+translateMulti&#738; : (J : DecSets) &#8594; (I : TDecSets J &#8594; Interface&#738;) &#8594;
+            (A : ((j : TDecSets J) &#8594;  (I j).State&#738;) &#8594; Set)
+            (f : (j : TDecSets J) &#8594;  (I j).State&#738;)
+            (obj : (j : TDecSets J) &#8594;  Object&#738; (I j) (f j))
+             &#8594; IO&#738;ind (objectInterfMultiToIOInterf&#738; J I) A f
+             &#8594; &#931;[ s' &#8712; ((j : TDecSets J) &#8594;  (I j).State&#738;) ]
+                (A s' &#215; ( (j : TDecSets J) &#8594; Object&#738; (I j) (s' j)))
+translateMulti&#738; J I A f obj (do&#738;'' (j , m) p) = (obj j) .objectMethod m &#9657; &#955; {(r , o')
+     &#8594; translateMulti&#738; J I A (IOnext&#738; (objectInterfMultiToIOInterf&#738; J I) f (j , m) r)
+        (updateDecSetsFunctionStateChange {J}
+          (&#955; j&#8321; &#8594; I j&#8321; .State&#738;)
+          f
+          (&#955; j&#8321; state &#8594; Object&#738; (I j&#8321;) state)
+          obj j
+          (I j .next&#738; (f j) m r) o')
+          (p r)}
+translateMulti&#738; J I A f obj (return&#738;'' a) = f , a , obj
+
+
+
+module _ (I&#8321; : IOInterface&#738; )
+         (let S&#8321; = IOState&#738; I&#8321;) (let C&#8321; = Command&#738; I&#8321;)
+         (let R&#8321; = Response&#738; I&#8321;) (let n&#8321; = IOnext&#738; I&#8321;)
+         (I&#8322; : IOInterface&#738; )
+         (let S&#8322; = IOState&#738; I&#8322;)
+           where
+
+  mutual
+    IO&#738;indcoind+ : (i : Size)(A : S&#8321; &#8594; S&#8322; &#8594; Set) (s&#8321; : S&#8321;)(s&#8322; : S&#8322;) &#8594; Set
+    IO&#738;indcoind+ i A s&#8321; s&#8322; = IO&#738;ind I&#8322; ((&#955; s&#8322; &#8594; IO&#738;indcoind i A s&#8321; s&#8322;)) s&#8322;
+
+    record IO&#738;indcoind (i : Size)(A : S&#8321; &#8594; S&#8322; &#8594; Set) (s&#8321; : S&#8321;)(s&#8322; : S&#8322;) : Set where
+      coinductive
+      field
+        forceIC : {j : Size&lt; i} &#8594; IO&#738;indcoindShape j A s&#8321; s&#8322;
+
+
+
+
+    data IO&#738;indcoindShape (i : Size)(A : S&#8321; &#8594; S&#8322; &#8594; Set) : S&#8321; &#8594; S&#8322; &#8594; Set where
+      do&#738;ic : {s&#8321; : S&#8321;} &#8594; {s&#8322; : S&#8322;} &#8594; (c&#8321; : C&#8321; s&#8321;)
+           &#8594; ((r&#8321; : R&#8321; s&#8321; c&#8321;) &#8594; IO&#738;indcoind+ i A (n&#8321; s&#8321; c&#8321; r&#8321;) s&#8322;)
+           &#8594; IO&#738;indcoindShape i A s&#8321; s&#8322;
+      return&#738;ic : {s&#8321; : S&#8321;} &#8594;  {s&#8322; : S&#8322;}
+                 &#8594; IO&#738;' I&#8321; i (&#955; s&#8321;' &#8594; A s&#8321;' s&#8322;) s&#8321;
+                 &#8594; IO&#738;indcoindShape i A s&#8321; s&#8322;
+
+{-
+  delay&#738;ic : {i : Size}{A : S&#8321; &#8594; S&#8322; &#8594; Set}{s&#8321; : S&#8321;}{s&#8322; : S&#8322;}
+           &#8594; IO&#738;indcoindShape i A s&#8321; s&#8322;
+           &#8594; IO&#738;indcoind (&#8593; i) A s&#8321; s&#8322;
+  delay&#738;ic {i} {A} {s&#8321;} {s&#8322;} P .IO&#738;indcoind.forceIC {j} = P
+-}
+
+
+
+module _ {I&#8321; : IOInterface&#738; }
+         (let S&#8321; = IOState&#738; I&#8321;) (let C&#8321; = Command&#738; I&#8321;)
+         (let R&#8321; = Response&#738; I&#8321;) (let n&#8321; = IOnext&#738; I&#8321;)
+         {I&#8322; : IOInterface&#738; }
+         (let S&#8322; = IOState&#738; I&#8322;)
+           where
+  open IO&#738;indcoind
+
+  delay&#738;ic : {i : Size}{A : S&#8321; &#8594; S&#8322; &#8594; Set}{s&#8321; : S&#8321;}{s&#8322; : S&#8322;}
+           &#8594; IO&#738;indcoindShape I&#8321; I&#8322; i A s&#8321; s&#8322;
+           &#8594; IO&#738;indcoind I&#8321; I&#8322; (&#8593; i) A s&#8321; s&#8322;
+  delay&#738;ic {i} {A} {s&#8321;} {s&#8322;} P .forceIC {j} = P
+
+
+--&#931; (State&#738; I&#8322;) (&#955; s&#8324; &#8594; &#931; (A s&#8323; s&#8324;) (&#955; x &#8594; Object&#738; I&#8322; s&#8324;))) s&#8321;
+
+
+--&#8594; IO&#738;ind I&#8322; (&#955; s&#8322; &#8594; A s&#8321; s&#8322;) s&#8322;
+
+
+open IO&#738;indcoind public
+
+module _ (I&#8321; : IOInterface&#738; )
+         (let S&#8321; = IOState&#738; I&#8321;) (let C&#8321; = Command&#738; I&#8321;)
+         (let R&#8321; = Response&#738; I&#8321;) (let n&#8321; = IOnext&#738; I&#8321;)
+         (I&#8322; : Interface&#738; )
+         (let I&#8322;' = objectInterfToIOInterf&#738; I&#8322;)
+         (let S&#8322; = State&#738; I&#8322;)(let n&#8322; = IOnext&#738; I&#8322;')
+           where
+  mutual
+
+    translate&#738;IndCoind+ : &#8704;{i} &#8594; {A : S&#8321; &#8594; S&#8322; &#8594; Set}{s&#8321; : S&#8321;}{s&#8322; : S&#8322;}
+                 &#8594; Object&#738;  I&#8322; s&#8322;
+                 &#8594; IO&#738;indcoind+ I&#8321; I&#8322;' i A s&#8321; s&#8322;
+                 &#8594; IO&#738; I&#8321; i ((&#955; s&#8321; &#8594; &#931;[ s&#8322; &#8712; S&#8322; ]  (A s&#8321; s&#8322; &#215; Object&#738; I&#8322; s&#8322;))) s&#8321;
+    translate&#738;IndCoind+ {i} {A} {s&#8321;} {s&#8322;} obj p =
+                              let q : &#931;[ s' &#8712; S&#8322; ]
+                                        (IO&#738;indcoind I&#8321; I&#8322;' i A s&#8321; s'
+                                         &#215; Object&#738; I&#8322; s')
+                                  q = translate&#738; obj p
+                              in translate&#738;IndCoind (proj&#8322; (proj&#8322; q)) (proj&#8321; (proj&#8322; q))
+
+    translate&#738;IndCoind : &#8704;{i} &#8594; {A : S&#8321; &#8594; S&#8322; &#8594; Set}{s&#8321; : S&#8321;}{s&#8322; : S&#8322;}
+                 &#8594; Object&#738;  I&#8322; s&#8322;
+                 &#8594; IO&#738;indcoind I&#8321; I&#8322;' i A s&#8321; s&#8322;
+                 &#8594; IO&#738; I&#8321; i ((&#955; s&#8321; &#8594; &#931;[ s&#8322; &#8712; S&#8322; ]  (A s&#8321; s&#8322; &#215; Object&#738; I&#8322; s&#8322;))) s&#8321; --
+    translate&#738;IndCoind {i} {A} {s&#8321;} {s&#8322;} obj p .force&#738; {j}
+             = translate&#738;IndCoind' {j} {A} {s&#8321;} {s&#8322;} obj (p .forceIC {j})
+
+
+    translate&#738;IndCoind' : &#8704;{i} &#8594; {A : S&#8321; &#8594; S&#8322; &#8594; Set}{s&#8321; : S&#8321;}{s&#8322; : S&#8322;}
+                 &#8594; Object&#738;  I&#8322; s&#8322;
+                 &#8594; IO&#738;indcoindShape I&#8321; I&#8322;' i A s&#8321; s&#8322;
+                 &#8594; IO&#738;' I&#8321; i ((&#955; s&#8321; &#8594; &#931;[ s&#8322; &#8712; S&#8322; ]  (A s&#8321; s&#8322; &#215; Object&#738; I&#8322; s&#8322;))) s&#8321;
+    translate&#738;IndCoind' {i} {A} {.s&#8321;} {.s&#8322;} obj (do&#738;ic {s&#8321;} {s&#8322;} c&#8321; p)
+           = do&#738;' c&#8321; (&#955; r&#8321; &#8594; translate&#738;IndCoind+ {i} {A} {n&#8321; s&#8321; c&#8321; r&#8321;} {s&#8322;} obj (p r&#8321;))
+    translate&#738;IndCoind' {i} {A} {.s&#8321;} {.s&#8322;} obj (return&#738;ic {s&#8321;} {s&#8322;} p)
+           = fmap&#738;' i (&#955; s a &#8594; ( s&#8322; , a , obj)) s&#8321; p
+
+
+unsizedIOInterfToIOInterf&#738; : IOInterface &#8594; IOInterface&#738;
+unsizedIOInterfToIOInterf&#738; x .IOState&#738;  = Unit
+unsizedIOInterfToIOInterf&#738; x .Command&#738;  = &#955; _ &#8594; x .Command
+unsizedIOInterfToIOInterf&#738; x .Response&#738; = &#955; _ &#8594; x .Response
+unsizedIOInterfToIOInterf&#738; x .IOnext&#738;   _ _ _ =  unit
+
+ConsoleInterface&#738; : IOInterface&#738;
+ConsoleInterface&#738; = unsizedIOInterfToIOInterf&#738; consoleI
+
+CellInterface&#738;IO : IOInterface&#738;
+CellInterface&#738;IO = objectInterfToIOInterf&#738; (CellInterface&#738; String)
+
+
+
+module _ (I : IOInterface)
+       (let C = I .Command)
+       (let R = I .Response)
+       (let I' = unsizedIOInterfToIOInterf&#738; I)
+       (let C' = I' .Command&#738;)
+       (let R' = I' .Response&#738;)
+       (convertC : C' _ &#8594; C)
+       (convertR : &#8704;{c : C} &#8594; Response I (convertC c)  &#8594;  I .Response c)
+
+       where
+  mutual
+
+    flatternIO&#738; : &#8704; {A : Set}
+                 &#8594; IO&#738; (unsizedIOInterfToIOInterf&#738; I) &#8734; (&#955; _ &#8594; A) unit
+                 &#8594; IO I &#8734; A
+    flatternIO&#738; {A} p .force  = flatternIO&#738;' (force&#738; p)
+
+
+    flatternIO&#738;' : {A : Set}
+                 &#8594; IO&#738;' (unsizedIOInterfToIOInterf&#738; I) &#8734; (&#955; _ &#8594; A) unit
+                 &#8594; IO' I &#8734; A
+    flatternIO&#738;' {A} (do&#738;' c&#738; f) = do' (convertC c&#738;) (&#955; r&#738; &#8594;
+                    flatternIO&#738; (f (convertR {c&#738;} r&#738;)))
+    flatternIO&#738;' {A} (return&#738;' a) = return' a
+
+
+
+
+doIO : {i : Size}
+       {I&#8321; :  IOInterface&#738;} {I&#8322; :  IOInterface&#738;}
+       {A : I&#8321; .IOState&#738; &#8594; I&#8322; .IOState&#738; &#8594; Set}
+       {s&#8321; : I&#8321; .IOState&#738;}
+       {s&#8322; : I&#8322; .IOState&#738;}
+      (c&#8321; : I&#8321; .Command&#738; s&#8321;) &#8594;
+         ((r&#8321; : I&#8321; .Response&#738; s&#8321; c&#8321;) &#8594;
+          IO&#738;indcoind+ I&#8321; I&#8322; i  A (IOnext&#738; I&#8321; s&#8321; c&#8321; r&#8321;) s&#8322;)
+        &#8594;  IO&#738;indcoindShape I&#8321; I&#8322; i A  s&#8321; s&#8322;
+doIO  = do&#738;ic
+
+callMethod : {I&#8322; :  IOInterface&#738;}
+             {A : I&#8322; .IOState&#738; &#8594; Set}
+             {s&#8322; : I&#8322; .IOState&#738;}(c : Command&#738; I&#8322; s&#8322;) &#8594;
+               ((r : Response&#738; I&#8322; s&#8322; c) &#8594; IO&#738;ind I&#8322; A (IOnext&#738; I&#8322; s&#8322; c r)) &#8594;
+               IO&#738;ind I&#8322; A s&#8322;
+callMethod = do&#738;''
+
+
+
+endIO : {I&#8321; :  IOInterface&#738;} {I&#8322; :  IOInterface&#738;}
+--      {A : I&#8321; .IOState&#738; &#8594; I&#8322; .IOState&#738; &#8594; Set}
+       {s&#8321; : I&#8321; .IOState&#738;}
+       {s&#8322; : I&#8322; .IOState&#738;}
+       &#8594; IO&#738;ind I&#8322; (&#955; s &#8594; IO&#738;indcoind I&#8321; I&#8322; &#8734; (&#955; _ _ &#8594; Unit) s&#8321; s) s&#8322;
+endIO {I&#8321;} {I&#8322;} {s&#8321;} {s&#8322;} = return&#738;'' (delay&#738;ic (return&#738;ic (return&#738;' unit)))
+--                return&#738;'' {I&#8322;}
+--             {!!} -- (delay&#738;ic {!return&#738;''!} ) -- (return&#738;'' (return&#738;ic (return&#738;' unit))))   --(return&#738;ic (return&#738;' unit)))
+
+endIO+ : {I&#8321; :  IOInterface&#738;} {I&#8322; :  IOInterface&#738;}
+--      {A : I&#8321; .IOState&#738; &#8594; I&#8322; .IOState&#738; &#8594; Set}
+       {s&#8321; : I&#8321; .IOState&#738;}
+       {s&#8322; : I&#8322; .IOState&#738;}
+       &#8594; IO&#738;indcoind+ I&#8321; I&#8322; &#8734; (&#955; _ _ &#8594; Unit) s&#8321; s&#8322;
+endIO+ = return&#738;'' (delay&#738;ic (return&#738;ic (return&#738;' unit))) -- (return&#738;ic (return&#738;' unit))
+
+
+doIO+ : {i : Size}
+        {I&#8321; :  IOInterface&#738;} {I&#8322; :  IOInterface&#738;}
+--       {A : I&#8321; .IOState&#738; &#8594; I&#8322; .IOState&#738; &#8594; Set}
+       {s&#8321; : I&#8321; .IOState&#738;}
+       {s&#8322; : I&#8322; .IOState&#738;}
+       (c&#8321; : I&#8321; .Command&#738; s&#8321;) &#8594;
+       ((r&#8321; : I&#8321; .Response&#738; s&#8321; c&#8321;) &#8594;
+        IO&#738;indcoind+ I&#8321; I&#8322; i (&#955; _ _ &#8594; Unit) (IOnext&#738; I&#8321; s&#8321; c&#8321; r&#8321;) s&#8322;)
+       &#8594; IO&#738;indcoind+ I&#8321; I&#8322; i (&#955; _ _ &#8594; Unit) s&#8321; s&#8322;
+doIO+ {i} c p = return&#738;'' (delay&#738;ic (do&#738;ic c (&#955; r &#8594; p r)))
+
+
+doIO+' : {i : Size}
+        {I&#8321; :  IOInterface&#738;} {I&#8322; :  IOInterface&#738;}
+       {s&#8321; : I&#8321; .IOState&#738;}
+       {s&#8322; : I&#8322; .IOState&#738;}
+       (c&#8321; : I&#8321; .Command&#738; s&#8321;) &#8594;
+       ((r&#8321; : I&#8321; .Response&#738; s&#8321; c&#8321;) &#8594;
+        IO&#738;indcoind I&#8321; I&#8322; i (&#955; _ _ &#8594; Unit) (IOnext&#738; I&#8321; s&#8321; c&#8321; r&#8321;) s&#8322;)
+       &#8594; IO&#738;indcoind+ I&#8321; I&#8322; i (&#955; _ _ &#8594; Unit) s&#8321; s&#8322;
+doIO+' {i} c p = return&#738;'' (delay&#738;ic (do&#738;ic c (&#955; r &#8594; return&#738;'' (p r)))) -- p r -- (do&#738;ic c ? ) -- )
+
+
+callProg : {I : IOInterface&#738; }{A : I .IOState&#738; &#8594; Set}{s : I .IOState&#738;} (a : A s) &#8594; IO&#738;ind I A s
+callProg = return&#738;''
+
+
+
+run' : IO&#738;indcoind ConsoleInterface&#738; CellInterface&#738;IO &#8734; (&#955; x y &#8594; Unit)
+          unit empty
+       &#8594; NativeIO Unit
+run' prog = translateIOConsole
+               (flatternIO&#738;  consoleI (&#955; c &#8594; c) (&#955; r &#8594; r)
+              (fmap&#738; &#8734; (&#955; x y &#8594; unit) unit
+                (translate&#738;IndCoind ConsoleInterface&#738;
+                                    (CellInterface&#738; String) cellPempty' (prog))))
+
+
+module _ {objInf : Interface&#738;}
+         (let objIOInf = objectInterfToIOInterf&#738; objInf)
+         {objState : objIOInf .IOState&#738; }
+           where
+
+        run_startingWith_ : IO&#738;indcoind ConsoleInterface&#738; objIOInf &#8734; (&#955; x y &#8594; Unit) unit objState
+              &#8594; Object&#738; objInf objState
+              &#8594; NativeIO Unit
+        run prog startingWith obj = translateIOConsole
+           (flatternIO&#738;  consoleI (&#955; c &#8594; c) (&#955; r &#8594; r) (fmap&#738; &#8734; (&#955; x y &#8594; unit) unit
+                                    (translate&#738;IndCoind ConsoleInterface&#738; objInf obj prog)))
+
+
+        run+_startingWith_ : IO&#738;indcoind+ ConsoleInterface&#738; objIOInf &#8734; (&#955; x y &#8594; Unit) unit objState
+              &#8594; Object&#738; objInf objState
+              &#8594; NativeIO Unit
+        run+ prog startingWith obj = translateIOConsole
+           (flatternIO&#738;  consoleI (&#955; c &#8594; c) (&#955; r &#8594; r) (fmap&#738; &#8734; (&#955; x y &#8594; unit) unit
+                     (delay&#738; (force&#738; (translate&#738;IndCoind+ ConsoleInterface&#738; (ioInterfToObjectInterf&#738; objIOInf) obj prog)))))
+-}</a
+      ><a name="18025"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>
