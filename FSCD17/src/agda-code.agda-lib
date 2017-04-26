@@ -1,0 +1,3 @@
+name: agda-code
+depend: std-lib
+include: . ../../examples ../../src
