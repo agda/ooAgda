@@ -1,1 +1,212 @@
-Readme FSCD
+<head
+  ><title
+    >examples.heap.ALL</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1"
+      >
+
+
+</a
+      ><a name="4" class="Keyword"
+      >module</a
+      ><a name="10"
+      > </a
+      ><a name="11" href="examples.heap.ALL.html#1" class="Module"
+      >examples.heap.ALL</a
+      ><a name="28"
+      > </a
+      ><a name="29" class="Keyword"
+      >where</a
+      ><a name="34"
+      >
+
+</a
+      ><a name="36" class="Comment"
+      >-- Correctness Properties</a
+      ><a name="61"
+      >
+</a
+      ><a name="62" class="Comment"
+      >--</a
+      ><a name="64"
+      >
+</a
+      ><a name="65" class="Keyword"
+      >open</a
+      ><a name="69"
+      > </a
+      ><a name="70" class="Keyword"
+      >import</a
+      ><a name="76"
+      > </a
+      ><a name="77" href="examples.heap.correctnessLinkedList.html#1" class="Module"
+      >examples.heap.correctnessLinkedList</a
+      ><a name="112"
+      >
+
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="examples.heap.correctnessLinkedListStep2.html#1" class="Module"
+      >examples.heap.correctnessLinkedListStep2</a
+      ><a name="166"
+      >
+
+</a
+      ><a name="168" class="Comment"
+      >-- World Predicates</a
+      ><a name="187"
+      >
+</a
+      ><a name="188" class="Comment"
+      >--</a
+      ><a name="190"
+      >
+</a
+      ><a name="191" class="Keyword"
+      >open</a
+      ><a name="195"
+      > </a
+      ><a name="196" class="Keyword"
+      >import</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="src.heap.worldModule.html#1" class="Module"
+      >src.heap.worldModule</a
+      ><a name="223"
+      >
+
+</a
+      ><a name="225" class="Comment"
+      >-- Generic Heap</a
+      ><a name="240"
+      >
+</a
+      ><a name="241" class="Comment"
+      >--</a
+      ><a name="243"
+      >
+</a
+      ><a name="244" class="Keyword"
+      >open</a
+      ><a name="248"
+      > </a
+      ><a name="249" class="Keyword"
+      >import</a
+      ><a name="255"
+      > </a
+      ><a name="256" href="src.heap.heapAsObjectGeneric.html#1" class="Module"
+      >src.heap.heapAsObjectGeneric</a
+      ><a name="284"
+      >
+
+</a
+      ><a name="286" class="Comment"
+      >-- Store (without Object)</a
+      ><a name="311"
+      >
+</a
+      ><a name="312" class="Comment"
+      >--</a
+      ><a name="314"
+      >
+</a
+      ><a name="315" class="Keyword"
+      >open</a
+      ><a name="319"
+      > </a
+      ><a name="320" class="Keyword"
+      >import</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="src.heap.heapAsObjectBase.html#1" class="Module"
+      >src.heap.heapAsObjectBase</a
+      ><a name="352"
+      >
+
+</a
+      ><a name="354" class="Comment"
+      >-- Heap as Object</a
+      ><a name="371"
+      >
+</a
+      ><a name="372" class="Comment"
+      >--</a
+      ><a name="374"
+      >
+</a
+      ><a name="375" class="Keyword"
+      >open</a
+      ><a name="379"
+      > </a
+      ><a name="380" class="Keyword"
+      >import</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="src.heap.heapAsObject.html#1" class="Module"
+      >src.heap.heapAsObject</a
+      ><a name="408"
+      >
+
+</a
+      ><a name="410" class="Comment"
+      >-- Example</a
+      ><a name="420"
+      >
+</a
+      ><a name="421" class="Comment"
+      >--</a
+      ><a name="423"
+      >
+</a
+      ><a name="424" class="Keyword"
+      >open</a
+      ><a name="428"
+      > </a
+      ><a name="429" class="Keyword"
+      >import</a
+      ><a name="435"
+      > </a
+      ><a name="436" href="src.heap.heapAsObjectExample.html#1" class="Module"
+      >src.heap.heapAsObjectExample</a
+      ><a name="464"
+      >
+
+</a
+      ><a name="466" class="Comment"
+      >-- Native Heap</a
+      ><a name="480"
+      >
+</a
+      ><a name="481" class="Comment"
+      >--</a
+      ><a name="483"
+      >
+</a
+      ><a name="484" class="Keyword"
+      >open</a
+      ><a name="488"
+      > </a
+      ><a name="489" class="Keyword"
+      >import</a
+      ><a name="495"
+      > </a
+      ><a name="496" href="src.heap.heapAsObjectNativeHeap.html#1" class="Module"
+      >src.heap.heapAsObjectNativeHeap</a
+      ><a name="527"
+      >
+</a
+      ></pre
+    ></body
+  >
