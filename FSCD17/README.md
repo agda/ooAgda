@@ -36,7 +36,7 @@
       >import</a
       ><a name="76"
       > </a
-      ><a name="77" href="examples.heap.correctnessLinkedList.html#1" class="Module"
+      ><a name="77" href="https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedList.html#1" class="Module"
       >examples.heap.correctnessLinkedList</a
       ><a name="112"
       >
@@ -50,7 +50,7 @@
       >import</a
       ><a name="125"
       > </a
-      ><a name="126" href="examples.heap.correctnessLinkedListStep2.html#1" class="Module"
+      ><a name="126" href="https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListStep2.html#1" class="Module"
       >examples.heap.correctnessLinkedListStep2</a
       ><a name="166"
       >
@@ -74,7 +74,7 @@
       >import</a
       ><a name="202"
       > </a
-      ><a name="203" href="src.heap.worldModule.html#1" class="Module"
+      ><a name="203" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.worldModule.html#1" class="Module"
       >src.heap.worldModule</a
       ><a name="223"
       >
@@ -98,7 +98,7 @@
       >import</a
       ><a name="255"
       > </a
-      ><a name="256" href="src.heap.heapAsObjectGeneric.html#1" class="Module"
+      ><a name="256" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectGeneric.html#1" class="Module"
       >src.heap.heapAsObjectGeneric</a
       ><a name="284"
       >
@@ -122,7 +122,7 @@
       >import</a
       ><a name="326"
       > </a
-      ><a name="327" href="src.heap.heapAsObjectBase.html#1" class="Module"
+      ><a name="327" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectBase.html#1" class="Module"
       >src.heap.heapAsObjectBase</a
       ><a name="352"
       >
@@ -146,7 +146,7 @@
       >import</a
       ><a name="386"
       > </a
-      ><a name="387" href="src.heap.heapAsObject.html#1" class="Module"
+      ><a name="387" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObject.html#1" class="Module"
       >src.heap.heapAsObject</a
       ><a name="408"
       >
@@ -170,7 +170,7 @@
       >import</a
       ><a name="435"
       > </a
-      ><a name="436" href="src.heap.heapAsObjectExample.html#1" class="Module"
+      ><a name="436" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectExample.html#1" class="Module"
       >src.heap.heapAsObjectExample</a
       ><a name="464"
       >
@@ -194,7 +194,7 @@
       >import</a
       ><a name="495"
       > </a
-      ><a name="496" href="src.heap.heapAsObjectNativeHeap.html#1" class="Module"
+      ><a name="496" href="https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectNativeHeap.html#1" class="Module"
       >src.heap.heapAsObjectNativeHeap</a
       ><a name="527"
       >
