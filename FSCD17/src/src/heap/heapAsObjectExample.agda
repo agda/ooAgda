@@ -23,15 +23,15 @@ open import Size using (Size; ∞)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 
-open import SizedIO.Base using (IOInterface; Command; Response)
-open import StateSizedIO.RObject using (RInterfaceˢ; Stateˢ; Methodˢ; RMethodˢ; Resultˢ; RResultˢ; nextˢ; RObjectˢ; IOInterfaceˢ; objectMethod; readerMethod; IOStateˢ; Commandˢ; Responseˢ; IOnextˢ; IOˢ';  IOˢ; doˢ'; returnˢ'; forceˢ)
+open import src.SizedIO.Base using (IOInterface; Command; Response)
+open import src.StateSizedIO.RObject using (RInterfaceˢ; Stateˢ; Methodˢ; RMethodˢ; Resultˢ; RResultˢ; nextˢ; RObjectˢ; IOInterfaceˢ; objectMethod; readerMethod; IOStateˢ; Commandˢ; Responseˢ; IOnextˢ; IOˢ';  IOˢ; doˢ'; returnˢ'; forceˢ)
 
-open import NativeIO using (String; Unit; unit; NativeIO; _native>>=_; nativeReturn; nativePutStrLn)
+open import src.NativeIO using (String; Unit; unit; NativeIO; _native>>=_; nativeReturn; nativePutStrLn)
 
 
-open import StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
+open import src.StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
 
-open import SizedIO.Console using (putStrLn; getLine; consoleI; translateIOConsoleLocal)
+open import src.SizedIO.Console using (putStrLn; getLine; consoleI; translateIOConsoleLocal)
 
 
 --

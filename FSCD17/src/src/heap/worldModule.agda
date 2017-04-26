@@ -12,10 +12,10 @@ open import Data.Nat.Base using () renaming (_⊔_ to _⊔n_)
 open import Data.Product using (_,_) renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_; map to mapp)
 open import Data.Unit using (⊤; tt)
 
-open import heap.libraryNat
-open import heap.libraryFin
+open import src.heap.libraryNat
+open import src.heap.libraryFin
 
-open import StateSizedIO.Object using (Interfaceˢ; Stateˢ; Methodˢ; Resultˢ; Objectˢ; nextˢ) renaming (objectMethod to method)
+open import src.StateSizedIO.Object using (Interfaceˢ; Stateˢ; Methodˢ; Resultˢ; Objectˢ; nextˢ) renaming (objectMethod to method)
 
 
 --

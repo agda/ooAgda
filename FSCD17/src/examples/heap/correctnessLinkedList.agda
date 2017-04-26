@@ -21,7 +21,7 @@ open import Data.Unit using (⊤; tt)
 
 
 
-open import StateSizedIO.RObject using (RObjectˢ; readerMethod) renaming (objectMethod to method)
+open import src.StateSizedIO.RObject using (RObjectˢ; readerMethod) renaming (objectMethod to method)
 
 
 

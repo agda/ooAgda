@@ -29,28 +29,28 @@ open import Level renaming (zero to lzero; suc to lsuc) hiding (lift)
 open import Size hiding (↑_)
 open import Data.Sum
 
-open import heap.libraryNat
-open import heap.libraryBool
-open import heap.library
+open import src.heap.libraryNat
+open import src.heap.libraryBool
+open import src.heap.library
 
-open import SizedIO.Base
+open import src.SizedIO.Base
 --open import StateSizedIO.Object  renaming (objectMethod to method)
 
 
 {-open import UnSizedIO.Object renaming (objectMethod to method)
 open import StateSizedIO.Object  renaming (objectMethod to method) -}
-open import StateSizedIO.Base
+open import src.StateSizedIO.Base
 
-open import NativeIO
+open import src.NativeIO
 
 open import src.heap.heapAsObjectBase  hiding (Pointer;newH)
 open import src.heap.heapAsObjectGeneric
 
-open import StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
+open import src.StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
 
-open import SizedIO.Console using (putStrLn; getLine)
+open import src.SizedIO.Console using (putStrLn; getLine)
 
-open import SizedIO.Console using (consoleI; translateIOConsoleLocal)
+open import src.SizedIO.Console using (consoleI; translateIOConsoleLocal)
 open import src.heap.worldModule
 
 open import Data.Bool.Base
@@ -62,22 +62,22 @@ open import Data.Product renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _
 open import Data.Unit hiding ( _≟_ )
 open import Data.List
 
-open import heap.libraryNat
-open import heap.libraryMaybe
-open import heap.libraryFin
-open import heap.libraryBool
-open import heap.library
+open import src.heap.libraryNat
+open import src.heap.libraryMaybe
+open import src.heap.libraryFin
+open import src.heap.libraryBool
+open import src.heap.library
 
-open import StateSizedIO.RObject renaming (objectMethod to method)
+open import src.StateSizedIO.RObject renaming (objectMethod to method)
 
 --open import UnSizedIO.Object renaming (objectMethod to method)
-open import SizedIO.Object renaming (objectMethod to method)
+open import src.SizedIO.Object renaming (objectMethod to method)
 
-open import StateSizedIO.Object  renaming (objectMethod to method)
+open import src.StateSizedIO.Object  renaming (objectMethod to method)
 
 open import src.heap.heapAsObject hiding (readP;writeP)
 
-open import StateSizedIO.writingOOsUsingIO
+open import src.StateSizedIO.writingOOsUsingIO
 
 --open import src.heap.ExampleHeapAsObject
 open import Function

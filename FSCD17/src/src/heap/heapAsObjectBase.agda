@@ -15,7 +15,7 @@ open import Data.Nat using (ℕ; suc) renaming (_⊔_ to _⊔n_)
 
 open import Data.Product using () renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_)
 
-open import heap.libraryNat
+open import src.heap.libraryNat
 
 
 World : Set

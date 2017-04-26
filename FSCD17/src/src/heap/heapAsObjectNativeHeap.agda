@@ -9,9 +9,9 @@ module src.heap.heapAsObjectNativeHeap where
 open import Data.Maybe using (Maybe; nothing; just)
 open import Size using (Size; ∞)
 
-open import SizedIO.Base
+open import src.SizedIO.Base
 
-open import NativeIO
+open import src.NativeIO
 
 
 
