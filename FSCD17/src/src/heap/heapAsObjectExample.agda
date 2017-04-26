@@ -29,7 +29,7 @@ open import src.StateSizedIO.RObject using (RInterfaceˢ; Stateˢ; Methodˢ; RMe
 open import src.NativeIO using (String; Unit; unit; NativeIO; _native>>=_; nativeReturn; nativePutStrLn)
 
 
-open import src.StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
+open import src.StateSizedIO.writingOOsUsingIOReaderMethods hiding (nˢ)
 
 open import src.SizedIO.Console using (putStrLn; getLine; consoleI; translateIOConsoleLocal)
 

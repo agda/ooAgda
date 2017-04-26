@@ -46,7 +46,7 @@ open import src.NativeIO
 open import src.heap.heapAsObjectBase  hiding (Pointer;newH)
 open import src.heap.heapAsObjectGeneric
 
-open import src.StateSizedIO.writingOOsUsingIOVers4ReaderMethods hiding (nˢ)
+open import src.StateSizedIO.writingOOsUsingIOReaderMethods hiding (nˢ)
 
 open import src.SizedIO.Console using (putStrLn; getLine)
 

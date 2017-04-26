@@ -1,9 +1,9 @@
---@PREFIX@writingOOsUsingIOVersFourReaderMethods
+--@PREFIX@writingOOsUsingIOReaderMethods
 {-# OPTIONS --postfix-projections #-}
 {-# OPTIONS --allow-unsolved-metas #-}
 
 
-module src.StateSizedIO.writingOOsUsingIOVers4ReaderMethods where
+module src.StateSizedIO.writingOOsUsingIOReaderMethods where
 
 
 open import src.StateSizedIO.RObject
