@@ -8,7 +8,7 @@
       >module</a
       ><a name="10"
       > </a
-      ><a name="11" href="examples.heap.ALL.html#1" class="Module"
+      ><a name="11" href="https://stephanadl.github.io/ooAgdaHtml/examples.heap.ALL.html#1" class="Module"
       >examples.heap.ALL</a
       ><a name="28"
       > </a
