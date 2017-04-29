@@ -4,8 +4,8 @@ The source code is available in "src/" and also as html pages.
 Below is an index for the html version.
 
 1. Section 2 – Object-Based Programming in Agda
-  *   [RInterface](https://stephanadl.github.io/ooAgdaHtml/StateSizedIO.RObject.html#530)
-  *   [RObject](https://stephanadl.github.io/ooAgdaHtml/StateSizedIO.RObject.html#1211)
+  * [RInterface](https://stephanadl.github.io/ooAgdaHtml/StateSizedIO.RObject.html#530)
+  * [RObject](https://stephanadl.github.io/ooAgdaHtml/StateSizedIO.RObject.html#1211)
 2. Section 3 –  Static Heap Safety and Abstract Pointers
   * [PointerStruct](https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectGeneric.html#450)
   * [WorldPred](https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObjectBase.html#642)
@@ -25,9 +25,7 @@ Below is an index for the html version.
   * [genProgr2NativeIOUsingAgdaHeap](https://stephanadl.github.io/ooAgdaHtml/src.heap.heapAsObject.html#8743)
   * [LinkedListNodeType](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedList.html#2416)
   * [gLinkedWP](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedList.html#3093)
+  * [exampleProg+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListExampleProg.html#2269)
+  * [exampleProgStep2+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListExampleProg.html#2662)
+  * [consHeapProg](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListStep2.html#4349)
 
-  <!---
-  * exampleProg+
-  * exampleProgStep2+
-  * consHeapProg
--->
