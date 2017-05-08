@@ -100,25 +100,6 @@ transferDecSets : {J : DecSets} → (P : TDecSets J → Set) →
 transferDecSets {(fin n)} P i j q p = transferFin' {n} P i j q p
 
 
-{-
-transferDec : {J : DecSets} → (P : TDecSets J  → Set) →
-              (i j : TDecSets) → ((i ==DecSets j) ≡ true) →
-              P i → P j
--}
-
-
---with {!!} inspect {!!} --(_==DecSets_ j j')
---... | x = {!!}
-
-{-
-... | true = {!!} -- {!(I j).nextˢ (f j) m ?!}
-... | false = {!!}
--}
-
-{-
-    = if (j ==DecSets j') then  else {!!}
--}
-
 
 module _ (I : IOInterfaceˢ )
          (let S = IOStateˢ I) (let C = Commandˢ I)
@@ -366,25 +347,6 @@ module _ (I₁ : IOInterfaceˢ )
   ioˢind2IOˢindcoind A s₁ s₂ p .forceIC = ioˢind2IOˢindcoind+ A s₁ s₂ p
 
 
-{-
-    translateˢ : ∀{A : S → Set}{s : S}
-                 → Objectˢ I s
-                 → IOˢindcoind+ (objectInterfToIOInterfˢ I) A s
-                 → Σ[ s' ∈ S ]  (A s' × Objectˢ I s')
-    translateˢ {A} {s} obj (returnˢ'' x) = s , (x , obj)
-    translateˢ {A} {s} obj (doˢobj c p) = obj .objectMethod c ▹ λ {(x , o')
-                                        → translateˢ {A} {n s c x} o' (p x)  }
--}
-
-{-
-  delayˢic : {i : Size}{A : S₁ → S₂ → Set}{s₁ : S₁}{s₂ : S₂}
-           → IOˢindcoindShape i A s₁ s₂
-           → IOˢindcoind (↑ i) A s₁ s₂
-  delayˢic {i} {A} {s₁} {s₂} P .IOˢindcoind.forceIC {j} = P
--}
-
-
-
 
 module _ {I : IOInterfaceˢ } (let S = IOStateˢ I)
            where
@@ -417,17 +379,6 @@ module _ {I₁ : IOInterfaceˢ }
      doˢIO c f₁  >>=indcoind+ f = doˢIO c  (λ r → f₁ r >>=indcoind f)
      returnˢic x >>=indcoind+ f = f x
 
-
-{-
-     _>>=indcoindShape_ : {i : Size}{A : S₁ → S₂ → Set}
-                      {B : S₁ → S₂ → Set}
-                      {s₁ : S₁}{s₂ : S₂}
-                      (p : IOˢindcoindShape I₁ I₂ i A s₁ s₂)
-                      (f : (s₁' : S₁)(s₂' : S₂)(a : A s₁' s₂') → IOˢindcoind+ I₁ I₂ i B s₁' s₂')
-                      → IOˢindcoind+ I₁ I₂ i B s₁ s₂
-     doˢIO c₁ f₁ >>=indcoindShape f = returnˢ'' (doˢIO c₁ (λ r → f₁ r >>=indcoind f))
-     _>>=indcoindShape_ {s₁ = s₁} {s₂ = s₂} (returnˢic x) f = x >>=indcoindaux' f
--}
      _>>=indcoind_ : {i : Size}{A : S₁ → S₂ → Set}
                       {B : S₁ → S₂ → Set}
                       {s₁ : S₁}{s₂ : S₂}
@@ -435,30 +386,6 @@ module _ {I₁ : IOInterfaceˢ }
                       (f : {s₁' : S₁}{s₂' : S₂}(a : A s₁' s₂') → IOˢindcoind+ I₁ I₂ i B s₁' s₂')
                       → IOˢindcoind I₁ I₂ i B s₁ s₂
      (p >>=indcoind f) .forceIC {j} = p .forceIC >>=indcoind+ f
-
-
-{-
-     _>>=indcoindaux'_ : {i : Size}{A : S₁ → S₂ → Set}
-                      {B : S₁ → S₂ → Set}
-                      {s₁ : S₁}{s₂ : S₂}
-                      (p : IOˢ' I₁ i (λ s₁' → A s₁' s₂) s₁)
-                      (f : {s₁' : S₁}{s₂' : S₂}(a : A s₁' s₂') → IOˢindcoind+ I₁ I₂ i B s₁' s₂')
-                      → IOˢindcoind+ I₁ I₂ i B s₁ s₂
-     doˢ' c f₁ >>=indcoindaux' f = {!!} -- returnˢ'' (returnˢic (doˢ' c λ r → {!returnˢic!})) -- doˢ' c λ r → f₁ r >>=indcoindaux f
-     _>>=indcoindaux'_ {s₁ = s₁}{s₂ = s₂} (returnˢ' a)  f = f {s₁} {s₂} a -- doˢobj {!inj₂ c!} {!!}
--}
-
-{-
-     _>>=indcoindaux_ : {i : Size}{A : S₁ → S₂ → Set}
-                      {B : S₁ → S₂ → Set}
-                      {s₁ : S₁}{s₂ : S₂}
-                      (p : IOˢ I₁ i (λ s₁' → A s₁' s₂) s₁)
-                      (f : (s₁' : S₁)(s₂' : S₂)(a : A s₁' s₂') → IOˢindcoind+ I₁ I₂ i B s₁' s₂')
-                      → IOˢindcoind+ I₁ I₂ i B s₁ s₂
-     p >>=indcoindaux f = {!!}
--}
-
-
 
 module _ {I₁ : IOInterfaceˢ }
          (let S₁ = IOStateˢ I₁) (let C₁ = Commandˢ I₁)
@@ -472,13 +399,6 @@ module _ {I₁ : IOInterfaceˢ }
            → IOˢindcoind+ I₁ I₂ i A s₁ s₂
            → IOˢindcoind I₁ I₂ (↑ i) A s₁ s₂
   delayˢic {i} {A} {s₁} {s₂} P .forceIC {j} = P
-
-
-
---Σ (Stateˢ I₂) (λ s₄ → Σ (A s₃ s₄) (λ x → Objectˢ I₂ s₄))) s₁
-
-
---→ IOˢind I₂ (λ s₂ → A s₁ s₂) s₂
 
 
 open IOˢindcoind public
@@ -507,32 +427,6 @@ module _ (I₁ : IOInterfaceˢ )
       translateˢIndCoind obj (f r₁)
     translateˢIndCoind+ {i} {A} {s₁} {s₂} obj (returnˢic a) = returnˢ' (s₂ , a , obj)
 --@END
-{-
-    translateˢIndCoindShape : ∀{i} → {A : S₁ → S₂ → Set}{s₁ : S₁}{s₂ : S₂}
-                 → RObjectˢ  I₂ s₂
-                 → IOˢindcoindShape I₁ I₂′ i A s₁ s₂
-                 → IOˢ' I₁ i ((λ s₁ → Σ[ s₂ ∈ S₂ ]  (A s₁ s₂ × RObjectˢ I₂ s₂))) s₁
-    translateˢIndCoindShape {i} {A} {.s₁} {.s₂} obj (doˢIO {s₁} {s₂} c₁ p)
-           = doˢ' c₁ (λ r₁ → translateˢIndCoind {i} {A} {n₁ s₁ c₁ r₁} {s₂} obj (p r₁))
-    translateˢIndCoindShape {i} {A} {.s₁} {.s₂} obj (returnˢic {s₁} {s₂} p)
-           = fmapˢ' i (λ s a → ( s₂ , a , obj)) s₁ p
--}
-
-
-
----
---- ### file content of writingOOsUsingIO
----
-
-
-{-
-objectInterfMultiToIOInterfˢ J I .IOnextˢ f (j , m) r j' with (_==DecSets_ j j') | inspect (_==DecSets_ j) j'
-... | true | [ eq ] = transferDecSets {J} (λ j'' → I j'' .Stateˢ) j j' eq ((I j).nextˢ (f j) m r)
-... | false | [ eq ] = f j'
--}
-
-
-
 
 module _ (I₁ : IOInterfaceˢ )
          (let S₁ = IOStateˢ I₁) (let C₁ = Commandˢ I₁)
@@ -621,20 +515,7 @@ RMethodˢ (RCellInterfaceˢ A)  = RRCellMethodˢ A
 RResultˢ (RCellInterfaceˢ A)  = RRCellResultˢ A
 nextˢ (RCellInterfaceˢ A)  = nˢ
 
-{-
-mutual
-   RcellPempty : (i : Size) → IOObject consoleI (RCellInterfaceˢ String) i empty
-   method (cellPempty i) {j} (put str) = do (putStrLn ("put (" ++ str ++ ")")) λ _ →
-                                         return (unit , cellPfull j str)
 
-   cellPfull : (i : Size) → (str : String) → IOObject consoleI (CellInterfaceˢ String) i full
-   method (cellPfull i str) {j} get        = do (putStrLn ("get (" ++ str ++ ")")) λ _ →
-                                             return (str , cellPfull j str)
-   method (cellPfull i str) {j} (put str') = do (putStrLn ("put (" ++ str' ++ ")")) λ _ →
-                                             return (unit , cellPfull j str')
--}
-
--- UNSIZED Version, without IO
 mutual
    RcellPempty' : ∀{A} → RObjectˢ (RCellInterfaceˢ A) empty
    RcellPempty' .objectMethod (put a)     =  (_ , RcellPfull' a)
@@ -677,29 +558,6 @@ module _ (I : IOInterface)
 
 
 
-{-
-doIOShape : {i : Size}
-       {I₁ :  IOInterfaceˢ} {I₂ :  IOInterfaceˢ}
-       {A : I₁ .IOStateˢ → I₂ .IOStateˢ → Set}
-       {s₁ : I₁ .IOStateˢ}
-       {s₂ : I₂ .IOStateˢ}
-      (c₁ : I₁ .Commandˢ s₁) →
-         ((r₁ : I₁ .Responseˢ s₁ c₁) →
-          IOˢindcoind I₁ I₂ i  A (IOnextˢ I₁ s₁ c₁ r₁) s₂)
-        →  IOˢindcoindShape I₁ I₂ i A  s₁ s₂
-doIOShape  = doˢIO
--}
-
-{-
-callMethod'' : {I₂ :  IOInterfaceˢ}
-             {A : I₂ .IOStateˢ → Set}
-             {s₂ : I₂ .IOStateˢ}
-             (c : Commandˢ I₂ s₂) →
-             ((r : Responseˢ I₂ s₂ c) → IOˢind I₂ A (IOnextˢ I₂ s₂ c r))
-             → IOˢind I₂ A s₂
-callMethod'' = doˢobj
--}
-
 doˢobj∞ : {I₁ : IOInterfaceˢ }{I₂ :  IOInterfaceˢ}
              {A : IOStateˢ I₁ → I₂ .IOStateˢ → Set}
              {s₁ : IOStateˢ I₁}
@@ -709,28 +567,6 @@ doˢobj∞ : {I₁ : IOInterfaceˢ }{I₂ :  IOInterfaceˢ}
              → IOˢindcoind I₁ I₂ ∞ A s₁ s₂
 doˢobj∞ {I₁} {I₂} {A} {s₁} {s₂} c f .forceIC {j} = doˢobj c  f
 
-{-
-callMethod+ : {I₁ : IOInterfaceˢ }{I₂ :  IOInterfaceˢ}
-             {A : IOStateˢ I₁ → I₂ .IOStateˢ → Set}
-             {s₁ : IOStateˢ I₁}
-             {s₂ : I₂ .IOStateˢ}
-             (c : Commandˢ I₂ s₂) →
-             ((r : Responseˢ I₂ s₂ c) → IOˢindcoind+ I₁ I₂ ∞ A s₁ (IOnextˢ I₂ s₂ c r) )
-             → IOˢindcoind+ I₁ I₂ ∞ A s₁ s₂
-callMethod+ {I₁} {I₂} {A} {s₁} {s₂} = doˢobj
--}
-
-{-
-we think not needed anymore
-endIO : {I₁ :  IOInterfaceˢ} {I₂ :  IOInterfaceˢ}
---      {A : I₁ .IOStateˢ → I₂ .IOStateˢ → Set}
-       {s₁ : I₁ .IOStateˢ}
-       {s₂ : I₂ .IOStateˢ}
-       → IOˢind I₂ (λ s → IOˢindcoind I₁ I₂ ∞ (λ _ _ → Unit) s₁ s) s₂
-endIO {I₁} {I₂} {s₁} {s₂} = returnˢ'' (delayˢic (returnˢ'' (returnˢic (returnˢ' unit)))) -- (delayˢic (returnˢic (returnˢ' unit)))
---                returnˢ'' {I₂}
---             {!!} -- (delayˢic {!returnˢ''!} ) -- (returnˢ'' (returnˢic (returnˢ' unit))))   --(returnˢic (returnˢ' unit)))
--}
 
 
 endIO+ : {I₁ :  IOInterfaceˢ} {I₂ :  IOInterfaceˢ}
@@ -791,23 +627,6 @@ module _ {objInf : RInterfaceˢ}
         run+ prog startingWith obj = translateIOConsole
                          (flatternIOˢ consoleI id id (fmapˢ ∞  (λ _ _ → unit) unit
                               (delayˢ (translateˢIndCoind+ ConsoleInterfaceˢ  objInf obj prog))))
--- (ioInterfToObjectInterfˢ objIOInf)
---- ### END of file content of writingOOsUsingIO
----
-
-
-{-
-
-obj .objectMethod c ▹ λ {(x , o')
-                                      → translateˢ {A} {n s c x} o' (p x)  }
-
-
-                              let q : Σ[ s' ∈ S₂ ]
-                                        (IOˢindcoindShape I₁ I₂′ i A s₁ s'
-                                         × Objectˢ I₂ s')
-                                  q = translateˢ obj p
-                              in translateˢIndCoindShape (proj₂ (proj₂ q)) (proj₁ (proj₂ q)) -}
-
 
 
 

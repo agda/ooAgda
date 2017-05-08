@@ -4,31 +4,26 @@
 
 module examples.heap.correctnessLinkedListExampleProg where
 
+open import Relation.Binary.PropositionalEquality hiding (sym)
+open import Data.String renaming (_==_ to _==Str_)
+open import Data.Maybe hiding (maybe)
+open import Size hiding (↑_)
 
+open import src.NativeIO
 
-open import Relation.Binary.PropositionalEquality using (refl)
-
-open import Data.Bool.Base using (if_then_else_)
-open import Data.String using () renaming (_==_ to _==Str_)
-open import Data.Maybe using (Maybe; just; nothing)
-open import Data.Product renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_; map to mapp)
-
-open import Size using (Size; ∞)
-
-open import src.NativeIO using (String; Unit; unit; NativeIO)
-
+open import src.heap.heapAsObjectBase hiding (Pointer)
+open import src.heap.heapAsObjectGeneric
 
 open import src.StateSizedIO.writingOOsUsingIOReaderMethods hiding (nˢ)
 
-open import src.SizedIO.Console using (putStrLn; getLine; consoleI; translateIOConsoleLocal)
+open import src.SizedIO.Console using (consoleI; translateIOConsoleLocal; putStrLn; getLine)
 
-open import src.heap.worldModule
+open import Data.Bool.Base
 
+open import Data.Product renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_; map to mapp)
 
-open import src.heap.heapAsObjectBase hiding (Pointer;newH)
-open import src.heap.heapAsObjectGeneric
+open import src.heap.heapAsObject hiding (readP;writeP)
 
-open import src.heap.heapAsObject --hiding (readP;writeP; main)
 open import examples.heap.correctnessLinkedList
 open import examples.heap.correctnessLinkedListStep2
 
@@ -46,7 +41,6 @@ str2StackCmd s = if (s ==Str "push") then push
 maybeStringToString : Maybe String → String
 maybeStringToString (just s) = s
 maybeStringToString nothing = "got nothing"
-
 
 
 module _ (pointStruct : PointerStruct)

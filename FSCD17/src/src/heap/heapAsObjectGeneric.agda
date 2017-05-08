@@ -27,8 +27,6 @@ record PointerStruct : Set₁ where --@HIDE-BEG
     Pointer  :  (w : World)  → Set
     embedp   :  {w : World}  (p : Pointer w) → Pointer (sucw w)
 --@END
---    newp    : {w : World} → Pointer (sucw w)
---    lift    : (B : Set) {w : World} (resultOfNew : B) (oldfun : Pointer w → B) (p : Pointer (sucw w)) → B
 
 
 open PointerStruct public
@@ -57,15 +55,6 @@ pointerStructfin .embedp = embedfin
 {-# INLINE pointerStructfin #-}
 
 
-{-
-module _ (pointerStruct : PointerStruct)
-         --(Pointer : ℕ → Set)
-         (let Pointer = Pointer pointerStruct)
-         --(embed : {n : ℕ} → Pointer n → Pointer (suc n))
-         (let embed = embedp pointerStruct )
-         where
--}
---\heapAsObjectGenericStoreg
 --@BEGIN@Storeg
 record Storeg (ptrStruct : PointerStruct) (wp : WorldPred)  (w : World) : Set where  --@HIDE-BEG
    field

@@ -2,17 +2,6 @@ module src.StateSizedIO.Object where
 
 open import Data.Product
 open import src.StateSizedIO.Base public
-{-
---  This definition was probably moved to StateSizedIO.Base
---  and by accident left here. Delete this.
-record Interfaceˢ : Set₁ where
-  field
-    Stateˢ    : Set
-    Methodˢ   : Stateˢ → Set
-    Resultˢ   : (s : Stateˢ) → (m : Methodˢ s) → Set
-    nextˢ     : (s : Stateˢ) → (m : Methodˢ s) → Resultˢ s m → Stateˢ
-open Interfaceˢ public
--}
 
 module _ (I : Interfaceˢ)(let S = Stateˢ I) (let M = Methodˢ I)
          (let R = Resultˢ I) (let next = nextˢ I) where

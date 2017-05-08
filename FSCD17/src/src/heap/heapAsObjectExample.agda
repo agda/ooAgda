@@ -1,12 +1,7 @@
---@PREFIX@heapAsObjectAttemptSeven
+--@PREFIX@heapAsObjectExample
 {-# OPTIONS --postfix-projections #-}
 {-# OPTIONS --allow-unsolved-metas #-}
 
-
---
--- NOTE: This file was not used for the paper!
---
---
 
 module src.heap.heapAsObjectExample where
 

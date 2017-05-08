@@ -30,17 +30,6 @@ NothingInductionLemma : ∀{A}(P : Maybe A → Set) → (a : Maybe A) -> IsNothi
 NothingInductionLemma p (just x) ()
 NothingInductionLemma p nothing q q' = q'
 
-{-
-NothingMaybeLem : {A B : Set} → (P : B → Set) → (a : Maybe A)
-                  → IsNothing a
-                  → (g : A → B)
-                  → (b : B)
-                  → P b
-                  → P (maybe g b a)
-NothingMaybeLem P (just x) () b g p
-NothingMaybeLem P nothing anothing b g p = p
--}
-
 maybeAcrossBtoMaybeAcrossB : {A B : Set} (mab : Maybe A ×' B) → Maybe (A ×' B)
 maybeAcrossBtoMaybeAcrossB (just a , b) = just (a , b)
 maybeAcrossBtoMaybeAcrossB (nothing , _) = nothing

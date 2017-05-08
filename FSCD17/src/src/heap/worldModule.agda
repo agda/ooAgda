@@ -52,7 +52,7 @@ module HeapObjectImplementation (wp : WorldPred) where
     readSimple : {w : HeapStateˢ}→ Pointer w → HeapMethodˢ w
 
 
-    -- this is only for debugging, will be deleted later:
+
     getHeap : {w : HeapStateˢ} →  HeapMethodˢ w
 
 
@@ -169,9 +169,7 @@ module worldModule (heapElements : World → Set)
   newM  : {w : World} → newType w → heapMElements w
   newM {w} a = just (new {w} a)
 
-  -- new Object erzeugt aus einem heap fuer Welt w
-  --   einen neuen heap fur Welt suc w
-  -- mit dem neuen pointer in suc w auf Nothing gesetzt
+
   newNullObject : {w : World}
             (h : Heap objWorldPred w)
             → Heap objWorldPred (sucw w)

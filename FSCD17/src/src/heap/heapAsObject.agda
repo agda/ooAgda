@@ -1,4 +1,4 @@
---@PREFIX@heapAsObjectAttemptSeven
+--@PREFIX@heapAsObject
 {-# OPTIONS --postfix-projections #-}
 {-# OPTIONS --allow-unsolved-metas #-}
 
@@ -172,21 +172,6 @@ module heapRObjectFinM (wp : WorldPred) where
 
 open heapRObjectFinM -- (wpString pointerStructfin)
 
-{---
---- WRITE THIS IN NEW FILE ASAP:
----
-
-mainSimpleHeapProgram : NativeIO Unit
-mainSimpleHeapProgram = run+ simpleHeapProgram pointerStructfin ∞ startingWith heapRObject (wpString pointerStructfin) ∅Hfin
-
-
-mainTranslatedViaAgdaHeap : NativeIO Unit
-mainTranslatedViaAgdaHeap = mainSimpleHeapProgram
-
-
---}
-
-
 
 _⊎IOIˢhalf_ : (I : IOInterface) (I' : IOInterfaceˢ) → IOInterfaceˢ
 (I ⊎IOIˢhalf I') .IOStateˢ = I' .IOStateˢ
@@ -319,11 +304,6 @@ module _ (wp : WorldPred)
                                               translateIOConsoleLocal
                                               translateHeapInterIORefLocalˢ
 
---
--- I use here "translateIOˢ", but could also use
--- use "flattern" to translate it to an non-state dependent
--- interface, that is actually the case (for the NativeHeap programs)
---
 
 module _  {I : IOInterfaceˢ}
                 (let S = IOStateˢ I)     (let C  = Commandˢ I)

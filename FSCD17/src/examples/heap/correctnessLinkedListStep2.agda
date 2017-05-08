@@ -6,40 +6,10 @@ module examples.heap.correctnessLinkedListStep2 where
 
 open import Relation.Binary.PropositionalEquality hiding (sym)
 
-
-open import Relation.Binary.PropositionalEquality hiding (sym)
---open import Relation.Binary.HeterogeneousEquality hiding (cong;sym)
-open import Relation.Nullary
-
-
-open import Function
-
-open import Data.Bool.Base
-open import Data.String
-open import Data.Empty
-open import Data.Fin hiding (lift)
 open import Data.Maybe hiding (maybe)
--- open import Data.Maybe -- renaming (map to maybefunc)
-open import Data.Nat hiding (_≟_) renaming (_⊔_ to _⊔n_)
-open import Data.List
-open import Data.Product renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_)
-open import Data.Unit hiding ( _≟_ )
 
-open import Level renaming (zero to lzero; suc to lsuc) hiding (lift)
 open import Size hiding (↑_)
 open import Data.Sum
-
-open import src.heap.libraryNat
-open import src.heap.libraryBool
-open import src.heap.library
-
-open import src.SizedIO.Base
---open import StateSizedIO.Object  renaming (objectMethod to method)
-
-
-{-open import UnSizedIO.Object renaming (objectMethod to method)
-open import StateSizedIO.Object  renaming (objectMethod to method) -}
-open import src.StateSizedIO.Base
 
 open import src.NativeIO
 
@@ -48,39 +18,11 @@ open import src.heap.heapAsObjectGeneric
 
 open import src.StateSizedIO.writingOOsUsingIOReaderMethods hiding (nˢ)
 
-open import src.SizedIO.Console using (putStrLn; getLine)
-
-open import src.SizedIO.Console using (consoleI; translateIOConsoleLocal)
-open import src.heap.worldModule
-
-open import Data.Bool.Base
-open import Data.Empty renaming (⊥-elim to efq)
-open import Data.Fin hiding (lift)
-
-open import Data.Nat hiding (_≟_) renaming (_⊔_ to _⊔n_)
 open import Data.Product renaming (proj₁ to pr₁; proj₂ to pr₂; _×_ to _×'_; map to mapp)
-open import Data.Unit hiding ( _≟_ )
-open import Data.List
-
-open import src.heap.libraryNat
-open import src.heap.libraryMaybe
-open import src.heap.libraryFin
-open import src.heap.libraryBool
-open import src.heap.library
-
-open import src.StateSizedIO.RObject renaming (objectMethod to method)
-
---open import UnSizedIO.Object renaming (objectMethod to method)
-open import src.SizedIO.Object renaming (objectMethod to method)
 
 open import src.StateSizedIO.Object  renaming (objectMethod to method)
 
 open import src.heap.heapAsObject hiding (readP;writeP)
-
-open import src.StateSizedIO.writingOOsUsingIO
-
---open import src.heap.ExampleHeapAsObject
-open import Function
 
 open import examples.heap.correctnessLinkedList
 
@@ -268,42 +210,6 @@ module _ (pointStruct : PointerStruct)
   tailHeapauxHeap : {B : Set}{w : World}(p : Pointer w) (heap : HeapObjectLL B pointStruct w)
                       → HeapObjectLL B pointStruct w
   tailHeapauxHeap {B} {w} p heap = pr₂ (pr₂ (tailHeapaux {B} {w} p heap))
-
-
-
-
-{-
-
-  -- the following code works but is no longer used
-
-
-  tailHeapProg' : {B : Set}{w : World} (mp : Maybe (Pointer w)) →
-                IOˢind (heapInterfaceGen B) (λ w' →  Maybe (Maybe (Pointer w))) w
-  tailHeapProg' {B} {w} (just p) = doˢ'' (inj₂ (readPh p)) λ q →
-                                 returnˢ'' (just (q .getNextLL))
-  tailHeapProg' {B} {w} nothing = returnˢ'' nothing
-
-
-
-  tailHeapaux' : {B : Set}{w : World} (mp : Maybe (Pointer w)) →
-            (heap : HeapObjectLL B pointStruct w)
-            → Σ[ w' ∈ World ] (Maybe (Maybe (Pointer w)) ×' HeapObjectLL B pointStruct w')
-  tailHeapaux' {B}{w} mp heap =  translateˢ {HeapRInterfaceˢ Pointer (gLinkedWP B pointStruct)}
-                               {λ w' → Maybe (Maybe (Pointer w))}{w} heap (tailHeapProg' {B}{w} mp )
-
-
-
-  tailHeapauxWorld' : {B : Set}{w : World} (mp : Maybe (Pointer w))(heap : HeapObjectLL B pointStruct w)
-                    → World
-  tailHeapauxWorld' {B} {w} mp heap = pr₁ (tailHeapaux' {B} {w} mp heap)
-
-  tailHeapauxWorldIsw' : {B : Set}{w : World}(mp : Maybe (Pointer w))(heap : HeapObjectLL B pointStruct w)
-                        →  tailHeapauxWorld' {B} {w} mp heap ≡ w
-  tailHeapauxWorldIsw' {B} {w} (just x) heap = refl
-  tailHeapauxWorldIsw' {B} {w} nothing heap = refl
--}
-
-
 
 
 

@@ -22,6 +22,14 @@ open import src.heap.heapAsObjectBase
 --
 open import src.heap.heapAsObject
 
+-- Session Types/Alebraic Proofs
+--
+open import examples.heap.correctnessLinkedListExampleProg
+open import examples.heap.correctnessLinkedListProofsAlgebraicLaws
+open import examples.heap.correctnessLinkedListSessionTypes
+open import examples.heap.correctnessLinkedListStep2
+
+
 -- Example
 --
 open import src.heap.heapAsObjectExample
@@ -29,3 +37,9 @@ open import src.heap.heapAsObjectExample
 -- Native Heap
 --
 open import src.heap.heapAsObjectNativeHeap
+
+-- Benchmarks
+--
+open import examples.benchmarks.binaryTreeBenchmark
+open import examples.benchmarks.nativeBinaryTree
+open import examples.heap.heapEfficient

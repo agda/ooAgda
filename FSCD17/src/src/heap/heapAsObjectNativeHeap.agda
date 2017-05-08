@@ -15,52 +15,6 @@ open import src.NativeIO
 
 
 
-{- Idea:
-
-    We can write an IO language corresponding to the langauge of
-   Mvars
-    MVar would be postulated
-   but we have commands
-     newMVar {A}  depending on A returntype MVar A
-     takeMVAr {A}  depending on MVar A returntype A
-     putMVar {A} depending on MVar A and A and returntype Unit
-
-   now we can write IO programs referring to MVars and use this
-     to create Strings on the heap
-
-
-   When defining LInked list we have the problem that we would need
-
-    MVar(String x Maybe (MVar (String x Maybe ( ....)))
-
-   anfinite type.
-
-   In Java this is done by having
-    X = MVar(String x Maybe (pointer to X)
-
-   unclear how to do it with Mvars
-   SOLUTION:
-     https://www.schoolofhaskell.com/user/edwardk/unlifted-structures
-
-     data DLL = DLL (IORef (Maybe DLL)) (IORef (Maybe DLL))
-   so we would write
-
-     data LL = LL (MVar (String x Maybe LL))
-
-
-
- These IO programs can be translated in Agda into programs operating on
-our heap.
-   newMVar {A} would use the new function for the Agda heap
-   takeMVar {A} would look up the element on the Agda heap
-   putMVar  {A} would update the AGda heap
-
--}
-
-
-
-
-
 {-# FOREIGN GHC import qualified Data.IORef as IORef #-}
 
 postulate  IORef : Set → Set
@@ -78,16 +32,6 @@ postulate
 {-# COMPILE GHC nativeReadIORef = (\ _ -> IORef.readIORef ) #-}
 {-# COMPILE GHC nativeWriteIORef = (\ _ -> IORef.writeIORef ) #-}
 
-{-
-nativeNewIORef : {A : Set} (a : A) → NativeIO (IORef A)
-nativeNewIORef {A} = nativeNewIORef' {Maybe A}
-
-nativeReadIORef : {A : Set} (p : IORef (Maybe A)) → NativeIO (Maybe A)
-nativeReadIORef {A} = anativeReadIORef' {Maybe A}
-
-nativeWriteIORef : IORef (Maybe String) → Maybe String → NativeIO Unit
-nativeWriteIORef =  nativeWriteIORef' {Maybe String}
--}
 
 
 data HeapCommand (A : Set) : Set where

@@ -120,11 +120,6 @@ module heapObjectLLMod (B : Set) (pointStruct : PointerStruct)
 
 
 
-   -- open HeapObjectImplementation objWorldPred
-
-   -- HeapEl : World → Set
-   -- HeapEl w = Maybe (LinkedLObject ℕ w)
-
 
    -- The heap (stores linked lists).
 

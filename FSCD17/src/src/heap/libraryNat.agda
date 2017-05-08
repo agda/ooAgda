@@ -9,12 +9,6 @@ open import Function
 open import Relation.Nullary
 open import Relation.Binary.PropositionalEquality
 
-{-
---- WARNING USES TODO
-postulate TODO : {A : Set} → A
--}
-
-
 
 _==b_ : ℕ → ℕ → Bool
 zero ==b zero = true
