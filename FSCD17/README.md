@@ -34,4 +34,15 @@ Below is an index for the html version.
   * [iorefHeapInter](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#3073)
   * [transMethod](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#3229)
 8. Section –  Proving Correctness via Session Types
+  * [sessionCommands](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#1222)
+  * [sessionResponse](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#1386)
+  * [sessionIO](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#1764)
+  * [sessionProg+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#2940)
+  * [sessionProgStep2+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#3309)
+  * [existsPointL](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#4236)
+  * [corExampleProg](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#7083)
+  * [corExampleProgStep2](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListSessionTypes.html#7520)
+9. Section –  Benchmarks  
+  * [files](https://github.com/agda/ooAgda/tree/master/FSCD17/src/examples/benchmarks)
+  * [README](https://github.com/agda/ooAgda/blob/master/FSCD17/src/examples/benchmarks/README.txt)
   
