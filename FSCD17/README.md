@@ -28,4 +28,10 @@ Below is an index for the html version.
   * [exampleProg+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListExampleProg.html#2269)
   * [exampleProgStep2+](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListExampleProg.html#2662)
   * [consHeapProg](https://stephanadl.github.io/ooAgdaHtml/examples.heap.correctnessLinkedListStep2.html#4349)
-
+7. Section –  Compiling Heap Programs into Efficient Haskell Programs
+  * [NativeLL](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#707)
+  * [iorefStruct](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#2571)
+  * [iorefHeapInter](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#3073)
+  * [transMethod](https://stephanadl.github.io/ooAgdaHtml/examples.heap.heapEfficient.html#3229)
+8. Section –  Proving Correctness via Session Types
+  
