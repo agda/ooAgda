@@ -1,3 +1,0 @@
-name: ooAgda-FSCD17
-depend: standard-library
-include: . 
