@@ -4,6 +4,7 @@ module SizedIO.Base where
 
 open import Data.Maybe.Base
 open import Data.Sum renaming (inj₁ to left; inj₂ to right; [_,_]′ to either)
+open import Data.List
 
 open import Function
 --open import Level using (_⊔_) renaming (suc to lsuc)
@@ -114,10 +115,23 @@ module _  {I : IOInterface } (let C = Command I) (let R = Response I) where
   whenJust (just a) k = k a
 
 
-mutual 
+mutual
   mapIO : ∀ {i} → {I : IOInterface} → {A B : Set} → (A → B) → IO I i  A  → IO I i B
   force (mapIO f p) = mapIO' f (force p)
 
   mapIO' : ∀ {i} → {I : IOInterface} → {A B : Set} → (A → B) → IO' I i  A  → IO' I i B
   mapIO' f (do' c g) = do' c (λ r → mapIO f (g r))
   mapIO' f (return' a) = return' (f a)
+
+
+sequenceIO : {i : IOInterface} →  List  (IO  i ∞ Unit) → IO i ∞ Unit
+sequenceIO [] .force = return' unit
+sequenceIO (p ∷ l) = p >>= (λ _ → sequenceIO l)
+
+
+Return : {i : Size} → {int : IOInterface} →  {A : Set} → A → IO int i A
+Return a .force = return' a
+
+Do : {i : Size} → {int : IOInterface} → (c : int .Command)
+                → IO int i (int .Response c)
+Do c .force = do' c Return
