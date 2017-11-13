@@ -81,7 +81,7 @@
  
     In "~/.agda/libraries" add the following three lines:
      -----------
-    /home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib
+    /home/username/Downloads/agda-master/agda-stdlib/standard-library.agda-lib
     /home/username/Downloads/ooAgda/src/ooAgda.agda-lib
     /home/username/Downloads/ooAgda/examples/ooAgdaExamples.agda-lib
     ----------
@@ -89,15 +89,6 @@
     with the paths adapted to where your version of std-lib (Agda standard lib)
      and of ooAgda  is located
 
-    Create the file
-    "/home/username/Downloads/agda-master/agda-stdlib/src/std.agda-lib" 
-    (adapt the path so that it points to your version of the agda standard 
-    library) with the following content (two lines):
-
- ----------
- name: std-lib
- include: .
- ----------
 
     For more information on the library files,
     please refer to the changelog of Agda "2.5.1":
