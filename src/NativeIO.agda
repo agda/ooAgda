@@ -17,5 +17,5 @@ postulate
   nativeGetLine   : NativeIO String
   nativePutStrLn  : String → NativeIO Unit
 
-{-# COMPILED nativePutStrLn (\ s -> putStrLn (Data.Text.unpack s)) #-}
-{-# COMPILED nativeGetLine (fmap Data.Text.pack getLine) #-}
+{-# COMPILE GHC nativePutStrLn = (\ s -> putStrLn (Data.Text.unpack s)) #-}
+{-# COMPILE GHC nativeGetLine = (fmap Data.Text.pack getLine) #-}
