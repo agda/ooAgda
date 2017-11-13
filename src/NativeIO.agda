@@ -9,9 +9,9 @@ postulate
   _native>>=_  : {A B : Set} → NativeIO A → (A → NativeIO B) → NativeIO B
 
 {-# BUILTIN IO NativeIO #-}
-{-# COMPILED_TYPE NativeIO IO #-}   -- IO.FFI.AgdaIO
-{-# COMPILED _native>>=_ (\_ _ -> (>>=) :: IO a -> (a -> IO b) -> IO b) #-}
-{-# COMPILED nativeReturn (\_ -> return :: a -> IO a) #-}
+{-# COMPILE GHC NativeIO = type IO #-}
+{-# COMPILE GHC nativeReturn = (\_ -> return :: a -> IO a) #-}
+{-# COMPILE GHC _native>>=_ = (\_ _ -> (>>=) :: IO a -> (a -> IO b) -> IO b) #-}
 
 postulate
   nativeGetLine   : NativeIO String
