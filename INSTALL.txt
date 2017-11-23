@@ -102,6 +102,10 @@
     with the paths adapted to where your version of std-lib (Agda standard lib)
      and of ooAgda  is located
 
+  - For using the libraries in your code add a library file (e.g. a copy of 
+    ~/git/ooagda/examples/ooAgdaExamples.agda-lib
+     ) to the directory containing your code
+
 
     For more information on the library files,
     please refer to the changelog of Agda "2.5.1":
