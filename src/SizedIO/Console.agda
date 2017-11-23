@@ -24,6 +24,9 @@ IOConsole i = IO consoleI i
 IOConsole+ : Size → Set → Set
 IOConsole+ i = IO+ consoleI i
 
+IOConsole' : Size → Set → Set
+IOConsole' i = IO' consoleI i
+
 translateIOConsoleLocal : (c : ConsoleCommand) → NativeIO (ConsoleResponse c)
 translateIOConsoleLocal (putStrLn s) = nativePutStrLn s
 translateIOConsoleLocal getLine      = nativeGetLine
