@@ -2,7 +2,7 @@ module consoleExamples.simpleLoop where
 
 open import ConsoleLib
 open import Data.Bool renaming (not to ¬)
-open import Data.String renaming (_==_ to _==str_)
+open import Data.String hiding (_==_)
 open import SizedIO.Base
 open import Size
 
@@ -39,10 +39,10 @@ bool2Str false = "false"
 mainBody : ∀{i} → IOConsole i  Unit
 force (mainBody) = WriteString+ "Enter true or false"
                    (GetLine >>= λ s →
-                    if (checkStrBoolInput s) then
-                       (WriteString ("Result of negating your input is " ++
-                                    bool2Str (¬ (boolStrInput2Bool s))) >>= λ _ →
-                        mainBody)
+                    if   (checkStrBoolInput s)
+                    then (WriteString ("Result of negating your input is " ++
+                                       bool2Str (¬ (boolStrInput2Bool s))) >>= λ _ →
+                          mainBody)
                      else
                        (WriteString ("Please enter \"true\" or \"false\"") >>= λ _ →
                        mainBody))
