@@ -1,3 +1,3 @@
 name: ooAgda
-depend: standard-library
+depend: 
 include: .

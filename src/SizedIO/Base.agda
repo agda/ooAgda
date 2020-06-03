@@ -8,7 +8,7 @@ open import Data.List
 
 open import Function
 --open import Level using (_⊔_) renaming (suc to lsuc)
-open import Size
+open import Size renaming (ω to ∞ )
 
 open import NativeIO
 
@@ -41,11 +41,11 @@ module _  {I : IOInterface } (let C = Command I) (let R = Response I) where
   return : ∀{i}{A : Set} (a : A) → IO I i A
   force (return a) = return' a
 
-  do : ∀{i}{A : Set} (c : C) (f : R c → IO I i A) → IO I i A
-  force (do c f) = do' c f
+  exec : ∀{i}{A : Set} (c : C) (f : R c → IO I i A) → IO I i A
+  force (exec c f) = do' c f
 
-  do1 :  ∀{i} (c : C) → IO I i (R c)
-  do1 c = do c return
+  exec1 :  ∀{i} (c : C) → IO I i (R c)
+  exec1 c = exec c return
 
   infixl 2 _>>=_ _>>='_ _>>_
 

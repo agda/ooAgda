@@ -1,7 +1,7 @@
 module SizedIO.Console where
 
 open import Level using () renaming (zero to lzero)
-open import Size
+open import Size renaming (ω to ∞)
 
 open import NativeIO
 open import SizedIO.Base
