@@ -4,7 +4,7 @@
     Andreas Abel, Stephan Adelsberger, Anton Setzer: Interactive Programming in 
         Agda - Objects and Graphical User Interfaces
         Journal of Functional Programming, 27, 2017. 
-        doi: http://dx.doi.org/10.1145/2976022.2976032
+        doi: http://dx.doi.org/10.1017/S0956796816000319
         author's copy: http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.pdf
         bibtex:        http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.bib
 
