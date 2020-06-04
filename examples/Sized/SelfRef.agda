@@ -9,7 +9,7 @@ open import SizedIO.Object
 open import SizedIO.IOObject
 open import SizedIO.ConsoleObject
 
-open import SizedIO.Base 
+open import SizedIO.Base
 open import SizedIO.Console hiding (main)
 
 open import NativeIO
@@ -25,7 +25,7 @@ AResult _  =  Unit
 
 aI : Interface
 Method  aI  =  AMethod
-Result  aI  =  AResult 
+Result  aI  =  AResult
 
 aC : (i : Size) → Set
 aC i = ConsoleObject i aI
@@ -36,11 +36,11 @@ aC i = ConsoleObject i aI
 {-# NON_TERMINATING #-}
 aP :  ∀{i} (s : String) → aC i
 method (aP s) print =
-  do1 (putStrLn s) >>
+  exec1 (putStrLn s) >>
   return (_ , aP s)
 
 method (aP s) m1 =
-  do1 (putStrLn s) >>
+  exec1 (putStrLn s) >>
   method (aP s) m2  >>= λ{ (_ , c₀) →
   return (_ , c₀) }
 method (aP s) m2 =
@@ -52,7 +52,7 @@ program arg =
   let c₀ = aP ("start̄") in
   method c₀ m1  >>= λ{ (_ , c₁) →   --- ===> m1 called, then m2 prints out text
   method c₁ print  >>= λ{ (_ , c₂) →
-  do1 (putStrLn "end")        }}
+  exec1 (putStrLn "end")        }}
 
 main : NativeIO Unit
 main = translateIOConsole (program "")

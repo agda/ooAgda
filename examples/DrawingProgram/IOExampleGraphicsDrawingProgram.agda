@@ -53,12 +53,12 @@ line p  newpoint = withColor red (polygon
 State = Maybe Point
 
 loop                 :  ∀{i} → Window → State → IOGraphics i Unit
-force (loop w s)     =  do'  (getWindowEvent w)
-  λ{  (Key c t)      →  if charEquality c 'x' then (do (closeWindow w) return) 
+force (loop w s)     =  exec'  (getWindowEvent w)
+  λ{  (Key c t)      →  if charEquality c 'x' then (exec (closeWindow w) return)
                                               else loop w s
    ;  (MouseMove p₂) →  case s of
       λ{ nothing     →  loop w (just p₂)
-       ; (just p₁)   →  do (drawInWindow w (line p₁ p₂)) λ _ →
+       ; (just p₁)   →  exec (drawInWindow w (line p₁ p₂)) λ _ →
                         loop w (just p₂)
        }
    ; _               →  loop w  s
@@ -67,11 +67,11 @@ force (loop w s)     =  do'  (getWindowEvent w)
 
 {-
 loop                 :  ∀{i} → Window → State → IOGraphics i Unit
-force (loop w s)     =  do'  (getWindowEvent w)
+force (loop w s)     =  exec'  (getWindowEvent w)
   λ{  (Key c t)      →  if charEquality c 'x' then return _ else loop w s
    ;  (MouseMove p₂) →  case s of
       λ{ nothing     →  loop w (just p₂)
-       ; (just p₁)   →  do (drawInWindow w (line p₁ p₂)) λ _ →
+       ; (just p₁)   →  exec (drawInWindow w (line p₁ p₂)) λ _ →
                         loop w (just p₂)
        }
    ; _               →  loop w  s
@@ -79,14 +79,14 @@ force (loop w s)     =  do'  (getWindowEvent w)
 -}
 
 {-
-mutual 
+mutual
   loop                 :  ∀{i} → Window → State → IOGraphics i Unit
-  force (loop w s)     =  do'  (getWindowEvent w)  (λ e → aux w e s)
+  force (loop w s)     =  exec'  (getWindowEvent w)  (λ e → aux w e s)
 
   aux                  :  ∀{i} → Window → Event → State → IOGraphics i Unit
-  aux w (Key c t) s              = if charEquality c 'x' then (do (closeWindow w) λ _ → return _)
+  aux w (Key c t) s              = if charEquality c 'x' then (exec (closeWindow w) λ _ → return _)
                                    else loop w s
-  aux w (MouseMove p₂) (just p₁) = do (drawInWindow w (line p₁ p₂)) (λ _ → 
+  aux w (MouseMove p₂) (just p₁) = exec (drawInWindow w (line p₁ p₂)) (λ _ →
                                    loop w (just p₂))
   aux w (MouseMove p₂) nothing   = loop w (just p₂)
   aux w _  s                     = loop w s
@@ -95,13 +95,13 @@ mutual
 {-
 tailrecursion discussion
 
-mutual 
+mutual
   loop                 :  ∀{i} → Window → State → IOGraphics i Unit
-  command (force (loop w s))     =  (getWindowEvent w)  
+  command (force (loop w s))     =  (getWindowEvent w)
   response (force (loop w s)) e    = aux w e s
 
   aux                  :  ∀{i} → Window → Event → State → IOGraphics i Unit
-  command (aux w (MouseMove p₂) (just p₁)) = (drawInWindow w (line p₁ p₂)) 
+  command (aux w (MouseMove p₂) (just p₁)) = (drawInWindow w (line p₁ p₂))
   response (aux w (MouseMove p₂) (just p₁)) _ = loop w (just p₂))
   aux w (MouseMove p₂) nothing   = loop w (just p₂)
   aux w _  s                     = loop w s
@@ -111,10 +111,10 @@ mutual
 
 {-
   λ{  (Key c t)      →  if charEquality c 'x' then
-                          (do ? λ _ → return _) else loop w s
+                          (exec ? λ _ → return _) else loop w s
    ;  (MouseMove p₂) →  case s of
       λ{ nothing     →  loop w (just p₂)
-       ; (just p₁)   →  do (drawInWindow w (line p₁ p₂)) λ _ →
+       ; (just p₁)   →  exec (drawInWindow w (line p₁ p₂)) λ _ →
                         loop w (just p₂)
        }
    ; _               →  loop w  s
@@ -125,10 +125,10 @@ mutual
 
 myProgram : ∀{i} → IOGraphics i Unit
 myProgram =
-  do (openWindow "Drawing Program" nothing
-       (just (size (+ 1000) (+ 1000))) nativeDrawGraphic nothing) λ window →
+  exec (openWindow "Drawing Program" nothing
+       1000 1000 nativeDrawGraphic nothing) λ window →
   loop window nothing
- 
+
 
 main : NativeIO Unit
 main = nativeRunGraphics (translateIOGraphics myProgram)

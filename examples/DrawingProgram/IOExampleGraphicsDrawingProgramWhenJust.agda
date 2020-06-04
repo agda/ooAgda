@@ -53,16 +53,16 @@ line p  newpoint = withColor red (polygon
 State = Maybe Point
 
 loop                 :  ∀{i} → Window → State → IOGraphics i Unit
-force (loop w s)     =  do'  (getWindowEvent w)
+force (loop w s)     =  exec'  (getWindowEvent w)
   λ{  (Key c t)      →  if charEquality c 'x' then return _ else loop w s
-   ;  (MouseMove p₂) →  whenJust s (λ p₁ → do1 (drawInWindow w (line p₁ p₂))) >>= λ _ →
+   ;  (MouseMove p₂) →  whenJust s (λ p₁ → exec1 (drawInWindow w (line p₁ p₂))) >>= λ _ →
                         loop w (just p₂)
    ; _               →  loop w  s
    }
 
 myProgram : ∀{i} → IOGraphics i Unit
 myProgram =
-  do (openWindow "Drawing Program" nothing
+  exec (openWindow "Drawing Program" nothing
        (just (size (+ 1000) (+ 1000))) nativeDrawGraphic nothing) λ window →
   loop window nothing
 

@@ -7,6 +7,6 @@ postulate
   toInt : ℤ -> Int
   fromInt : Int -> ℤ
 
-{-# COMPILED_TYPE Int Int #-}
-{-# COMPILED toInt fromInteger #-}
-{-# COMPILED fromInt toInteger #-}
+{-# COMPILE GHC Int = type Int #-}
+{-# COMPILE GHC toInt fromInteger #-}
+{-# COMPILE GHC fromInt toInteger #-}

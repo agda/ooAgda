@@ -1,7 +1,12 @@
 module StateSizedIO.Object where
 
 open import Data.Product
-
+open import Level  renaming (zero to lzero; suc to lsuc)
+open import StateSizedIO.GUI.BaseStateDependent
+-- open import StateSizedIO.Base public
+{-
+--  This definition was probably moved to StateSizedIO.Base
+--  and by accident left here. Delete this.
 record Interfaceˢ : Set₁ where
   field
     Stateˢ    : Set
@@ -9,9 +14,9 @@ record Interfaceˢ : Set₁ where
     Resultˢ   : (s : Stateˢ) → (m : Methodˢ s) → Set
     nextˢ     : (s : Stateˢ) → (m : Methodˢ s) → Resultˢ s m → Stateˢ
 open Interfaceˢ public
+-}
 
-
-module _ (I : Interfaceˢ)(let S = Stateˢ I) (let M = Methodˢ I)
+module _ (I : Interfaceˢ {lzero} {lzero} {lzero})(let S = Stateˢ I) (let M = Methodˢ I)
          (let R = Resultˢ I) (let next = nextˢ I) where
   -- A simple object just returns for a method the response
   -- and the object itself
@@ -33,7 +38,7 @@ a ▹ f = f a
 module Bisim (I : Interfaceˢ)
   (let S    = Stateˢ  I)
   (let M    = Methodˢ I)
-  (let R    = Resultˢ I) 
+  (let R    = Resultˢ I)
   (let next = nextˢ   I)
   (let O = Objectˢ I)
   where

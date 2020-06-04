@@ -35,10 +35,10 @@ CellC i = ConsoleObject i (cellI String)
 -- cellP is constructor for the consoleObject for interface (cellI String)
 cellP : ∀{i} (s : String) → CellC i
 force (method (cellP s) get) =
-  do' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
+  exec' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
   return (s , cellP s)
 force (method (cellP s) (put x)) =
-  do' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
+  exec' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
   return (_ , (cellP x))
 
 
@@ -47,10 +47,10 @@ program : String → IOConsole ∞ Unit
 program arg =
   let c₀ = cellP "Start" in
   method c₀ get       >>= λ{ (s , c₁) →
-  do1 (putStrLn s)         >>
+  exec1 (putStrLn s)         >>
   method c₁ (put arg) >>= λ{ (_ , c₂) →
   method c₂ get       >>= λ{ (s' , c₃) →
-  do1 (putStrLn s')        }}}
+  exec1 (putStrLn s')        }}}
 
 main : NativeIO Unit
 main = translateIOConsole (program "hello")

@@ -40,20 +40,21 @@ alphaC i = ConsoleObject i (alphaI String)
 --
 --  Self Referential: method 'm1' calls method 'm2'
 --
+{-
 -- {-# NON_TERMINATING #-}
 alphaO :  ∀{i} (s : String) → alphaC i
 method (alphaO s) print =
-  do (putStrLn s) >>
+  exec (putStrLn s) >>
   return (_ , alphaO s)
 
 method (alphaO s) (set x) =
   return (_ , alphaO x)
 
--- force (method (alphaO s) m1) = do (putStrLn s) λ _ →
+-- force (method (alphaO s) m1) = exec (putStrLn s) λ _ →
 --   method (alphaO s) m2  >>= λ{ (_ , c₀) →
 --   return (_ , c₀) }
 method (alphaO s) m1 =
-  do1 (putStrLn s) >>
+  exec1 (putStrLn s) >>
   method (alphaO s) m2  >>= λ{ (_ , c₀) →
   return (_ , c₀) }
 method (alphaO s) m2 =
@@ -65,7 +66,8 @@ program arg =
   let c₀ = alphaO ("start̄\n====\n\n") in
   method c₀ m1  >>= λ{ (_ , c₁) →   --- ===> m1 called, but m2 prints out text
   method c₁ print  >>= λ{ (_ , c₂) →
-  do1 (putStrLn "\n\n====\nend")        }}
+  exec1 (putStrLn "\n\n====\nend")        }}
 
 main : NativeIO Unit
 main = translateIOConsole (program "")
+-}

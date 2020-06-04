@@ -19,7 +19,7 @@ record Wrap A : Set where
   constructor wrap
   field unwrap : A
 
-parrotI = cellI (Wrap String)
+parrotI = cellJ (Wrap String)
 
 ParrotC : (i : Size) → Set
 ParrotC i = ConsoleObject i parrotI
@@ -61,10 +61,10 @@ program : String → IOConsole ∞ Unit
 program arg =
   let c₀ = parrotP (cellP "Start") in
   method c₀ get               >>= λ{ (wrap s   , c₁) →
-  do1 (putStrLn s)            >>
+  exec1 (putStrLn s)            >>
   method c₁ (put (wrap arg))  >>= λ{ (_        , c₂) →
   method c₂ get               >>= λ{ (wrap s'  , c₃) →
-  do1 (putStrLn s')           }}}
+  exec1 (putStrLn s')           }}}
 
 main : NativeIO Unit
 main = translateIOConsole (program "hello")

@@ -7,9 +7,9 @@ open import NativeIO
 
 {-# TERMINATING #-}
 myProgram  :  IOConsole Unit
-force myProgram =  do' getLine          λ line  →
-                   delay (do' (putStrLn line)  λ _     →
-                   delay (do' (putStrLn line)  λ _     →
+force myProgram =  exec' getLine          λ line  →
+                   delay (exec' (putStrLn line)  λ _     →
+                   delay (exec' (putStrLn line)  λ _     →
                    myProgram
                    ))
 

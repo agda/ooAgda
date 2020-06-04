@@ -13,7 +13,7 @@ open import NativeIO
 
 open import Size
 
-open import StateSizedIO.Base
+--open import StateSizedIO.Base
 
 data CellState#  : Set where
   empty full  : CellState#

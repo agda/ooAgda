@@ -55,14 +55,14 @@ module _ (w : Window) where
      ; (just lastMousePoint) →
          {- case there was a new mouse movement. -}
          (whenJust (oldpoint s) λ p →
-              do1 (drawInWindow w (myBox p)) >>
-              do1 (drawInWindow w (withColor white (text lastMousePoint ("1st :some Text")))))
+              exec1 (drawInWindow w (myBox p)) >>
+              exec1 (drawInWindow w (withColor white (text lastMousePoint ("1st :some Text")))))
            >> return (state (just lastMousePoint) nothing)
      }
 
   processEvent : ∀{i} → State → IOGraphics+ i (Maybe State)
   processEvent s =
-    do (getWindowEvent w)
+    exec (getWindowEvent w)
       λ{ {- key event: check whether this was equal to 'x'; if yes, terminate, otherwise return to loop -}
          (Key c t) →
            if (c ==CharBool 'x') then return nothing else return (just s)
@@ -86,7 +86,7 @@ module _ (w : Window) where
 
 myProgram : ∀{i} → IOGraphics i Unit
 force myProgram =
-  do   (openWindowEx "Hello World" nothing (just (natSize 1000 1000)) nativeDrawGraphic nothing) λ window →
+  exec   (openWindowEx "Hello World" nothing (just (natSize 1000 1000)) nativeDrawGraphic nothing) λ window →
   loop window (state nothing nothing)
 
 main : NativeIO Unit

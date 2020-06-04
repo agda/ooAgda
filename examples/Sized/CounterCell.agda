@@ -29,7 +29,7 @@ pattern putᶜ x = super (put x)
 
 counterI : (A : Set) → Interface
 Method (counterI A)           =  CounterMethod A
-Result (counterI A) (super m) =  Result (cellI A) m
+Result (counterI A) (super m) =  Result (cellJ A) m
 Result (counterI A) stats     =  Unit
 
 
@@ -46,7 +46,7 @@ method (counterP c ngets nputs) (putᶜ x) =
   method c (put x)                            >>= λ { (_ , c') →
   return (_ , counterP c' ngets (1 + nputs))  }
 method (counterP c ngets nputs) stats =
-  do (putStrLn ("Counted "
+  exec (putStrLn ("Counted "
     ++ show ngets ++ " calls to get and "
     ++ show nputs ++ " calls to put."))       λ _ →
   return (_ , counterP c ngets nputs)
@@ -55,10 +55,10 @@ program : String → IOConsole ∞ Unit
 program arg =
   let c₀ = counterP (cellP "Start") 0 0 in
   method c₀ getᶜ               >>= λ{ (s   , c₁) →
-  do1 (putStrLn s)            >>
+  exec1 (putStrLn s)            >>
   method c₁ (putᶜ arg)         >>= λ{ (_        , c₂) →
   method c₂ getᶜ               >>= λ{ (s'  , c₃) →
-  do1 (putStrLn s')           >>
+  exec1 (putStrLn s')           >>
   method c₃ (putᶜ "Over!")     >>= λ{ (_ , c₄) →
   method c₄ stats              >>= λ{ (_ , c₅) →
   return _                     }}}}}

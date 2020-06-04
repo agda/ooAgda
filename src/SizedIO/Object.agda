@@ -18,6 +18,5 @@ record Object (i : Interface) : Set where
 open Object public
 
 
-_▹_  : {A : Set } → { B : Set } →  A → (A → B) → B
+_▹_ : {A : Set} → {B : Set} → A → (A → B) → B
 a ▹ f = f a
-

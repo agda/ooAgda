@@ -1,25 +1,40 @@
 module NativePolyIO where
 
 open import Data.String.Base using (String) public
+open import Level
+
 
 record Unit {α} : Set α where
   constructor unit
 
-{-# COMPILED_DATA Unit Data.FFI.AgdaUnit () #-}
+{-# HASKELL type AgdaUnit a = () #-}
+
+{-# COMPILED_DATA Unit AgdaUnit () #-}
 
 postulate
-  NativeIO     : ∀{α} → Set α → Set α
-  nativeReturn : ∀{α}{A : Set α} → A → NativeIO A
-  _native>>=_  : ∀{α β}{A : Set α}{B : Set β} → NativeIO A → (A → NativeIO B) → NativeIO B
+  NativeIO : ∀ {ℓ} → Set ℓ → Set ℓ
+  nativeReturn : ∀ {a} {A : Set a} → A → NativeIO A
+  _native>>=_  : ∀ {a b} {A : Set a} {B : Set b} → NativeIO A → (A → NativeIO B) → NativeIO B
 
+
+{-# COMPILED_TYPE NativeIO MAlonzo.Code.NativePolyIO.AgdaIO #-}
 {-# BUILTIN IO NativeIO #-}
-{-# COMPILED_TYPE NativeIO IO.FFI.AgdaIO #-}
-{-# COMPILED _native>>=_ (\_ _ _ _ -> (>>=) :: IO a -> (a -> IO b) -> IO b) #-}
+
+{-# HASKELL type AgdaIO a b = IO b #-}
+
+
 {-# COMPILED nativeReturn (\_ _ -> return :: a -> IO a) #-}
+{-# COMPILED _native>>=_  (\_ _ _ _ ->
+                        (>>=) :: IO a -> (a -> IO b) -> IO b) #-}
+
+{-# IMPORT Data.Text.IO #-}
 
 postulate
-  nativeGetLine   : NativeIO String
-  nativePutStrLn  : ∀{α} → String → NativeIO (Unit {α})
+  nativePutStrLn : ∀ {ℓ} → String → NativeIO (Unit{ℓ})
+  nativeGetLine  : NativeIO String
 
-{-# COMPILED nativePutStrLn (\ _ s -> putStrLn (Data.Text.unpack s)) #-}
-{-# COMPILED nativeGetLine (fmap Data.Text.pack getLine) #-}
+
+
+
+{-# COMPILED nativePutStrLn (\ _ s -> Data.Text.IO.putStrLn s) #-}
+{-# COMPILED nativeGetLine  Data.Text.IO.getLine #-}

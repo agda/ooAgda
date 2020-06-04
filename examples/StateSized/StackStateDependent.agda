@@ -1,3 +1,5 @@
+{-# OPTIONS --postfix-projections #-}
+
 module StateSized.StackStateDependent where
 
 open import Data.Product
@@ -15,6 +17,7 @@ open import NativeIO
 open import SizedIO.Base
 open import SizedIO.Console hiding (main)
 
+open import StateSizedIO.GUI.BaseStateDependent
 open import StateSizedIO.Object
 open import StateSizedIO.IOObject
 
@@ -27,7 +30,6 @@ data StackMethodˢ (A : Set) : StackStateˢ → Set where
   push : {n : StackStateˢ} → A → StackMethodˢ A n
   pop  : {n : StackStateˢ} → StackMethodˢ A (suc n)
 
-
 StackResultˢ : (A : Set) → (s : StackStateˢ) → StackMethodˢ A s → Set
 StackResultˢ A .n (push { n  } x₁)  = Unit
 StackResultˢ A (suc .n)  (pop {n} ) = A
@@ -38,15 +40,24 @@ nˢ A (suc .n) (pop  { n }) r = n
 
 
 StackInterfaceˢ : (A : Set) → Interfaceˢ
-Stateˢ (StackInterfaceˢ A)  = StackStateˢ
-Methodˢ (StackInterfaceˢ A)  = StackMethodˢ A
-Resultˢ (StackInterfaceˢ A)  = StackResultˢ A
-nextˢ (StackInterfaceˢ A)  = nˢ A
+StackInterfaceˢ A .Stateˢ  = StackStateˢ
+StackInterfaceˢ A .Methodˢ = StackMethodˢ A
+StackInterfaceˢ A .Resultˢ = StackResultˢ A
+StackInterfaceˢ A .nextˢ = nˢ A
 
-
-stackP : ∀{n : ℕ} → (i : Size) → (v : Vec String n) → IOObject consoleI (StackInterfaceˢ String) i n
+stackP : ∀{n : ℕ} → (i : Size) → (v : Vec String n) → IOObjectˢ consoleI (StackInterfaceˢ String) i n
 method (stackP { n }   i es)       {j} (push e) = return (_ , stackP j (e ∷ es))
 method (stackP {suc n} i (x ∷ xs)){j} pop      = return (x , stackP j xs)
+
+
+
+-- UNSIZED Version, without IO
+
+stackP' : ∀{n : ℕ} → (v : Vec String n) → Objectˢ (StackInterfaceˢ String) n
+stackP' es .objectMethod (push e) = (_ , stackP' (e ∷ es))
+stackP' (x ∷ xs) .objectMethod pop = x , stackP' xs
+
+
 
 stackO : ∀{E : Set} {n : ℕ} (v : Vec E n) → Objectˢ (StackInterfaceˢ E) n
 objectMethod (stackO es)      (push e) = _ , stackO (e ∷ es)
@@ -78,15 +89,15 @@ module _ {E : Set} where
 
   pop-after-push : ∀{n}{v : Vec E n} (e : E) (let stack = stackO v) →
      (objectMethod stack (push e) ▹   λ { (_ , stack₁) →
-      objectMethod stack₁ pop     ▹   λ { (e₁ , stack₂) → 
-      ( e₁ , stack₂ )  }})  
+      objectMethod stack₁ pop     ▹   λ { (e₁ , stack₂) →
+      ( e₁ , stack₂ )  }})
     ≡×≅' (e , stack)
   pop-after-push e = refl , refl≅ _
 
 
   push-after-pop : ∀{n}{v : Vec E n} (e : E) (let stack = stackO (e ∷ v)) →
      (objectMethod stack  pop       ▹  λ { (e₁ , stack₁) →
-      objectMethod stack₁ (push e₁) ▹  λ { (_  , stack₂) → 
+      objectMethod stack₁ (push e₁) ▹  λ { (_  , stack₂) →
       stack₂ }})
      ≅ stack
   push-after-pop e = refl≅ _
@@ -104,22 +115,24 @@ module _ {E : Set} where
     bisim (impl-bisim v (cong tail p))
 
 program : IOConsole ∞ Unit
-program =
-  let s₀ = stackP ∞ []  in
-  do getLine                λ str₀ →
+program = 
+  exec getLine                λ str₀ →
   method s₀ (push str₀) >>= λ{ (_ , s₁) →            -- empty
-  do getLine                λ   str₁ →
+  exec getLine                λ   str₁ →
   method s₁ (push str₁) >>= λ{ (_ , s₂) →            -- full
   method s₂ pop         >>= λ{ (str₂ , s₃) →
-  do (putStrLn ("first pop: " Str.++ str₂)  ) λ _ →
-  do getLine                λ   str₃ →
+  exec (putStrLn ("first pop: " Str.++ str₂)  ) λ _ →
+  exec getLine                λ   str₃ →
   method s₃ (push str₃) >>= λ{ (_ , s₄) →
   method s₄ pop         >>= λ{ (str₄ , s₅) →
-  do (putStrLn ("second pop: " Str.++ str₄)  ) λ _ →
+  exec (putStrLn ("second pop: " Str.++ str₄)  ) λ _ →
   method s₅ pop         >>= λ{ (str₅ , s₅) →
-  do (putStrLn ("third  pop: " Str.++ str₅)  ) λ _ →
+  exec (putStrLn ("third  pop: " Str.++ str₅)  ) λ _ →
   return unit
   }}}}}}
+  where
+    s₀ = stackP ∞ []
 
 main : NativeIO Unit
 main = translateIOConsole program
+

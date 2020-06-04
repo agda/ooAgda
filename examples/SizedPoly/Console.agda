@@ -10,9 +10,9 @@ open import Level using () renaming (zero to lzero)
 
 {-# TERMINATING #-}
 myProgram  :  ∀{i} → IOConsole i (Unit {lzero})
-myProgram  =  do  getLine          λ line →
-              do  (putStrLn line)  λ _ →
-              do  (putStrLn line)  λ _ →
+myProgram  =  exec  getLine          λ line →
+              exec  (putStrLn line)  λ _ →
+              exec  (putStrLn line)  λ _ →
               myProgram
 
 

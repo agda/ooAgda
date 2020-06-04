@@ -1,7 +1,7 @@
 module SizedIO.Console where
 
 open import Level using () renaming (zero to lzero)
-open import Size renaming (ω to ∞)
+open import Size
 
 open import NativeIO
 open import SizedIO.Base
@@ -24,15 +24,15 @@ IOConsole i = IO consoleI i
 IOConsole+ : Size → Set → Set
 IOConsole+ i = IO+ consoleI i
 
-IOConsole' : Size → Set → Set
-IOConsole' i = IO' consoleI i
-
 translateIOConsoleLocal : (c : ConsoleCommand) → NativeIO (ConsoleResponse c)
 translateIOConsoleLocal (putStrLn s) = nativePutStrLn s
 translateIOConsoleLocal getLine      = nativeGetLine
 
 translateIOConsole : {A : Set} → IOConsole ∞ A → NativeIO A
 translateIOConsole = translateIO translateIOConsoleLocal
+
+postulate translateIOConsoleTODO : {A : Set} → (i : Size) → IOConsole i A → NativeIO A
+
 
 main : NativeIO Unit
 main = nativePutStrLn "Console"

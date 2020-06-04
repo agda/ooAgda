@@ -1,3 +1,5 @@
+{-# OPTIONS --postfix-projections #-}
+
 module StateSized.cellStateDependent where
 
 open import Data.Product
@@ -19,70 +21,27 @@ open import StateSizedIO.IOObject
 
 
 open import Size
-
-data CellStateˢ  : Set where
-  empty full  : CellStateˢ
-
-data CellMethodEmpty A : Set where
-    put : A → CellMethodEmpty A
-
-data CellMethodFull A : Set where
-    get : CellMethodFull A
-    put : A → CellMethodFull A
-
-CellMethodˢ : (A : Set) → CellStateˢ → Set
-CellMethodˢ A empty = CellMethodEmpty A
-CellMethodˢ A full = CellMethodFull A
+open import StateSizedIO.cellStateDependent
 
 
-CellResultFull : ∀{A} → CellMethodFull A → Set
-CellResultFull {A} get = A
-CellResultFull (put _) = Unit
+{- I moved most into src/StateSizedIO/cellStateDependent.agda
 
-CellResultEmpty : ∀{A} → CellMethodEmpty A → Set
-CellResultEmpty (put _) = Unit
-
-
-CellResultˢ : (A : Set) → (s : CellStateˢ) → CellMethodˢ A s → Set
-CellResultˢ A empty = CellResultEmpty{A}
-CellResultˢ A full = CellResultFull{A}
-
-
-nˢ : ∀{A} → (s : CellStateˢ) → (c : CellMethodˢ A s) → (CellResultˢ A s c) → CellStateˢ
-nˢ _ _ _ = full
-
-CellInterfaceˢ : (A : Set) → Interfaceˢ
-Stateˢ (CellInterfaceˢ A)  = CellStateˢ
-Methodˢ (CellInterfaceˢ A)  = CellMethodˢ A
-Resultˢ (CellInterfaceˢ A)  = CellResultˢ A
-nextˢ (CellInterfaceˢ A)  = nˢ
-
-mutual
-   cellPempty : (i : Size) → IOObject consoleI (CellInterfaceˢ String) i empty
-   method (cellPempty i) {j} (put str) = do (putStrLn ("put (" ++ str ++ ")")) λ _ →
-                                         return (unit , cellPfull j str)
-
-   cellPfull : (i : Size) → (str : String) → IOObject consoleI (CellInterfaceˢ String) i full
-   method (cellPfull i str) {j} get        = do (putStrLn ("get (" ++ str ++ ")")) λ _ →
-                                             return (str , cellPfull j str)
-   method (cellPfull i str) {j} (put str') = do (putStrLn ("put (" ++ str' ++ ")")) λ _ →
-                                             return (unit , cellPfull j str')
-
-
+now the code doesn't work
+-}
 
 -- Program is another program
 program : IOConsole ∞ Unit
 program =
   let c₀ = cellPempty ∞  in
-  do getLine            λ str →
+  exec getLine            λ str →
   method c₀ (put str)    >>= λ{ (_ , c₁) →        -- empty
   method c₁ get          >>= λ{ (str₁ , c₂) →     -- full
-  do (putStrLn ("we got " ++ str₁))    λ _ →
-  do (putStrLn ("Second Round"))    λ _ →
-  do getLine            λ str₂ →
+  exec (putStrLn ("we got " ++ str₁))    λ _ →
+  exec (putStrLn ("Second Round"))    λ _ →
+  exec getLine            λ str₂ →
   method c₂ (put str₂)    >>= λ{ (_ , c₃) →
   method c₃ get          >>= λ{ (str₃ , c₄) →
-  do (putStrLn ("we got " ++ str₃)  ) λ _ →
+  exec (putStrLn ("we got " ++ str₃)  ) λ _ →
   return unit
   }}}}
 
@@ -100,10 +59,10 @@ force (method cellPˢ (put x)) = {!!}
 {-
 cellP : ∀{i} (s : String) → CellC i
 force (method (cellP s) get) =
-  do' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
+  exec' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
   return (s , cellP s)
 force (method (cellP s) (put x)) =
-  do' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
+  exec' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
   return (_ , (cellP x))
 -}
 
@@ -126,10 +85,10 @@ CellC i = ConsoleObject i (cellI String)
 -- cellP is constructor for the consoleObject for interface (cellI String)
 cellP : ∀{i} (s : String) → CellC i
 force (method (cellP s) get) =
-  do' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
+  exec' (putStrLn ("getting (" ++ s ++ ")")) λ _ →
   return (s , cellP s)
 force (method (cellP s) (put x)) =
-  do' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
+  exec' (putStrLn ("putting (" ++ x ++ ")")) λ _ →
   return (_ , (cellP x))
 
 -- Program is another program
@@ -137,10 +96,10 @@ program : String → IOConsole ∞ Unit
 program arg =
   let c₀ = cellP "Start" in
   method c₀ get       >>= λ{ (s , c₁) →
-  do1 (putStrLn s)         >>
+  exec1 (putStrLn s)         >>
   method c₁ (put arg) >>= λ{ (_ , c₂) →
   method c₂ get       >>= λ{ (s' , c₃) →
-  do1 (putStrLn s')        }}}
+  exec1 (putStrLn s')        }}}
 
 main : NativeIO Unit
 main = translateIOConsole (program "hello")
