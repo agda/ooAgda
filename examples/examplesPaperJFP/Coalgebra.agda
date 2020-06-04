@@ -1,4 +1,3 @@
--- {-# OPTIONS --allow-unsolved-metas #-}
 module examplesPaperJFP.Coalgebra where
 
 open import Size

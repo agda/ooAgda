@@ -48,7 +48,7 @@ method (counterCell c ngets nputs) (putᶜ x) =
   return (unit , counterCell c′ ngets (1 + nputs))  }
 
 method (counterCell c ngets nputs) stats =
-  do' (putStrLn ("Counted "
+  exec (putStrLn ("Counted "
     ++ show ngets ++ " calls to get and "
     ++ show nputs ++ " calls to put."))       λ _ →
   return (unit , counterCell c ngets nputs)
@@ -57,10 +57,10 @@ program : String → IO ConsoleInterface ∞ Unit
 program arg =
   let c₀ = counterCell (simpleCell "Start") 0 0 in
   method c₀ getᶜ               >>= λ{ (s   , c₁) →
-  do' (putStrLn s)              λ _ →
+  exec (putStrLn s)              λ _ →
   method c₁ (putᶜ arg)         >>= λ{ (_        , c₂) →
   method c₂ getᶜ               >>= λ{ (s′  , c₃) →
-  do' (putStrLn s′)             λ _ →
+  exec (putStrLn s′)             λ _ →
   method c₃ (putᶜ "Over!")     >>= λ{ (_ , c₄) →
   method c₄ stats              >>= λ{ (_ , c₅) →
   return unit                  }}}}}

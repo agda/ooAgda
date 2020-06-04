@@ -6,6 +6,6 @@ open import examplesPaperJFP.NativeIOSafe
 
 cat : IO ConsoleInterface Unit
 force cat =
-  do'′ getLine          λ{ nothing → return unit ; (just line) → delay (
-  do'′ (putStrLn line)  λ _     →
+  exec′ getLine          λ{ nothing → return unit ; (just line) → delay (
+  exec′ (putStrLn line)  λ _     →
   cat                  )}

@@ -5,7 +5,8 @@ module examplesPaperJFP.loadAllOOAgdaFilesAsInLibrary where
 -- which occur in the library as well
 -- the code as it occurred in the original paper after adapting to current Agda
 --    including any code not found directly inthe library
---    can be found in loadAllOOAgda.agda
+--    can be found in loadAllOOAgdaPart1.agda
+--    and             loadAllOOAgdaPart2.agda
 
 -- Source of paper:
 --  Andreas Abel, Stephan Adelsberger, Anton Setzer:
@@ -44,34 +45,33 @@ open import SizedIO.Object
 -- code as in library
 open import Sized.CounterCell
 
+-- 8. State-Dependent Objects and IO
+-- 8.1 State-Dependent Interfaces
+-- 8.2 State-Dependent Objects
+-- 8.2.1. Example of Use of Safe Stack
+-- 8.3 Reasoning About Stateful Objects
+-- 8.3.1. Bisimilarity
+-- 8.3.2. Verifying stack laws}
+-- 8.3.3. Bisimilarity of different stack implementations
+-- 8.4. State-Dependent IO
+-- 9. A Drawing Program in Agda
+
+open import SizedIO.IOGraphicsLib
 
 
-{-
-open import CatNonTerm
-open import CatTerm
-open import Coalgebra
-open import Colists
-open import Collatz
-open import ConsoleInterface
-open import Console
-open import CounterCell
--- open import ExampleDrawingProgram
-open import IOExampleConsole
--- open import IOGraphicsLib
--- open import  loadAllForChecking.agda
--- open import  loadAllForCheckingPart2.agda
-open import NativeIOSafe
-open import Object
-open import Sized
--- open import SpaceShipAdvanced
--- open import SpaceShipCell
--- open import SpaceShipSimpleVar
--- open import StackBisim
--- open import StateDependentIO
--- open import StatefulObject
--- open import StatefulStackProgram
--- open import VariableListForDispatchOnly
--- open import VariableList
--- open import WxBindingsFFI
--- open import WxGraphicsLib
--}
+-- 10. A Graphical User Interface using an Object
+-- 10.1. wxHaskell
+-- 10.2. A Library for Object-Based GUIs in Agda
+
+open import StateSizedIO.GUI.VariableList
+open import StateSizedIO.GUI.WxGraphicsLib
+
+-- 10.3 Example: A GUI controlling a Space Ship in Agda
+
+open import StateSized.GUI.SpaceShipSimpleVar
+open import StateSized.GUI.SpaceShipCell
+open import StateSized.GUI.SpaceShipAdvanced
+
+-- 11. Related Work
+-- 12. Conclusion
+-- Bibliography

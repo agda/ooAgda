@@ -1,0 +1,3 @@
+name: myExample
+depend: standard-library, ooAgdaExamples
+include: . 

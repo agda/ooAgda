@@ -34,13 +34,13 @@ mutual
     field force : {j : Size< i} → IO′ Iᵢₒ j A
 
   data IO′ (Iᵢₒ : IOInterface) (i : Size)  (A : Set) : Set where
-    do'′      :  (c : Command Iᵢₒ) (f : Response Iᵢₒ c → IO Iᵢₒ i A)  → IO′ Iᵢₒ i A
+    exec′      :  (c : Command Iᵢₒ) (f : Response Iᵢₒ c → IO Iᵢₒ i A)  → IO′ Iᵢₒ i A
     return′  :  (a : A)                                              → IO′ Iᵢₒ i A
 
 module NestedRecursion (Iᵢₒ : IOInterface) (A : Set) where
 
   data F (X : Set) : Set where
-    do'′      :  (c : Command Iᵢₒ) (f : Response Iᵢₒ c → X)  → F X
+    exec′      :  (c : Command Iᵢₒ) (f : Response Iᵢₒ c → X)  → F X
     return′  :  (a : A)                                     → F X
 
   record νF (i : Size) : Set where
@@ -54,15 +54,15 @@ module _  {Iᵢₒ : IOInterface } (let C = Command Iᵢₒ) (let R = Response I
 
   infixl 2 _>>=_
 
-  do'      :  ∀ {i A}    (c : C) (f : R c → IO Iᵢₒ i A) → IO Iᵢₒ i A
+  exec      :  ∀ {i A}    (c : C) (f : R c → IO Iᵢₒ i A) → IO Iᵢₒ i A
   return  :  ∀ {i A}    (a : A) → IO Iᵢₒ i A
   _>>=_   :  ∀ {i A B}  (m : IO Iᵢₒ i A) (k : A → IO Iᵢₒ i B) → IO Iᵢₒ i B
 
-  force (do' c f)    = do'′ c f
+  force (exec c f)    = exec′ c f
   force (return a)  =  return′ a
 
   force (_>>=_ {i} m k) {j} with force m {j}
-  ... | do'′ c f     =  do'′ c λ r → _>>=_ {j} (f r) k
+  ... | exec′ c f     =  exec′ c λ r → _>>=_ {j} (f r) k
   ... | return′ a   =  force (k a) {j}
 
 
@@ -72,7 +72,7 @@ module _  {Iᵢₒ : IOInterface } (let C = Command Iᵢₒ) (let R = Response I
     →  IO Iᵢₒ ∞ A
     →  NativeIO A
   translateIO translateLocal m = case (force m) of
-    λ{ (do'′ c f)    → (translateLocal c) native>>= λ r →
+    λ{ (exec′ c f)    → (translateLocal c) native>>= λ r →
          translateIO translateLocal (f r)
      ; (return′ a) → nativeReturn a
      }
@@ -91,19 +91,19 @@ CellC = IOObject ConsoleInterface (cellJ String)
 
 simpleCell : ∀{i} (s : String) → CellC i
 force (method (simpleCell {i} s) {j} get) =
-  do'′ (putStrLn ("getting (" ++ s ++ ")")) λ _ →
+  exec′ (putStrLn ("getting (" ++ s ++ ")")) λ _ →
   return (s , simpleCell {j} s)
 force (method (simpleCell _) (put s)) =
-  do'′ (putStrLn ("putting (" ++ s ++ ")")) λ _ →
+  exec′ (putStrLn ("putting (" ++ s ++ ")")) λ _ →
   return (unit , simpleCell s)
 
 program : ∀{i} → IO ConsoleInterface i Unit
 force program =
   let c₁ = simpleCell "Start" in
-  do'′ getLine          λ{ nothing → return unit; (just s) →
+  exec′ getLine          λ{ nothing → return unit; (just s) →
   method c₁ (put s)    >>= λ{ (_ , c₂) →
   method c₂ get        >>= λ{ (s′ , c₃) →
-  do' (putStrLn s′)     λ _ →
+  exec (putStrLn s′)     λ _ →
   program }}}
 
 

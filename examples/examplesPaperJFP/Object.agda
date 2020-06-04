@@ -45,10 +45,10 @@ CellC = IOObject ConsoleInterface (cellJ String)
 
 simpleCell : (s : String) → CellC
 force (method (simpleCell s) get) =
-  do'′ (putStrLn ("getting (" ++ s ++ ")")) λ _ →
+  exec′ (putStrLn ("getting (" ++ s ++ ")")) λ _ →
   delay (return′ (s , simpleCell s))
 force (method (simpleCell s) (put x)) =
-  do'′ (putStrLn ("putting (" ++ x ++ ")")) λ _ →
+  exec′ (putStrLn ("putting (" ++ x ++ ")")) λ _ →
   delay (return′ (unit , simpleCell x))
 
 {-# TERMINATING #-}
@@ -56,10 +56,10 @@ force (method (simpleCell s) (put x)) =
 program : IOConsole Unit
 force program =
   let c₁ = simpleCell "Start" in
-  do'′ getLine          λ{ nothing → return unit; (just s) →
+  exec′ getLine          λ{ nothing → return unit; (just s) →
   method c₁ (put s)    >>= λ{ (_ , c₂) →
   method c₂ get        >>= λ{ (s′ , _ ) →
-  do' (putStrLn s′)     λ _ →
+  exec (putStrLn s′)     λ _ →
   program }}}
 
 main : NativeIO Unit

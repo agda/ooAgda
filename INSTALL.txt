@@ -3,13 +3,10 @@
  This library contains the code as in the paper 
     Andreas Abel, Stephan Adelsberger, Anton Setzer: Interactive Programming in 
         Agda - Objects and Graphical User Interfaces
-        Journal of Functional Programming, 27, 2017. Doi 10.1017/S0956796816000319 
+        Journal of Functional Programming, 27, 2017. 
+        doi: http://dx.doi.org/10.1145/2976022.2976032
         author's copy: http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.pdf
         bibtex:        http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.bib
-
- The following are the preliminary installation instructions, we are currently
- working on a more detailed documentation of the library.
-
 
  The code works with the most recent version of Agda version 2.5
  (master branch from github, commit
@@ -25,6 +22,8 @@
 
 
  Details:
+ 
+  - This version has been tested with Agda version 2.6.2-40e78a7
 
   - Install agda from git:
 
@@ -94,17 +93,21 @@
  
     In "~/.agda/libraries" add the following three lines:
      -----------
-    /home/username/Downloads/agda-master/agda-stdlib/standard-library.agda-lib
-    /home/username/Downloads/ooAgda/src/ooAgda.agda-lib
-    /home/username/Downloads/ooAgda/examples/ooAgdaExamples.agda-lib
+     <absolute pathto Agda standard library>/agda-stdlib/standard-library.agda-lib
+     <absolute path to ooAgda>/ooAgda/src/ooAgda.agda-lib
+     <absolute path to ooAgda>/ooAgda/examples/ooAgdaExamples.agda-lib
     ----------
 
-    with the paths adapted to where your version of std-lib (Agda standard lib)
+    with the <paths> adapted to where your version of agda-stdlib 
+       (Agda standard lib)
      and of ooAgda  is located
 
-  - For using the libraries in your code add a library file (e.g. a copy of 
-    ~/git/ooagda/examples/ooAgdaExamples.agda-lib
-     ) to the directory containing your code
+  - For using the libraries in your code add a library file 
+    containing as dependencies  standard-library, ooAgdaExamples
+    into your code.
+
+    The helloworld example with an agda library file myExample.agda-lib 
+    can be found in subdirectory exampleCode
 
 
     For more information on the library files,

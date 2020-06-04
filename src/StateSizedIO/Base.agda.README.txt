@@ -1,0 +1,12 @@
+
+"StateSizedIO.Base"
+
+Change: State, Methods, etc. all have different levels
+to get the old code running, I need to add those levels!
+
+Base should no longer be used  
+there is a more level generic one in 
+StateSizedIO.GUI.BaseStateDependent
+
+The old version of Base.agda is in 
+BaseOld.agda
