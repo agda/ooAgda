@@ -13,12 +13,8 @@ module examplesPaperJFP.loadAllOOAgdaFilesAsInLibrary where
 --    Interactive Programming in Agda - Objects and Graphical User Interfaces
 --    Journal of Functional Programming, 27, 2017
 --    doi: http://dx.doi.org/10.1145/2976022.2976032
---    authors copy: http://www.cs.swan.ac.uk/~csetzer/articles/TyDe2016.pdf
---    bibtex: http://www.cs.swan.ac.uk/~csetzer/articles/TyDe2016.bib
---    Presentation video
---    https://www.youtube.com/watch?v=0pnqynBqGOQ&list=PLnqUlCo055hUFzMkHyGOvOc0jNbv_bd26&index=7
---    Presentation slides
---    http://www.cs.swan.ac.uk/~csetzer/slides/TyDe/2016/slidesTyDe2016BasharIgried.pdf
+--    authors copy: http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.pdf
+--    bibtex: http://www.cs.swan.ac.uk/~csetzer/articles/ooAgda.bib
 
 
 -- 1. Introdution
